@@ -188,11 +188,16 @@ class JoystickHID : public HIDUniversal {
 
           if (buf[0] & 0x0080) { // R2ボタン
             output |= 16;
-
-
             Serial.println("Z button");
-
           }
+          if (buf[1] & 0x0002) { // STARTボタン
+            output |= 32;
+            Serial.println("Start button");
+          }
+
+
+
+
 
           DDRC = output;
           output = 0;
@@ -226,6 +231,11 @@ class JoystickHID : public HIDUniversal {
           if (buf[0] & 0x0004) { // Bボタン (circle)
             output |= 128;
             Serial.println("Y button");
+          }
+
+          if (buf[1] & 0x0001) { // SELECTボタン
+            output |= 64;
+            Serial.println("Select button");
           }
 
 
@@ -281,11 +291,9 @@ class JoystickHID : public HIDUniversal {
           if (buf[1] & 0x0004) // L3ボタン
             joydrv_snddata[port_no][1] &= B11111011;
 
-          if (buf[1] & 0x0002) // STARTボタン
-            Serial.println("Start button");
+
           joydrv_snddata[port_no][0] &= B11111110;
-          if (buf[1] & 0x0001) // SELECTボタン
-            Serial.println("Select button");
+
           //   joydrv_snddata[port_no][0] &= B11111101;
 
           if (stick_ctrldata[port_no].flg_change)
