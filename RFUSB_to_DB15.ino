@@ -127,38 +127,10 @@ class JoystickHID : public HIDUniversal {
           Serial.print(F(":"));
           Serial.println(buf[0], HEX);*/
 
-      joydrv_snddata[port_no][0] = joydrv_snddata[port_no][1] = joydrv_snddata[port_no][2] = joydrv_snddata[port_no][3] = B11111111;
-      joydrv_snddata[port_no][4] = joydrv_snddata[port_no][5] = joydrv_snddata[port_no][6] = joydrv_snddata[port_no][7] = B10000000;
-      for (i = 8; i < 16; i++) joydrv_snddata[port_no][i] = 0;
+
 
       // コントローラ別処理
       switch (Tbl_cnv_data[cnv_pointer].joy_type) {
-        case TYPE_MDmini: // MDmini
-          joydrv_snddata[port_no][5] = byte(buf[3]); // 左右アナログ
-          joydrv_snddata[port_no][4] = byte(buf[4]); // 上下アナログ
-
-          if (buf[5] & 0x0040) // Aボタン
-            joydrv_snddata[port_no][2] &= B11111110;
-          if (buf[5] & 0x0020) // Bボタン
-            joydrv_snddata[port_no][2] &= B11111101;
-          if (buf[6] & 0x0002) // Cボタン
-            joydrv_snddata[port_no][2] &= B11111011;
-          if (buf[5] & 0x0080) // Xボタン
-            joydrv_snddata[port_no][2] &= B11101111;
-          if (buf[5] & 0x0010) // Yボタン
-            joydrv_snddata[port_no][2] &= B11011111;
-          if (buf[6] & 0x0001) // Zボタン
-            joydrv_snddata[port_no][2] &= B10111111;
-
-          if (buf[6] & 0x0020) // STARTボタン
-            joydrv_snddata[port_no][0] &= B11111110;
-          if (buf[6] & 0x0010) // SELECT(MODE)ボタン
-            joydrv_snddata[port_no][0] &= B11111101;
-
-          if (stick_ctrldata[port_no].flg_change)
-            stick_ctrldata[port_no].flg_change = false;
-
-          break;
 
         case TYPE_RAP3: // RAP (PS3mode)
           // [[ HORI Real Arcade Pro.V HAYABUSA(PS3 MODE) ------------------------------------------------------
@@ -276,250 +248,30 @@ class JoystickHID : public HIDUniversal {
 
           //     joydrv_snddata[port_no][1] &= B11011111;
           if (buf[1] & 0x0008) // R3ボタン
-            joydrv_snddata[port_no][1] &= B10111111;
-          /*if (buf[0] & 0x0001) // Xボタン (square)
 
-            Serial.println(F("A button"))
-            //  joydrv_snddata[port_no][2] &= B11101111;
-            if (buf[0] & 0x0008) // Yボタン (triangle)
-            Serial.println("B button");;*/
-          joydrv_snddata[port_no][2] &= B11011111;
-          if (buf[0] & 0x0010) // L1ボタン
-            joydrv_snddata[port_no][1] &= B11111110;
-          if (buf[0] & 0x0040) // L2ボタン
-            joydrv_snddata[port_no][1] &= B11111101;
-          if (buf[1] & 0x0004) // L3ボタン
-            joydrv_snddata[port_no][1] &= B11111011;
+            /*if (buf[0] & 0x0001) // Xボタン (square)
+
+              Serial.println(F("A button"))
+              //  joydrv_snddata[port_no][2] &= B11101111;
+              if (buf[0] & 0x0008) // Yボタン (triangle)
+              Serial.println("B button");;*/
+
+            if (buf[0] & 0x0010) // L1ボタン
+
+              if (buf[0] & 0x0040) // L2ボタン
+
+                if (buf[1] & 0x0004) // L3ボタン
 
 
-          joydrv_snddata[port_no][0] &= B11111110;
 
-          //   joydrv_snddata[port_no][0] &= B11111101;
 
-          if (stick_ctrldata[port_no].flg_change)
-            stick_ctrldata[port_no].flg_change = false;
+                  //   joydrv_snddata[port_no][0] &= B11111101;
+
+                  if (stick_ctrldata[port_no].flg_change)
+                    stick_ctrldata[port_no].flg_change = false;
           break;
 
-        case TYPE_PSC:
-          // [[ Playstation Classic Controller Parser ----------------------------------------------------------
 
-          joydrv_snddata[port_no][3] = psc_udlr_data[(byte(buf[1]) >> 2)&B00001111];
-
-          if (buf[0] & 0x0004) // Aボタン (cross)
-            joydrv_snddata[port_no][2] &= B11111110;
-          if (buf[0] & 0x0002) // Bボタン (circle)
-            joydrv_snddata[port_no][2] &= B11111101;
-          if (buf[0] & 0x0080) // R1ボタン
-            joydrv_snddata[port_no][1] &= B11101111;
-          if (buf[0] & 0x0020) // R2ボタン
-            joydrv_snddata[port_no][1] &= B11011111;
-          if (buf[0] & 0x0008) // Xボタン (square)
-            joydrv_snddata[port_no][2] &= B11101111;
-          if (buf[0] & 0x0001) // Yボタン (triangle)
-            joydrv_snddata[port_no][2] &= B11011111;
-          if (buf[0] & 0x0040) // L1ボタン
-            joydrv_snddata[port_no][1] &= B11111110;
-          if (buf[0] & 0x0010) // L2ボタン
-            joydrv_snddata[port_no][1] &= B11111101;
-
-          if (buf[1] & 0x0002) // STARTボタン
-            joydrv_snddata[port_no][0] &= B11111110;
-          if (buf[1] & 0x0001) // SELECTボタン
-            joydrv_snddata[port_no][0] &= B11111101;
-
-          if (stick_ctrldata[port_no].flg_change)
-            stick_ctrldata[port_no].flg_change = false;
-          break;
-
-        case TYPE_SNES:
-          // [[ iBUFFALO SNES CLASSIC USB GAMEPAD Parser -------------------------------------------------------
-          joydrv_snddata[port_no][5] = byte(buf[0]); // 左右アナログ
-          joydrv_snddata[port_no][4] = byte(buf[1]); // 上下アナログ
-
-          if (buf[2] & 0x0001) // Aボタン
-            joydrv_snddata[port_no][2] &= B11111101;
-          if (buf[2] & 0x0002) // Bボタン
-            joydrv_snddata[port_no][2] &= B11111110;
-          if (buf[2] & 0x0004) // Xボタン
-            joydrv_snddata[port_no][2] &= B11011111;
-          if (buf[2] & 0x0008) // Yボタン
-            joydrv_snddata[port_no][2] &= B11101111;
-          if (buf[2] & 0x0010) // L1ボタン
-            joydrv_snddata[port_no][1] &= B11111110;
-          if (buf[2] & 0x0020) // R1ボタン
-            joydrv_snddata[port_no][1] &= B11101111;
-          if (buf[2] & 0x0040) // SELECTボタン
-            joydrv_snddata[port_no][0] &= B11111101;
-          if (buf[2] & 0x0080) // STARTボタン
-            joydrv_snddata[port_no][0] &= B11111110;
-
-          if (stick_ctrldata[port_no].flg_change)
-            stick_ctrldata[port_no].flg_change = false;
-          break;
-
-        case TYPE_RETROFREAK:
-          // レトロフリーク コントローラアダプター -------------------------------------------------------------
-          switch (byte(buf[0])) {
-            case 1: // NESは未確認
-              joydrv_snddata[port_no][5] = byte(buf[1]); // 左右アナログ
-              joydrv_snddata[port_no][4] = byte(buf[2]); // 上下アナログ
-
-              if (buf[3] & 0x0001) // Aボタン
-                joydrv_snddata[port_no][2] &= B11111110;
-              if (buf[3] & 0x0002) // Bボタン
-                joydrv_snddata[port_no][2] &= B11111101;
-              if (buf[3] & 0x0004) // STARTボタン
-                joydrv_snddata[port_no][0] &= B11111110;
-              if (buf[3] & 0x0008) // SELECTボタン
-                joydrv_snddata[port_no][0] &= B11111101;
-
-              if (stick_ctrldata[port_no].flg_change)
-                stick_ctrldata[port_no].flg_change = false;
-              break;
-            case 2: // SFC
-              joydrv_snddata[port_no][5] = byte(buf[1]); // 左右アナログ
-              joydrv_snddata[port_no][4] = byte(buf[2]); // 上下アナログ
-
-              if (buf[3] & 0x0001) // Bボタン
-                joydrv_snddata[port_no][2] &= B11111101;
-              if (buf[3] & 0x0002) // Aボタン
-                joydrv_snddata[port_no][2] &= B11111110;
-              if (buf[3] & 0x0004) // Yボタン
-                joydrv_snddata[port_no][2] &= B11011111;
-              if (buf[3] & 0x0008) // Xボタン
-                joydrv_snddata[port_no][2] &= B11101111;
-              if (buf[3] & 0x0010) // L1ボタン
-                joydrv_snddata[port_no][1] &= B11111110;
-              if (buf[3] & 0x0020) // R1ボタン
-                joydrv_snddata[port_no][1] &= B11101111;
-              if (buf[3] & 0x0040) // SELECTボタン
-                joydrv_snddata[port_no][0] &= B11111101;
-              if (buf[3] & 0x0080) // STARTボタン
-                joydrv_snddata[port_no][0] &= B11111110;
-
-              if (stick_ctrldata[port_no].flg_change)
-                stick_ctrldata[port_no].flg_change = false;
-              break;
-            case 3: // MegaDrive 6bは未確認
-              joydrv_snddata[port_no][5] = byte(buf[1]); // 左右アナログ
-              joydrv_snddata[port_no][4] = byte(buf[2]); // 上下アナログ
-
-              if (buf[3] & 0x0001) // Aボタン
-                joydrv_snddata[port_no][2] &= B11111110;
-              if (buf[3] & 0x0002) // Bボタン
-                joydrv_snddata[port_no][2] &= B11111101;
-              if (buf[3] & 0x0004) // Cボタン
-                joydrv_snddata[port_no][2] &= B11111011;
-              if (buf[3] & 0x0008) // Xボタン
-                joydrv_snddata[port_no][2] &= B11101111;
-              if (buf[3] & 0x0010) // Yボタン
-                joydrv_snddata[port_no][2] &= B11011111;
-              if (buf[3] & 0x0020) // Zボタン
-                joydrv_snddata[port_no][2] &= B10111111;
-              if (buf[3] & 0x0040) // STARTボタン
-                joydrv_snddata[port_no][0] &= B11111110;
-              if (buf[3] & 0x0080) // MODEボタン
-                joydrv_snddata[port_no][0] &= B11111101;
-
-              if (stick_ctrldata[port_no].flg_change)
-                stick_ctrldata[port_no].flg_change = false;
-              break;
-            case 4: // PCE2b PCE 6bは未確認
-              joydrv_snddata[port_no][5] = byte(buf[1]); // 左右アナログ
-              joydrv_snddata[port_no][4] = byte(buf[2]); // 上下アナログ
-
-              if (buf[3] & 0x0001) // Aボタン
-                joydrv_snddata[port_no][2] &= B11111110;
-              if (buf[3] & 0x0002) // Bボタン
-                joydrv_snddata[port_no][2] &= B11111101;
-              if (buf[3] & 0x0004) // STARTボタン
-                joydrv_snddata[port_no][0] &= B11111110;
-              if (buf[3] & 0x0008) // SELECTボタン
-                joydrv_snddata[port_no][0] &= B11111101;
-
-              if (stick_ctrldata[port_no].flg_change)
-                stick_ctrldata[port_no].flg_change = false;
-              break;
-            case 5: // FC
-              joydrv_snddata[port_no][5] = byte(buf[1]); // 左右アナログ
-              joydrv_snddata[port_no][4] = byte(buf[2]); // 上下アナログ
-
-              if (buf[3] & 0x0001) // Aボタン
-                joydrv_snddata[port_no][2] &= B11111110;
-              if (buf[3] & 0x0002) // Bボタン
-                joydrv_snddata[port_no][2] &= B11111101;
-              if (buf[3] & 0x0004) // STARTボタン
-                joydrv_snddata[port_no][0] &= B11111110;
-              if (buf[3] & 0x0008) // SELECTボタン
-                joydrv_snddata[port_no][0] &= B11111101;
-
-              if (stick_ctrldata[port_no].flg_change)
-                stick_ctrldata[port_no].flg_change = false;
-              break;
-
-          }
-          break;
-
-        case TYPE_PS4: // PS4
-defult: // 標準
-          if (buf[0] == 0x01) d_pointer = 0;
-          else if (buf[0] == 0x11) {
-            if (len < 4) return;
-            d_pointer = 2;
-          }
-          else return;
-
-          joydrv_snddata[port_no][5] = byte(buf[d_pointer + 1]); // L左右アナログ
-          joydrv_snddata[port_no][4] = byte(buf[d_pointer + 2]); // L上下アナログ
-          joydrv_snddata[port_no][7] = byte(buf[d_pointer + 3]); // R左右アナログ
-          joydrv_snddata[port_no][6] = byte(buf[d_pointer + 4]); // R上下アナログ
-          joydrv_snddata[port_no][8]  = byte(buf[d_pointer + 8]); // 左アナログボタン
-          joydrv_snddata[port_no][12] = byte(buf[d_pointer + 9]); // 右アナログボタン
-
-          joydrv_snddata[port_no][3] = ps_udlr_data[byte(buf[d_pointer + 5])&B00001111];
-
-          if (buf[d_pointer + 5] & 0x0020) // Aボタン (cross)
-            joydrv_snddata[port_no][2] &= B11111110;
-          if (buf[d_pointer + 5] & 0x0040) // Bボタン (circle)
-            joydrv_snddata[port_no][2] &= B11111101;
-          if (buf[d_pointer + 6] & 0x0002) // R1ボタン
-            joydrv_snddata[port_no][1] &= B11101111;
-          if (buf[d_pointer + 6] & 0x0008) // R2ボタン
-            joydrv_snddata[port_no][1] &= B11011111;
-          if (buf[d_pointer + 6] & 0x0080) // R3ボタン
-            joydrv_snddata[port_no][1] &= B10111111;
-          if (buf[d_pointer + 5] & 0x0010) // Xボタン (square)
-            joydrv_snddata[port_no][2] &= B11101111;
-          if (buf[d_pointer + 5] & 0x0080) // Yボタン (triangle)
-            joydrv_snddata[port_no][2] &= B11011111;
-          if (buf[d_pointer + 6] & 0x0001) // L1ボタン
-            joydrv_snddata[port_no][1] &= B11111110;
-          if (buf[d_pointer + 6] & 0x0004) // L2ボタン
-            joydrv_snddata[port_no][1] &= B11111101;
-          if (buf[d_pointer + 6] & 0x0040) // L3ボタン
-            joydrv_snddata[port_no][1] &= B11111011;
-
-          if ((buf[d_pointer + 6] & 0x0020) || (buf[d_pointer + 7] & 0x0001)) // STARTボタン
-            joydrv_snddata[port_no][0] &= B11111110;
-          if (buf[d_pointer + 6] & 0x0010) // SELECTボタン
-            joydrv_snddata[port_no][0] &= B11111101;
-
-          if (stick_ctrldata[port_no].flg_change) {
-            memset(w_buf, 0, sizeof(w_buf));
-            w_buf[0]  = 0x05;
-            w_buf[1]  = 0xFF;
-            w_buf[4]  = stick_ctrldata[port_no].motor2;
-            w_buf[5]  = stick_ctrldata[port_no].motor1;
-            w_buf[6]  = stick_ctrldata[port_no].led_r;
-            w_buf[7]  = stick_ctrldata[port_no].led_g;
-            w_buf[8]  = stick_ctrldata[port_no].led_b;
-            w_buf[9]  = stick_ctrldata[port_no].flush_on;
-            w_buf[10] = stick_ctrldata[port_no].flush_off;
-
-            stick_ctrldata[port_no].flg_change = false;
-            SndRpt(sizeof(w_buf), w_buf);
-          }
-          break;
       }
     }
 };
@@ -532,29 +284,15 @@ JoystickHID Hid3(&Usb);
 JoystickHID Hid4(&Usb);
 
 void setup() {
+
+  PORTC = B00000000;
+  PORTD = B00000000;
   byte i, j;
 
   Serial.begin(115200);
   while (!Serial);
 
-  atari_data_SELL = atari_data_SELH = B11111111;
 
-  for (i = 0; i < MAX_JOYSTICK; i++) {
-    for (j = 0; j <= 3; j++) joydrv_snddata[i][j] = B11111111;
-    for (j = 4; j <= 7; j++) joydrv_snddata[i][j] = B10000000;
-    for (j = 8; j <= 15; j++) joydrv_snddata[i][j] = 0;
-    stick_ctrldata[i].motor1 = 0;
-    stick_ctrldata[i].motor2 = 0;
-    stick_ctrldata[i].led_r = 0;
-    stick_ctrldata[i].led_g = 0;
-    stick_ctrldata[i].led_b = 0;
-    stick_ctrldata[i].flush_on = 0;
-    stick_ctrldata[i].flush_off = 0;
-    stick_ctrldata[i].flg_change = false;
-  }
-
-  cnv_mode = EEPROM.read(0);
-  if (cnv_mode > IF_MODE_JOYDRV) cnv_mode = IF_MODE_ATARI;
 
   //  set_cnv_mode();
 
@@ -677,17 +415,17 @@ void loop() {
     //    joydrv_port = rcv_joydrv();
     if (joydrv_port < 0 || joydrv_port >= MAX_JOYSTICK) {
       Serial.println(F("JOYDRV rcv ERROR1"));
-      goto joydrvif_error;
+
     }
     //    motor1 = rcv_joydrv();
     if (motor1 < 0) {
       Serial.println(F("JOYDRV rcv ERROR2"));
-      goto joydrvif_error;
+
     }
     //    motor2 = rcv_joydrv();
     if (motor2 < 0) {
       Serial.println(F("JOYDRV rcv ERROR3"));
-      goto joydrvif_error;
+
     }
     if (stick_ctrldata[joydrv_port].motor1 != byte(motor1) || stick_ctrldata[joydrv_port].motor2 != byte(motor2))
       stick_ctrldata[joydrv_port].flg_change = true;
@@ -700,167 +438,19 @@ void loop() {
     }
     if (i >= JOYDRV_WAIT) {
       Serial.print(F("JOYDRV BUSY ERROR"));
-      goto joydrvif_error;
+
     }
 
     for (i = 0; i < 16; i++) {
       //      if (snd_joydrv(joydrv_snddata[joydrv_port][i]) < 0) {
       Serial.print(F("JOYDRV snd ERROR"));
       Serial.println(i, DEC);
-      goto joydrvif_error;
+
     }
   }
-joydrvif_error:
-  //  PORTC = B11111111;
-  //  }
-  //  else if (cnv_mode == IF_MODE_ATARI) {
-  atari_work_SELL = (joydrv_snddata[0][3] | B11110000);
-  atari_work_SELH = ((joydrv_snddata[0][3] >> 4) | B11110000);
-  if (joydrv_snddata[0][5] < AD_CNV_DATA1) atari_work_SELL &= B11111011; // 左
-  else if (joydrv_snddata[0][5] > AD_CNV_DATA2) atari_work_SELL &= B11110111; // 右
-  if (joydrv_snddata[0][4] < AD_CNV_DATA1) atari_work_SELL &= B11111110; // 上
-  else if (joydrv_snddata[0][4] > AD_CNV_DATA2) atari_work_SELL &= B11111101; // 下
-  if (joydrv_snddata[0][7] < AD_CNV_DATA1) atari_work_SELH &= B11111011; // 左
-  else if (joydrv_snddata[0][7] > AD_CNV_DATA2) atari_work_SELH &= B11110111; // 右
-  if (joydrv_snddata[0][6] < AD_CNV_DATA1) atari_work_SELH &= B11111110; // 上
-  else if (joydrv_snddata[0][6] > AD_CNV_DATA2) atari_work_SELH &= B11111101; // 下
-  if (!(joydrv_snddata[0][0] & 0x01)) // STARTボタン
-    atari_work_SELL &= B11110011;
-  if (!(joydrv_snddata[0][0] & 0x02)) // SELECTボタン
-    atari_work_SELL &= B11111100;
-  if (!(joydrv_snddata[0][2] & 0x20) || !(joydrv_snddata[0][2] & 0x01)) { // AボタンorYボタン
-    atari_work_SELL &= B11101111;
-    atari_work_SELH &= B11101111;
-  }
-  if (!(joydrv_snddata[0][2] & 0x10) || !(joydrv_snddata[0][2] & 0x02)) { // BボタンorXボタン
-    atari_work_SELL &= B11011111;
-    atari_work_SELH &= B11011111;
-  }
-  atari_data_SELL = atari_work_SELL;
-  atari_data_SELH = atari_work_SELH;
 
-  //   PORTC = ((PIND & B00000100) ? atari_data_SELH : atari_data_SELL);
 }
-//  else if (cnv_mode == IF_MODE_CPSF) {
-/*    atari_work_SELL = (joydrv_snddata[0][3] | B11110000);
-    atari_work_SELH = B11111111;
-    if (joydrv_snddata[0][5] < AD_CNV_DATA1) atari_work_SELL &= B11111011; // 左
-    else if (joydrv_snddata[0][5] > AD_CNV_DATA2) atari_work_SELL &= B11110111; // 右
-    if (joydrv_snddata[0][4] < AD_CNV_DATA1) atari_work_SELL &= B11111110; // 上
-    else if (joydrv_snddata[0][4] > AD_CNV_DATA2) atari_work_SELL &= B11111101; // 下
-    if (!(joydrv_snddata[0][0] & 0x01)) // STARTボタン
-      atari_work_SELH &= B11011111;
-    if (!(joydrv_snddata[0][0] & 0x02)) // SELECTボタン
-      atari_work_SELH &= B11110111;
-    if (!(joydrv_snddata[0][2] & 0x01)) // Aボタン
-      atari_work_SELL &= B11101111;
-    if (!(joydrv_snddata[0][2] & 0x02)) // Bボタン
-      atari_work_SELL &= B11011111;
-    if (!(joydrv_snddata[0][1] & 0x10)) // R1ボタン
-      atari_work_SELH &= B11111110;
-    if (!(joydrv_snddata[0][2] & 0x10)) // Xボタン
-      atari_work_SELH &= B11111011;
-    if (!(joydrv_snddata[0][2] & 0x20)) // Yボタン
-      atari_work_SELH &= B11111101;
-    if (!(joydrv_snddata[0][1] & 0x01)) // L1ボタン
-      atari_work_SELH &= B11101111;
-    atari_data_SELL = atari_work_SELL;
-    atari_data_SELH = atari_work_SELH;
 
-  //  PORTC = ((PIND & B00000100) ? atari_data_SELH : atari_data_SELL);
-  }
-  }
-
-
-  int rcv_joydrv()
-  {
-  int d_work;
-  byte i;
-  long j;
-
-  d_work = 0;
-  for (i = 0; i < 4; i++) {
-    for (j = 0; j < JOYDRV_WAIT; j++) {
-      if (!(PINC & B00010000)) {
-   //     PORTC &= B11111110;
-        break;
-      }
-    }
-    if (j >= JOYDRV_WAIT) return -1;
-    for (j = 0; j < JOYDRV_WAIT; j++) {
-      if (PINC & B00010000) {
-        d_work = d_work << 1;
-        if (PINC & B00100000) d_work |= 1;
-  //       PORTC |= B00000001;
-        break;
-      }
-    }
-    if (j >= JOYDRV_WAIT) return -1;
-
-    for (j = 0; j < JOYDRV_WAIT; j++) {
-      if (!(PINC & B00100000)) {
-    //    PORTC &= B11111101;
-        break;
-      }
-    }
-    if (j >= JOYDRV_WAIT) return -1;
-    for (j = 0; j < JOYDRV_WAIT; j++) {
-      if (PINC & B00100000) {
-        d_work = d_work << 1;
-        if (PINC & B00010000) d_work |= 1;
-    //    PORTC |= B00000010;
-        break;
-      }
-    }
-    if (j >= JOYDRV_WAIT) return -1;
-  }
-  return d_work;
-  }
-
-  int snd_joydrv(byte snd_data)
-  {
-  byte d_work;
-  byte i;
-  long j;
-
-  d_work = snd_data;
-
-  for (i = 0; i < 4; i++) {
-    if (d_work & B10000000) PORTC |= B00000010;
-    else PORTC &= B11111101;
-    d_work = d_work << 1;
-    PORTC &= B11111110;
-    for (j = 0; j < JOYDRV_WAIT; j++) {
-      if (!(PINC & B00010000)) {
-        PORTC |= B00000001;
-        break;
-      }
-    }
-    if (j >= JOYDRV_WAIT) return -1;
-    for (j = 0; j < JOYDRV_WAIT; j++) {
-      if (PINC & B00010000) break;
-    }
-    if (j >= JOYDRV_WAIT) return -1;
-
-    if (d_work & B10000000) PORTC |= B00000001;
-    else PORTC &= B11111110;
-    d_work = d_work << 1;
-    PORTC &= B11111101;
-    for (j = 0; j < JOYDRV_WAIT; j++) {
-      if (!(PINC & B00100000)) {
-        PORTC |= B00000010;
-        break;
-      }
-    }
-    if (j >= JOYDRV_WAIT) return -1;
-    for (j = 0; j < JOYDRV_WAIT; j++) {
-      if (PINC & B00100000) break;
-    }
-    if (j >= JOYDRV_WAIT) return -1;
-  }
-  return 0;
-  }
-*/
 
 void int_cyber()
 {
