@@ -43,6 +43,8 @@ const struct {
   int joy_type;
 } Tbl_cnv_data[] = {
   {0x054c, 0x09cc, TYPE_PS4}, // PS4標準コントローラ
+  {0x054c, 0x05C4, TYPE_PS4}, // PS4Controller
+
   {0x0ca3, 0x0024, TYPE_MDmini}, // MDmini標準コントローラ
   {0x054c, 0x0ba0, TYPE_PS4}, // PS4 Wireless Adapter
   {0x054c, 0x0cda, TYPE_PSC}, // PlayStation Classic USB Controller
@@ -125,16 +127,28 @@ class JoystickHID : public HIDUniversal {
           Serial.print(F(":"));
           Serial.print(PID, HEX);
           Serial.print(F(":"));
-          Serial.println(buf[0], HEX);*/
+          Serial.println(buf[0], HEX);
 
 
+      // デバッグ用VID/PID buf[x]表示
+      char strString[256];
+      sprintf(strString, "VID:%04X PID:%04X cnv_pointer:%02X\t", VID, PID, cnv_pointer);
+      Serial.print(strString);
+      Serial.print(" ");
+      for (int i = 0; i < len; i++ ) {
+        PrintHex<uint8_t > (buf[i], 0);
+        Serial.print(" ");
+      }
+      Serial.println("");
+
+*/
 
       // コントローラ別処理
       switch (Tbl_cnv_data[cnv_pointer].joy_type) {
 
         case TYPE_RAP3: // RAP (PS3mode)
           // [[ HORI Real Arcade Pro.V HAYABUSA(PS3 MODE) ------------------------------------------------------
-          joydrv_snddata[port_no][3] = ps_udlr_data[byte(buf[2])&B00001111];
+          joydrv_snddata[port_no][3] = ps_udlr_data[byte(buf[2])];
 
 
           output = 0;
@@ -270,6 +284,194 @@ class JoystickHID : public HIDUniversal {
                   if (stick_ctrldata[port_no].flg_change)
                     stick_ctrldata[port_no].flg_change = false;
           break;
+
+        case TYPE_PS4: // PS4
+defult: // 標準
+          if (buf[0] == 0x01) d_pointer = 0;
+          else if (buf[0] == 0x11) {
+            if (len < 4) return;
+            d_pointer = 2;
+          }
+          else return;
+
+          joydrv_snddata[port_no][5] = byte(buf[d_pointer + 1]); // L左右アナログ
+          joydrv_snddata[port_no][4] = byte(buf[d_pointer + 2]); // L上下アナログ
+          joydrv_snddata[port_no][7] = byte(buf[d_pointer + 3]); // R左右アナログ
+          joydrv_snddata[port_no][6] = byte(buf[d_pointer + 4]); // R上下アナログ
+          joydrv_snddata[port_no][8]  = byte(buf[d_pointer + 8]); // 左アナログボタン
+          joydrv_snddata[port_no][12] = byte(buf[d_pointer + 9]); // 右アナログボタン
+
+          joydrv_snddata[port_no][3] = ps_udlr_data[byte(buf[d_pointer + 5])&B00001111];
+
+
+
+          output = 0;
+
+          if (byte(buf[5]) == 0) {
+            output |= 8; // pin A3
+            Serial.println("UP");
+          }
+
+          if (byte(buf[5]) == 6) {
+            output |= 4; //pin A2
+            Serial.println("LEFT");
+          }
+          if (buf[d_pointer + 5] & 0x0010) { // Xボタン (square)
+            output |= 2;
+            Serial.println(F("A button"));
+          }
+
+          if (buf[d_pointer + 6] & 0x0002) { // R1ボタン
+            output |= 1;
+            Serial.println("C button");
+          }
+
+          if (buf[d_pointer + 6] & 0x0008) { // R2ボタン
+            output |= 16;
+            Serial.println("Z button");
+          }
+          if (buf[d_pointer + 6] & 0x0020) { // STARTボタン
+            output |= 32;
+            Serial.println("Start button");
+          }
+
+
+
+          DDRC = output;
+
+
+          output = 0;
+
+
+   
+
+
+            // joydrv_snddata[port_no][2] &= B11111110;
+          
+
+          DDRD = output;
+
+
+          output = 0;
+
+          if (byte(buf[5]) == 2) {
+            output |= 8; //pin 3
+            Serial.println("RIGHT");
+          }
+          if (byte(buf[5]) == 4) {
+            output |= 4; // pin 2
+            Serial.println("DOWN");
+          }
+
+          if (byte(buf[5]) == 3) {
+            output |= 12; // pin 2 + 3
+            Serial.println("DOWN+RIGHT");
+          }
+
+
+
+          if (buf[d_pointer + 5] & 0x0080) { // Yボタン (triangle)
+            output |= 16;
+            Serial.println(F("B button"));
+          }
+                if (buf[d_pointer + 5] & 0x0020) { // Aボタン (cross)
+            output |= 32;
+            Serial.println("X button");
+          }
+
+          if (buf[d_pointer + 5] & 0x0040) { // Bボタン (circle)
+            output |= 128;
+            Serial.println("Y button");
+          }
+
+          if (buf[d_pointer + 6] & 0x0010) { // SELECTボタン
+            output |= 64;
+            Serial.println("Select button");
+          }
+
+
+
+
+          DDRD = output;
+
+
+
+          if (byte(buf[5]) == 5) {
+            DDRD |= 4;
+            DDRC |= 4;
+            Serial.println("DOWN+LEFT");
+          }
+
+          if (byte(buf[5]) == 7) {
+            DDRC |= 12;
+
+            Serial.println("UP+LEFT");
+          }
+
+          if (byte(buf[5]) == 1) {
+            DDRD |= 8;
+            DDRC |= 8;
+            Serial.println("UP+RIGHT");
+          }
+
+
+
+
+
+
+          //  joydrv_snddata[port_no][2] &= B11111101;
+
+
+
+
+          // joydrv_snddata[port_no][1] &= B11101111;
+
+          //  joydrv_snddata[port_no][1] &= B11011111;
+          if (buf[d_pointer + 6] & 0x0080) // R3ボタン
+            joydrv_snddata[port_no][1] &= B10111111;
+
+
+
+
+
+
+          //  joydrv_snddata[port_no][2] &= B11101111;
+
+
+
+
+          //  joydrv_snddata[port_no][2] &= B11011111;
+          if (buf[d_pointer + 6] & 0x0001) // L1ボタン
+            joydrv_snddata[port_no][1] &= B11111110;
+          if (buf[d_pointer + 6] & 0x0004) // L2ボタン
+            joydrv_snddata[port_no][1] &= B11111101;
+          if (buf[d_pointer + 6] & 0x0040) // L3ボタン
+            joydrv_snddata[port_no][1] &= B11111011;
+
+
+          //         joydrv_snddata[port_no][0] &= B11111110;
+
+          // joydrv_snddata[port_no][0] &= B11111101;
+
+          if (stick_ctrldata[port_no].flg_change) {
+            memset(w_buf, 0, sizeof(w_buf));
+            w_buf[0]  = 0x05;
+            w_buf[1]  = 0xFF;
+            w_buf[4]  = stick_ctrldata[port_no].motor2;
+            w_buf[5]  = stick_ctrldata[port_no].motor1;
+            w_buf[6]  = stick_ctrldata[port_no].led_r;
+            w_buf[7]  = stick_ctrldata[port_no].led_g;
+            w_buf[8]  = stick_ctrldata[port_no].led_b;
+            w_buf[9]  = stick_ctrldata[port_no].flush_on;
+            w_buf[10] = stick_ctrldata[port_no].flush_off;
+
+            stick_ctrldata[port_no].flg_change = false;
+            SndRpt(sizeof(w_buf), w_buf);
+          }
+          break;
+
+
+
 
 
       }
