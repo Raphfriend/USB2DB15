@@ -130,18 +130,18 @@ class JoystickHID : public HIDUniversal {
           Serial.println(buf[0], HEX);
 
 
-      // デバッグ用VID/PID buf[x]表示
-      char strString[256];
-      sprintf(strString, "VID:%04X PID:%04X cnv_pointer:%02X\t", VID, PID, cnv_pointer);
-      Serial.print(strString);
-      Serial.print(" ");
-      for (int i = 0; i < len; i++ ) {
+        // デバッグ用VID/PID buf[x]表示
+        char strString[256];
+        sprintf(strString, "VID:%04X PID:%04X cnv_pointer:%02X\t", VID, PID, cnv_pointer);
+        Serial.print(strString);
+        Serial.print(" ");
+        for (int i = 0; i < len; i++ ) {
         PrintHex<uint8_t > (buf[i], 0);
         Serial.print(" ");
-      }
-      Serial.println("");
+        }
+        Serial.println("");
 
-*/
+      */
 
       // コントローラ別処理
       switch (Tbl_cnv_data[cnv_pointer].joy_type) {
@@ -287,38 +287,39 @@ class JoystickHID : public HIDUniversal {
 
         case TYPE_PS4: // PS4
 defult: // 標準
-          if (buf[0] == 0x01) d_pointer = 0;
-          else if (buf[0] == 0x11) {
-            if (len < 4) return;
-            d_pointer = 2;
-          }
-          else return;
+          //          if (buf[0] == 0x01) d_pointer = 0;
+          //          else if (buf[0] == 0x11) {
+          //            if (len < 4) return;
+          //            d_pointer = 2;
+          //          }
+          //          else return;
 
-          joydrv_snddata[port_no][5] = byte(buf[d_pointer + 1]); // L左右アナログ
-          joydrv_snddata[port_no][4] = byte(buf[d_pointer + 2]); // L上下アナログ
-          joydrv_snddata[port_no][7] = byte(buf[d_pointer + 3]); // R左右アナログ
-          joydrv_snddata[port_no][6] = byte(buf[d_pointer + 4]); // R上下アナログ
-          joydrv_snddata[port_no][8]  = byte(buf[d_pointer + 8]); // 左アナログボタン
-          joydrv_snddata[port_no][12] = byte(buf[d_pointer + 9]); // 右アナログボタン
+          //          joydrv_snddata[port_no][5] = byte(buf[d_pointer + 1]); // L左右アナログ
+          //          joydrv_snddata[port_no][4] = byte(buf[d_pointer + 2]); // L上下アナログ
+          //          joydrv_snddata[port_no][7] = byte(buf[d_pointer + 3]); // R左右アナログ
+          //          joydrv_snddata[port_no][6] = byte(buf[d_pointer + 4]); // R上下アナログ
+          //          joydrv_snddata[port_no][8]  = byte(buf[d_pointer + 8]); // 左アナログボタン
+          //          joydrv_snddata[port_no][12] = byte(buf[d_pointer + 9]); // 右アナログボタン
 
-          joydrv_snddata[port_no][3] = ps_udlr_data[byte(buf[d_pointer + 5])&B00001111];
+          //       joydrv_snddata[port_no][3] = ps_udlr_data[byte(buf[d_pointer+5])&B00001111];
 
 
 
           output = 0;
 
-          if (byte(buf[5]) == 0) {
+          if (byte(buf[5]  & 0x0F) == 0) {
             output |= 8; // pin A3
             Serial.println("UP");
           }
 
-          if (byte(buf[5]) == 6) {
+          if (byte(buf[5]  & 0x0F) == 6) {
             output |= 4; //pin A2
             Serial.println("LEFT");
           }
           if (buf[d_pointer + 5] & 0x0010) { // Xボタン (square)
             output |= 2;
-            Serial.println(F("A button"));
+
+            Serial.println("A button");
           }
 
           if (buf[d_pointer + 6] & 0x0002) { // R1ボタン
@@ -340,30 +341,19 @@ defult: // 標準
           DDRC = output;
 
 
-          output = 0;
-
-
-   
-
-
-            // joydrv_snddata[port_no][2] &= B11111110;
-          
-
-          DDRD = output;
-
 
           output = 0;
 
-          if (byte(buf[5]) == 2) {
-            output |= 8; //pin 3
+    if ((byte(buf[5]) & 0x0F) == 2){
             Serial.println("RIGHT");
+            output |= 8; //pin 3
           }
-          if (byte(buf[5]) == 4) {
+          if (byte(buf[5] & 0x0F) == 4) {
             output |= 4; // pin 2
             Serial.println("DOWN");
           }
 
-          if (byte(buf[5]) == 3) {
+          if (byte(buf[5]  & 0x0F ) == 3) {
             output |= 12; // pin 2 + 3
             Serial.println("DOWN+RIGHT");
           }
@@ -374,7 +364,7 @@ defult: // 標準
             output |= 16;
             Serial.println(F("B button"));
           }
-                if (buf[d_pointer + 5] & 0x0020) { // Aボタン (cross)
+          if (buf[d_pointer + 5] & 0x0020) { // Aボタン (cross)
             output |= 32;
             Serial.println("X button");
           }
@@ -391,24 +381,23 @@ defult: // 標準
 
 
 
-
           DDRD = output;
 
 
 
-          if (byte(buf[5]) == 5) {
+          if (byte(buf[5]) == 5  & 0x0F) {
             DDRD |= 4;
             DDRC |= 4;
             Serial.println("DOWN+LEFT");
           }
 
-          if (byte(buf[5]) == 7) {
+          if (byte(buf[5]  & 0x0F) == 7) {
             DDRC |= 12;
 
             Serial.println("UP+LEFT");
           }
 
-          if (byte(buf[5]) == 1) {
+          if (byte(buf[5]  & 0x0F) == 1) {
             DDRD |= 8;
             DDRC |= 8;
             Serial.println("UP+RIGHT");
@@ -428,26 +417,26 @@ defult: // 標準
 
           //  joydrv_snddata[port_no][1] &= B11011111;
           if (buf[d_pointer + 6] & 0x0080) // R3ボタン
-            joydrv_snddata[port_no][1] &= B10111111;
+            //   joydrv_snddata[port_no][1] &= B10111111;
 
 
 
 
 
 
-          //  joydrv_snddata[port_no][2] &= B11101111;
+            //  joydrv_snddata[port_no][2] &= B11101111;
 
 
 
 
-          //  joydrv_snddata[port_no][2] &= B11011111;
-          if (buf[d_pointer + 6] & 0x0001) // L1ボタン
-            joydrv_snddata[port_no][1] &= B11111110;
-          if (buf[d_pointer + 6] & 0x0004) // L2ボタン
-            joydrv_snddata[port_no][1] &= B11111101;
-          if (buf[d_pointer + 6] & 0x0040) // L3ボタン
-            joydrv_snddata[port_no][1] &= B11111011;
-
+//            //  joydrv_snddata[port_no][2] &= B11011111;
+//            if (buf[d_pointer + 6] & 0x0001) // L1ボタン
+//              joydrv_snddata[port_no][1] &= B11111110;
+//          if (buf[d_pointer + 6] & 0x0004) // L2ボタン
+//            joydrv_snddata[port_no][1] &= B11111101;
+//          if (buf[d_pointer + 6] & 0x0040) // L3ボタン
+//            joydrv_snddata[port_no][1] &= B11111011;
+//
 
           //         joydrv_snddata[port_no][0] &= B11111110;
 
@@ -487,8 +476,8 @@ JoystickHID Hid4(&Usb);
 
 void setup() {
 
-  PORTC = B00000000;
-  PORTD = B00000000;
+  // PORTC = B00000000;
+  // PORTD = B00000000;
   byte i, j;
 
   Serial.begin(115200);
@@ -536,122 +525,31 @@ void loop() {
   if (if_com_flg == 0) Usb.Task();
 
   now_time = millis(); // 現在の起動からの時間
-  if (!(joydrv_snddata[0][0] & 0x03)) { //SELECT + STARTボタン
-    if (!(joydrv_snddata[0][2] & 0x01)) // Aボタン
-      flg_chg_mode = IF_MODE_ATARI;
-    else if (!(joydrv_snddata[0][2] & 0x02)) // Bボタン
-      flg_chg_mode = IF_MODE_CPSF;
-    else if (!(joydrv_snddata[0][2] & 0x10)) // Xボタン
-      flg_chg_mode = IF_MODE_CYBER;
-    else if (!(joydrv_snddata[0][2] & 0x20)) // Yボタン
-      flg_chg_mode = IF_MODE_JOYDRV;
-    else mode_time = now_time;
-    if ((now_time - mode_time) >= MODE_CHG_TIME) {
-      SPI.end();
-      cnv_mode = flg_chg_mode;
-      EEPROM.write(0, cnv_mode);
-      //   set_cnv_mode();
-      SPI.begin();
-      mode_time = now_time = millis(); // 現在の起動からの時間
-      if_com_flg = 0; /* 通信要求クリア */
-    }
+
+  if ((now_time - mode_time) >= MODE_CHG_TIME) {
+    SPI.end();
+    cnv_mode = flg_chg_mode;
+    EEPROM.write(0, cnv_mode);
+    //   set_cnv_mode();
+    SPI.begin();
+    mode_time = now_time = millis(); // 現在の起動からの時間
+    if_com_flg = 0; /* 通信要求クリア */
   }
-  else mode_time = now_time;
-
-  if (if_com_flg == 1) {
-    for (i = 0; i < 12; i += 2) {
-      cyber_data[i] = B11001111;
-      cyber_data[i + 1] = B11011111;
-    }
-    /* 左左右アナログ */
-    cyber_data[3] &= ((joydrv_snddata[0][5] >> 4) | B11110000); // 上位4ビット
-    cyber_data[7] &= (joydrv_snddata[0][5] | B11110000); // 下位4ビット
-    /* 左上下アナログ */
-    cyber_data[2] &= ((joydrv_snddata[0][4] >> 4) | B11110000); // 上位4ビット
-    cyber_data[6] &= (joydrv_snddata[0][4] | B11110000); // 下位4ビット
-    /* 右左右アナログ */
-    cyber_data[5] &= ((joydrv_snddata[0][7] >> 4) | B11110000); // 上位4ビット
-    cyber_data[9] &= (joydrv_snddata[0][7] | B11110000); // 下位4ビット
-    /* 右上下アナログ */
-    cyber_data[4] &= ((joydrv_snddata[0][6] >> 4) | B11110000); // 上位4ビット
-    cyber_data[8] &= (joydrv_snddata[0][6] | B11110000); // 下位4ビット
-    if (!(joydrv_snddata[0][2] & 0x01)) { // Aボタン
-      cyber_data[0]  &= B11110111;
-      cyber_data[10] &= B11110111;
-    }
-    if (!(joydrv_snddata[0][2] & 0x02)) { // Bボタン
-      cyber_data[0]  &= B11111011;
-      cyber_data[10] &= B11111011;
-    }
-    if (!(joydrv_snddata[0][1] & 0x10)) // R1ボタン
-      cyber_data[0] &= B11111101;
-    if (!(joydrv_snddata[0][2] & 0x10)) { // Xボタン
-      cyber_data[0]  &= B11110111;
-      cyber_data[10] &= B11111101;
-    }
-    if (!(joydrv_snddata[0][2] & 0x20)) { // Yボタン
-      cyber_data[0]  &= B11111011;
-      cyber_data[10] &= B11111110;
-    }
-    if (!(joydrv_snddata[0][1] & 0x01)) // L1ボタン
-      cyber_data[0] &= B11111110;
-    if (!(joydrv_snddata[0][1] & 0x20)) // R2ボタン
-      cyber_data[1] &= B11110111;
-    if (!(joydrv_snddata[0][1] & 0x02)) // L2ボタン
-      cyber_data[1] &= B11111011;
-    if (!(joydrv_snddata[0][0] & 0x01)) // STARTボタン
-      cyber_data[1] &= B11111101;
-    if (!(joydrv_snddata[0][0] & 0x02)) // SELECTボタン
-      cyber_data[1] &= B11111110;
-
-    for (i = 0; i < 12; i++) {
-      //    PORTC = cyber_data[i];
-      delayMicroseconds(CYBER_WAIT);
-    }
-    PORTC = B11111111;
-    if_com_flg = 0;
-  }
-  else if (if_com_flg == 2) {
-    if_com_flg = 0;
-
-    //    joydrv_port = rcv_joydrv();
-    if (joydrv_port < 0 || joydrv_port >= MAX_JOYSTICK) {
-      Serial.println(F("JOYDRV rcv ERROR1"));
-
-    }
-    //    motor1 = rcv_joydrv();
-    if (motor1 < 0) {
-      Serial.println(F("JOYDRV rcv ERROR2"));
-
-    }
-    //    motor2 = rcv_joydrv();
-    if (motor2 < 0) {
-      Serial.println(F("JOYDRV rcv ERROR3"));
-
-    }
-    if (stick_ctrldata[joydrv_port].motor1 != byte(motor1) || stick_ctrldata[joydrv_port].motor2 != byte(motor2))
-      stick_ctrldata[joydrv_port].flg_change = true;
-    stick_ctrldata[joydrv_port].motor1 = byte(motor1);
-    stick_ctrldata[joydrv_port].motor2 = byte(motor2);
-
-    /* PC本体側のBUSY終了待ち */
-    for (i = 0; i < JOYDRV_WAIT; i++) {
-      if (PINC & B00010000) break;
-    }
-    if (i >= JOYDRV_WAIT) {
-      Serial.print(F("JOYDRV BUSY ERROR"));
-
-    }
-
-    for (i = 0; i < 16; i++) {
-      //      if (snd_joydrv(joydrv_snddata[joydrv_port][i]) < 0) {
-      Serial.print(F("JOYDRV snd ERROR"));
-      Serial.println(i, DEC);
-
-    }
-  }
-
 }
+
+
+
+
+
+
+
+/* PC本体側のBUSY終了待ち */
+
+
+
+
+
+
 
 
 void int_cyber()
