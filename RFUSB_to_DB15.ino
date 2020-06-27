@@ -5,6 +5,7 @@
 //   コントローラタイプ(TYPE_PSC, TYPE_RAP3, TYPE_RAP4, TYPE_SNES, TYPE_RETROFREAK) :
 //     たねけん 2020
 //
+#include <XBOXONE.h>
 #include <EEPROM.h>
 #include <usbhid.h>
 #include <hiduniversal.h>
@@ -36,6 +37,7 @@
 #endif
 #include <SPI.h>
 
+
 int output = 0;
 const struct {
   uint16_t vid;
@@ -44,7 +46,8 @@ const struct {
 } Tbl_cnv_data[] = {
   {0x054c, 0x09cc, TYPE_PS4}, // PS4標準コントローラ
   {0x054c, 0x05C4, TYPE_PS4}, // PS4Controller
-
+  {0x1532, 0x0401, TYPE_PS4}, // Razer Panthera
+  {0x045E, 0x02D1, TYPE_PS4}, // XONE Controller
   {0x0ca3, 0x0024, TYPE_MDmini}, // MDmini標準コントローラ
   {0x054c, 0x0ba0, TYPE_PS4}, // PS4 Wireless Adapter
   {0x054c, 0x0cda, TYPE_PSC}, // PlayStation Classic USB Controller
@@ -344,7 +347,7 @@ defult: // 標準
 
           output = 0;
 
-    if ((byte(buf[5]) & 0x0F) == 2){
+          if ((byte(buf[5]) & 0x0F) == 2) {
             Serial.println("RIGHT");
             output |= 8; //pin 3
           }
@@ -385,19 +388,19 @@ defult: // 標準
 
 
 
-          if (byte(buf[5]) == 5  & 0x0F) {
+          if (byte(buf[5] & 0x0F) == 5 ) {
             DDRD |= 4;
             DDRC |= 4;
             Serial.println("DOWN+LEFT");
           }
 
-          if (byte(buf[5]  & 0x0F) == 7) {
+          if (byte(buf[5] & 0x0F) == 7) {
             DDRC |= 12;
 
             Serial.println("UP+LEFT");
           }
 
-          if (byte(buf[5]  & 0x0F) == 1) {
+          if (byte(buf[5] & 0x0F) == 1 ) {
             DDRD |= 8;
             DDRC |= 8;
             Serial.println("UP+RIGHT");
@@ -429,34 +432,34 @@ defult: // 標準
 
 
 
-//            //  joydrv_snddata[port_no][2] &= B11011111;
-//            if (buf[d_pointer + 6] & 0x0001) // L1ボタン
-//              joydrv_snddata[port_no][1] &= B11111110;
-//          if (buf[d_pointer + 6] & 0x0004) // L2ボタン
-//            joydrv_snddata[port_no][1] &= B11111101;
-//          if (buf[d_pointer + 6] & 0x0040) // L3ボタン
-//            joydrv_snddata[port_no][1] &= B11111011;
-//
+            //            //  joydrv_snddata[port_no][2] &= B11011111;
+            //            if (buf[d_pointer + 6] & 0x0001) // L1ボタン
+            //              joydrv_snddata[port_no][1] &= B11111110;
+            //          if (buf[d_pointer + 6] & 0x0004) // L2ボタン
+            //            joydrv_snddata[port_no][1] &= B11111101;
+            //          if (buf[d_pointer + 6] & 0x0040) // L3ボタン
+            //            joydrv_snddata[port_no][1] &= B11111011;
+            //
 
-          //         joydrv_snddata[port_no][0] &= B11111110;
+            //         joydrv_snddata[port_no][0] &= B11111110;
 
-          // joydrv_snddata[port_no][0] &= B11111101;
+            // joydrv_snddata[port_no][0] &= B11111101;
 
-          if (stick_ctrldata[port_no].flg_change) {
-            memset(w_buf, 0, sizeof(w_buf));
-            w_buf[0]  = 0x05;
-            w_buf[1]  = 0xFF;
-            w_buf[4]  = stick_ctrldata[port_no].motor2;
-            w_buf[5]  = stick_ctrldata[port_no].motor1;
-            w_buf[6]  = stick_ctrldata[port_no].led_r;
-            w_buf[7]  = stick_ctrldata[port_no].led_g;
-            w_buf[8]  = stick_ctrldata[port_no].led_b;
-            w_buf[9]  = stick_ctrldata[port_no].flush_on;
-            w_buf[10] = stick_ctrldata[port_no].flush_off;
+            if (stick_ctrldata[port_no].flg_change) {
+              memset(w_buf, 0, sizeof(w_buf));
+              w_buf[0]  = 0x05;
+              w_buf[1]  = 0xFF;
+              w_buf[4]  = stick_ctrldata[port_no].motor2;
+              w_buf[5]  = stick_ctrldata[port_no].motor1;
+              w_buf[6]  = stick_ctrldata[port_no].led_r;
+              w_buf[7]  = stick_ctrldata[port_no].led_g;
+              w_buf[8]  = stick_ctrldata[port_no].led_b;
+              w_buf[9]  = stick_ctrldata[port_no].flush_on;
+              w_buf[10] = stick_ctrldata[port_no].flush_off;
 
-            stick_ctrldata[port_no].flg_change = false;
-            SndRpt(sizeof(w_buf), w_buf);
-          }
+              stick_ctrldata[port_no].flg_change = false;
+              SndRpt(sizeof(w_buf), w_buf);
+            }
           break;
 
 
@@ -468,6 +471,7 @@ defult: // 標準
 };
 
 USB Usb;
+XBOXONE Xbox(&Usb);
 USBHub Hub(&Usb);
 JoystickHID Hid1(&Usb);
 JoystickHID Hid2(&Usb);
@@ -499,6 +503,134 @@ void setup() {
 
 
 void loop() {
+
+  Usb.Task();
+  if (Xbox.XboxOneConnected) {
+    if (Xbox.getAnalogHat(LeftHatX) > 7500 || Xbox.getAnalogHat(LeftHatX) < -7500
+        || Xbox.getAnalogHat(LeftHatY) > 7500
+        || Xbox.getAnalogHat(LeftHatY) < -7500
+        || Xbox.getAnalogHat(RightHatX) > 7500
+        || Xbox.getAnalogHat(RightHatX) < -7500
+        || Xbox.getAnalogHat(RightHatY) > 7500
+        || Xbox.getAnalogHat(RightHatY) < -7500) {
+      if (Xbox.getAnalogHat(LeftHatX) > 7500
+          || Xbox.getAnalogHat(LeftHatX) < -7500) {
+        Serial.print(F("LeftHatX: "));
+        Serial.print(Xbox.getAnalogHat(LeftHatX));
+        Serial.print("\t");
+      }
+      if (Xbox.getAnalogHat(LeftHatY) > 7500
+          || Xbox.getAnalogHat(LeftHatY) < -7500) {
+        Serial.print(F("LeftHatY: "));
+        Serial.print(Xbox.getAnalogHat(LeftHatY));
+        Serial.print("\t");
+      }
+      if (Xbox.getAnalogHat(RightHatX) > 7500
+          || Xbox.getAnalogHat(RightHatX) < -7500) {
+        Serial.print(F("RightHatX: "));
+        Serial.print(Xbox.getAnalogHat(RightHatX));
+        Serial.print("\t");
+      }
+      if (Xbox.getAnalogHat(RightHatY) > 7500 || Xbox.getAnalogHat(RightHatY) < -7500) {
+        Serial.print(F("RightHatY: "));
+        Serial.print(Xbox.getAnalogHat(RightHatY));
+      }
+      Serial.println();
+    }
+
+    if (Xbox.getButtonPress(L2) > 0 || Xbox.getButtonPress(R2) > 0) {
+      if (Xbox.getButtonPress(L2) > 0) {
+        Serial.print(F("L2: "));
+        Serial.print(Xbox.getButtonPress(L2));
+        Serial.print("\t");
+      }
+      if (Xbox.getButtonPress(R2) > 0) {
+        Serial.print(F("R2: "));
+        Serial.print(Xbox.getButtonPress(R2));
+        Serial.print("\t");
+      }
+      Serial.println();
+    }
+
+    // Set rumble effect
+    //    static uint16_t oldL2Value, oldR2Value;
+    //    if (Xbox.getButtonPress(L2) != oldL2Value || Xbox.getButtonPress(R2) != oldR2Value) {
+    //      oldL2Value = Xbox.getButtonPress(L2);
+    //      oldR2Value = Xbox.getButtonPress(R2);
+    //    uint8_t leftRumble = map(oldL2Value, 0, 1023, 0, 255); // Map the trigger values into a byte
+    //    uint8_t rightRumble = map(oldR2Value, 0, 1023, 0, 255);
+    //    if (leftRumble > 0 || rightRumble > 0)
+    //      Xbox.setRumbleOn(leftRumble, rightRumble, leftRumble, rightRumble);
+    //    else
+    Xbox.setRumbleOff();
+    //}
+
+    if (Xbox.getButtonClick(UP))
+      Serial.println(F("Up"));
+
+    output = 0;
+
+    if (Xbox.getButtonClick(LEFT)) {
+      output |= 4; //pin A2
+
+      Serial.println(F("Left"));
+    }
+
+    DDRC = output;
+    output = 0;
+
+    if (Xbox.getButtonClick(DOWN)) {
+      output |= 4; // pin 2
+      Serial.println(F("Down"));
+    }
+
+
+    DDRD = output;
+
+
+
+    if (Xbox.getButtonClick(RIGHT))
+      Serial.println(F("Right"));
+
+    if (Xbox.getButtonClick(START))
+      Serial.println(F("Start"));
+    if (Xbox.getButtonClick(BACK))
+      Serial.println(F("Back"));
+    if (Xbox.getButtonClick(XBOX))
+      Serial.println(F("Xbox"));
+    if (Xbox.getButtonClick(SYNC))
+      Serial.println(F("Sync"));
+
+    if (Xbox.getButtonClick(L1))
+      Serial.println(F("L1"));
+    if (Xbox.getButtonClick(R1))
+      Serial.println(F("R1"));
+    if (Xbox.getButtonClick(L2))
+      Serial.println(F("L2"));
+    if (Xbox.getButtonClick(R2))
+      Serial.println(F("R2"));
+    if (Xbox.getButtonClick(L3))
+      Serial.println(F("L3"));
+    if (Xbox.getButtonClick(R3))
+      Serial.println(F("R3"));
+
+
+    if (Xbox.getButtonClick(A))
+      Serial.println(F("A"));
+    if (Xbox.getButtonClick(B))
+      Serial.println(F("B"));
+    if (Xbox.getButtonClick(X))
+      Serial.println(F("X"));
+    if (Xbox.getButtonClick(Y))
+      Serial.println(F("Y"));
+  }
+  delay(1);
+
+
+
+
+
+
   byte cyber_data[12];
   // 上位4bitはステータス、下位4bitがデータ
   //  0 : A+A' B+B' C D
