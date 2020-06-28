@@ -47,7 +47,6 @@ const struct {
   {0x054c, 0x09cc, TYPE_PS4}, // PS4標準コントローラ
   {0x054c, 0x05C4, TYPE_PS4}, // PS4Controller
   {0x1532, 0x0401, TYPE_PS4}, // Razer Panthera
-  {0x045E, 0x02D1, TYPE_PS4}, // XONE Controller
   {0x0ca3, 0x0024, TYPE_MDmini}, // MDmini標準コントローラ
   {0x054c, 0x0ba0, TYPE_PS4}, // PS4 Wireless Adapter
   {0x054c, 0x0cda, TYPE_PSC}, // PlayStation Classic USB Controller
@@ -538,91 +537,129 @@ void loop() {
       Serial.println();
     }
 
-    if (Xbox.getButtonPress(L2) > 0 || Xbox.getButtonPress(R2) > 0) {
-      if (Xbox.getButtonPress(L2) > 0) {
-        Serial.print(F("L2: "));
-        Serial.print(Xbox.getButtonPress(L2));
-        Serial.print("\t");
-      }
-      if (Xbox.getButtonPress(R2) > 0) {
-        Serial.print(F("R2: "));
-        Serial.print(Xbox.getButtonPress(R2));
-        Serial.print("\t");
-      }
-      Serial.println();
-    }
+//      if (Xbox.getButtonPress(L2) > 0 || Xbox.getButtonPress(R2) > 0) {
+//        if (Xbox.getButtonPress(L2) > 0) {
+//          Serial.print(F("L2: "));
+//          Serial.print(Xbox.getButtonPress(L2));
+//          Serial.print("\t");
+//        }
+//        if (Xbox.getButtonPress(R2) > 0) {
+//          Serial.print(F("R2: "));
+//          Serial.print(Xbox.getButtonPress(R2));
+//          Serial.print("\t");
+//        }
+//        Serial.println();
+//      }
 
-    // Set rumble effect
-    //    static uint16_t oldL2Value, oldR2Value;
-    //    if (Xbox.getButtonPress(L2) != oldL2Value || Xbox.getButtonPress(R2) != oldR2Value) {
-    //      oldL2Value = Xbox.getButtonPress(L2);
-    //      oldR2Value = Xbox.getButtonPress(R2);
-    //    uint8_t leftRumble = map(oldL2Value, 0, 1023, 0, 255); // Map the trigger values into a byte
-    //    uint8_t rightRumble = map(oldR2Value, 0, 1023, 0, 255);
-    //    if (leftRumble > 0 || rightRumble > 0)
-    //      Xbox.setRumbleOn(leftRumble, rightRumble, leftRumble, rightRumble);
-    //    else
+
     Xbox.setRumbleOff();
-    //}
 
-    if (Xbox.getButtonClick(UP))
-      Serial.println(F("Up"));
+
+
 
     output = 0;
 
-    if (Xbox.getButtonClick(LEFT)) {
-      output |= 4; //pin A2
 
+    if (Xbox.getButtonPress(UP)) {
+      output |= 8; // pin A3
+      Serial.println(F("Up"));
+    }
+
+
+    if (Xbox.getButtonPress(LEFT)) {
+      output |= 4; //pin A2
       Serial.println(F("Left"));
     }
+
+    if (Xbox.getButtonPress(X)) {
+      output |= 2; //A1
+      Serial.println(F("X"));
+    }
+
+    if (Xbox.getButtonPress(START)) {
+      output |= 32;
+      Serial.println(F("Start"));
+    }
+
+    if (Xbox.getButtonPress(R1)) {
+      output |= 1;
+      Serial.println(F("R1"));
+    }
+
+    if (Xbox.getButtonPress(R2)) {
+      output |= 16;
+      Serial.println(F("R2"));
+    }
+
+
+
 
     DDRC = output;
     output = 0;
 
-    if (Xbox.getButtonClick(DOWN)) {
+
+
+    if (Xbox.getButtonPress(DOWN)) {
       output |= 4; // pin 2
       Serial.println(F("Down"));
     }
 
 
+    if (Xbox.getButtonPress(Y)) {
+      output |= 16;
+      Serial.println(F("Y"));
+    }
+
+    if (Xbox.getButtonPress(A)) {
+      output |= 32;
+      Serial.println(F("A"));
+    }
+
+    if (Xbox.getButtonPress(B)) {
+      output |= 128; //pin 7
+      Serial.println(F("B"));
+    }
+    if (Xbox.getButtonPress(RIGHT)) {
+      output |= 8; //pin 3
+
+      Serial.println(F("Right"));
+    }
+
+
+    if (Xbox.getButtonPress(BACK)) {
+      output |= 64; //pin 6
+      Serial.println(F("Back"));
+    }
+
     DDRD = output;
 
 
 
-    if (Xbox.getButtonClick(RIGHT))
+    if (Xbox.getButtonPress(RIGHT))
       Serial.println(F("Right"));
 
-    if (Xbox.getButtonClick(START))
-      Serial.println(F("Start"));
-    if (Xbox.getButtonClick(BACK))
-      Serial.println(F("Back"));
-    if (Xbox.getButtonClick(XBOX))
+
+
+    if (Xbox.getButtonPress(XBOX))
       Serial.println(F("Xbox"));
-    if (Xbox.getButtonClick(SYNC))
+    if (Xbox.getButtonPress(SYNC))
       Serial.println(F("Sync"));
 
-    if (Xbox.getButtonClick(L1))
+    if (Xbox.getButtonPress(L1))
       Serial.println(F("L1"));
-    if (Xbox.getButtonClick(R1))
-      Serial.println(F("R1"));
-    if (Xbox.getButtonClick(L2))
+
+    if (Xbox.getButtonPress(L2))
       Serial.println(F("L2"));
-    if (Xbox.getButtonClick(R2))
-      Serial.println(F("R2"));
-    if (Xbox.getButtonClick(L3))
+
+    if (Xbox.getButtonPress(L3))
       Serial.println(F("L3"));
-    if (Xbox.getButtonClick(R3))
+    if (Xbox.getButtonPress(R3))
       Serial.println(F("R3"));
 
 
-    if (Xbox.getButtonClick(A))
-      Serial.println(F("A"));
-    if (Xbox.getButtonClick(B))
-      Serial.println(F("B"));
-    if (Xbox.getButtonClick(X))
-      Serial.println(F("X"));
-    if (Xbox.getButtonClick(Y))
-      Serial.println(F("Y"));
+
+
+
   }
   delay(1);
 
