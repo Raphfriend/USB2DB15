@@ -1,9 +1,9 @@
-// USB controller -> ATARI ver 1.21
+// Based on USB controller -> ATARI ver 1.21 by HUYE (twitter @huye_4589) park7.wakwak.com/~huye/kaihatsu/ 2018-2020
 // Copyright
 //   メインプログラム、コントローラタイプ(TYPE_PS4, TYPE_MDmini) :
-//     HUYE 2018-2020
+//
 //   コントローラタイプ(TYPE_PSC, TYPE_RAP3, TYPE_RAP4, TYPE_SNES, TYPE_RETROFREAK) :
-//     たねけん 2020
+//   With big help from  たねけん (twitter @taneken2000)
 //
 #include <XBOXONE.h>
 #include <EEPROM.h>
@@ -25,10 +25,6 @@
 #define AD_CNV_DATA1 64
 #define AD_CNV_DATA2 192
 
-#define IF_MODE_ATARI 0
-#define IF_MODE_CPSF  1
-#define IF_MODE_CYBER 2
-#define IF_MODE_JOYDRV 3
 
 #define MODE_CHG_TIME 3000 // 3秒
 
@@ -256,21 +252,9 @@ class JoystickHID : public HIDUniversal {
 
 
 
-          //   joydrv_snddata[port_no][2] &= B11111110;
 
-          //   joydrv_snddata[port_no][2] &= B11111101;
-
-          //     joydrv_snddata[port_no][1] &= B11101111;
-
-          //     joydrv_snddata[port_no][1] &= B11011111;
           if (buf[1] & 0x0008) // R3ボタン
 
-            /*if (buf[0] & 0x0001) // Xボタン (square)
-
-              Serial.println(F("A button"))
-              //  joydrv_snddata[port_no][2] &= B11101111;
-              if (buf[0] & 0x0008) // Yボタン (triangle)
-              Serial.println("B button");;*/
 
             if (buf[0] & 0x0010) // L1ボタン
 
@@ -280,8 +264,6 @@ class JoystickHID : public HIDUniversal {
 
 
 
-
-                  //   joydrv_snddata[port_no][0] &= B11111101;
 
                   if (stick_ctrldata[port_no].flg_change)
                     stick_ctrldata[port_no].flg_change = false;
@@ -537,19 +519,19 @@ void loop() {
       Serial.println();
     }
 
-//      if (Xbox.getButtonPress(L2) > 0 || Xbox.getButtonPress(R2) > 0) {
-//        if (Xbox.getButtonPress(L2) > 0) {
-//          Serial.print(F("L2: "));
-//          Serial.print(Xbox.getButtonPress(L2));
-//          Serial.print("\t");
-//        }
-//        if (Xbox.getButtonPress(R2) > 0) {
-//          Serial.print(F("R2: "));
-//          Serial.print(Xbox.getButtonPress(R2));
-//          Serial.print("\t");
-//        }
-//        Serial.println();
-//      }
+    //      if (Xbox.getButtonPress(L2) > 0 || Xbox.getButtonPress(R2) > 0) {
+    //        if (Xbox.getButtonPress(L2) > 0) {
+    //          Serial.print(F("L2: "));
+    //          Serial.print(Xbox.getButtonPress(L2));
+    //          Serial.print("\t");
+    //        }
+    //        if (Xbox.getButtonPress(R2) > 0) {
+    //          Serial.print(F("R2: "));
+    //          Serial.print(Xbox.getButtonPress(R2));
+    //          Serial.print("\t");
+    //        }
+    //        Serial.println();
+    //      }
 
 
     Xbox.setRumbleOff();
