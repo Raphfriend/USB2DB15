@@ -1,4 +1,4 @@
-# RFUSBtoDB15
+# Arduino-USB-HID-to-Supergun-DB15-Adapter
 Simple USB to DB15 for Neogeo and Supergun.
 
 
