@@ -1,5 +1,5 @@
-# Arduino-USB-HID-to-Supergun-DB15-Adapter
-Simple USB to DB15 for Neogeo and Supergun.
+USB-HID-to-Supergun-DB15-Adapter
+Simple USB to DB15 for Neogeo and Supergun using the Arduino pro mini.
 
 
 It have default action buttons as CAPCOM, but can be switched to NEO GEO pattern with 4 buttons (2 different styles).
