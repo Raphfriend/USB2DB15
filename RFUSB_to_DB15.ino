@@ -6,10 +6,11 @@
 //   With big help from  たねけん (twitter @taneken2000)
 //
 #include <XBOXONE.h>
+#include <PS3USB.h>
 #include <EEPROM.h>
 #include <usbhid.h>
 #include <hiduniversal.h>
-#include <usbhub.h>
+//#include <usbhub.h>
 
 #define TYPE_PS4 0
 #define TYPE_MDmini 1
@@ -33,6 +34,9 @@
 #endif
 #include <SPI.h>
 
+bool printAngle;
+uint8_t state = 0;
+
 
 int output = 0;
 const struct {
@@ -42,7 +46,9 @@ const struct {
 } Tbl_cnv_data[] = {
   {0x054c, 0x09cc, TYPE_PS4}, // PS4標準コントローラ
   {0x054c, 0x05C4, TYPE_PS4}, // PS4Controller
+  //  {0x054c, 0x0268, TYPE_RAP3},// PS3Controller
   {0x1532, 0x0401, TYPE_PS4}, // Razer Panthera
+  {0xC410, 0xC082, TYPE_PS4}, // UPCB
   {0x0ca3, 0x0024, TYPE_MDmini}, // MDmini標準コントローラ
   {0x054c, 0x0ba0, TYPE_PS4}, // PS4 Wireless Adapter
   {0x054c, 0x0cda, TYPE_PSC}, // PlayStation Classic USB Controller
@@ -389,9 +395,6 @@ defult: // 標準
 
 
 
-
-
-
           //  joydrv_snddata[port_no][2] &= B11111101;
 
 
@@ -443,17 +446,14 @@ defult: // 標準
             }
           break;
 
-
-
-
-
       }
     }
 };
 
 USB Usb;
+PS3USB PS3(&Usb);
 XBOXONE Xbox(&Usb);
-USBHub Hub(&Usb);
+//USBHub Hub(&Usb);
 JoystickHID Hid1(&Usb);
 JoystickHID Hid2(&Usb);
 JoystickHID Hid3(&Usb);
@@ -486,6 +486,84 @@ void setup() {
 void loop() {
 
   Usb.Task();
+
+  if (PS3.PS3Connected) {
+
+
+    output = 0;
+
+
+    if (PS3.getButtonPress(UP)) {
+      output |= 8; // pin A3
+      Serial.println(F("Up"));
+    }
+
+
+    if (PS3.getButtonPress(LEFT)) {
+      output |= 4; //pin A2
+      Serial.println(F("Left"));
+    }
+
+    if (PS3.getButtonPress(SQUARE)) {
+      output |= 2; //A1
+      Serial.println(F("Square"));
+    }
+
+    if (PS3.getButtonPress(START)) {
+      output |= 32;
+      Serial.println(F("Start"));
+    }
+
+    if (PS3.getButtonPress(R1)) {
+      output |= 1;
+      Serial.println(F("R1"));
+    }
+
+    if (PS3.getButtonPress(R2)) {
+      output |= 16;
+      Serial.println(F("R2"));
+    }
+
+    DDRC = output;
+    output = 0;
+
+    if (PS3.getButtonPress(DOWN)) {
+      output |= 4; // pin 2
+      Serial.println(F("Down"));
+    }
+
+
+    if (PS3.getButtonPress(TRIANGLE)) {
+      output |= 16;
+      Serial.println(F("\r\nTriangle"));
+    }
+
+    if (PS3.getButtonPress(CIRCLE)) {
+      output |= 32;
+      Serial.println(F("Circle"));
+    }
+
+    if (PS3.getButtonPress(X)) {
+      output |= 128; //pin 7
+      Serial.println(F("X"));
+    }
+    if (PS3.getButtonPress(RIGHT)) {
+      output |= 8; //pin 3
+
+      Serial.println(F("Right"));
+    }
+
+    if (PS3.getButtonPress(SELECT)) {
+      output |= 64; //pin 6
+      Serial.println(F("Select"));
+    }
+
+    DDRD = output;
+
+
+  }
+
+
   if (Xbox.XboxOneConnected) {
     if (Xbox.getAnalogHat(LeftHatX) > 7500 || Xbox.getAnalogHat(LeftHatX) < -7500
         || Xbox.getAnalogHat(LeftHatY) > 7500
@@ -519,25 +597,8 @@ void loop() {
       Serial.println();
     }
 
-    //      if (Xbox.getButtonPress(L2) > 0 || Xbox.getButtonPress(R2) > 0) {
-    //        if (Xbox.getButtonPress(L2) > 0) {
-    //          Serial.print(F("L2: "));
-    //          Serial.print(Xbox.getButtonPress(L2));
-    //          Serial.print("\t");
-    //        }
-    //        if (Xbox.getButtonPress(R2) > 0) {
-    //          Serial.print(F("R2: "));
-    //          Serial.print(Xbox.getButtonPress(R2));
-    //          Serial.print("\t");
-    //        }
-    //        Serial.println();
-    //      }
-
 
     Xbox.setRumbleOff();
-
-
-
 
     output = 0;
 
@@ -573,13 +634,8 @@ void loop() {
       Serial.println(F("R2"));
     }
 
-
-
-
     DDRC = output;
     output = 0;
-
-
 
     if (Xbox.getButtonPress(DOWN)) {
       output |= 4; // pin 2
@@ -607,7 +663,6 @@ void loop() {
       Serial.println(F("Right"));
     }
 
-
     if (Xbox.getButtonPress(BACK)) {
       output |= 64; //pin 6
       Serial.println(F("Back"));
@@ -617,33 +672,9 @@ void loop() {
 
 
 
-    if (Xbox.getButtonPress(RIGHT))
-      Serial.println(F("Right"));
-
-
-
-    if (Xbox.getButtonPress(XBOX))
-      Serial.println(F("Xbox"));
-    if (Xbox.getButtonPress(SYNC))
-      Serial.println(F("Sync"));
-
-    if (Xbox.getButtonPress(L1))
-      Serial.println(F("L1"));
-
-    if (Xbox.getButtonPress(L2))
-      Serial.println(F("L2"));
-
-    if (Xbox.getButtonPress(L3))
-      Serial.println(F("L3"));
-    if (Xbox.getButtonPress(R3))
-      Serial.println(F("R3"));
-
-
-
-
 
   }
-  delay(1);
+ 
 
 
 
@@ -673,7 +704,7 @@ void loop() {
   int i;
   unsigned long now_time;
 
-  if (if_com_flg == 0) Usb.Task();
+ // if (if_com_flg == 0) Usb.Task();
 
   now_time = millis(); // 現在の起動からの時間
 
