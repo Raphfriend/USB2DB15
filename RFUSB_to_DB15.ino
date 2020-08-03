@@ -539,12 +539,12 @@ void loop() {
     }
 
     if (PS3.getButtonPress(CIRCLE)) {
-      output |= 32;
+      output |= 128;
       Serial.println(F("Circle"));
     }
 
     if (PS3.getButtonPress(X)) {
-      output |= 128; //pin 7
+      output |= 32; //pin 5
       Serial.println(F("X"));
     }
     if (PS3.getButtonPress(RIGHT)) {
@@ -674,7 +674,7 @@ void loop() {
 
 
   }
- 
+
 
 
 
@@ -704,7 +704,7 @@ void loop() {
   int i;
   unsigned long now_time;
 
- // if (if_com_flg == 0) Usb.Task();
+  // if (if_com_flg == 0) Usb.Task();
 
   now_time = millis(); // 現在の起動からの時間
 
