@@ -1,16 +1,18 @@
 // Based on USB controller -> ATARI ver 1.21 by HUYE (twitter @huye_4589) park7.wakwak.com/~huye/kaihatsu/ 2018-2020
+//     With big help from  たねけん (twitter @taneken2000) 
+//    
 // Copyright
 //   メインプログラム、コントローラタイプ(TYPE_PS4, TYPE_MDmini) :
 //
 //   コントローラタイプ(TYPE_PSC, TYPE_RAP3, TYPE_RAP4, TYPE_SNES, TYPE_RETROFREAK) :
-//   With big help from  たねけん (twitter @taneken2000)
+//   
 //
 #include <XBOXONE.h>
 #include <PS3USB.h>
 #include <EEPROM.h>
 #include <usbhid.h>
 #include <hiduniversal.h>
-//#include <usbhub.h>
+#include <usbhub.h>
 
 #define TYPE_PS4 0
 #define TYPE_MDmini 1
@@ -21,13 +23,8 @@
 #define TYPE_RETROFREAK 6
 
 #define MAX_JOYSTICK 4
-#define CYBER_WAIT  25
-#define JOYDRV_WAIT 1000000L
-#define AD_CNV_DATA1 64
-#define AD_CNV_DATA2 192
 
 
-#define MODE_CHG_TIME 3000 // 3秒
 
 #ifdef dobogusinclude
 #include <spi4teensy3.h>
@@ -97,13 +94,7 @@ volatile struct {
   bool flg_change;
 } stick_ctrldata[MAX_JOYSTICK];
 
-const byte ps_udlr_data[16] = {B11111110, B11110110, B11110111, B11110101, B11111101, B11111001, B11111011, B11111010,
-                               B11111111, B11111111, B11111111, B11111111, B11111111, B11111111, B11111111, B11111111
-                              };
 
-const byte psc_udlr_data[16] = {B11111010, B11111110, B11110110, B11111111, B11111011, B11111111, B11110111, B11111111,
-                                B11111001, B11111101, B11110101, B11111111, B11111111, B11111111, B11111111, B11111111
-                               };
 
 class JoystickHID : public HIDUniversal {
   public:
@@ -152,7 +143,7 @@ class JoystickHID : public HIDUniversal {
 
         case TYPE_RAP3: // RAP (PS3mode)
           // [[ HORI Real Arcade Pro.V HAYABUSA(PS3 MODE) ------------------------------------------------------
-          joydrv_snddata[port_no][3] = ps_udlr_data[byte(buf[2])];
+          //          joydrv_snddata[port_no][3] = ps_udlr_data[byte(buf[2])];
 
 
           output = 0;
@@ -185,10 +176,6 @@ class JoystickHID : public HIDUniversal {
             Serial.println("Start button");
           }
 
-
-
-
-
           DDRC = output;
           output = 0;
 
@@ -205,8 +192,6 @@ class JoystickHID : public HIDUniversal {
             output |= 12; // pin 2 + 3
             Serial.println("DOWN+RIGHT");
           }
-
-
 
           if (buf[0] & 0x0008) { // Yボタン (triangle)
             output |= 16;
@@ -228,12 +213,7 @@ class JoystickHID : public HIDUniversal {
             Serial.println("Select button");
           }
 
-
-
-
           DDRD = output;
-
-
 
           if (byte(buf[2]) == 5) {
             DDRD |= 4;
@@ -254,46 +234,16 @@ class JoystickHID : public HIDUniversal {
           }
 
 
-
-
-
-
-
           if (buf[1] & 0x0008) // R3ボタン
-
-
             if (buf[0] & 0x0010) // L1ボタン
-
               if (buf[0] & 0x0040) // L2ボタン
-
                 if (buf[1] & 0x0004) // L3ボタン
 
 
-
-
-                  if (stick_ctrldata[port_no].flg_change)
-                    stick_ctrldata[port_no].flg_change = false;
-          break;
+                  break;
 
         case TYPE_PS4: // PS4
 defult: // 標準
-          //          if (buf[0] == 0x01) d_pointer = 0;
-          //          else if (buf[0] == 0x11) {
-          //            if (len < 4) return;
-          //            d_pointer = 2;
-          //          }
-          //          else return;
-
-          //          joydrv_snddata[port_no][5] = byte(buf[d_pointer + 1]); // L左右アナログ
-          //          joydrv_snddata[port_no][4] = byte(buf[d_pointer + 2]); // L上下アナログ
-          //          joydrv_snddata[port_no][7] = byte(buf[d_pointer + 3]); // R左右アナログ
-          //          joydrv_snddata[port_no][6] = byte(buf[d_pointer + 4]); // R上下アナログ
-          //          joydrv_snddata[port_no][8]  = byte(buf[d_pointer + 8]); // 左アナログボタン
-          //          joydrv_snddata[port_no][12] = byte(buf[d_pointer + 9]); // 右アナログボタン
-
-          //       joydrv_snddata[port_no][3] = ps_udlr_data[byte(buf[d_pointer+5])&B00001111];
-
-
 
           output = 0;
 
@@ -326,11 +276,7 @@ defult: // 標準
             Serial.println("Start button");
           }
 
-
-
           DDRC = output;
-
-
 
           output = 0;
 
@@ -347,8 +293,6 @@ defult: // 標準
             output |= 12; // pin 2 + 3
             Serial.println("DOWN+RIGHT");
           }
-
-
 
           if (buf[d_pointer + 5] & 0x0080) { // Yボタン (triangle)
             output |= 16;
@@ -369,11 +313,7 @@ defult: // 標準
             Serial.println("Select button");
           }
 
-
-
           DDRD = output;
-
-
 
           if (byte(buf[5] & 0x0F) == 5 ) {
             DDRD |= 4;
@@ -393,42 +333,7 @@ defult: // 標準
             Serial.println("UP+RIGHT");
           }
 
-
-
-          //  joydrv_snddata[port_no][2] &= B11111101;
-
-
-
-
-          // joydrv_snddata[port_no][1] &= B11101111;
-
-          //  joydrv_snddata[port_no][1] &= B11011111;
           if (buf[d_pointer + 6] & 0x0080) // R3ボタン
-            //   joydrv_snddata[port_no][1] &= B10111111;
-
-
-
-
-
-
-            //  joydrv_snddata[port_no][2] &= B11101111;
-
-
-
-
-            //            //  joydrv_snddata[port_no][2] &= B11011111;
-            //            if (buf[d_pointer + 6] & 0x0001) // L1ボタン
-            //              joydrv_snddata[port_no][1] &= B11111110;
-            //          if (buf[d_pointer + 6] & 0x0004) // L2ボタン
-            //            joydrv_snddata[port_no][1] &= B11111101;
-            //          if (buf[d_pointer + 6] & 0x0040) // L3ボタン
-            //            joydrv_snddata[port_no][1] &= B11111011;
-            //
-
-            //         joydrv_snddata[port_no][0] &= B11111110;
-
-            // joydrv_snddata[port_no][0] &= B11111101;
-
             if (stick_ctrldata[port_no].flg_change) {
               memset(w_buf, 0, sizeof(w_buf));
               w_buf[0]  = 0x05;
@@ -453,7 +358,9 @@ defult: // 標準
 USB Usb;
 PS3USB PS3(&Usb);
 XBOXONE Xbox(&Usb);
-//USBHub Hub(&Usb);
+
+
+USBHub Hub(&Usb);
 JoystickHID Hid1(&Usb);
 JoystickHID Hid2(&Usb);
 JoystickHID Hid3(&Usb);
@@ -461,26 +368,17 @@ JoystickHID Hid4(&Usb);
 
 void setup() {
 
-  // PORTC = B00000000;
-  // PORTD = B00000000;
   byte i, j;
 
   Serial.begin(115200);
   while (!Serial);
-
-
-
-  //  set_cnv_mode();
 
   if (Usb.Init() == -1) {
     Serial.print(F("\r\nOSC did not start"));
     while (1);
   }
 
-  mode_time = millis();  /* 起動時の時間 */
-  if_com_flg = 0; /* 通信要求クリア */
 }
-
 
 
 void loop() {
@@ -489,15 +387,12 @@ void loop() {
 
   if (PS3.PS3Connected) {
 
-
     output = 0;
-
 
     if (PS3.getButtonPress(UP)) {
       output |= 8; // pin A3
       Serial.println(F("Up"));
     }
-
 
     if (PS3.getButtonPress(LEFT)) {
       output |= 4; //pin A2
@@ -532,7 +427,6 @@ void loop() {
       Serial.println(F("Down"));
     }
 
-
     if (PS3.getButtonPress(TRIANGLE)) {
       output |= 16;
       Serial.println(F("\r\nTriangle"));
@@ -559,19 +453,17 @@ void loop() {
     }
 
     DDRD = output;
-
-
   }
 
+  delay(1);
 
-  if (Xbox.XboxOneConnected) {
+
+  if (Xbox.XboxOneConnected)
+
+  {
     if (Xbox.getAnalogHat(LeftHatX) > 7500 || Xbox.getAnalogHat(LeftHatX) < -7500
-        || Xbox.getAnalogHat(LeftHatY) > 7500
-        || Xbox.getAnalogHat(LeftHatY) < -7500
-        || Xbox.getAnalogHat(RightHatX) > 7500
-        || Xbox.getAnalogHat(RightHatX) < -7500
-        || Xbox.getAnalogHat(RightHatY) > 7500
-        || Xbox.getAnalogHat(RightHatY) < -7500) {
+        || Xbox.getAnalogHat(LeftHatY) > 7500 || Xbox.getAnalogHat(LeftHatY) < -7500 )
+    {
       if (Xbox.getAnalogHat(LeftHatX) > 7500
           || Xbox.getAnalogHat(LeftHatX) < -7500) {
         Serial.print(F("LeftHatX: "));
@@ -584,26 +476,16 @@ void loop() {
         Serial.print(Xbox.getAnalogHat(LeftHatY));
         Serial.print("\t");
       }
-      if (Xbox.getAnalogHat(RightHatX) > 7500
-          || Xbox.getAnalogHat(RightHatX) < -7500) {
-        Serial.print(F("RightHatX: "));
-        Serial.print(Xbox.getAnalogHat(RightHatX));
-        Serial.print("\t");
-      }
-      if (Xbox.getAnalogHat(RightHatY) > 7500 || Xbox.getAnalogHat(RightHatY) < -7500) {
-        Serial.print(F("RightHatY: "));
-        Serial.print(Xbox.getAnalogHat(RightHatY));
-      }
+
       Serial.println();
     }
-
 
     Xbox.setRumbleOff();
 
     output = 0;
 
 
-    if (Xbox.getButtonPress(UP)) {
+    if (Xbox.getButtonPress(UP))  {
       output |= 8; // pin A3
       Serial.println(F("Up"));
     }
@@ -614,22 +496,22 @@ void loop() {
       Serial.println(F("Left"));
     }
 
-    if (Xbox.getButtonPress(X)) {
+    if (Xbox.getButtonPress(X))  {
       output |= 2; //A1
       Serial.println(F("X"));
     }
 
-    if (Xbox.getButtonPress(START)) {
+    if (Xbox.getButtonPress(START))  {
       output |= 32;
       Serial.println(F("Start"));
     }
 
-    if (Xbox.getButtonPress(R1)) {
+    if (Xbox.getButtonPress(R1))  {
       output |= 1;
       Serial.println(F("R1"));
     }
 
-    if (Xbox.getButtonPress(R2)) {
+    if (Xbox.getButtonPress(R2))  {
       output |= 16;
       Serial.println(F("R2"));
     }
@@ -637,13 +519,13 @@ void loop() {
     DDRC = output;
     output = 0;
 
-    if (Xbox.getButtonPress(DOWN)) {
+    if (Xbox.getButtonPress(DOWN))  {
       output |= 4; // pin 2
       Serial.println(F("Down"));
     }
 
 
-    if (Xbox.getButtonPress(Y)) {
+    if (Xbox.getButtonPress(Y))  {
       output |= 16;
       Serial.println(F("Y"));
     }
@@ -653,93 +535,25 @@ void loop() {
       Serial.println(F("A"));
     }
 
-    if (Xbox.getButtonPress(B)) {
+    if (Xbox.getButtonPress(B))  {
       output |= 128; //pin 7
       Serial.println(F("B"));
     }
-    if (Xbox.getButtonPress(RIGHT)) {
+    if (Xbox.getButtonPress(RIGHT))  {
       output |= 8; //pin 3
 
       Serial.println(F("Right"));
     }
 
-    if (Xbox.getButtonPress(BACK)) {
+    if (Xbox.getButtonPress(BACK))  {
       output |= 64; //pin 6
       Serial.println(F("Back"));
     }
 
     DDRD = output;
-
-
-
-
   }
 
 
+  delay(1);
 
-
-
-
-
-  byte cyber_data[12];
-  // 上位4bitはステータス、下位4bitがデータ
-  //  0 : A+A' B+B' C D
-  //  1 : E1 E2 F(START) G(SELECT)
-  //  2 : 左上下 上位4bit
-  //  3 : 左左右 上位4bit
-  //  4 : 右上下 上位4bit
-  //  5 : 右左右 上位4bit
-  //  6 : 左上下 下位4bit
-  //  7 : 左左右 下位4bit
-  //  8 : 右上下 下位4bit
-  //  9 : 右左右 下位4bit
-  // 10 : A B A' B'
-  // 11 : 1 1 1 1
-  int joydrv_port;
-  int motor1;
-  int motor2;
-  byte atari_work_SELL;
-  byte atari_work_SELH;
-  byte flg_chg_mode;
-  int i;
-  unsigned long now_time;
-
-  // if (if_com_flg == 0) Usb.Task();
-
-  now_time = millis(); // 現在の起動からの時間
-
-  if ((now_time - mode_time) >= MODE_CHG_TIME) {
-    SPI.end();
-    cnv_mode = flg_chg_mode;
-    EEPROM.write(0, cnv_mode);
-    //   set_cnv_mode();
-    SPI.begin();
-    mode_time = now_time = millis(); // 現在の起動からの時間
-    if_com_flg = 0; /* 通信要求クリア */
-  }
-}
-
-
-
-
-
-
-
-/* PC本体側のBUSY終了待ち */
-
-
-
-
-
-
-
-
-void int_cyber()
-{
-  if_com_flg = 1;
-}
-
-void int_joydrv()
-{
-  if_com_flg = 2;
 }
