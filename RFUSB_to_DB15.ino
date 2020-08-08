@@ -1,13 +1,14 @@
 // Based on USB controller -> ATARI ver 1.21 by HUYE (twitter @huye_4589) park7.wakwak.com/~huye/kaihatsu/ 2018-2020
-//     With big help from  たねけん (twitter @taneken2000) 
-//    
+//     With big help from  たねけん (twitter @taneken2000)
+//
 // Copyright
 //   メインプログラム、コントローラタイプ(TYPE_PS4, TYPE_MDmini) :
 //
 //   コントローラタイプ(TYPE_PSC, TYPE_RAP3, TYPE_RAP4, TYPE_SNES, TYPE_RETROFREAK) :
-//   
+//
 //
 #include <XBOXONE.h>
+//#include <XBOXUSB.h>
 #include <PS3USB.h>
 #include <EEPROM.h>
 #include <usbhid.h>
@@ -138,6 +139,11 @@ class JoystickHID : public HIDUniversal {
 
       */
 
+
+      joydrv_snddata[port_no][0] = joydrv_snddata[port_no][1] = joydrv_snddata[port_no][2] = joydrv_snddata[port_no][3] = B11111111;
+      joydrv_snddata[port_no][4] = joydrv_snddata[port_no][5] = joydrv_snddata[port_no][6] = joydrv_snddata[port_no][7] = B10000000;
+      for (i = 8; i < 16; i++) joydrv_snddata[port_no][i] = 0;
+
       // コントローラ別処理
       switch (Tbl_cnv_data[cnv_pointer].joy_type) {
 
@@ -234,16 +240,19 @@ class JoystickHID : public HIDUniversal {
           }
 
 
-          if (buf[1] & 0x0008) // R3ボタン
-            if (buf[0] & 0x0010) // L1ボタン
-              if (buf[0] & 0x0040) // L2ボタン
-                if (buf[1] & 0x0004) // L3ボタン
+          //          if (buf[1] & 0x0008) // R3ボタン
+          //            if (buf[0] & 0x0010) // L1ボタン
+          //              if (buf[0] & 0x0040) // L2ボタン
+          //                if (buf[1] & 0x0004) // L3ボタン
 
 
-                  break;
+          break;
+
+
+
 
         case TYPE_PS4: // PS4
-defult: // 標準
+        default: // 標準
 
           output = 0;
 
@@ -358,7 +367,7 @@ defult: // 標準
 USB Usb;
 PS3USB PS3(&Usb);
 XBOXONE Xbox(&Usb);
-
+//XBOXUSB XboxT(&Usb);
 
 USBHub Hub(&Usb);
 JoystickHID Hid1(&Usb);
@@ -555,5 +564,8 @@ void loop() {
 
 
   delay(1);
+
+
+
 
 }
