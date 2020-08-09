@@ -47,6 +47,7 @@ const struct {
   //  {0x054c, 0x0268, TYPE_RAP3},// PS3Controller
   {0x1532, 0x0401, TYPE_PS4}, // Razer Panthera
   {0xC410, 0xC082, TYPE_PS4}, // UPCB
+  {0x0079, 0x0011, TYPE_RAP3}, // Retrobit Sega Saturn wireless
   {0x0ca3, 0x0024, TYPE_MDmini}, // MDmini標準コントローラ
   {0x054c, 0x0ba0, TYPE_PS4}, // PS4 Wireless Adapter
   {0x054c, 0x0cda, TYPE_PSC}, // PlayStation Classic USB Controller
@@ -139,18 +140,17 @@ class JoystickHID : public HIDUniversal {
 
       */
 
-
       joydrv_snddata[port_no][0] = joydrv_snddata[port_no][1] = joydrv_snddata[port_no][2] = joydrv_snddata[port_no][3] = B11111111;
       joydrv_snddata[port_no][4] = joydrv_snddata[port_no][5] = joydrv_snddata[port_no][6] = joydrv_snddata[port_no][7] = B10000000;
       for (i = 8; i < 16; i++) joydrv_snddata[port_no][i] = 0;
 
       // コントローラ別処理
       switch (Tbl_cnv_data[cnv_pointer].joy_type) {
-
+        
         case TYPE_RAP3: // RAP (PS3mode)
-          // [[ HORI Real Arcade Pro.V HAYABUSA(PS3 MODE) ------------------------------------------------------
-          //          joydrv_snddata[port_no][3] = ps_udlr_data[byte(buf[2])];
-
+        // [[ HORI Real Arcade Pro.V HAYABUSA(PS3 MODE) ------------------------------------------------------
+        //          joydrv_snddata[port_no][3] = ps_udlr_data[byte(buf[2])];
+        default: // 標準
 
           output = 0;
 
@@ -252,7 +252,7 @@ class JoystickHID : public HIDUniversal {
 
 
         case TYPE_PS4: // PS4
-        default: // 標準
+
 
           output = 0;
 
@@ -371,9 +371,9 @@ XBOXONE Xbox(&Usb);
 
 USBHub Hub(&Usb);
 JoystickHID Hid1(&Usb);
-JoystickHID Hid2(&Usb);
-JoystickHID Hid3(&Usb);
-JoystickHID Hid4(&Usb);
+//JoystickHID Hid2(&Usb);
+//JoystickHID Hid3(&Usb);
+//JoystickHID Hid4(&Usb);
 
 void setup() {
 
