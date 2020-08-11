@@ -120,6 +120,8 @@ class JoystickHID : public HIDUniversal {
         cnv_pointer++;
       }
 
+      if (Tbl_cnv_data[cnv_pointer].joy_type == -1) return;
+
       /*   Serial.print(VID, HEX);
           Serial.print(F(":"));
           Serial.print(PID, HEX);
