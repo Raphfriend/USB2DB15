@@ -25,6 +25,8 @@
 
 #define MAX_JOYSTICK 4
 
+#define LED_PIN 8
+
 
 
 #ifdef dobogusinclude
@@ -37,6 +39,7 @@ uint8_t state = 0;
 
 
 int output = 0;
+bool led_on = false;
 const struct {
   uint16_t vid;
   uint16_t pid;
@@ -378,6 +381,8 @@ JoystickHID Hid1(&Usb);
 //JoystickHID Hid4(&Usb);
 
 void setup() {
+  pinMode(LED_PIN, OUTPUT);
+  digitalWrite(LED_PIN, HIGH); // LED starts off
 
   byte i, j;
 
@@ -395,6 +400,17 @@ void setup() {
 void loop() {
 
   Usb.Task();
+
+  if ( (Usb.getUsbTaskState() == USB_STATE_RUNNING) && !led_on ) {
+    digitalWrite(LED_PIN, LOW); // LED is on when low
+    Serial.println(F("LED On"));
+    led_on = true;
+  }
+  else if ( (Usb.getUsbTaskState() == USB_DETACHED_SUBSTATE_WAIT_FOR_DEVICE) && led_on ) {
+    digitalWrite(LED_PIN, HIGH); // LED is off when high
+    Serial.println(F("LED Off"));
+    led_on = false;
+  }
 
   if (PS3.PS3Connected) {
 
