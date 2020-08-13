@@ -30,6 +30,7 @@ You will need to know basics about Arduino. There's a bunch of videos explaining
 
 <p align="center">
   <img width="480" height="600" src="https://i.imgur.com/voZmPqe.jpg">
+ <br>
   <b>DB15 female connector, Arduino Nano and Usb Host Shield Mini</b><br>	
 </p>
   		
