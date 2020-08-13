@@ -1,8 +1,9 @@
+
+
 # USB2DB15-Supergun Adapter
 
 
 Simple USB to DB15 for Supergun and Neogeo using Atmega328p.
-
 
 
 ### 1. Technical information:
@@ -34,6 +35,14 @@ You will need to know basics about Arduino. There's a bunch of videos explaining
   <b>DB15 female connector, Arduino Nano and Usb Host Shield Mini</b><br>	
 </p>
   		
+        
+        
+        <p align="center">
+  <img width="680" height="480" src="https://i.imgur.com/CMmYJeC.png">
+ <br>
+  <b>Custom PCB for Arduino Mini</b><br>	
+</p>
+  	
 
 
 
