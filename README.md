@@ -18,6 +18,22 @@ Of course, you still can just solder everything on a a breadboard and play nicel
 
 You will need to know basics about Arduino. There's a bunch of videos explaining how to use the IDE, programming and all, but you are always free to ask for any question.
 
+#### What is need
+
+
+- We are using Atmega328p AVR, but you can get any Arduino that uses this microcontroller, like Mini Pro, Nano, Uno, etc.
+- Usb Host Shield Mino, or, if you are using a Uno like Arduino, you will need the a full shield.
+- A programmer like FDTI, if your Arduino has already a bootloader (Nano, UNO), you won't need it.
+
+
+Arduino kinds pic
+
+Usb host shield pics
+
+Programmer pics
+
+
+
 
 #### Instalation:
 
