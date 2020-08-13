@@ -5,7 +5,7 @@
 //         Date:             06.07.2020
 //         Version:          1.0
 //
-//         USB Host Shield 2.0 modded lib:         https://github.com/greiman/SdFat
+//         USB Host Shield 2.0 modded lib:         https://github.com/Raphfriend/USB_Host_Shield_2.0
 //         
 //         Compiled with Arduino 1.8.10
 //      
@@ -613,6 +613,10 @@ void loop() {
   delay(1);
 
 
-
-
 }
+
+
+
+//******************************************
+// End of File
+//******************************************
