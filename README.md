@@ -1,9 +1,11 @@
 # USB2DB15-Supergun Adapter
+
+
 Simple USB to DB15 for Supergun and Neogeo using the Arduino pro mini.
 
-Technical information:
 
 
+#### Technical information:
 
 The USB2DB15 is Open Source device based on AVR that adapts a USB controller for use on Jamma PBCs via SUPERGUNs or a Neo Geo console.
 In the most of cases, it will work as plug an play, on most of best of sellers controllers, but sometimes we will need to implement the new controller on code, so, be batient and concatact the devs and post issues on our GitHub. 
@@ -17,7 +19,7 @@ Of course, you still can just solder everything on a a breadboard and play nicel
 You will need to know basics about Arduino. There's a bunch of videos explaining how to use the IDE, programming and all, but you are always free to ask for any question.
 
 
-Instalation:
+#### Instalation:
 
 Download the USB Host Shield 2.0 and install, so download the code (RFUSB_to_DB15.ino) and programm it on your AVR.  
 
