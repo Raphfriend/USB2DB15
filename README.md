@@ -60,13 +60,13 @@ If you are not using any custom PCB, follow the schematic.
 
 #### 3.1. Arduino Uno + USB Host Shield:
 
-1. Install Arduino IDE
-2. Mount the USB Host Shield on Arduino Uno correctly
-3. Plug the Arduino UNO with the Shield in the PC USB and in the Arduino IDE navigate to "Tools" -> "Ports"  and choose the Arduino Device.
-4.  Arduino IDE navigate to "Tools" -> "Programmer"  and choose the "AVRISP MKII".
-5. Get library path (Arduino IDE -> File -> Preference-> Settings->Sketchbook location) and drop the required library  "USB_Host_Shield_20"  to the library directory 
-6. Get the ino (firmware from): _____________________________
-7. Arduino IDE open the ino file (with the Arduino attached to the PC ) and Sketch-> Upload
+1. Install Arduino IDE; 
+2. Mount the USB Host Shield on Arduino Uno correctly; 
+3. Plug the Arduino UNO with the Shield in the PC USB and in the Arduino IDE navigate to "Tools" -> "Ports"  and choose the Arduino Device; 
+4.  Arduino IDE navigate to "Tools" -> "Programmer"  and choose the "AVRISP MKII"; 
+5. Get library path (Arduino IDE -> File -> Preference-> Settings->Sketchbook location) and drop the required library  "USB_Host_Shield_20"  to the library directory; 
+6. Get the ino firmware (RFUSB_to_DB15.ino);
+7. Arduino IDE open the ino file (with the Arduino attached to the PC ) and Sketch-> Upload; 
 8. Look for "Done Uploading" on the Arduino IDE.
 
 
@@ -91,13 +91,11 @@ If you are not using any custom PCB, follow the schematic.
 We are based on the forum Arcade-Projects, so if you need any help, there!
 
 <p align="center">
-  [<img width="460" height="300" src="https://i.imgur.com/7arl7Zn.png">](https://www.arcade-projects.com/forums/index.php?thread/14205-open-source-usb-to-db15-for-supergun-adapter/)
+<a href="https://www.arcade-projects.com/forums/index.php?thread/14205-open-source-usb-to-db15-for-supergun-adapter/">
+  [<img width="460" height="300" src="https://i.imgur.com/7arl7Zn.png">]
 </p>
 
 
 	
-
-
-
-
+    
 
