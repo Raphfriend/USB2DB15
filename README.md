@@ -5,7 +5,7 @@ Simple USB to DB15 for Supergun and Neogeo using the Arduino pro mini.
 
 
 
-#### Technical information:
+### Technical information:
 
 The USB2DB15 is Open Source device based on AVR that adapts a USB controller for use on Jamma PBCs via SUPERGUNs or a Neo Geo console.
 In the most of cases, it will work as plug an play, on most of best of sellers controllers, but sometimes we will need to implement the new controller on code, so, be batient and concatact the devs and post issues on our GitHub. 
@@ -18,12 +18,15 @@ Of course, you still can just solder everything on a a breadboard and play nicel
 
 You will need to know basics about Arduino. There's a bunch of videos explaining how to use the IDE, programming and all, but you are always free to ask for any question.
 
-#### What is need
+### What is need
 
 
-- We are using Atmega328p AVR, but you can get any Arduino that uses this microcontroller, like Mini Pro, Nano, Uno, etc.
-- Usb Host Shield Mino, or, if you are using a Uno like Arduino, you will need the a full shield.
-- A programmer like FDTI, if your Arduino has already a bootloader (Nano, UNO), you won't need it.
+- We are using Atmega328p AVR, but you can get any Arduino that uses this microcontroller, like Mini Pro, Nano, Uno, etc.; 
+- Usb Host Shield Mino, or, if you are using a Uno like Arduino, you will need the a full shield; 
+- A programmer like FDTI, if your Arduino has already a bootloader (Nano, UNO), you won't need it; 
+- USB2DB15 Custom PCB or any breadboard for solder the AVR and USB Host Shield.
+- DB15 female connector.
+
 
 
 Arduino kinds pic
@@ -35,7 +38,10 @@ Programmer pics
 
 
 
-#### Installation:
+
+
+
+### Installation:
 
 Download the USB Host Shield 2.0 and install, so download the code (RFUSB_to_DB15.ino) and programm it on your AVR.  
 
@@ -51,7 +57,7 @@ The rest is plug and play.
 If you are not using any custom PCB, follow the schematic.
 
 
-#### Supported Controllers:    
+### Supported Controllers:    
 
 - Playstation 3 DS3
 - Playstation 4 DS4
@@ -61,6 +67,16 @@ If you are not using any custom PCB, follow the schematic.
 - Xbox One official and some 3rd Party controllers
 - RetroFreak CONTROLLER ADAPTER
 - iBUFFALO SNES CLASSIC USB GAMEPAD
+
+
+
+
+
+### Where can I get more help, if I need it?
+
+
+	We are based on the forum Arcade-Projects, so if you need any help, go on the this topic:
+	https://www.arcade-projects.com/forums/index.php?thread/14205-open-source-usb-to-db15-for-supergun-adapter/
 
 
 
