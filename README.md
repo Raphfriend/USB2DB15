@@ -29,7 +29,10 @@ You will need to know basics about Arduino. There's a bunch of videos explaining
 
 
 
-![GitHub Logo](https://i.imgur.com/voZmPqe.jpg)
+![DB15 female connector, Arduino Nano and Usb Host Shield Mini](https://i.imgur.com/voZmPqe.jpg)
+
+#####  			(DB15 female connector, Arduino Nano and Usb Host Shield Mini)
+
 
 
 
