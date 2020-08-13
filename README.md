@@ -38,8 +38,7 @@ A basic understanding of Arduino and its programming environment is required. Th
   <b>DB15 female connector, Arduino Nano and Usb Host Shield Mini</b><br>
 <br>
 	<br>
-	<br>
-	
+	<br>	
 <img width="680" height="480" src="https://i.imgur.com/CMmYJeC.png">
  <br>
   <b>Custom PCB for Arduino Pro Mini</b><br>
@@ -97,10 +96,16 @@ If you are not using any custom PCB, follow the schematic.
 ### 5. Where can I get more help, if I need it?
 
 We are based on the forum Arcade-Projects, so if you need any help, go there!
+You can access our Discord for live chat. 
 
 <p align="center">
 <a href="https://www.arcade-projects.com/forums/index.php?thread/14205-open-source-usb-to-db15-for-supergun-adapter/">
   [<img width="460" height="300" src="https://i.imgur.com/7arl7Zn.png">]
+</p>
+
+<p align="center">
+<a href="https://discord.gg/XKCjtpH">
+  [<img width="460" height="300" src="https://i.imgur.com/LZJjOUJ.png">]
 </p>
 
 
