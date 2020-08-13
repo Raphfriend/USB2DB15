@@ -88,7 +88,7 @@ If you are not using any custom PCB, follow the schematic.
 
 ### 5. Where can I get more help, if I need it?
 
-We are based on the forum Arcade-Projects, so if you need any help, there!
+We are based on the forum Arcade-Projects, so if you need any help, go there!
 
 <p align="center">
 <a href="https://www.arcade-projects.com/forums/index.php?thread/14205-open-source-usb-to-db15-for-supergun-adapter/">
