@@ -22,3 +22,13 @@ Instalation:
 Download the USB Host Shield 2.0 and install, so download the code (RFUSB_to_DB15.ino) and programm it on your AVR.  
 
 If you have a USB Host shield mini, you will need to CUT trace after 2k2 resistor close to USB VBUS pin, so it will feed by 5V (JP2 on the custom PCB), just solder it on the hole at same trace. 
+
+https://imgur.com/vGgNsPl
+
+Now, we devices that only work on 5V will turn on, like DS3.
+
+
+The rest is plug and play. 
+
+If you are not using any custom PCB, follow the schematic.
+
