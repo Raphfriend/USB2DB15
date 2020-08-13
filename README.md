@@ -37,13 +37,6 @@ You will need to know basics about Arduino. There's a bunch of videos explaining
 
 
 
-
-
-
-
-
-
-
 ### 3. Installation:
 
 Download the USB Host Shield 2.0 and install, so download the code (RFUSB_to_DB15.ino) and programm it on your AVR.  
@@ -95,8 +88,7 @@ If you are not using any custom PCB, follow the schematic.
 
 ### 5. Where can I get more help, if I need it?
 
-
-	We are based on the forum Arcade-Projects, so if you need any help, go on the this topic:
+We are based on the forum Arcade-Projects, so if you need any help, there!
 
 <p align="center">
   [<img width="460" height="300" src="https://i.imgur.com/7arl7Zn.png">](https://www.arcade-projects.com/forums/index.php?thread/14205-open-source-usb-to-db15-for-supergun-adapter/)
