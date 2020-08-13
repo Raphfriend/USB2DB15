@@ -35,7 +35,7 @@ Programmer pics
 
 
 
-#### Instalation:
+#### Installation:
 
 Download the USB Host Shield 2.0 and install, so download the code (RFUSB_to_DB15.ino) and programm it on your AVR.  
 
