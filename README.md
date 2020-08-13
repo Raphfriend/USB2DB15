@@ -54,6 +54,19 @@ The rest is plug and play.
 If you are not using any custom PCB, follow the schematic.
 
 
+####Arduino Uno + USB Host Shield:
+
+1. Install Arduino IDE
+2. Mount the USB Host Shield on Arduino Uno correctly
+3. Plug the Arduino UNO with the Shield in the PC USB and in the Arduino IDE navigate to "Tools" -> "Ports"  and choose the Arduino Device.
+4.  Arduino IDE navigate to "Tools" -> "Programmer"  and choose the "AVRISP MKII".
+5. Get library path (Arduino IDE -> File -> Preference-> Settings->Sketchbook location) and drop the required library  "USB_Host_Shield_20"  to the library directory 
+6. Get the ino (firmware from): _____________________________
+7. Arduino IDE open the ino file (with the Arduino attached to the PC ) and Sketch-> Upload
+8. Look for "Done Uploading" on the Arduino IDE.
+
+
+
 ### Supported Controllers:    
 
 - Playstation 3 DS3
