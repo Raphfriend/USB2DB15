@@ -21,11 +21,11 @@ You will need to know basics about Arduino. There's a bunch of videos explaining
 ### What is need
 
 
-- We are using Atmega328p AVR, but you can get any Arduino that uses this microcontroller, like Mini Pro, Nano, Uno, etc.; 
-- Usb Host Shield Mino, or, if you are using a Uno like Arduino, you will need the a full shield; 
-- A programmer like FDTI, if your Arduino has already a bootloader (Nano, UNO), you won't need it; 
-- USB2DB15 Custom PCB or any breadboard for solder the AVR and USB Host Shield.
-- DB15 female connector.
+1. We are using Atmega328p AVR, but you can get any Arduino that uses this microcontroller, like Mini Pro, Nano, Uno, etc.; 
+2. Usb Host Shield Mino, or, if you are using a Uno like Arduino, you will need the a full shield; 
+3. A programmer like FDTI, if your Arduino has already a bootloader (Nano, UNO), you won't need it; 
+4. USB2DB15 Custom PCB or any breadboard for solder the AVR and USB Host Shield.
+5. DB15 female connector.
 
 
 
