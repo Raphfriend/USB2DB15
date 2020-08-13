@@ -1,33 +1,36 @@
-
-
 # USB2DB15-Supergun Adapter
 
 
-Simple USB to DB15 for Supergun and Neogeo using Atmega328p.
+A simple USB to DB15 adapter for Supergun and Neo-Geo using an Atmega328P.
 
 
 ### 1. Technical information:
 
-The USB2DB15 is Open Source device based on AVR that adapts a USB controller for use on Jamma PBCs via SUPERGUNs or a Neo Geo console.
-In the most of cases, it will work as plug an play, on most of best of sellers controllers, but sometimes we will need to implement the new controller on code, so, be batient and concatact the devs and post issues on our GitHub. 
+The USB2DB15 adapter is an Open Source device based on an AVR microcontroller that adapts a USB controller for use on Jamma PBCs via SUPERGUNs or a Neo-Geo console.
+At present most common controllers are supported, such as ones that follow the PS3, PS4 and Xbox One protocol. Some controllers will not work and require additional coding implementation. Please be patient during these early stages and feel free to contact the developers with additional information, issues and requests for help via GitHub.
 
-We are using a modded USB Host shield 2.0 lib for controllers IDs that aren't supported on the original. 
 
-For the moment, there's 2 models for custom PCB, one if you want to use just a Arduino Pro Mini plus USB Host Shield mini, or a all in one designed by Frank_fjs that will cover both AVR and USB decoder IC. 
+We are using a modified USB Host Shield 2.0 library for controller IDs that aren't natively supported. 
 
-Of course, you still can just solder everything on a a breadboard and play nicely. 
 
-You will need to know basics about Arduino. There's a bunch of videos explaining how to use the IDE, programming and all, but you are always free to ask for any question.
+In regards to hardware there are currently two options:
+
+- A CUSTOM PCB that accommodates and integrates an Arduino Pro Mini, USB Shield Mini and other relevant hardware.
+- A STANDALONE PCB that incorporates all the required hardware in a standalone form.
+
+Alternatively you can simply use a breadboard to tie it all together. 
+
+
+A basic understanding of Arduino and its programming environment is required. There is plenty of useful information available at arduino.cc to help you get started.
 
 ### 2. What is need
 
 
-* We are using Atmega328p AVR, but you can get any Arduino that uses this microcontroller, like Mini Pro, Nano, Uno, etc.; 
-* Usb Host Shield Mino, or, if you are using a Uno like Arduino, you will need the a full shield; 
-* A programmer like FDTI, if your Arduino has already a bootloader (Nano, UNO), you won't need it; 
-* USB2DB15 Custom PCB or any breadboard for solder the AVR and USB Host Shield.
-* DB15 female connector.
-
+* We are using an Atmega328P AVR. Any Arduino that uses this microcontroller such as the Mini Pro, Nano and Uno are suitable. The PCB accommodates an Arduino Mini Pro and USB Host Shield Mini;
+* USB Host Shield Mini if using an Arduino Pro Mini / Nano. Full sized USB Host Shield for Uno;
+* A FTDI programmer is required for the Arduino Pro Mini. This is not needed if using an Arduino Nano or Uno;
+* USB2DB15 CUSTOM PCB or a breadboard to complete all the connections between the AVR and USB Host Shield;
+* DB15 female connector;
 
 <p align="center">
   <img width="480" height="600" src="https://i.imgur.com/voZmPqe.jpg">
@@ -43,26 +46,20 @@ You will need to know basics about Arduino. There's a bunch of videos explaining
 
 	
 </p>
-  		
-        
-
-
-
+  		   
 
 ### 3. Installation:
 
-Download the USB Host Shield 2.0 and install, so download the code (RFUSB_to_DB15.ino) and programm it on your AVR.  
+Download the USB Host Shield 2.0 library and install it to the Arduino IDE. Open the INO file (RFUSB_to_DB15.ino) and program it to your AVR.  
 
-If you have a USB Host shield mini, you will need to CUT trace after 2k2 resistor close to USB VBUS pin, so it will feed by 5V (JP2 on the custom PCB), just solder it on the hole at same trace. 
+If you have a USB Host Shield Mini, you will need to CUT the trace after the 2K2 resistor close to the USB VBUS pin, to feed it 5V (JP2 on the custom PCB). Solder it to the hole at same trace. 
 
 <p align="center">
   <img width="460" height="300" src="https://i.imgur.com/vGgNsPl.png">
 </p>
 
 
-
-
-Now, we devices that only work on 5V will turn on, like DS3.
+This enables devices that require +5V power to function correctly, as by default the USB Host Shield Mini only outputs 3.3V to the VBUS pin of the USB connector.
 
 
 The rest is plug and play. 
@@ -73,14 +70,15 @@ If you are not using any custom PCB, follow the schematic.
 #### 3.1. Arduino Uno + USB Host Shield:
 
 1. Install Arduino IDE; 
-2. Mount the USB Host Shield on Arduino Uno correctly; 
-3. Plug the Arduino UNO with the Shield in the PC USB and in the Arduino IDE navigate to "Tools" -> "Ports"  and choose the Arduino Device; 
-4.  Arduino IDE navigate to "Tools" -> "Programmer"  and choose the "AVRISP MKII"; 
-5. Get library path (Arduino IDE -> File -> Preference-> Settings->Sketchbook location) and drop the required library  "USB_Host_Shield_20"  to the library directory; 
-6. Get the ino firmware (RFUSB_to_DB15.ino);
-7. Arduino IDE open the ino file (with the Arduino attached to the PC ) and Sketch-> Upload; 
-8. Look for "Done Uploading" on the Arduino IDE.
-
+2. Mount the USB Host Shield to the Arduino Uno correctly; 
+3. Connect the Arduino Uno to your PC via its USB cable. 
+4. In the Arduino IDE navigate to "Tools" -> "Board" -> "Arduino AVR Boards" and select "Arduino Uno";
+5. In the Arduino IDE navigate to "Tools" -> "Port" and choose the Arduino Device; 
+6.  Arduino IDE navigate to "Tools" -> "Programmer" and choose the "AVRISP MKII"; 
+7. Obtain the library path (Arduino IDE -> File -> Preference-> Settings->Sketchbook location) and drop the required library  "USB_Host_Shield_20"  to the library directory; 
+8. Obtain the INO firmware (RFUSB_to_DB15.ino);
+9. Open the INO file with the Arduino IDE (with the Arduino Uno connected to your PC) and select Sketch-> Upload; 
+10. Wait for the sketch to be uploaded as indicated in the console window at the bottom of the Arduino IDE software.
 
 
 ### 4. Supported Controllers:    
@@ -93,8 +91,6 @@ If you are not using any custom PCB, follow the schematic.
 - Xbox One official and some 3rd Party controllers
 - RetroFreak CONTROLLER ADAPTER
 - iBUFFALO SNES CLASSIC USB GAMEPAD
-
-
 
 
 
