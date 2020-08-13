@@ -28,10 +28,14 @@ You will need to know basics about Arduino. There's a bunch of videos explaining
 * DB15 female connector.
 
 
+<p align="center">
+  <img width="460" height="300" src="https://i.imgur.com/voZmPqe.jpg">
+</p>
 
-![DB15 female connector, Arduino Nano and Usb Host Shield Mini](https://i.imgur.com/voZmPqe.jpg)
 
-#####  			(DB15 female connector, Arduino Nano and Usb Host Shield Mini)
+
+
+#####  			DB15 female connector, Arduino Nano and Usb Host Shield Mini
 
 
 
