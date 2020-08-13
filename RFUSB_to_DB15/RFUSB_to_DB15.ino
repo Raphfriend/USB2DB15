@@ -25,7 +25,7 @@
 
 #define MAX_JOYSTICK 4
 
-#define LED_PIN 8
+//#define LED_PIN A7
 
 
 
@@ -151,7 +151,7 @@ class JoystickHID : public HIDUniversal {
 
       // コントローラ別処理
       switch (Tbl_cnv_data[cnv_pointer].joy_type) {
-        
+
         case TYPE_RAP3: // RAP (PS3mode)
         // [[ HORI Real Arcade Pro.V HAYABUSA(PS3 MODE) ------------------------------------------------------
         //          joydrv_snddata[port_no][3] = ps_udlr_data[byte(buf[2])];
@@ -214,10 +214,7 @@ class JoystickHID : public HIDUniversal {
 
           }
 
-          if (buf[0] & 0x0004) { // Bボタン (circle)
-            output |= 128;
-            Serial.println("Y button");
-          }
+
 
           if (buf[1] & 0x0001) { // SELECTボタン
             output |= 64;
@@ -244,6 +241,11 @@ class JoystickHID : public HIDUniversal {
             Serial.println("UP+RIGHT");
           }
 
+
+          if (buf[0] & 0x0004) { // Bボタン (circle)
+            DDRC |= 64;
+            Serial.println("Y button");
+          }
 
           //          if (buf[1] & 0x0008) // R3ボタン
           //            if (buf[0] & 0x0010) // L1ボタン
@@ -400,17 +402,17 @@ void setup() {
 void loop() {
 
   Usb.Task();
-
-  if ( (Usb.getUsbTaskState() == USB_STATE_RUNNING) && !led_on ) {
-    digitalWrite(LED_PIN, LOW); // LED is on when low
-    Serial.println(F("LED On"));
-    led_on = true;
-  }
-  else if ( (Usb.getUsbTaskState() == USB_DETACHED_SUBSTATE_WAIT_FOR_DEVICE) && led_on ) {
-    digitalWrite(LED_PIN, HIGH); // LED is off when high
-    Serial.println(F("LED Off"));
-    led_on = false;
-  }
+//
+//  if ( (Usb.getUsbTaskState() == USB_STATE_RUNNING) && !led_on ) {
+//    digitalWrite(LED_PIN, LOW); // LED is on when low
+//    Serial.println(F("LED On"));
+//    led_on = true;
+//  }
+//  else if ( (Usb.getUsbTaskState() == USB_DETACHED_SUBSTATE_WAIT_FOR_DEVICE) && led_on ) {
+//    digitalWrite(LED_PIN, HIGH); // LED is off when high
+//    Serial.println(F("LED Off"));
+//    led_on = false;
+//  }
 
   if (PS3.PS3Connected) {
 
