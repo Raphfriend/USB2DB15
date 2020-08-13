@@ -1,10 +1,37 @@
-// Based on USB controller -> ATARI ver 1.21 by HUYE (twitter @huye_4589) park7.wakwak.com/~huye/kaihatsu/ 2018-2020
-//     With big help from  たねけん (twitter @taneken2000)
+//          USB2DB15 adapter for Supergun/Neogeo
 //
-// Copyright
-//   メインプログラム、コントローラタイプ(TYPE_PS4, TYPE_MDmini) :
 //
-//   コントローラタイプ(TYPE_PSC, TYPE_RAP3, TYPE_RAP4, TYPE_SNES, TYPE_RETROFREAK) :
+//         Author:           Raph_friend
+//         Date:             06.07.2020
+//         Version:          1.0
+//
+//         USB Host Shield 2.0 modded lib:         https://github.com/greiman/SdFat
+//         
+//         Compiled with Arduino 1.8.10
+//      
+//
+//                 Thanks to:
+//              
+//              Oleg Mazurov for USB Host Shield 2.0 and libs
+//              HUYE (twitter @huye_4589) for USB controller -> ATARI ver 1.21 
+//              たねけん (twitter @taneken2000) for kind help on HUYE code understanding
+//              NearlyLogical beta testing and code improvement implementation
+//              Frank_fjs for beta testing and all in one PCB design
+//              fluxcore for beta testing
+//              suverman for beta testing
+//              akiramishima for beta testing
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//            メインプログラム、コントローラタイプ(TYPE_PS4, TYPE_MDmini) :
+//
+//            コントローラタイプ(TYPE_PSC, TYPE_RAP3, TYPE_RAP4, TYPE_SNES, TYPE_RETROFREAK) :
 //
 //
 #include <XBOXONE.h>
@@ -383,8 +410,8 @@ JoystickHID Hid1(&Usb);
 //JoystickHID Hid4(&Usb);
 
 void setup() {
-  pinMode(LED_PIN, OUTPUT);
-  digitalWrite(LED_PIN, HIGH); // LED starts off
+//  pinMode(LED_PIN, OUTPUT);
+//  digitalWrite(LED_PIN, HIGH); // LED starts off
 
   byte i, j;
 
