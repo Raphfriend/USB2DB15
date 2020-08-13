@@ -29,7 +29,7 @@ You will need to know basics about Arduino. There's a bunch of videos explaining
 
 
 <p align="center">
-  <img width="460" height="300" src="https://i.imgur.com/voZmPqe.jpg">
+  <img width="460" height="600" src="https://i.imgur.com/voZmPqe.jpg">
 </p>
 
 
