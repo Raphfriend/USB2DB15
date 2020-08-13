@@ -58,7 +58,7 @@ If you are not using any custom PCB, follow the schematic.
 - Universal Brook PCB (PS4 Mode)
 - Most of Hori RAP PS3 and PS4 controllers	
 - Razer Panthera PS4
-- Xbox One offical and some 3rd Party controllers
+- Xbox One official and some 3rd Party controllers
 - RetroFreak CONTROLLER ADAPTER
 - iBUFFALO SNES CLASSIC USB GAMEPAD
 
