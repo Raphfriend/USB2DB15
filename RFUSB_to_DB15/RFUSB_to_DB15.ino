@@ -76,6 +76,7 @@ const struct {
   {0x054c, 0x05C4, TYPE_PS4}, // PS4Controller
   //  {0x054c, 0x0268, TYPE_RAP3},// PS3Controller
   {0x1532, 0x0401, TYPE_PS4}, // Razer Panthera
+  {0x0C12, 0x0C30, TYPE_PS4}, // Brook universal PCB
   {0xC410, 0xC082, TYPE_PS4}, // UPCB
   {0x0079, 0x0011, TYPE_RAP3}, // Retrobit Sega Saturn wireless
   {0x0ca3, 0x0024, TYPE_MDmini}, // MDmini標準コントローラ
