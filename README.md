@@ -32,17 +32,20 @@ You will need to know basics about Arduino. There's a bunch of videos explaining
 <p align="center">
   <img width="480" height="600" src="https://i.imgur.com/voZmPqe.jpg">
  <br>
-  <b>DB15 female connector, Arduino Nano and Usb Host Shield Mini</b><br>	
+  <b>DB15 female connector, Arduino Nano and Usb Host Shield Mini</b><br>
+<br>
+	<br>
+	<br>
+	
+<img width="680" height="480" src="https://i.imgur.com/CMmYJeC.png">
+ <br>
+  <b>Custom PCB for Arduino Mini</b><br>
+
+	
 </p>
   		
         
-        
-        <p align="center">
-  <img width="680" height="480" src="https://i.imgur.com/CMmYJeC.png">
- <br>
-  <b>Custom PCB for Arduino Mini</b><br>	
-</p>
-  	
+
 
 
 
