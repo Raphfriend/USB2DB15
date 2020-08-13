@@ -54,7 +54,7 @@ The rest is plug and play.
 If you are not using any custom PCB, follow the schematic.
 
 
-####Arduino Uno + USB Host Shield:
+#### Arduino Uno + USB Host Shield:
 
 1. Install Arduino IDE
 2. Mount the USB Host Shield on Arduino Uno correctly
