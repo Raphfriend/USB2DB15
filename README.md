@@ -52,7 +52,12 @@ Download the USB Host Shield 2.0 and install, so download the code (RFUSB_to_DB1
 
 If you have a USB Host shield mini, you will need to CUT trace after 2k2 resistor close to USB VBUS pin, so it will feed by 5V (JP2 on the custom PCB), just solder it on the hole at same trace. 
 
-https://i.imgur.com/vGgNsPl.png
+<p align="center">
+  <img width="460" height="300" src="https://i.imgur.com/vGgNsPl.png">
+</p>
+
+
+
 
 Now, we devices that only work on 5V will turn on, like DS3.
 
