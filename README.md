@@ -29,7 +29,8 @@ You will need to know basics about Arduino. There's a bunch of videos explaining
 
 
 
-https://i.imgur.com/voZmPqe.jpg
+![GitHub Logo](https://i.imgur.com/voZmPqe.jpg)
+
 
 
 
