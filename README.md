@@ -97,7 +97,13 @@ If you are not using any custom PCB, follow the schematic.
 
 
 	We are based on the forum Arcade-Projects, so if you need any help, go on the this topic:
-	https://www.arcade-projects.com/forums/index.php?thread/14205-open-source-usb-to-db15-for-supergun-adapter/
+
+<p align="center">
+  [<img width="460" height="300" src="https://i.imgur.com/7arl7Zn.png">](https://www.arcade-projects.com/forums/index.php?thread/14205-open-source-usb-to-db15-for-supergun-adapter/)
+</p>
+
+
+	
 
 
 
