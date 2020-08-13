@@ -39,7 +39,7 @@ You will need to know basics about Arduino. There's a bunch of videos explaining
 	
 <img width="680" height="480" src="https://i.imgur.com/CMmYJeC.png">
  <br>
-  <b>Custom PCB for Arduino Mini</b><br>
+  <b>Custom PCB for Arduino Pro Mini</b><br>
 
 	
 </p>
