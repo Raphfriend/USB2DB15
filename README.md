@@ -29,11 +29,8 @@ You will need to know basics about Arduino. There's a bunch of videos explaining
 
 
 
-Arduino kinds pic
+https://i.imgur.com/voZmPqe.jpg
 
-Usb host shield pics
-
-Programmer pics
 
 
 
@@ -47,7 +44,7 @@ Download the USB Host Shield 2.0 and install, so download the code (RFUSB_to_DB1
 
 If you have a USB Host shield mini, you will need to CUT trace after 2k2 resistor close to USB VBUS pin, so it will feed by 5V (JP2 on the custom PCB), just solder it on the hole at same trace. 
 
-https://imgur.com/vGgNsPl
+https://i.imgur.com/vGgNsPl.png
 
 Now, we devices that only work on 5V will turn on, like DS3.
 
