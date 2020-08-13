@@ -1,7 +1,7 @@
 # USB2DB15-Supergun Adapter
 
 
-Simple USB to DB15 for Supergun and Neogeo using the Arduino pro mini.
+Simple USB to DB15 for Supergun and Neogeo using Atmega328p.
 
 
 
