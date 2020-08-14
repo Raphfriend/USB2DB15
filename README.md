@@ -100,12 +100,12 @@ You can access our Discord for live chat.
 
 <p align="center">
 <a href="https://www.arcade-projects.com/forums/index.php?thread/14205-open-source-usb-to-db15-for-supergun-adapter/">
-  [<img width="460" height="300" src="https://i.imgur.com/7arl7Zn.png">]
+  <img width="460" height="300" src="https://i.imgur.com/7arl7Zn.png">
 </p>
 
 <p align="center">
 <a href="https://discord.gg/XKCjtpH">
-  [<img width="460" height="300" src="https://i.imgur.com/LZJjOUJ.png">]
+  <img width="460" height="300" src="https://i.imgur.com/LZJjOUJ.png">
 </p>
 
 
