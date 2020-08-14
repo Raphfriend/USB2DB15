@@ -273,7 +273,7 @@ class JoystickHID : public HIDUniversal {
 
 
           if (buf[0] & 0x0004) { // Bボタン (circle)
-            DDRC |= 64;
+            DDRD |= 128;
             Serial.println("Y button");
           }
 
