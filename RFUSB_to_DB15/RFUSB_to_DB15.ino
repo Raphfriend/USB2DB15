@@ -49,6 +49,7 @@
 #define TYPE_RAP4 4
 #define TYPE_SNES 5
 #define TYPE_RETROFREAK 6
+#define TYPE_8BITDO 7
 
 #define MAX_JOYSTICK 4
 
@@ -87,6 +88,7 @@ const struct {
   {0x0f0d, 0x008b, TYPE_RAP3}, // HORI RAP V HAYABUSA Controller(PS3)
   {0x0f0d, 0x008a, TYPE_PS4},  // HORI RAP V HAYABUSA Controller(PS4)
   {0x0f0d, 0x0066, TYPE_PS4},  // HORIPAD FPS+(PS4)
+  {0x0f0d, 0x00c1, TYPE_8BITDO},
   {0x0f0d, 0x00ee, TYPE_PS4},  // HORI ワイヤードコントローラライト for PS4-102
   {0x0583, 0x2060, TYPE_SNES}, // iBUFFALO SNES CLASSIC USB GAMEPAD
   {0x1345, 0x1030, TYPE_SNES}, // RetroFreak GAME CONTROLLER
@@ -151,7 +153,7 @@ class JoystickHID : public HIDUniversal {
         cnv_pointer++;
       }
 
-      if (Tbl_cnv_data[cnv_pointer].joy_type == -1) return;
+      // if (Tbl_cnv_data[cnv_pointer].joy_type == -1) return;
 
       /*   Serial.print(VID, HEX);
           Serial.print(F(":"));
@@ -284,7 +286,74 @@ class JoystickHID : public HIDUniversal {
           break;
 
 
+        case TYPE_8BITDO:
+          output = 0;
 
+          if (buf[4] == 0) {
+            output |= 8; // pin A3
+            Serial.println("UP");
+          }
+
+          if (buf[3] == 0) {
+            output |= 4; //pin A2
+            Serial.println("LEFT");
+          }
+
+          if (buf[0] & 0x0001) { // Xボタン (square)
+            output |= 2;
+            Serial.println(F("A button"));
+          }
+
+          if (buf[0] & 0x0020) { // R1ボタン
+            output |= 1;
+            Serial.println("C button");
+          }
+
+          if (buf[0] & 0x0080) { // R2ボタン
+            output |= 16;
+            Serial.println("Z button");
+          }
+
+          if (buf[1] & 0x0002) { // STARTボタン
+            output |= 32;
+            Serial.println("Start button");
+          }
+
+          DDRC = output;
+          output = 0;
+
+          if (buf[3] == 0xFF) {
+            output |= 8; //pin 3
+            Serial.println("RIGHT");
+          }
+
+          if (buf[4] == 0xFF) {
+            output |= 4; // pin 2
+            Serial.println("DOWN");
+          }
+
+          if (buf[0] & 0x0008) { // Yボタン (triangle)
+            output |= 16;
+            Serial.println(F("B button"));
+          }
+
+          if (buf[0] & 0x0002) { // Aボタン (cross)
+            output |= 32;
+            Serial.println("X button");
+          }
+
+          if (buf[0] & 0x0004) { // Bボタン (circle)
+            output |= 128;
+            Serial.println("Y button");
+          }
+
+          if (buf[1] & 0x0001) { // SELECTボタン
+            output |= 64;
+            Serial.println("Select button");
+          }
+
+          DDRD = output;
+          break;
 
         case TYPE_PS4: // PS4
 
