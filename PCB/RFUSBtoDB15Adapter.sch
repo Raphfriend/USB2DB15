@@ -6,7 +6,7 @@
 <setting alwaysvectorfont="no"/>
 <setting verticaltext="up"/>
 </settings>
-<grid distance="0.1" unitdist="inch" unit="inch" style="lines" multiple="1" display="no" altdistance="0.01" altunitdist="inch" altunit="inch"/>
+<grid distance="0.1" unitdist="inch" unit="inch" style="lines" multiple="1" display="yes" altdistance="0.01" altunitdist="inch" altunit="inch"/>
 <layers>
 <layer number="1" name="Top" color="4" fill="1" visible="no" active="no"/>
 <layer number="2" name="Route2" color="16" fill="1" visible="no" active="no"/>
@@ -18143,6 +18143,87 @@ diameter 5 mm, grid 2.54 mm</description>
 </deviceset>
 </devicesets>
 </library>
+<library name="BeagleBone_Blue_R3" urn="urn:adsk.eagle:library:5828899">
+<description>Generated from &lt;b&gt;BeagleBone_Blue.sch&lt;/b&gt;&lt;p&gt;
+by exp-lbrs.ulp</description>
+<packages>
+<package name="TACTILE-SWITCH-1101NE" urn="urn:adsk.eagle:footprint:5829391/2" library_version="31">
+<description>SparkFun SKU# COM-08229</description>
+<wire x1="-3" y1="1.1" x2="-3" y2="-1.1" width="0.127" layer="51"/>
+<wire x1="3" y1="1.1" x2="3" y2="-1.1" width="0.127" layer="51"/>
+<wire x1="-2.75" y1="1.75" x2="-3" y2="1.5" width="0.2032" layer="21" curve="90"/>
+<wire x1="-2.75" y1="1.75" x2="2.75" y2="1.75" width="0.2032" layer="21"/>
+<wire x1="2.75" y1="1.75" x2="3" y2="1.5" width="0.2032" layer="21" curve="-90"/>
+<wire x1="3" y1="-1.5" x2="2.75" y2="-1.75" width="0.2032" layer="21" curve="-90"/>
+<wire x1="2.75" y1="-1.75" x2="-2.75" y2="-1.75" width="0.2032" layer="21"/>
+<wire x1="-3" y1="-1.5" x2="-2.75" y2="-1.75" width="0.2032" layer="21" curve="90"/>
+<wire x1="-3" y1="-1.5" x2="-3" y2="-1.1" width="0.2032" layer="21"/>
+<wire x1="-3" y1="1.1" x2="-3" y2="1.5" width="0.2032" layer="21"/>
+<wire x1="3" y1="1.1" x2="3" y2="1.5" width="0.2032" layer="21"/>
+<wire x1="3" y1="-1.5" x2="3" y2="-1.1" width="0.2032" layer="21"/>
+<wire x1="-1.5" y1="0.75" x2="1.5" y2="0.75" width="0.2032" layer="21"/>
+<wire x1="1.5" y1="-0.75" x2="-1.5" y2="-0.75" width="0.2032" layer="21"/>
+<wire x1="-1.5" y1="-0.75" x2="-1.5" y2="0.75" width="0.2032" layer="21"/>
+<wire x1="1.5" y1="-0.75" x2="1.5" y2="0.75" width="0.2032" layer="21"/>
+<wire x1="-2" y1="0" x2="-1" y2="0" width="0.127" layer="51"/>
+<wire x1="-1" y1="0" x2="0.1" y2="0.5" width="0.127" layer="51"/>
+<wire x1="0.3" y1="0" x2="2" y2="0" width="0.127" layer="51"/>
+<smd name="1" x="-3.15" y="0" dx="2.3" dy="1.6" layer="1" rot="R180"/>
+<smd name="2" x="3.15" y="0" dx="2.3" dy="1.6" layer="1" rot="R180"/>
+<text x="-3" y="2" size="0.762" layer="25">&gt;NAME</text>
+<text x="-3" y="-2.7" size="0.762" layer="27">&gt;VALUE</text>
+</package>
+</packages>
+<packages3d>
+<package3d name="SPARKFUN-ELECTROMECHANICAL_TACTILE-SWITCH-1101NE" urn="urn:adsk.eagle:package:5829833/3" type="model" library_version="31">
+<description>SparkFun SKU# COM-08229</description>
+<packageinstances>
+<packageinstance name="TACTILE-SWITCH-1101NE"/>
+</packageinstances>
+</package3d>
+</packages3d>
+<symbols>
+<symbol name="SPARKFUN-ELECTROMECHANICAL_SWITCH-MOMENTARY-2" urn="urn:adsk.eagle:symbol:5828967/1" library_version="31">
+<circle x="-2.54" y="0" radius="0.127" width="0.4064" layer="94"/>
+<circle x="2.54" y="0" radius="0.127" width="0.4064" layer="94"/>
+<wire x1="1.905" y1="0" x2="2.54" y2="0" width="0.254" layer="94"/>
+<wire x1="-2.54" y1="0" x2="1.905" y2="1.27" width="0.254" layer="94"/>
+<pin name="1" x="-5.08" y="0" visible="off" length="short" direction="pas" swaplevel="2"/>
+<pin name="2" x="5.08" y="0" visible="off" length="short" direction="pas" swaplevel="1" rot="R180"/>
+<text x="-2.54" y="2.54" size="1.778" layer="95">&gt;NAME</text>
+<text x="-2.54" y="-2.54" size="1.778" layer="96">&gt;VALUE</text>
+</symbol>
+</symbols>
+<devicesets>
+<deviceset name="RS032G05A3SM-SPST-MOMENTARY-SW" urn="urn:adsk.eagle:component:5829909/3" prefix="S" library_version="31">
+<description>6x3.5mm 2-pin Momentary Switch (Push-button)
+&lt;p&gt;
+&lt;a href="https://www.digikey.com/products/en?keywords=CKN10388TR-ND"&gt;Digikey Link&lt;/a&gt;
+&lt;br&gt;
+&lt;a href="https://media.digikey.com/pdf/Data%20Sheets/C&amp;K/RS-032G05_-SM_RT.pdf"&gt;Datasheet&lt;/a&gt;
+&lt;/p&gt;</description>
+<gates>
+<gate name="G$1" symbol="SPARKFUN-ELECTROMECHANICAL_SWITCH-MOMENTARY-2" x="0" y="0"/>
+</gates>
+<devices>
+<device name="SMD-1101NE" package="TACTILE-SWITCH-1101NE">
+<connects>
+<connect gate="G$1" pin="1" pad="1"/>
+<connect gate="G$1" pin="2" pad="2"/>
+</connects>
+<package3dinstances>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:5829833/3"/>
+</package3dinstances>
+<technologies>
+<technology name="">
+<attribute name="PROD_ID" value="SWCH-00815" constant="no"/>
+</technology>
+</technologies>
+</device>
+</devices>
+</deviceset>
+</devicesets>
+</library>
 </libraries>
 <attributes>
 </attributes>
@@ -18158,7 +18239,6 @@ diameter 5 mm, grid 2.54 mm</description>
 <part name="3.3V" library="burr-brown" library_urn="urn:adsk.eagle:library:111" deviceset="REG1117" device="" package3d_urn="urn:adsk.eagle:package:4940/1"/>
 <part name="SUPPLY3" library="supply2" library_urn="urn:adsk.eagle:library:372" deviceset="GND" device=""/>
 <part name="SUPPLY5" library="supply2" library_urn="urn:adsk.eagle:library:372" deviceset="GND" device=""/>
-<part name="SUPPLY6" library="supply2" library_urn="urn:adsk.eagle:library:372" deviceset="GND" device=""/>
 <part name="FRAME1" library="SparkFun-Aesthetics" library_urn="urn:adsk.eagle:library:507" deviceset="FRAME-A4L" device="">
 <attribute name="CNAME" value="USB2DB15 adapter for Supergun/Neogeo"/>
 <attribute name="CREVISION" value="1.0"/>
@@ -18167,7 +18247,7 @@ diameter 5 mm, grid 2.54 mm</description>
 <part name="JP1" library="jumper" library_urn="urn:adsk.eagle:library:252" deviceset="JP2E" device="" package3d_urn="urn:adsk.eagle:package:15452/1"/>
 <part name="J1" library="SparkFun-Connectors" library_urn="urn:adsk.eagle:library:513" deviceset="CONN_05" device="" package3d_urn="urn:adsk.eagle:package:38104/1" value="0"/>
 <part name="J2" library="SparkFun-Connectors" library_urn="urn:adsk.eagle:library:513" deviceset="AVR_SPI_PROG_3X2" device="NS" package3d_urn="urn:adsk.eagle:package:38013/1"/>
-<part name="JP3" library="pinhead" library_urn="urn:adsk.eagle:library:325" deviceset="PINHD-1X1" device="" package3d_urn="urn:adsk.eagle:package:22485/2" value="0"/>
+<part name="A4" library="pinhead" library_urn="urn:adsk.eagle:library:325" deviceset="PINHD-1X1" device="" package3d_urn="urn:adsk.eagle:package:22485/2" value="0"/>
 <part name="R1" library="eagle-ltspice" library_urn="urn:adsk.eagle:library:217" deviceset="R" device="" package3d_urn="urn:adsk.eagle:package:13300/1" value="33Ω"/>
 <part name="C1" library="Wurth_Elektronik_Passive_Capacitors_rev18b" library_urn="urn:adsk.eagle:library:7562178" deviceset="WCAP-CSGP_0805" device="_REFLOW" package3d_urn="urn:adsk.eagle:package:7562358/1" technology="_885012006082" value="0.1uf"/>
 <part name="JP2" library="pinhead" library_urn="urn:adsk.eagle:library:325" deviceset="PINHD-1X1" device="" package3d_urn="urn:adsk.eagle:package:22485/2" value="JP2"/>
@@ -18187,6 +18267,7 @@ diameter 5 mm, grid 2.54 mm</description>
 <part name="PEM4" library="penn-engineering" deviceset="KF2-" device="M2"/>
 <part name="C5" library="resistor" library_urn="urn:adsk.eagle:library:348" deviceset="CPOL-US" device="B/3528-21W" package3d_urn="urn:adsk.eagle:package:23411/1" value="4.7UF"/>
 <part name="LOGO1" library="SparkFun-Aesthetics" library_urn="urn:adsk.eagle:library:507" deviceset="OSHW-LOGO" device="S" package3d_urn="urn:adsk.eagle:package:37099/1"/>
+<part name="S1" library="BeagleBone_Blue_R3" library_urn="urn:adsk.eagle:library:5828899" deviceset="RS032G05A3SM-SPST-MOMENTARY-SW" device="SMD-1101NE" package3d_urn="urn:adsk.eagle:package:5829833/3"/>
 </parts>
 <sheets>
 <sheet>
@@ -18222,9 +18303,6 @@ SJ1.</text>
 <instance part="SUPPLY5" gate="GND" x="83.82" y="33.02" smashed="yes">
 <attribute name="VALUE" x="81.915" y="29.845" size="1.778" layer="96"/>
 </instance>
-<instance part="SUPPLY6" gate="GND" x="-137.16" y="96.52" smashed="yes" rot="R270">
-<attribute name="VALUE" x="-140.335" y="98.425" size="1.778" layer="96" rot="R270"/>
-</instance>
 <instance part="FRAME1" gate="G$1" x="-160.02" y="-58.42" smashed="yes">
 <attribute name="DRAWING_NAME" x="21.59" y="-46.99" size="2.54" layer="94" font="vector"/>
 <attribute name="LAST_DATE_TIME" x="21.59" y="-52.07" size="2.286" layer="94" font="vector"/>
@@ -18245,9 +18323,8 @@ SJ1.</text>
 <attribute name="NAME" x="-111.76" y="-37.592" size="1.778" layer="95" font="vector"/>
 <attribute name="VALUE" x="-111.76" y="-50.546" size="1.778" layer="96" font="vector"/>
 </instance>
-<instance part="JP3" gate="G$1" x="-73.66" y="-43.18" smashed="yes">
-<attribute name="NAME" x="-80.01" y="-40.005" size="1.778" layer="95"/>
-<attribute name="VALUE" x="-80.01" y="-48.26" size="1.778" layer="96"/>
+<instance part="A4" gate="G$1" x="-101.6" y="-25.4" smashed="yes" rot="R90">
+<attribute name="NAME" x="-104.775" y="-31.75" size="1.778" layer="95" rot="R90"/>
 </instance>
 <instance part="R1" gate="G$1" x="9.906" y="58.674" smashed="yes">
 <attribute name="NAME" x="8.636" y="55.0926" size="1.778" layer="95"/>
@@ -18314,6 +18391,9 @@ SJ1.</text>
 <attribute name="VALUE" x="11.684" y="75.565" size="1.778" layer="96"/>
 </instance>
 <instance part="LOGO1" gate="G$1" x="-142.24" y="-20.32" smashed="yes"/>
+<instance part="S1" gate="G$1" x="-104.14" y="-2.54" smashed="yes">
+<attribute name="NAME" x="-106.68" y="0" size="1.778" layer="95"/>
+</instance>
 </instances>
 <busses>
 </busses>
@@ -18413,6 +18493,11 @@ SJ1.</text>
 <wire x1="-121.92" y1="50.8" x2="-142.24" y2="50.8" width="0.1524" layer="91"/>
 <label x="-149.86" y="50.8" size="1.778" layer="95"/>
 </segment>
+<segment>
+<pinref part="ARDUINO-ATMEGA328P" gate="G$1" pin="GND.3"/>
+<wire x1="-121.92" y1="96.52" x2="-134.62" y2="96.52" width="0.1524" layer="91"/>
+<label x="-134.62" y="96.52" size="1.778" layer="95"/>
+</segment>
 </net>
 <net name="BUT4" class="0">
 <segment>
@@ -18473,6 +18558,11 @@ SJ1.</text>
 <wire x1="54.102" y1="88.9" x2="54.102" y2="109.22" width="0.1524" layer="91"/>
 <label x="54.102" y="109.22" size="1.778" layer="95" rot="R90"/>
 </segment>
+<segment>
+<pinref part="A4" gate="G$1" pin="1"/>
+<wire x1="-101.6" y1="-27.94" x2="-116.84" y2="-27.94" width="0.1524" layer="91"/>
+<label x="-117.348" y="-27.178" size="1.778" layer="95"/>
+</segment>
 </net>
 <net name="GND" class="0">
 <segment>
@@ -18484,11 +18574,6 @@ SJ1.</text>
 <wire x1="83.82" y1="38.1" x2="83.82" y2="35.56" width="0.1524" layer="91"/>
 <pinref part="3.3V" gate="G$1" pin="GND"/>
 <pinref part="SUPPLY5" gate="GND" pin="GND"/>
-</segment>
-<segment>
-<wire x1="-121.92" y1="96.52" x2="-134.62" y2="96.52" width="0.1524" layer="91"/>
-<pinref part="ARDUINO-ATMEGA328P" gate="G$1" pin="GND.3"/>
-<pinref part="SUPPLY6" gate="GND" pin="GND"/>
 </segment>
 <segment>
 <pinref part="J1" gate="G$1" pin="1"/>
@@ -18535,6 +18620,11 @@ SJ1.</text>
 <junction x="20.32" y="73.66"/>
 <label x="22.86" y="73.66" size="1.778" layer="95"/>
 <pinref part="C5" gate="G$1" pin="-"/>
+</segment>
+<segment>
+<pinref part="S1" gate="G$1" pin="1"/>
+<wire x1="-109.22" y1="-2.54" x2="-121.92" y2="-2.54" width="0.1524" layer="91"/>
+<label x="-121.92" y="-2.54" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="5VSG" class="0">
@@ -18639,6 +18729,11 @@ SJ1.</text>
 <pinref part="J2" gate="G$1" pin="5"/>
 <wire x1="-114.3" y1="-45.72" x2="-121.92" y2="-45.72" width="0.1524" layer="91"/>
 <label x="-121.92" y="-45.72" size="1.778" layer="95"/>
+</segment>
+<segment>
+<pinref part="S1" gate="G$1" pin="2"/>
+<wire x1="-99.06" y1="-2.54" x2="-86.36" y2="-2.54" width="0.1524" layer="91"/>
+<label x="-93.98" y="-2.54" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="SCK" class="0">
