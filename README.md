@@ -46,7 +46,7 @@ If utilizing the Custom PCB in conjunction with an Arduino Pro Mini and Mini USB
 Due to variances of Mini Pro PCB's, A4 and A5 may be in different locations. Please pay attention to this.
 
 <p align="center">
-<img width="680" height="480" src="https://i.imgur.com/CMmYJeC.png">
+<img width="680" height="480" src="https://i.imgur.com/n5mkrv0.png">
  <br>
   <b>Custom PCB for Arduino Pro Mini</b><br>
 </p>
