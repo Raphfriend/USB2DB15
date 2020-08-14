@@ -93,6 +93,7 @@ If you are not using a prefabricated PCB, please view the schematic for wiring i
 - RetroFreak CONTROLLER ADAPTER
 - iBUFFALO SNES CLASSIC USB GAMEPAD
 - MadCatz PS3 compatible controllers
+- Retrobit SEGA Saturn® 8-Button Arcade Pad - 2.4 GHz Wireless
 
 ### 5. Where can I get more help, if I need it?
 
