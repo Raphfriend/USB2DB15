@@ -34,6 +34,10 @@
 //            コントローラタイプ(TYPE_PSC, TYPE_RAP3, TYPE_RAP4, TYPE_SNES, TYPE_RETROFREAK) :
 //
 //
+
+// Override USB Polling freqency --This needs to go before includes--
+#define POLLING_OVERRIDE 1000
+
 #include <XBOXONE.h>
 //#include <XBOXUSB.h>
 #include <PS3USB.h>
