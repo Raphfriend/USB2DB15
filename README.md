@@ -57,7 +57,7 @@ Due to variances of Mini Pro PCB's, A4 and A5 may be in different locations. Ple
 
 Download the  <a href="https://github.com/Raphfriend/USB_Host_Shield_2.0">USB Host Shield 2.0 library</a>  and install it to the Arduino IDE. Open the INO file (RFUSB_to_DB15.ino) and program it to your AVR.  
 
-If you have a USB Host Shield Mini, you will need to CUT the trace after the 2K2 resistor near the USB VBUS pin. Solder a wire from JP2 of the CUSTOM PCB to the highlighted red hole depicted in the picture below.
+If you have a USB Host Shield Mini, you will need to CUT the trace after the 2K2 resistor near the USB VBUS pin. Solder a wire from JP2 of the CUSTOM PCB to the through-hole VIA labelled '5V' as depicted in the picture below.
 
 <p align="center">
   <img width="460" height="300" src="https://i.imgur.com/vGgNsPl.png">
