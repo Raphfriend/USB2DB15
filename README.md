@@ -38,9 +38,8 @@ If utilizing the Custom PCB in conjunction with an Arduino Pro Mini and Mini USB
 
 ##### Jumper settings:
 
-- JP1: Select 3.3V or 5V power input to the Arduino Pro Mini.
-- SJ1: Bridge this jumper to disable 5V protection.
-- SJ1+SJ2+SJ3: Bridge all these jumpers to enable 5V protection.
+- SJ1: Bridge this jumper ONLY to disable 5V protection.
+- SJ2: Bridge this jumper ONLY to enable 5V protection.
 - JP2: 5V solder point (see information below regarding USB VBUS).
 
 Due to variances of Mini Pro PCB's, A4 and A5 may be in different locations. Please pay attention to this.
