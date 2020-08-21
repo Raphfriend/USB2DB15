@@ -93,6 +93,8 @@ If you are not using a prefabricated PCB, please view the schematic for wiring i
 - iBUFFALO SNES CLASSIC USB GAMEPAD
 - MadCatz PS3 compatible controllers
 - Retrobit SEGA Saturn® 8-Button Arcade Pad - 2.4 GHz Wireless
+- Hori Fighting Commander Controller for PS3 / PS4
+- Hori Fighting Stick for PS3
 
 ### 5. Where can I get more help, if I need it?
 
