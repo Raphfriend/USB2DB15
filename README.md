@@ -83,8 +83,8 @@ If you are not using a prefabricated PCB, please view the schematic for wiring i
 
 ### 4. Supported Controllers:    
 
-- Playstation 3 DS3
-- Playstation 4 DS4
+- PlayStation 3 DS3
+- PlayStation 4 DS4
 - Universal Brook PCB (PS4 Mode)
 - Most Hori RAP PS3 and PS4 controllers	
 - Razer Panthera PS4
