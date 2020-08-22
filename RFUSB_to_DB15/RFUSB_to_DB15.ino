@@ -6,14 +6,14 @@
 //         Version:          1.0
 //
 //         USB Host Shield 2.0 modded lib:         https://github.com/Raphfriend/USB_Host_Shield_2.0
-//         
+//
 //         Compiled with Arduino 1.8.10
-//      
+//
 //
 //                 Thanks to:
-//              
+//
 //              Oleg Mazurov for USB Host Shield 2.0 and libs
-//              HUYE (twitter @huye_4589) for USB controller -> ATARI ver 1.21 
+//              HUYE (twitter @huye_4589) for USB controller -> ATARI ver 1.21
 //              たねけん (twitter @taneken2000) for kind help on HUYE code understanding
 //              NearlyLogical beta testing and code improvement implementation
 //              Frank_fjs for beta testing and all in one PCB design
@@ -50,6 +50,8 @@
 #include "XBoxOneController.h"
 #include "USB2DB15.h"
 
+
+
 #define TYPE_PS4 0
 #define TYPE_MDmini 1
 #define TYPE_PSC 2
@@ -72,6 +74,8 @@
 
 bool printAngle;
 uint8_t state = 0;
+extern uint8_t curProfile = 0;
+int addr = 6; 
 
 
 int output = 0;
@@ -498,10 +502,23 @@ JoystickHID Hid1(&Usb);
 
 void setup() {
 
+Serial.begin(115200);
+  
+ while (!Serial);
+
+  curProfile = EEPROM.read(addr);
+  
+  
+  Serial.print("Using Profile: ");
+  Serial.println(curProfile);
+  
+  
+
+
   byte i, j;
 
-  Serial.begin(115200);
-  while (!Serial);
+  
+  
 
   if (Usb.Init() == -1) {
     Serial.print(F("\r\nOSC did not start"));

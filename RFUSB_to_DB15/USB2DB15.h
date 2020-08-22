@@ -1,7 +1,7 @@
 //
 // Created by Kitsune on 8/21/2020.
 //
-
+#include <EEPROM.h>
 #ifndef USB2DB15_USB2DB15_H
 #define USB2DB15_USB2DB15_H
 
@@ -36,25 +36,26 @@
 
 
 class USB2DB15 {
-  PS3Controller &ps3;
-  XBoxOneController &xbox;
-  Profile profiles[6];
-  uint8_t curProfile = 1;
-  uint8_t prevDDRC = 0;
-  uint8_t prevDDRD = 0;
+    PS3Controller &ps3;
+    XBoxOneController &xbox;
+    Profile profiles[6];
+    uint8_t curProfile = 1;
+    uint8_t prevDDRC = 0;
+    uint8_t prevDDRD = 0;
+    int addr = 6;
 
-public:
-  USB2DB15(PS3Controller &ps3, XBoxOneController &xbox);
-  void GenerateOutput();
+  public:
+    USB2DB15(PS3Controller &ps3, XBoxOneController &xbox);
+    void GenerateOutput();
 
-protected:
-  void GenerateBuiltinProfiles();
-  void GenerateDefaultProfile(Profile &profile);
-  void GenerateRowSwapProfile(Profile &profile, Profile &base);
-  void GenerateSnesProfile(Profile &profile, Profile &base);
-  uint8_t GetDDRC(Profile &profile, Controller &controller);
-  uint8_t GetDDRD(Profile &profile, Controller &controller);
-  void SetProfile(Controller &controller, uint8_t page);
+  protected:
+    void GenerateBuiltinProfiles();
+    void GenerateDefaultProfile(Profile &profile);
+    void GenerateRowSwapProfile(Profile &profile, Profile &base);
+    void GenerateSnesProfile(Profile &profile, Profile &base);
+    uint8_t GetDDRC(Profile &profile, Controller &controller);
+    uint8_t GetDDRD(Profile &profile, Controller &controller);
+    void SetProfile(Controller &controller, uint8_t page);
 };
 
 
