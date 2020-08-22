@@ -33,16 +33,17 @@
 /* Profile Pages */
 #define BUILT_IN_PROFILES 0
 
+/* EEPROM Locations */
+#define CURRENT_PROFILE_ADDR 6
 
 
 class USB2DB15 {
     PS3Controller &ps3;
     XBoxOneController &xbox;
     Profile profiles[6];
-    uint8_t curProfile = 1;
+    uint8_t curProfile = 0;
     uint8_t prevDDRC = 0;
     uint8_t prevDDRD = 0;
-    int addr = 6;
 
   public:
     USB2DB15(PS3Controller &ps3, XBoxOneController &xbox);

@@ -74,8 +74,6 @@
 
 bool printAngle;
 uint8_t state = 0;
-extern uint8_t curProfile = 0;
-int addr = 6; 
 
 
 int output = 0;
@@ -501,30 +499,19 @@ JoystickHID Hid1(&Usb);
 //JoystickHID Hid4(&Usb);
 
 void setup() {
+  Serial.begin(115200);
+  
+  while (!Serial);
 
-Serial.begin(115200);
-  
- while (!Serial);
-
-  curProfile = EEPROM.read(addr);
-  
-  
   Serial.print("Using Profile: ");
-  Serial.println(curProfile);
-  
-  
-
+  Serial.println(EEPROM.read(CURRENT_PROFILE_ADDR));
 
   byte i, j;
-
-  
-  
 
   if (Usb.Init() == -1) {
     Serial.print(F("\r\nOSC did not start"));
     while (1);
   }
-
 }
 
 

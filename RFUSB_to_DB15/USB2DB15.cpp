@@ -6,51 +6,51 @@
 
 void debugOutput(uint8_t ddrc, uint8_t ddrd) {
   Serial.print("Output: ");
-  if ( ddrc & DDRC_UP) {
+  if (ddrc & DDRC_UP) {
     Serial.print("UP ");
   }
 
-  if ( ddrd & DDRD_DOWN) {
+  if (ddrd & DDRD_DOWN) {
     Serial.print("DOWN ");
   }
 
-  if ( ddrc & DDRC_LEFT) {
+  if (ddrc & DDRC_LEFT) {
     Serial.print("LEFT ");
   }
 
-  if ( ddrd & DDRD_RIGHT) {
+  if (ddrd & DDRD_RIGHT) {
     Serial.print("RIGHT ");
   }
 
-  if ( ddrc & DDRC_START) {
+  if (ddrc & DDRC_START) {
     Serial.print("START ");
   }
 
-  if ( ddrd & DDRD_COIN) {
+  if (ddrd & DDRD_COIN) {
     Serial.print("SELECT ");
   }
 
-  if ( ddrc & DDRC_1) {
+  if (ddrc & DDRC_1) {
     Serial.print("A ");
   }
 
-  if ( ddrd & DDRD_2) {
+  if (ddrd & DDRD_2) {
     Serial.print("B ");
   }
 
-  if ( ddrc & DDRC_3) {
+  if (ddrc & DDRC_3) {
     Serial.print("C ");
   }
 
-  if ( ddrd & DDRD_4) {
+  if (ddrd & DDRD_4) {
     Serial.print("X ");
   }
 
-  if ( ddrd & DDRD_5) {
+  if (ddrd & DDRD_5) {
     Serial.print("Y ");
   }
 
-  if ( ddrc & DDRC_6) {
+  if (ddrc & DDRC_6) {
     Serial.print("Z ");
   }
   Serial.println(" ");
@@ -64,7 +64,7 @@ void USB2DB15::GenerateOutput() {
   uint8_t ddrc = 0; // getDDRC();
   uint8_t ddrd = 0; // getDDRD();
   uint8_t button = 0;
-  curProfile = EEPROM.read(6);
+  curProfile = EEPROM.read(CURRENT_PROFILE_ADDR);
 
   // Select the Controller and Generate DDRC and DDRD
   if (ps3.Connected()) { // PS3
@@ -198,28 +198,28 @@ void USB2DB15::SetProfile(Controller &controller, uint8_t page) {
     Serial.print("Using Profile: ");
     Serial.println((0 + page * 6));
     curProfile = 0 + page * 6;
-    EEPROM.update(addr, curProfile);
+    EEPROM.update(CURRENT_PROFILE_ADDR, curProfile);
   }
 
   if (controller.GetButtonState(profiles[0].bindings[PROFILE_BUTTON_2])) {
     Serial.print("Using Profile: ");
     Serial.println((1 + page * 6));
     curProfile = 1 + page * 6;
-    EEPROM.update(addr, curProfile);
+    EEPROM.update(CURRENT_PROFILE_ADDR, curProfile);
   }
 
   if (controller.GetButtonState(profiles[0].bindings[PROFILE_BUTTON_3])) {
     Serial.print("Using Profile: ");
     Serial.println((2 + page * 6));
     curProfile = 2 + page * 6;
-    EEPROM.update(addr, curProfile);
+    EEPROM.update(CURRENT_PROFILE_ADDR, curProfile);
   }
 
   if (controller.GetButtonState(profiles[0].bindings[PROFILE_BUTTON_4])) {
     Serial.print("Using Profile: ");
     Serial.println((3 + page * 6));
     curProfile = 3 + page * 6;
-    EEPROM.update(addr, curProfile);
+    EEPROM.update(CURRENT_PROFILE_ADDR, curProfile);
   }
   // if(ddrd & DDRD_5) return curProfile = 0;
   // if(ddrc & DDRC_6) return curProfile = 0;
