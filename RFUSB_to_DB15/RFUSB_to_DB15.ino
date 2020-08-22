@@ -46,6 +46,10 @@
 #include <hiduniversal.h>
 #include <usbhub.h>
 
+#include "PS3Controller.h"
+#include "XBoxOneController.h"
+#include "USB2DB15.h"
+
 #define TYPE_PS4 0
 #define TYPE_MDmini 1
 #define TYPE_PSC 2
@@ -210,6 +214,11 @@ class JoystickHID : public HIDUniversal {
           if (buf[0] & 0x0020) { // R1ボタン
             output |= 1;
             Serial.println("C button");
+          }
+
+          if (buf[0] & 0x0040) { // Z Retrobit
+            output |= 1;
+            Serial.println("C button_RETROBIT");
           }
 
           if (buf[0] & 0x0080) { // R2ボタン
@@ -476,6 +485,10 @@ USB Usb;
 PS3USB PS3(&Usb);
 XBOXONE Xbox(&Usb);
 //XBOXUSB XboxT(&Usb);
+PS3Controller PS3Con(&PS3);
+XBoxOneController XBoxCon(&Xbox);
+USB2DB15 Usb2db15(PS3Con, XBoxCon);
+
 
 USBHub Hub(&Usb);
 JoystickHID Hid1(&Usb);
@@ -484,8 +497,6 @@ JoystickHID Hid1(&Usb);
 //JoystickHID Hid4(&Usb);
 
 void setup() {
-//  pinMode(LED_PIN, OUTPUT);
-//  digitalWrite(LED_PIN, HIGH); // LED starts off
 
   byte i, j;
 
@@ -503,189 +514,12 @@ void setup() {
 void loop() {
 
   Usb.Task();
-//
-//  if ( (Usb.getUsbTaskState() == USB_STATE_RUNNING) && !led_on ) {
-//    digitalWrite(LED_PIN, LOW); // LED is on when low
-//    Serial.println(F("LED On"));
-//    led_on = true;
-//  }
-//  else if ( (Usb.getUsbTaskState() == USB_DETACHED_SUBSTATE_WAIT_FOR_DEVICE) && led_on ) {
-//    digitalWrite(LED_PIN, HIGH); // LED is off when high
-//    Serial.println(F("LED Off"));
-//    led_on = false;
-//  }
-
-  if (PS3.PS3Connected) {
-
-    output = 0;
-
-    if (PS3.getButtonPress(UP)) {
-      output |= 8; // pin A3
-      Serial.println(F("Up"));
-    }
-
-    if (PS3.getButtonPress(LEFT)) {
-      output |= 4; //pin A2
-      Serial.println(F("Left"));
-    }
-
-    if (PS3.getButtonPress(SQUARE)) {
-      output |= 2; //A1
-      Serial.println(F("Square"));
-    }
-
-    if (PS3.getButtonPress(START)) {
-      output |= 32;
-      Serial.println(F("Start"));
-    }
-
-    if (PS3.getButtonPress(R1)) {
-      output |= 1;
-      Serial.println(F("R1"));
-    }
-
-    if (PS3.getButtonPress(R2)) {
-      output |= 16;
-      Serial.println(F("R2"));
-    }
-
-    DDRC = output;
-    output = 0;
-
-    if (PS3.getButtonPress(DOWN)) {
-      output |= 4; // pin 2
-      Serial.println(F("Down"));
-    }
-
-    if (PS3.getButtonPress(TRIANGLE)) {
-      output |= 16;
-      Serial.println(F("\r\nTriangle"));
-    }
-
-    if (PS3.getButtonPress(CIRCLE)) {
-      output |= 128;
-      Serial.println(F("Circle"));
-    }
-
-    if (PS3.getButtonPress(X)) {
-      output |= 32; //pin 5
-      Serial.println(F("X"));
-    }
-    if (PS3.getButtonPress(RIGHT)) {
-      output |= 8; //pin 3
-
-      Serial.println(F("Right"));
-    }
-
-    if (PS3.getButtonPress(SELECT)) {
-      output |= 64; //pin 6
-      Serial.println(F("Select"));
-    }
-
-    DDRD = output;
-  }
 
   delay(1);
 
-
-  if (Xbox.XboxOneConnected)
-
-  {
-    if (Xbox.getAnalogHat(LeftHatX) > 7500 || Xbox.getAnalogHat(LeftHatX) < -7500
-        || Xbox.getAnalogHat(LeftHatY) > 7500 || Xbox.getAnalogHat(LeftHatY) < -7500 )
-    {
-      if (Xbox.getAnalogHat(LeftHatX) > 7500
-          || Xbox.getAnalogHat(LeftHatX) < -7500) {
-        Serial.print(F("LeftHatX: "));
-        Serial.print(Xbox.getAnalogHat(LeftHatX));
-        Serial.print("\t");
-      }
-      if (Xbox.getAnalogHat(LeftHatY) > 7500
-          || Xbox.getAnalogHat(LeftHatY) < -7500) {
-        Serial.print(F("LeftHatY: "));
-        Serial.print(Xbox.getAnalogHat(LeftHatY));
-        Serial.print("\t");
-      }
-
-      Serial.println();
-    }
-
-    Xbox.setRumbleOff();
-
-    output = 0;
-
-
-    if (Xbox.getButtonPress(UP))  {
-      output |= 8; // pin A3
-      Serial.println(F("Up"));
-    }
-
-
-    if (Xbox.getButtonPress(LEFT)) {
-      output |= 4; //pin A2
-      Serial.println(F("Left"));
-    }
-
-    if (Xbox.getButtonPress(X))  {
-      output |= 2; //A1
-      Serial.println(F("X"));
-    }
-
-    if (Xbox.getButtonPress(START))  {
-      output |= 32;
-      Serial.println(F("Start"));
-    }
-
-    if (Xbox.getButtonPress(R1))  {
-      output |= 1;
-      Serial.println(F("R1"));
-    }
-
-    if (Xbox.getButtonPress(R2))  {
-      output |= 16;
-      Serial.println(F("R2"));
-    }
-
-    DDRC = output;
-    output = 0;
-
-    if (Xbox.getButtonPress(DOWN))  {
-      output |= 4; // pin 2
-      Serial.println(F("Down"));
-    }
-
-
-    if (Xbox.getButtonPress(Y))  {
-      output |= 16;
-      Serial.println(F("Y"));
-    }
-
-    if (Xbox.getButtonPress(A)) {
-      output |= 32;
-      Serial.println(F("A"));
-    }
-
-    if (Xbox.getButtonPress(B))  {
-      output |= 128; //pin 7
-      Serial.println(F("B"));
-    }
-    if (Xbox.getButtonPress(RIGHT))  {
-      output |= 8; //pin 3
-
-      Serial.println(F("Right"));
-    }
-
-    if (Xbox.getButtonPress(BACK))  {
-      output |= 64; //pin 6
-      Serial.println(F("Back"));
-    }
-
-    DDRD = output;
-  }
-
+  Usb2db15.GenerateOutput();
 
   delay(1);
-
 
 }
 
