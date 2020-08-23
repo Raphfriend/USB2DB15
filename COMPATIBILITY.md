@@ -17,6 +17,9 @@ This is a list of tested controllers. Please reach out to Raph_Friend if you hav
 - Real Arcade Pro.3 Premium VLX (PS3 mode)
 - Real Arcade Pro V HAYABUSA (PS3 and PS4 modes)
 
+### Microsoft
+- XboxOne Controller
+
 ### Razer
 - Panthera
 

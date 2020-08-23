@@ -17,6 +17,7 @@
   - Sony PS4 and PS3 Controllers
   - Sony Wireless Adapter
   - Universal PCB firmware version 29
+  - Xbox One official and some 3rd Party controllers
 - 4 Builtin Profiles.  They can be switch by holding UP + SELECT + BUTTON 1-4 (button number is relative to the default profile)
   - Button 1: Default profile
   - Button 2: Default but the rows are swapped
