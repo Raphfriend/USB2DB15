@@ -109,10 +109,10 @@ void setupController(uint16_t vid, uint16_t pid, HIDController *controller) {
 void generateDPad(uint8_t index, HIDController *controller) {
   controller->ConfigButton(BUTTON_UP, index, DPAD_MASK, DPAD_UP);
   controller->ConfigButton(BUTTON_UP_RIGHT, index, DPAD_MASK, DPAD_UP_RIGHT);
-  controller->ConfigButton(BUTTON_RIGHT, index, DPAD_MASK, DPAD_RIGHT;
+  controller->ConfigButton(BUTTON_RIGHT, index, DPAD_MASK, DPAD_RIGHT);
   controller->ConfigButton(BUTTON_DOWN_RIGHT, index, DPAD_MASK, DPAD_DOWN_RIGHT);
   controller->ConfigButton(BUTTON_DOWN, index, DPAD_MASK, DPAD_DOWN);
-  controller->ConfigButton(BUTTON_DOWN_LEFT, DPAD_MASK, mask, DPAD_DOWN_LEFT);
+  controller->ConfigButton(BUTTON_DOWN_LEFT, DPAD_MASK, DPAD_DOWN_LEFT);
   controller->ConfigButton(BUTTON_LEFT, index, DPAD_MASK, DPAD_LEFT);
   controller->ConfigButton(BUTTON_UP_LEFT, index, DPAD_MASK, DPAD_UP_LEFT);
 }
@@ -134,7 +134,7 @@ void generateDPad(uint8_t index, HIDController *controller) {
  */
 void setup8BitDoM30(HIDController *controller) {
   // DPad setup
-  generateDPad(2, 0x0F, controller);
+  generateDPad(2, controller);
 
   controller->ConfigButton(BUTTON_COIN, 1, 0x04);
   controller->ConfigButton(BUTTON_START, 1, 0x08);
@@ -193,7 +193,7 @@ void setupBuffaloClassic(HIDController *controller) {
  */
 void setupHoriFightingCmdr(HIDController *controller) {
   // DPad setup
-  generateDPad(2, 0x0F, controller);
+  generateDPad(2, controller);
 
   controller->ConfigButton(BUTTON_COIN, 1, 0x01);
   controller->ConfigButton(BUTTON_START, 1, 0x02);
@@ -223,7 +223,7 @@ void setupHoriFightingCmdr(HIDController *controller) {
  * @param controller The HIDController that will be configured
  */
 void setupHoriRAP3(HIDController *controller) {
-  generateDPad(2, 0x0F, controller);
+  generateDPad(2, controller);
 
   controller->ConfigButton(BUTTON_COIN, 1, 0x01);
   controller->ConfigButton(BUTTON_START, 1, 0x02);
@@ -256,7 +256,7 @@ void setupHoriRAP3(HIDController *controller) {
  */
 
 void setupPS4(HIDController *controller) {
-  generateDPad(5, 0x0F, controller);
+  generateDPad(5, controller);
 
   controller->ConfigButton(BUTTON_COIN, 6, 0x10);
   controller->ConfigButton(BUTTON_START, 6, 0x20);
