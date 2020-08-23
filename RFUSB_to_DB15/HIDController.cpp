@@ -4,76 +4,26 @@
 
 #include "drivers.h"
 #include "HIDController.h"
-/*
-void HIDController::DebugStatePrint() {
-  Serial.print("HID Input: ");
-  if(buttonState & MASK_UP) {
-    Serial.print("UP ");
-  }
-  if(buttonState & MASK_UP_RIGHT) {
-    Serial.print("UP/RIGHT ");
-  }
-  if(buttonState & MASK_RIGHT) {
-    Serial.print("RIGHT ");
-  }
-  if(buttonState & MASK_DOWN_RIGHT) {
-    Serial.print("DOWN/RIGHT ");
-  }
-  if(buttonState & MASK_DOWN) {
-    Serial.print("DOWN ");
-  }
-  if(buttonState & MASK_DOWN_LEFT) {
-    Serial.print("DOWN/LEFT ");
-  }
-  if(buttonState & MASK_LEFT) {
-    Serial.print("LEFT ");
-  }
-  if(buttonState & MASK_UP_LEFT) {
-    Serial.print("UP/LEFT ");
-  }
-  if(buttonState & MASK_COIN) {
-    Serial.print("SELECT ");
-  }
-  if(buttonState & MASK_START) {
-    Serial.print("START ");
-  }
-  if(buttonState & MASK_BUTTON_1) {
-    Serial.print("BUTTON 1 ");
-  }
-  if(buttonState & MASK_BUTTON_2) {
-    Serial.print("BUTTON 2 ");
-  }
-  if(buttonState & MASK_BUTTON_3) {
-    Serial.print("BUTTON 3 ");
-  }
-  if(buttonState & MASK_BUTTON_4) {
-    Serial.print("BUTTON 4 ");
-  }
-  if(buttonState & MASK_BUTTON_5) {
-    Serial.print("BUTTON 5 ");
-  }
-  if(buttonState & MASK_BUTTON_6) {
-    Serial.print("BUTTON 6 ");
-  }
-  if(buttonState & MASK_BUTTON_7) {
-    Serial.print("BUTTON 7 ");
-  }
-  if(buttonState & MASK_BUTTON_8) {
-    Serial.print("BUTTON 8 ");
-  }
-  if(buttonState & MASK_BUTTON_9) {
-    Serial.print("BUTTON 9 ");
-  }
-  if(buttonState & MASK_BUTTON_10) {
-    Serial.print("BUTTON 10 ");
-  }
-  Serial.println();
-} */
 
+/**
+ * Returns if there is a controller connected and ready
+ *
+ * @return If there is a controller connected and ready
+ */
 bool HIDController::Connected() {
   isReady();
 }
 
+/**
+ * Gets the State(pressed or not) of a given button
+ *
+ * This function checks the buttonState variable to see if the bit
+ * corresponding to the button is set to true. For directionals it checks
+ * the primary direction as well as the 2 diagonals that include the direction.
+ *
+ * @param button The button to check. Defined in "device_description.h"
+ * @return If the requested button is pressed
+ */
 bool HIDController::GetButtonState(uint8_t button) {
   switch (button) {
     case BUTTON_UP :
@@ -112,10 +62,31 @@ bool HIDController::GetButtonState(uint8_t button) {
   return 0;
 }
 
+/**
+ * Configures a button.
+ *
+ * This function is an alias for ConfigButton(uint8_t, uint8_t, uint8_t, uint8_t)
+ * and should be used when the Mask is the same as the target value. This is often
+ * true for single bit masks.
+ *
+ * @param button_id The button id as defined in "device_descriptor.h"
+ * @param index The index in the usb packet buffer that the button is located at
+ * @param mask The bit mask to target the bits that make up the button
+ */
 void HIDController::ConfigButton(uint8_t button_id, uint8_t index, uint8_t mask) {
   ConfigButton(button_id, index, mask, mask);
 }
 
+/**
+ * Configures a Button.
+ *
+ * This functions configures at button for use in the ParseHIDData function.
+ *
+ * @param button_id The button id as defined in "device_descriptor.h"
+ * @param index The index in the usb packet buffer that the button is located
+ * @param mask The bit mask to target the bits that make up the button
+ * @param value The value the byte should equal after the bit mask is applied
+ */
 void HIDController::ConfigButton(uint8_t button_id, uint8_t index, uint8_t mask, uint8_t value) {
   if (button_id >= MAX_HID_BUTTONS) return;
 
@@ -133,12 +104,42 @@ void HIDController::ConfigButton(uint8_t button_id, uint8_t index, uint8_t mask,
   buttons[button_id].value = value;
 }
 
+/**
+ * Handle any setup that needs to happen when a controller is plugged in
+ *
+ * This is a callback function that is invoked by the USB Shield library
+ * once a controller is plugged in and successfully initalized.
+ *
+ * This function looks up and runs the configuration for the controller
+ * that was plugged in.
+ *
+ * @return error number, zero for no error
+ */
 uint8_t HIDController::OnInitSuccessful() {
   Serial.println("Detected HID device. ");
   ResetController();
   setupController(VID, PID, this);
+  return 0;
 }
 
+/**
+ * Processes in incoming USB data packet
+ *
+ * This is a callback function defined by HIDUniversal and is called when ever
+ * the controller sends data about it's current state. Do not call this
+ * function directly
+ *
+ * This function resets the buttonState to 0. It then iterates over each button
+ * shifting a 1 onto buttonState if it is pressed otherwise it leaves it at
+ * zero. The end result is that the current state of each button is represented
+ * as a single bit in buttonState. This will allow us to check the value of any
+ * button by ANDing buttonState with a bit mask later on.
+ *
+ * @param hid
+ * @param is_rpt_id
+ * @param len Length of the buffer
+ * @param buf The buffer
+ */
 void HIDController::ParseHIDData(USBHID *hid, bool is_rpt_id, uint8_t len, uint8_t *buf) {
   buttonState = 0;
   uint8_t value = 0;
@@ -156,6 +157,12 @@ void HIDController::ParseHIDData(USBHID *hid, bool is_rpt_id, uint8_t len, uint8
   }
 }
 
+/**
+ * Unsets all buttons on the controller
+ *
+ * Sets all button masks to zero.  This signals to the system that the buttons
+ * are unset and should not be used.
+ */
 void HIDController::ResetController() {
   for(uint8_t i = 0; i < MAX_HID_BUTTONS; i++) {
     buttons[i].mask = 0;

@@ -34,10 +34,11 @@
 #define MASK_BUTTON_10  0x0001
 
 
-// Data about a Button
-// Index is the location of the byte in the buffer
-// Mask is applied
-// Simple version
+/**
+ * Stores information on how to tell if a button is pressed
+ * A Mask of 0x00 signals that the button is not set for the
+ * current controller.
+ */
 struct Button {
   uint8_t index;
   uint8_t mask;
@@ -62,8 +63,6 @@ protected:
   uint8_t OnInitSuccessful();
   void ParseHIDData(USBHID *hid, bool is_rpt_id, uint8_t len, uint8_t *buf);
   void ResetController();
-
-  // void DebugStatePrint();
 };
 
 
