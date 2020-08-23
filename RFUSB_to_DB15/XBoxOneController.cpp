@@ -48,5 +48,9 @@ bool XBoxOneController::GetButtonState(uint8_t button) {
 }
 
 bool XBoxOneController::Connected() {
-  return xbox->XboxOneConnected;
+  if (xbox->XboxOneConnected;) {
+    xbox->setRumbleOff();
+    return true;
+  }
+  return false;
 }
