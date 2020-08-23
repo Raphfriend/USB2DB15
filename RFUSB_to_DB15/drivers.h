@@ -44,6 +44,21 @@
 #define PID_SONY_PS4_ADAPTER    0x0BA0 // PS4 Wireless Adapter
 #define PID_UPCB                0x1529 // Universal PCB Project
 
+/****************
+ * D Pad Constants
+ ****************/
+
+#define DPAD_UP         0
+#define DPAD_UP_RIGHT   1
+#define DPAD_RIGHT      2
+#define DPAD_DOWN_RIGHT 3
+#define DPAD_DOWN       4
+#define DPAD_DOWN_LEFT  5
+#define DPAD_LEFT       6
+#define DPAD_UP_LEFT    7
+
+#define DPAD_MASK       0x0F
+
 void setupController(uint16_t vid, uint16_t pid, HIDController *controller);
 
 // 8BitDo Controllers
