@@ -82,6 +82,7 @@ If you are not using a prefabricated PCB, please view the schematic for wiring i
 10. Wait for the sketch to be uploaded as indicated in the console window at the bottom of the Arduino IDE software.
 
 ### 4. Supported Controllers:    
+See COMPATIBILITY.md for a detailed list
 
 - PlayStation 3 DS3
 - PlayStation 4 DS4
@@ -96,7 +97,15 @@ If you are not using a prefabricated PCB, please view the schematic for wiring i
 - Hori Fighting Commander Controller for PS3 / PS4
 - Hori Fighting Stick for PS3
 
-### 5. Where can I get more help, if I need it?
+### 5. Software Usage
+#### 5.1 Built in Profiles
+The adapter has 4 built in profiles.  They can be switched to by pressing UP + SELECT + Button 1-4.  The Button number is relative to the default profile not your current profile for consistency.
+- Button 1: Default Profile
+- Button 2: Default with the button rows swapped
+- Button 3: SNES style with Button 6 mapped to Button 7(L1)
+- Button 4: SNES style with the rows flipped 
+
+### 6. Where can I get more help, if I need it?
 
 Via the Arcade-Projects website forum or via Discord.
 
