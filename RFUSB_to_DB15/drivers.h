@@ -21,7 +21,7 @@
 #define VID_RAZER               0x1532 // Razer
 #define VID_RETROBIT            0x0079 // Retrobit
 #define VID_SONY                0x054c // Sony
-#define VID_UPCB                0xC410 // Universal PCB Project
+#define VID_UPCB                0x04D8 // Universal PCB Project
 
 /****************
  * Product IDs
@@ -42,7 +42,7 @@
 #define PID_SONY_PS4_JP         0x09CC // PS4 Controller JP region
 #define PID_SONY_PS4_NA         0x05C4 // PS4 Controller NA region
 #define PID_SONY_PS4_ADAPTER    0x0BA0 // PS4 Wireless Adapter
-#define PID_UPCB                0xC082 // Universal PCB Project
+#define PID_UPCB                0x1529 // Universal PCB Project
 
 void setupController(uint16_t vid, uint16_t pid, HIDController *controller);
 
