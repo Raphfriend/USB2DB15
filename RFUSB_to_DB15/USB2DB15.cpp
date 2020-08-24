@@ -56,15 +56,18 @@ void debugOutput(uint8_t ddrc, uint8_t ddrd) {
   Serial.println(" ");
 }
 
-USB2DB15::USB2DB15(PS3Controller &ps3, XBoxOneController &xbox) : ps3(ps3), xbox(xbox) {
+USB2DB15::USB2DB15(PS3Controller &ps3, XBoxOneController &xbox, HIDController &hid) : ps3(ps3), xbox(xbox), hid(hid) {
   GenerateBuiltinProfiles();
+  curProfile = EEPROM.read(CURRENT_PROFILE_ADDR);
+  if (curProfile >= 6) {
+    curProfile = 0;
+  }
 };
 
 void USB2DB15::GenerateOutput() {
   uint8_t ddrc = 0; // getDDRC();
   uint8_t ddrd = 0; // getDDRD();
   uint8_t button = 0;
-  curProfile = EEPROM.read(CURRENT_PROFILE_ADDR);
 
   // Select the Controller and Generate DDRC and DDRD
   if (ps3.Connected()) { // PS3
@@ -73,11 +76,15 @@ void USB2DB15::GenerateOutput() {
   } else if (xbox.Connected()) { // XboxOne
     ddrc = GetDDRC(profiles[curProfile], xbox);
     ddrd = GetDDRD(profiles[curProfile], xbox);
+  } else if (hid.Connected()) { // Generic HID Controller
+    ddrc = GetDDRC(profiles[curProfile], hid);
+    ddrd = GetDDRD(profiles[curProfile], hid);
   }
 
   if (ddrc == prevDDRC && ddrd == prevDDRD) {
     return; // Nothing has changed
   }
+  Serial.println(curProfile, DEC);
   prevDDRC = ddrc;
   prevDDRD = ddrd;
 
@@ -88,6 +95,8 @@ void USB2DB15::GenerateOutput() {
       SetProfile(ps3, BUILT_IN_PROFILES);
     } else if (xbox.Connected()) { // XboxOne
       SetProfile(xbox, BUILT_IN_PROFILES);
+    } else if (hid.Connected()) { // Generic HID Controller
+      SetProfile(hid, BUILT_IN_PROFILES);
     }
     return;
   }

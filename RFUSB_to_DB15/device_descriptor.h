@@ -39,11 +39,11 @@
 #define BUTTON_2          11  // B, Triangle
 #define BUTTON_3          12  // C, R1
 #define BUTTON_4          13  // X, X
-#define BUTTON_5          15  // Y, Circle
-#define BUTTON_6          16  // Z, R2
-#define BUTTON_7          17  // L1
-#define BUTTON_8          18  // L2
-#define BUTTON_9          19  // R3
-#define BUTTON_10         20  // L3
+#define BUTTON_5          14  // Y, Circle
+#define BUTTON_6          15  // Z, R2
+#define BUTTON_7          16  // L1
+#define BUTTON_8          17  // L2
+#define BUTTON_9          18  // R3
+#define BUTTON_10         19  // L3
 
 #endif //USB2DB15_DEVICE_DESCRIPTOR_H
