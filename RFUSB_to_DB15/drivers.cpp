@@ -53,6 +53,7 @@ void setupController(uint16_t vid, uint16_t pid, HIDController *controller) {
         case PID_HORI_RAP_PS3:
         case PID_HORI_RAP_PREMIUM:
         case PID_HORI_RAP_V_PS3:
+        default:
           setupHoriRAP3(controller);
           break;
       }
@@ -75,6 +76,7 @@ void setupController(uint16_t vid, uint16_t pid, HIDController *controller) {
         case PID_SONY_PS4_JP:
         case PID_SONY_PS4_NA:
         case PID_SONY_PS4_ADAPTER:
+        default:
           setupPS4(controller);
           break;
       }
@@ -85,12 +87,12 @@ void setupController(uint16_t vid, uint16_t pid, HIDController *controller) {
       break;
 
     default:
-      Serial.println("Failed to find a driver for device. Using PS4 as fallback");
+      Serial.println("Failed to find a driver for device. Using RAP PS3 as fallback");
       Serial.print("VID: ");
       Serial.print(vid, HEX);
       Serial.print(" PID ");
       Serial.println(pid, HEX);
-      setupPS4(controller);
+      setupHoriRAP3(controller);
       break;
   }
 }
