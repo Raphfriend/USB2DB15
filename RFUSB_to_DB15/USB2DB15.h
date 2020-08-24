@@ -12,6 +12,7 @@
 #include "Profile.h"
 #include "PS3Controller.h"
 #include "XBoxOneController.h"
+#include "HIDController.h"
 
 // Output Constants
 /* DDRC */
@@ -40,13 +41,14 @@
 class USB2DB15 {
     PS3Controller &ps3;
     XBoxOneController &xbox;
+    HIDController &hid;
     Profile profiles[6];
     uint8_t curProfile = 0;
     uint8_t prevDDRC = 0;
     uint8_t prevDDRD = 0;
 
   public:
-    USB2DB15(PS3Controller &ps3, XBoxOneController &xbox);
+    USB2DB15(PS3Controller &ps3, XBoxOneController &xbox, HIDController &hid);
     void GenerateOutput();
 
   protected:
