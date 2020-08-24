@@ -1,5 +1,5 @@
 ## Known Compatible Controllers by Manufacturer
-This is a list of tested controllers. Please reach out to Raph_Friend if you have a controller not listed here and wish to be a tester.  You will need to test each beta version of the software for regressions
+This is a list of tested controllers. Please reach out to our Discord server if you have a controller not listed here and wish to be a tester.  You will need to test each beta version of the software for regressions
 
 ### 8BitDo
 - M30 Wired Controller
