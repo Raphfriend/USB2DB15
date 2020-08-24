@@ -112,7 +112,7 @@ void generateDPad(uint8_t index, HIDController *controller) {
   controller->ConfigButton(BUTTON_RIGHT, index, DPAD_MASK, DPAD_RIGHT);
   controller->ConfigButton(BUTTON_DOWN_RIGHT, index, DPAD_MASK, DPAD_DOWN_RIGHT);
   controller->ConfigButton(BUTTON_DOWN, index, DPAD_MASK, DPAD_DOWN);
-  controller->ConfigButton(BUTTON_DOWN_LEFT, DPAD_MASK, DPAD_DOWN_LEFT);
+  controller->ConfigButton(BUTTON_DOWN_LEFT, index, DPAD_MASK, DPAD_DOWN_LEFT);
   controller->ConfigButton(BUTTON_LEFT, index, DPAD_MASK, DPAD_LEFT);
   controller->ConfigButton(BUTTON_UP_LEFT, index, DPAD_MASK, DPAD_UP_LEFT);
 }
