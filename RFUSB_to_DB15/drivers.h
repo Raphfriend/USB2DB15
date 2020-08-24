@@ -18,6 +18,7 @@
 #define VID_BROOK               0x0C12 // Brook
 #define VID_BUFFALO             0x0583 // Buffalo
 #define VID_HORI                0x0F0D // HORI
+#define VID_MADCATZ             0x0738 // Mad Catz
 #define VID_RAZER               0x1532 // Razer
 #define VID_RETROBIT            0x0079 // Retrobit
 #define VID_SONY                0x054c // Sony
@@ -37,6 +38,7 @@
 #define PID_HORI_RAP_PREMIUM    0x0026 // HORI Real Arcade リアルアーケードPro.3 Premium VLX
 #define PID_HORI_RAP_V_PS3      0x008B // HORI RAP V HAYABUSA Controller(PS3)
 #define PID_HORI_RAP_V_PS4      0x008A // HORI RAP V HAYABUSA Controller(PS4)
+#define PID_MADCATZ_SF_PS3      0x8838 // Mad Catz Street Fighter IV Tournament Edition (PS3)
 #define PID_RAZER_PANTHERA      0x0401 // Razer Panthera
 #define PID_RETROBIT_SATURN     0x0011 // Retrobit Sega Saturn Wireless
 #define PID_SONY_PS4_JP         0x09CC // PS4 Controller JP region

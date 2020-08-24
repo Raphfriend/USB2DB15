@@ -58,6 +58,10 @@ void setupController(uint16_t vid, uint16_t pid, HIDController *controller) {
       }
       break;
 
+    case VID_MADCATZ:
+      if(pid == PID_MADCATZ_SF_PS3) setupHoriRAP3(controller);
+      break;
+
     case VID_RAZER:
       if(pid == PID_RAZER_PANTHERA) setupPS4(controller);
       break;
