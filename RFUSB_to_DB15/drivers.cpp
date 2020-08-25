@@ -146,10 +146,10 @@ void setup8BitDoM30(HIDController *controller) {
   controller->ConfigButton(BUTTON_START, 1, 0x08);
   controller->ConfigButton(BUTTON_1, 0, 0x08);
   controller->ConfigButton(BUTTON_2, 0, 0x10);
-  controller->ConfigButton(BUTTON_3, 0, 0x40);
+  controller->ConfigButton(BUTTON_3, 0, 0x80);
   controller->ConfigButton(BUTTON_4, 0, 0x01);
   controller->ConfigButton(BUTTON_5, 0, 0x02);
-  controller->ConfigButton(BUTTON_6, 0, 0x80);
+  controller->ConfigButton(BUTTON_6, 0, 0x40);
 }
 
 /**************************
