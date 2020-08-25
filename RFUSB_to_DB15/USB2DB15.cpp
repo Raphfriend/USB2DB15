@@ -3,6 +3,7 @@
 //
 
 #include "USB2DB15.h"
+
 /**
  * A debug function to print out which buttons are being press.
  * TODO allow this function to be stripped out of release build.
@@ -61,6 +62,7 @@ void debugOutput(uint8_t ddrc, uint8_t ddrd) {
   }
   Serial.println(" ");
 }
+
 /**
  * Constructor for the USB2DB15 class
  *

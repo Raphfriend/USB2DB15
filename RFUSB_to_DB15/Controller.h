@@ -6,6 +6,7 @@
 #define USB2DB15_CONTROLLER_H
 
 #include <stdint.h>
+
 /**
  * A Generic Controller interface.
  *

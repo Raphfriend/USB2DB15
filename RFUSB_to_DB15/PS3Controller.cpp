@@ -13,6 +13,7 @@
 PS3Controller::PS3Controller(PS3USB *p) {
   ps3usb = p;
 }
+
 /**
  * Gets the State(pressed or not) of a given button
  *

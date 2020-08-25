@@ -33,7 +33,6 @@
 #define MASK_BUTTON_9   0x0002
 #define MASK_BUTTON_10  0x0001
 
-
 /**
  * Stores information on how to tell if a button is pressed
  * A Mask of 0x00 signals that the button is not set for the

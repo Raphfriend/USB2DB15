@@ -60,6 +60,7 @@ bool XBoxOneController::GetButtonState(uint8_t button) {
   }
   return false;
 }
+
 /**
  * Checks if an Official XBoxOne controller is connected to the system
  *
