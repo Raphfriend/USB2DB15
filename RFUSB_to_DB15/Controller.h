@@ -7,6 +7,13 @@
 
 #include <stdint.h>
 
+/**
+ * A Generic Controller interface.
+ *
+ * This exists to abstract away the concept of a controller so that we
+ * can treat all the controllers the same regardless of if we are using
+ * the generic HID interface or a controller specific one
+ */
 class Controller {
 public:
   virtual bool GetButtonState(uint8_t button);

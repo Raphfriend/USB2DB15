@@ -37,7 +37,13 @@
 /* EEPROM Locations */
 #define CURRENT_PROFILE_ADDR 6
 
-
+/**
+ * USB To DB15
+ *
+ * Class which controls the mapping for input from USB controllers to
+ * the DB15 output. It contains support for Profiles as well as trapping
+ * combinations of inputs to allow control of the adapter.
+ */
 class USB2DB15 {
     PS3Controller &ps3;
     XBoxOneController &xbox;

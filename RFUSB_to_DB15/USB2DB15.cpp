@@ -4,6 +4,13 @@
 
 #include "USB2DB15.h"
 
+/**
+ * A debug function to print out which buttons are being press.
+ * TODO allow this function to be stripped out of release build.
+ *
+ * @param ddrc The value of DDRC
+ * @param ddrd The value of DDRD
+ */
 void debugOutput(uint8_t ddrc, uint8_t ddrd) {
   Serial.print("Output: ");
   if (ddrc & DDRC_UP) {
@@ -56,6 +63,16 @@ void debugOutput(uint8_t ddrc, uint8_t ddrd) {
   Serial.println(" ");
 }
 
+/**
+ * Constructor for the USB2DB15 class
+ *
+ * This class controls the mapping of a USB controller to the DB15 connector.
+ * Contains logic around profiles.
+ *
+ * @param ps3 The PS3 controller to use
+ * @param xbox The XBox controller to use
+ * @param hid  The HID controller to use
+ */
 USB2DB15::USB2DB15(PS3Controller &ps3, XBoxOneController &xbox, HIDController &hid) : ps3(ps3), xbox(xbox), hid(hid) {
   GenerateBuiltinProfiles();
   curProfile = EEPROM.read(CURRENT_PROFILE_ADDR);
@@ -64,9 +81,19 @@ USB2DB15::USB2DB15(PS3Controller &ps3, XBoxOneController &xbox, HIDController &h
   }
 };
 
+/**
+ * Outputs the keys pressed on the controller to the DB15 connector
+ *
+ * This function handles the reading of input from the controller and
+ * outputs it to the DB15 connector if it has changed. It also handles
+ * the control inputs for setting profiles.
+ *
+ * This function prioritizes the PS3 driver first, then the XBoxOne,
+ * and finally falls back to raw hid if neither are present.
+ */
 void USB2DB15::GenerateOutput() {
-  uint8_t ddrc = 0; // getDDRC();
-  uint8_t ddrd = 0; // getDDRD();
+  uint8_t ddrc = 0;
+  uint8_t ddrd = 0;
   uint8_t button = 0;
 
   // Select the Controller and Generate DDRC and DDRD
@@ -107,13 +134,25 @@ void USB2DB15::GenerateOutput() {
   debugOutput(ddrc, ddrd);
 }
 
+/**
+ * Generates the builtin Profiles
+ */
 void USB2DB15::GenerateBuiltinProfiles() {
+  // Profile 0 is the Default profile
   GenerateDefaultProfile(profiles[0]);
+  // Profile 1 is a Row Swap of the default profile
   GenerateRowSwapProfile(profiles[1], profiles[0]);
+  // Profile 2 is the Default profile but with L1 instead of R2
   GenerateSnesProfile(profiles[2], profiles[0]);
+  // Profile 3 is Profile 2 with the rows swapped
   GenerateRowSwapProfile(profiles[3], profiles[2]);
 }
 
+
+/**
+ * Creates a Default profile.
+ * @param profile The profile slot to store the profile in
+ */
 void USB2DB15::GenerateDefaultProfile(Profile &profile) {
   profile.SetButton(BUTTON_UP, PROFILE_BUTTON_UP);
   profile.SetButton(BUTTON_RIGHT, PROFILE_BUTTON_RIGHT);
@@ -129,6 +168,15 @@ void USB2DB15::GenerateDefaultProfile(Profile &profile) {
   profile.SetButton(BUTTON_6, PROFILE_BUTTON_6);
 }
 
+/**
+ * Copies the base profile into the profile and swaps the top and bottom rows
+ *
+ * It accomplishes this swap by swapping buttons 1 with 4, 2 with 5,
+ * and 3 with 6
+ *
+ * @param profile The profile slot to store the profile in
+ * @param base The profile slot to copy from
+ */
 void USB2DB15::GenerateRowSwapProfile(Profile &profile, Profile &base) {
   profile.Copy(base);
   profile.SwapButtons(PROFILE_BUTTON_1, PROFILE_BUTTON_4);
@@ -136,11 +184,31 @@ void USB2DB15::GenerateRowSwapProfile(Profile &profile, Profile &base) {
   profile.SwapButtons(PROFILE_BUTTON_3, PROFILE_BUTTON_6);
 }
 
+/**
+ * Copies the base profile into the profile and switches to SNES style
+ *
+ * It accomplishes this switch but changing button 6 to button 7
+ *
+ * @param profile The profile slot to store the profile in
+ * @param base The profile slot to copy from
+ */
 void USB2DB15::GenerateSnesProfile(Profile &profile, Profile &base) {
   profile.Copy(base);
   profile.SetButton(BUTTON_7, PROFILE_BUTTON_6);
 }
 
+/**
+ * Generates the DDRC Data from the buttons pressed on the controller
+ *
+ * Uses a profile to map the raw button input from the controller to the
+ * data pins in the DDRC register. Pin data masks are defined in USB2DB15.h
+ *
+ * Does not write to the DDRC resister directly.
+ *
+ * @param profile The profile to use for mapping the raw button input
+ * @param controller The controller to read the raw input from
+ * @return The value of DDRC that the raw input should produce
+ */
 uint8_t USB2DB15::GetDDRC(Profile &profile, Controller &controller) {
   uint8_t ddrc = 0;
 
@@ -171,6 +239,18 @@ uint8_t USB2DB15::GetDDRC(Profile &profile, Controller &controller) {
   return ddrc;
 }
 
+/**
+ * Generates the DDRD Data from the buttons pressed on the controller
+ *
+ * Uses a profile to map the raw button input from the controller to the
+ * data pins in the DDRD register. Pin data masks are defined in USB2DB15.h
+ *
+ * Does not write to the DDRD resister directly.
+ *
+ * @param profile The profile to use for mapping the raw button input
+ * @param controller The controller to read the raw input from
+ * @return The value of DDRD that the raw input should produce
+ */
 uint8_t USB2DB15::GetDDRD(Profile &profile, Controller &controller) {
   uint8_t ddrd = 0;
 
@@ -201,7 +281,15 @@ uint8_t USB2DB15::GetDDRD(Profile &profile, Controller &controller) {
   return ddrd;
 }
 
-// Gets the number of the lowest index button pressed
+/**
+ * Sets the current Profile
+ *
+ * Reads the controller input as mapped by the default profile and uses that
+ * to decide which profile to use.
+ *
+ * @param controller The controller to read from
+ * @param page The profile page to use. 0 for builtin, 1 user defined
+ */
 void USB2DB15::SetProfile(Controller &controller, uint8_t page) {
   if (controller.GetButtonState(profiles[0].bindings[PROFILE_BUTTON_1])) {
     Serial.print("Using Profile: ");

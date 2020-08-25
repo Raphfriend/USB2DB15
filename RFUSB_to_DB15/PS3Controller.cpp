@@ -5,10 +5,24 @@
 #include "PS3Controller.h"
 #include "device_descriptor.h"
 
+/**
+ * Create a new PS3Controller
+ *
+ * @param p Pointer to the PS3 Controller to Wrap
+ */
 PS3Controller::PS3Controller(PS3USB *p) {
   ps3usb = p;
 }
 
+/**
+ * Gets the State(pressed or not) of a given button
+ *
+ * This function uses the aliases provide by the Host Shield Library
+ * to determine if a given button is pressed on the controller
+ *
+ * @param button The button to check. Defined in "device_description.h"
+ * @return If the requested button is pressed
+ */
 bool PS3Controller::GetButtonState(uint8_t button) {
   switch(button) {
     case BUTTON_UP:
@@ -47,6 +61,17 @@ bool PS3Controller::GetButtonState(uint8_t button) {
   return false;
 }
 
+/**
+ * Checks if an Official PS3 controller is connected to the system
+ *
+ * Checks if a PS3 controller is connected to the system. The Vid and Pid
+ * of PS3 Controllers is defined in the Host Shield Library.  Any
+ * Controllers not defined as PS3 controllers in the library will be
+ * treated as generic HID controllers. See the RAP3 PS3 driver for
+ * HID support
+ *
+ * @return true if an PS3 controller is connected to the system
+ */
 bool PS3Controller::Connected() {
   return ps3usb->PS3Connected;
 }

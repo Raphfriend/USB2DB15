@@ -8,6 +8,12 @@
 #include <PS3USB.h>
 #include "Controller.h"
 
+/**
+ * Wrapper for the USB Host Shield PS3 Controller
+ *
+ * This class wraps the USB Host Shield PS3 controller. It implements
+ * the Controller Interface that the USB2DB15 class expects.
+ */
 class PS3Controller : public Controller {
   PS3USB *ps3usb;
 public:
