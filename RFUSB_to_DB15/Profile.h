@@ -7,9 +7,10 @@
 
 #include <stdint.h>
 
+// Max number of buttons in a profile
 #define NUM_BUTTON_BINDINGS 12
 
-// Profile Buttons
+// Profile Button Ids
 #define PROFILE_BUTTON_UP       0
 #define PROFILE_BUTTON_RIGHT    1
 #define PROFILE_BUTTON_DOWN     2
@@ -23,6 +24,13 @@
 #define PROFILE_BUTTON_5        10
 #define PROFILE_BUTTON_6        11
 
+/**
+ * Holds the bindings for a profile.
+ *
+ * Maps Generic Profile buttons to controller specific buttons
+ *
+ * Controller Button Ids are defined in "device_description.h"
+ */
 struct Profile {
   uint8_t bindings[NUM_BUTTON_BINDINGS];
 
