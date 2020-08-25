@@ -5,10 +5,24 @@
 #include "XBoxOneController.h"
 #include "device_descriptor.h"
 
+/**
+ * Create a new XBoxOneController
+ *
+ * @param p Pointer to the XBoxOne Controller to Wrap
+ */
 XBoxOneController::XBoxOneController(XBOXONE *p) {
   xbox = p;
 }
 
+/**
+ * Gets the State(pressed or not) of a given button
+ *
+ * This function uses the aliases provide by the Host Shield Library
+ * to determine if a given button is pressed on the controller
+ *
+ * @param button The button to check. Defined in "device_description.h"
+ * @return If the requested button is pressed
+ */
 bool XBoxOneController::GetButtonState(uint8_t button) {
   switch(button) {
     case BUTTON_UP:
@@ -46,7 +60,16 @@ bool XBoxOneController::GetButtonState(uint8_t button) {
   }
   return false;
 }
-
+/**
+ * Checks if an Official XBoxOne controller is connected to the system
+ *
+ * Checks if a XBoxOne controller is connected to the system. The Vid and Pid
+ * of XboxOne Controllers is defined in the Host Shield Library.  Any
+ * Controllers not defined as XBoxOne controllers in the library will be
+ * treated as generic HID controllers
+ *
+ * @return true if an XBoxOne controller is connected to the system
+ */
 bool XBoxOneController::Connected() {
   if (xbox->XboxOneConnected) {
     xbox->setRumbleOff();

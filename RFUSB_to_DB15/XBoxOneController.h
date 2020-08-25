@@ -8,6 +8,12 @@
 #include <XBOXONE.h>
 #include "Controller.h"
 
+/**
+ * Wrapper for the USB Host Shield XBoxOne Controller
+ *
+ * This class wraps the USB Host Shield XBoxOne controller. It implements
+ * the Controller Interface that the USB2DB15 class expects.
+ */
 class XBoxOneController : public Controller {
   XBOXONE *xbox;
 
