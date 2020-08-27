@@ -17520,7 +17520,7 @@ You are welcome to use this library for commercial purposes. For attribution, we
 </class>
 </classes>
 <parts>
-<part name="ARDUINO-ATMEGA328P" library="Arduino" deviceset="ARDUINO-PRO-MINI-*" device="" technology="5.0V"/>
+<part name="ARDUINO-MINIPRO" library="Arduino" deviceset="ARDUINO-PRO-MINI-*" device="" technology="5.0V"/>
 <part name="DB15OUT" library="dbconnector" deviceset="DB15M/90" device="" value="0"/>
 <part name="3.3V" library="burr-brown" library_urn="urn:adsk.eagle:library:111" deviceset="REG1117" device="" package3d_urn="urn:adsk.eagle:package:4940/1"/>
 <part name="SUPPLY3" library="supply2" library_urn="urn:adsk.eagle:library:372" deviceset="GND" device=""/>
@@ -17558,21 +17558,17 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <sheets>
 <sheet>
 <plain>
-<text x="45.212" y="-6.35" size="1.524" layer="113" distance="67" align="top-left">IF USING A 5V ARDUINO, FEED 
-RAW (VCCIN) PIN WITH 3.3V 
-FROM THE REGULATOR (REG1117).</text>
-<rectangle x1="42.418" y1="-16.002" x2="83.058" y2="-3.302" layer="203"/>
-<text x="45.72" y="-17.018" size="1.524" layer="113" distance="67" align="top-left">THE 5V REGULATOR (IC1) WILL 
+<text x="-25.4" y="-17.018" size="1.524" layer="113" distance="67" align="top-left">THE 5V REGULATOR (IC1) WILL 
 PROTECT THE VCC LINE FROM 
 A POSSIBLE BAD PSU VOLTAGE, 
 IF YOU DON'T NEED, JUST JUMPER 
 SJ1.</text>
-<rectangle x1="42.418" y1="-29.21" x2="83.058" y2="-16.51" layer="203"/>
+<rectangle x1="-28.702" y1="-29.21" x2="11.938" y2="-16.51" layer="203"/>
 <text x="-46.482" y="50.546" size="1.524" layer="113" distance="67" align="top-left">FEED USB HOST SHIELD MINI VBUS WITH JP2</text>
 <rectangle x1="-49.276" y1="45.72" x2="4.064" y2="53.34" layer="203"/>
 </plain>
 <instances>
-<instance part="ARDUINO-ATMEGA328P" gate="G$1" x="-104.14" y="71.12" smashed="yes" rot="R180">
+<instance part="ARDUINO-MINIPRO" gate="G$1" x="-104.14" y="71.12" smashed="yes" rot="R180">
 <attribute name="NAME" x="-117.856" y="102.362" size="1.778" layer="95"/>
 </instance>
 <instance part="DB15OUT" gate="G$1" x="66.802" y="86.36" smashed="yes" rot="R180">
@@ -17662,7 +17658,7 @@ SJ1.</text>
 </instance>
 <instance part="C5" gate="G$1" x="9.398" y="77.47" smashed="yes" rot="R90">
 <attribute name="NAME" x="8.763" y="78.486" size="1.778" layer="95" rot="R90"/>
-<attribute name="VALUE" x="11.684" y="75.565" size="1.778" layer="96"/>
+<attribute name="VALUE" x="11.684" y="80.645" size="1.778" layer="96"/>
 </instance>
 <instance part="LOGO1" gate="G$1" x="-142.24" y="-20.32" smashed="yes"/>
 <instance part="S1" gate="G$1" x="-104.14" y="-2.54" smashed="yes">
@@ -17691,7 +17687,7 @@ SJ1.</text>
 <label x="79.502" y="109.22" size="1.778" layer="95" rot="R90"/>
 </segment>
 <segment>
-<pinref part="ARDUINO-ATMEGA328P" gate="G$1" pin="D2"/>
+<pinref part="ARDUINO-MINIPRO" gate="G$1" pin="D2"/>
 <wire x1="-86.36" y1="68.58" x2="-68.58" y2="68.58" width="0.1524" layer="91"/>
 <label x="-68.58" y="68.58" size="1.778" layer="95"/>
 </segment>
@@ -17703,7 +17699,7 @@ SJ1.</text>
 <label x="74.422" y="109.22" size="1.778" layer="95" rot="R90"/>
 </segment>
 <segment>
-<pinref part="ARDUINO-ATMEGA328P" gate="G$1" pin="D3"/>
+<pinref part="ARDUINO-MINIPRO" gate="G$1" pin="D3"/>
 <wire x1="-86.36" y1="71.12" x2="-68.58" y2="71.12" width="0.1524" layer="91"/>
 <label x="-68.58" y="71.12" size="1.778" layer="95"/>
 </segment>
@@ -17715,7 +17711,7 @@ SJ1.</text>
 <label x="69.342" y="109.22" size="1.778" layer="95" rot="R90"/>
 </segment>
 <segment>
-<pinref part="ARDUINO-ATMEGA328P" gate="G$1" pin="D4"/>
+<pinref part="ARDUINO-MINIPRO" gate="G$1" pin="D4"/>
 <wire x1="-86.36" y1="73.66" x2="-68.58" y2="73.66" width="0.1524" layer="91"/>
 <label x="-68.58" y="73.66" size="1.778" layer="95"/>
 </segment>
@@ -17727,7 +17723,7 @@ SJ1.</text>
 <label x="82.042" y="66.04" size="1.778" layer="95" rot="R90"/>
 </segment>
 <segment>
-<pinref part="ARDUINO-ATMEGA328P" gate="G$1" pin="A3"/>
+<pinref part="ARDUINO-MINIPRO" gate="G$1" pin="A3"/>
 <wire x1="-121.92" y1="68.58" x2="-139.7" y2="68.58" width="0.1524" layer="91"/>
 <label x="-142.24" y="68.58" size="1.778" layer="95"/>
 </segment>
@@ -17740,7 +17736,7 @@ SJ1.</text>
 </segment>
 <segment>
 <wire x1="-139.7" y1="71.12" x2="-121.92" y2="71.12" width="0.1524" layer="91"/>
-<pinref part="ARDUINO-ATMEGA328P" gate="G$1" pin="A2"/>
+<pinref part="ARDUINO-MINIPRO" gate="G$1" pin="A2"/>
 <label x="-144.78" y="71.12" size="1.778" layer="95"/>
 </segment>
 </net>
@@ -17752,7 +17748,7 @@ SJ1.</text>
 </segment>
 <segment>
 <wire x1="-139.7" y1="73.66" x2="-121.92" y2="73.66" width="0.1524" layer="91"/>
-<pinref part="ARDUINO-ATMEGA328P" gate="G$1" pin="A1"/>
+<pinref part="ARDUINO-MINIPRO" gate="G$1" pin="A1"/>
 <label x="-144.78" y="73.66" size="1.778" layer="95"/>
 </segment>
 </net>
@@ -17764,7 +17760,7 @@ SJ1.</text>
 </segment>
 <segment>
 <wire x1="-139.7" y1="76.2" x2="-121.92" y2="76.2" width="0.1524" layer="91"/>
-<pinref part="ARDUINO-ATMEGA328P" gate="G$1" pin="A0"/>
+<pinref part="ARDUINO-MINIPRO" gate="G$1" pin="A0"/>
 <label x="-144.78" y="76.2" size="1.778" layer="95"/>
 </segment>
 </net>
@@ -17775,19 +17771,19 @@ SJ1.</text>
 <label x="61.722" y="63.5" size="1.778" layer="95" rot="R90"/>
 </segment>
 <segment>
-<pinref part="ARDUINO-ATMEGA328P" gate="G$1" pin="A5"/>
+<pinref part="ARDUINO-MINIPRO" gate="G$1" pin="A5"/>
 <wire x1="-121.92" y1="50.8" x2="-142.24" y2="50.8" width="0.1524" layer="91"/>
 <label x="-149.86" y="50.8" size="1.778" layer="95"/>
 </segment>
 <segment>
-<pinref part="ARDUINO-ATMEGA328P" gate="G$1" pin="GND.3"/>
+<pinref part="ARDUINO-MINIPRO" gate="G$1" pin="GND.3"/>
 <wire x1="-121.92" y1="96.52" x2="-134.62" y2="96.52" width="0.1524" layer="91"/>
 <label x="-134.62" y="96.52" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="BUT4" class="0">
 <segment>
-<pinref part="ARDUINO-ATMEGA328P" gate="G$1" pin="D5"/>
+<pinref part="ARDUINO-MINIPRO" gate="G$1" pin="D5"/>
 <wire x1="-86.36" y1="76.2" x2="-68.58" y2="76.2" width="0.1524" layer="91"/>
 <label x="-68.58" y="76.2" size="1.778" layer="95"/>
 </segment>
@@ -17804,14 +17800,14 @@ SJ1.</text>
 <label x="59.182" y="109.22" size="1.778" layer="95" rot="R90"/>
 </segment>
 <segment>
-<pinref part="ARDUINO-ATMEGA328P" gate="G$1" pin="D6"/>
+<pinref part="ARDUINO-MINIPRO" gate="G$1" pin="D6"/>
 <wire x1="-86.36" y1="78.74" x2="-68.58" y2="78.74" width="0.1524" layer="91"/>
 <label x="-68.58" y="78.74" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="BUT5" class="0">
 <segment>
-<pinref part="ARDUINO-ATMEGA328P" gate="G$1" pin="D7"/>
+<pinref part="ARDUINO-MINIPRO" gate="G$1" pin="D7"/>
 <wire x1="-86.36" y1="81.28" x2="-68.58" y2="81.28" width="0.1524" layer="91"/>
 <label x="-68.58" y="81.28" size="1.778" layer="95"/>
 </segment>
@@ -17832,14 +17828,14 @@ SJ1.</text>
 <junction x="99.06" y="50.8"/>
 </segment>
 <segment>
-<pinref part="ARDUINO-ATMEGA328P" gate="G$1" pin="VCC"/>
+<pinref part="ARDUINO-MINIPRO" gate="G$1" pin="VCC"/>
 <wire x1="-121.92" y1="66.04" x2="-139.7" y2="66.04" width="0.1524" layer="91"/>
 <label x="-140.208" y="66.04" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="BUT6" class="0">
 <segment>
-<pinref part="ARDUINO-ATMEGA328P" gate="G$1" pin="A4"/>
+<pinref part="ARDUINO-MINIPRO" gate="G$1" pin="A4"/>
 <wire x1="-121.92" y1="53.34" x2="-142.24" y2="53.34" width="0.1524" layer="91"/>
 <label x="-149.86" y="53.34" size="1.778" layer="95"/>
 </segment>
@@ -17879,17 +17875,17 @@ SJ1.</text>
 <label x="-147.066" y="-37.592" size="1.778" layer="95" rot="R180"/>
 </segment>
 <segment>
-<pinref part="ARDUINO-ATMEGA328P" gate="G$1" pin="P_GND"/>
+<pinref part="ARDUINO-MINIPRO" gate="G$1" pin="P_GND"/>
 <wire x1="-109.22" y1="35.56" x2="-109.22" y2="27.94" width="0.1524" layer="91"/>
 <label x="-109.22" y="22.86" size="1.778" layer="95" rot="R90"/>
 </segment>
 <segment>
-<pinref part="ARDUINO-ATMEGA328P" gate="G$1" pin="GND.1"/>
+<pinref part="ARDUINO-MINIPRO" gate="G$1" pin="GND.1"/>
 <wire x1="-86.36" y1="66.04" x2="-68.58" y2="66.04" width="0.1524" layer="91"/>
 <label x="-68.58" y="66.04" size="1.778" layer="95"/>
 </segment>
 <segment>
-<pinref part="ARDUINO-ATMEGA328P" gate="G$1" pin="GND.2"/>
+<pinref part="ARDUINO-MINIPRO" gate="G$1" pin="GND.2"/>
 <wire x1="-121.92" y1="60.96" x2="-142.24" y2="60.96" width="0.1524" layer="91"/>
 <label x="-147.32" y="60.96" size="1.778" layer="95"/>
 </segment>
@@ -17968,12 +17964,12 @@ SJ1.</text>
 <segment>
 <wire x1="-96.52" y1="35.56" x2="-96.52" y2="27.94" width="0.1524" layer="91"/>
 <label x="-97.028" y="27.94" size="1.778" layer="95" rot="R270"/>
-<pinref part="ARDUINO-ATMEGA328P" gate="G$1" pin="P_DTR"/>
+<pinref part="ARDUINO-MINIPRO" gate="G$1" pin="P_DTR"/>
 </segment>
 </net>
 <net name="TX" class="0">
 <segment>
-<pinref part="ARDUINO-ATMEGA328P" gate="G$1" pin="P_TXD"/>
+<pinref part="ARDUINO-MINIPRO" gate="G$1" pin="P_TXD"/>
 <wire x1="-99.06" y1="35.56" x2="-99.06" y2="27.94" width="0.1524" layer="91"/>
 <label x="-98.298" y="24.892" size="1.778" layer="95" rot="R90"/>
 </segment>
@@ -17985,7 +17981,7 @@ SJ1.</text>
 </net>
 <net name="RX" class="0">
 <segment>
-<pinref part="ARDUINO-ATMEGA328P" gate="G$1" pin="P_RXD"/>
+<pinref part="ARDUINO-MINIPRO" gate="G$1" pin="P_RXD"/>
 <wire x1="-101.6" y1="35.56" x2="-101.6" y2="27.94" width="0.1524" layer="91"/>
 <label x="-100.584" y="24.638" size="1.778" layer="95" rot="R90"/>
 </segment>
@@ -17997,7 +17993,7 @@ SJ1.</text>
 </net>
 <net name="RESET" class="0">
 <segment>
-<pinref part="ARDUINO-ATMEGA328P" gate="G$1" pin="RST.1"/>
+<pinref part="ARDUINO-MINIPRO" gate="G$1" pin="RST.1"/>
 <wire x1="-86.36" y1="63.5" x2="-68.58" y2="63.5" width="0.1524" layer="91"/>
 <label x="-68.58" y="63.5" size="1.778" layer="95"/>
 </segment>
@@ -18014,7 +18010,7 @@ SJ1.</text>
 </net>
 <net name="SCK" class="0">
 <segment>
-<pinref part="ARDUINO-ATMEGA328P" gate="G$1" pin="D13"/>
+<pinref part="ARDUINO-MINIPRO" gate="G$1" pin="D13"/>
 <wire x1="-121.92" y1="78.74" x2="-127" y2="78.74" width="0.1524" layer="91"/>
 <label x="-132.08" y="78.74" size="1.778" layer="95"/>
 </segment>
@@ -18027,7 +18023,7 @@ SJ1.</text>
 <net name="MISO" class="0">
 <segment>
 <wire x1="-121.92" y1="81.28" x2="-127" y2="81.28" width="0.1524" layer="91"/>
-<pinref part="ARDUINO-ATMEGA328P" gate="G$1" pin="D12"/>
+<pinref part="ARDUINO-MINIPRO" gate="G$1" pin="D12"/>
 <label x="-132.08" y="81.28" size="1.778" layer="95"/>
 </segment>
 <segment>
@@ -18039,7 +18035,7 @@ SJ1.</text>
 <net name="MOSI" class="0">
 <segment>
 <wire x1="-121.92" y1="83.82" x2="-127" y2="83.82" width="0.1524" layer="91"/>
-<pinref part="ARDUINO-ATMEGA328P" gate="G$1" pin="D11"/>
+<pinref part="ARDUINO-MINIPRO" gate="G$1" pin="D11"/>
 <label x="-132.08" y="83.82" size="1.778" layer="95"/>
 </segment>
 <segment>
@@ -18130,7 +18126,7 @@ SJ1.</text>
 </net>
 <net name="LED" class="0">
 <segment>
-<pinref part="ARDUINO-ATMEGA328P" gate="G$1" pin="D10"/>
+<pinref part="ARDUINO-MINIPRO" gate="G$1" pin="D10"/>
 <wire x1="-121.92" y1="86.36" x2="-134.62" y2="86.36" width="0.1524" layer="91"/>
 <label x="-134.62" y="86.36" size="1.778" layer="95"/>
 </segment>
