@@ -214,6 +214,15 @@ uint8_t USB2DB15::GetDDRD(Controller &controller) {
   return ddrd;
 }
 
+/**
+ * Handles Input in the Normal Mode Context
+ *
+ * This mode will check for profile change commands and update the DB15 pins
+ *
+ * @param ddrc the data to send to DDRC
+ * @param ddrd the data to send to DDRD
+ * @param controller The controller pull raw input from
+ */
 void USB2DB15::HandleNormalMode(uint8_t ddrc, uint8_t ddrd, Controller &controller) {
   if (ddrc == prevDDRC && ddrd == prevDDRD) return;
   // Check Special Button Combinations
@@ -229,6 +238,15 @@ void USB2DB15::HandleNormalMode(uint8_t ddrc, uint8_t ddrd, Controller &controll
   debugOutput(ddrc, ddrd);
 }
 
+/**
+ * Handles Inpute in the Profile Rebinding Context
+ *
+ * Handles setting up User Defined Profiles.
+ *
+ * @param ddrc the data to send to DDRC
+ * @param ddrd the data to send to DDRD
+ * @param controller The controller pull raw input from
+ */
 void USB2DB15::HandleProfileBindMode(uint8_t ddrc, uint8_t ddrd, Controller &controller) {
   // End Mode if SELECT/COIN is released
   if(!(ddrd & DDRD_COIN)) {
