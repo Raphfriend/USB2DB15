@@ -15,6 +15,62 @@ bool HIDController::Connected() {
 }
 
 /**
+ * Gets if the button has been clicked since the last check
+ *
+ * This function checks the buttonState variable to see if the bit
+ * corresponding to the button is set to true. Then checked lastButtonState
+ * to make sure it wasn't previously pressed.
+ *
+ * @param button The button to check. Defined in "device_description.h"
+ * @return If the requested button is pressed
+ */
+bool HIDController::GetButtonClick(uint8_t button) {
+  switch (button) {
+    case BUTTON_UP :
+      return (buttonState & MASK_UP) && !(lastButtonState & MASK_UP);
+    case BUTTON_DOWN :
+      return (buttonState & MASK_DOWN) && !(lastButtonState & MASK_DOWN);
+    case BUTTON_RIGHT :
+      return (buttonState & MASK_RIGHT) && !(lastButtonState & MASK_RIGHT);
+    case BUTTON_LEFT :
+      return (buttonState & MASK_LEFT) && !(lastButtonState & MASK_LEFT);
+    case BUTTON_UP_RIGHT :
+      return (buttonState & MASK_UP_RIGHT) && !(lastButtonState & MASK_UP_RIGHT);
+    case BUTTON_DOWN_RIGHT :
+      return (buttonState & MASK_DOWN_RIGHT) && !(lastButtonState & MASK_DOWN_RIGHT);
+    case BUTTON_DOWN_LEFT :
+      return (buttonState & MASK_DOWN_LEFT) && !(lastButtonState & MASK_DOWN_LEFT);
+    case BUTTON_UP_LEFT :
+      return (buttonState & MASK_UP_LEFT) && !(lastButtonState & MASK_UP_LEFT);
+    case BUTTON_COIN :
+      return (buttonState & MASK_COIN) && !(lastButtonState & MASK_COIN);
+    case BUTTON_START :
+      return (buttonState & MASK_START) && !(lastButtonState & MASK_START);
+    case BUTTON_1 :
+      return (buttonState & MASK_BUTTON_1) && !(lastButtonState & MASK_BUTTON_1);
+    case BUTTON_2 :
+      return (buttonState & MASK_BUTTON_2) && !(lastButtonState & MASK_BUTTON_2);
+    case BUTTON_3 :
+      return (buttonState & MASK_BUTTON_3) && !(lastButtonState & MASK_BUTTON_3);
+    case BUTTON_4 :
+      return (buttonState & MASK_BUTTON_4) && !(lastButtonState & MASK_BUTTON_4);
+    case BUTTON_5 :
+      return (buttonState & MASK_BUTTON_5) && !(lastButtonState & MASK_BUTTON_5);
+    case BUTTON_6 :
+      return (buttonState & MASK_BUTTON_6) && !(lastButtonState & MASK_BUTTON_6);
+    case BUTTON_7 :
+      return (buttonState & MASK_BUTTON_7) && !(lastButtonState & MASK_BUTTON_7);
+    case BUTTON_8 :
+      return (buttonState & MASK_BUTTON_8) && !(lastButtonState & MASK_BUTTON_8);
+    case BUTTON_9 :
+      return (buttonState & MASK_BUTTON_9) && !(lastButtonState & MASK_BUTTON_9);
+    case BUTTON_10 :
+      return (buttonState & MASK_BUTTON_10) && !(lastButtonState & MASK_BUTTON_10);
+  }
+  return 0;
+}
+
+/**
  * Gets the State(pressed or not) of a given button
  *
  * This function checks the buttonState variable to see if the bit
@@ -141,8 +197,10 @@ uint8_t HIDController::OnInitSuccessful() {
  * @param buf The buffer
  */
 void HIDController::ParseHIDData(USBHID *hid, bool is_rpt_id, uint8_t len, uint8_t *buf) {
-  buttonState = 0;
   uint8_t value = 0;
+
+  lastButtonState = buttonState;
+  buttonState = 0;
 
   // For each button shift left then append the button state
   // UP is the left most bit, BUTTON_10 is right most

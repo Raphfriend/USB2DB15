@@ -24,7 +24,7 @@ XBoxOneController::XBoxOneController(XBOXONE *p) {
  * @param button The button to check. Defined in "device_description.h"
  * @return If the button has been clicked
  */
-bool GetButtonClick(uint8_t button) {
+bool XBoxOneController::GetButtonClick(uint8_t button) {
   switch(button) {
     case BUTTON_UP:
       return xbox->getButtonClick(UP);
