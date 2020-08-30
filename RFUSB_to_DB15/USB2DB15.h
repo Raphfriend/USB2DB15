@@ -1,7 +1,6 @@
 //
 // Created by Kitsune on 8/21/2020.
 //
-#include <EEPROM.h>
 #ifndef USB2DB15_USB2DB15_H
 #define USB2DB15_USB2DB15_H
 
@@ -9,6 +8,7 @@
 
 #include "controller.h"
 #include "device_descriptor.h"
+#include "EepromManager.h"
 #include "Profile.h"
 #include "PS3Controller.h"
 #include "XBoxOneController.h"
@@ -48,23 +48,19 @@ class USB2DB15 {
     PS3Controller &ps3;
     XBoxOneController &xbox;
     HIDController &hid;
-    Profile profiles[6];
-    uint8_t curProfile = 0;
+    EepromManager &eeprom;
+    Profile profile;
     uint8_t prevDDRC = 0;
     uint8_t prevDDRD = 0;
 
   public:
-    USB2DB15(PS3Controller &ps3, XBoxOneController &xbox, HIDController &hid);
+    USB2DB15(PS3Controller &ps3, XBoxOneController &xbox, HIDController &hid, EepromManager &eeprom);
     void GenerateOutput();
 
   protected:
-    void GenerateBuiltinProfiles();
-    void GenerateDefaultProfile(Profile &profile);
-    void GenerateRowSwapProfile(Profile &profile, Profile &base);
-    void GenerateSnesProfile(Profile &profile, Profile &base);
-    uint8_t GetDDRC(Profile &profile, Controller &controller);
-    uint8_t GetDDRD(Profile &profile, Controller &controller);
-    void SetProfile(Controller &controller, uint8_t page);
+    uint8_t GetDDRC(Controller &controller);
+    uint8_t GetDDRD(Controller &controller);
+    void SetProfile(Controller &controller);
 };
 
 

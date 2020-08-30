@@ -73,12 +73,10 @@ void debugOutput(uint8_t ddrc, uint8_t ddrd) {
  * @param xbox The XBox controller to use
  * @param hid  The HID controller to use
  */
-USB2DB15::USB2DB15(PS3Controller &ps3, XBoxOneController &xbox, HIDController &hid) : ps3(ps3), xbox(xbox), hid(hid) {
-  GenerateBuiltinProfiles();
-  curProfile = EEPROM.read(CURRENT_PROFILE_ADDR);
-  if (curProfile >= 6) {
-    curProfile = 0;
-  }
+USB2DB15::USB2DB15(PS3Controller &ps3, XBoxOneController &xbox, HIDController &hid, EepromManager &eeprom) :
+  ps3(ps3), xbox(xbox), hid(hid), eeprom(eeprom) {
+  uint8_t cur_profile = eeprom.LoadCurrentProfile();
+  eeprom.LoadProfile(cur_profile, profile);
 };
 
 /**
@@ -98,20 +96,20 @@ void USB2DB15::GenerateOutput() {
 
   // Select the Controller and Generate DDRC and DDRD
   if (ps3.Connected()) { // PS3
-    ddrc = GetDDRC(profiles[curProfile], ps3);
-    ddrd = GetDDRD(profiles[curProfile], ps3);
+    ddrc = GetDDRC(ps3);
+    ddrd = GetDDRD(ps3);
   } else if (xbox.Connected()) { // XboxOne
-    ddrc = GetDDRC(profiles[curProfile], xbox);
-    ddrd = GetDDRD(profiles[curProfile], xbox);
+    ddrc = GetDDRC(xbox);
+    ddrd = GetDDRD(xbox);
   } else if (hid.Connected()) { // Generic HID Controller
-    ddrc = GetDDRC(profiles[curProfile], hid);
-    ddrd = GetDDRD(profiles[curProfile], hid);
+    ddrc = GetDDRC(hid);
+    ddrd = GetDDRD(hid);
   }
 
   if (ddrc == prevDDRC && ddrd == prevDDRD) {
     return; // Nothing has changed
   }
-  Serial.println(curProfile, DEC);
+  
   prevDDRC = ddrc;
   prevDDRD = ddrd;
 
@@ -119,11 +117,11 @@ void USB2DB15::GenerateOutput() {
   // Change Profile
   if ((ddrd & DDRD_COIN) && (ddrc & DDRC_UP)) {
     if (ps3.Connected()) { // PS3
-      SetProfile(ps3, BUILT_IN_PROFILES);
+      SetProfile(ps3);
     } else if (xbox.Connected()) { // XboxOne
-      SetProfile(xbox, BUILT_IN_PROFILES);
+      SetProfile(xbox);
     } else if (hid.Connected()) { // Generic HID Controller
-      SetProfile(hid, BUILT_IN_PROFILES);
+      SetProfile(hid);
     }
     return;
   }
@@ -132,69 +130,6 @@ void USB2DB15::GenerateOutput() {
   DDRD = ddrd;
 
   debugOutput(ddrc, ddrd);
-}
-
-/**
- * Generates the builtin Profiles
- */
-void USB2DB15::GenerateBuiltinProfiles() {
-  // Profile 0 is the Default profile
-  GenerateDefaultProfile(profiles[0]);
-  // Profile 1 is a Row Swap of the default profile
-  GenerateRowSwapProfile(profiles[1], profiles[0]);
-  // Profile 2 is the Default profile but with L1 instead of R2
-  GenerateSnesProfile(profiles[2], profiles[0]);
-  // Profile 3 is Profile 2 with the rows swapped
-  GenerateRowSwapProfile(profiles[3], profiles[2]);
-}
-
-
-/**
- * Creates a Default profile.
- * @param profile The profile slot to store the profile in
- */
-void USB2DB15::GenerateDefaultProfile(Profile &profile) {
-  profile.SetButton(BUTTON_UP, PROFILE_BUTTON_UP);
-  profile.SetButton(BUTTON_RIGHT, PROFILE_BUTTON_RIGHT);
-  profile.SetButton(BUTTON_DOWN, PROFILE_BUTTON_DOWN);
-  profile.SetButton(BUTTON_LEFT, PROFILE_BUTTON_LEFT);
-  profile.SetButton(BUTTON_START, PROFILE_BUTTON_START);
-  profile.SetButton(BUTTON_COIN, PROFILE_BUTTON_COIN);
-  profile.SetButton(BUTTON_1, PROFILE_BUTTON_1);
-  profile.SetButton(BUTTON_2, PROFILE_BUTTON_2);
-  profile.SetButton(BUTTON_3, PROFILE_BUTTON_3);
-  profile.SetButton(BUTTON_4, PROFILE_BUTTON_4);
-  profile.SetButton(BUTTON_5, PROFILE_BUTTON_5);
-  profile.SetButton(BUTTON_6, PROFILE_BUTTON_6);
-}
-
-/**
- * Copies the base profile into the profile and swaps the top and bottom rows
- *
- * It accomplishes this swap by swapping buttons 1 with 4, 2 with 5,
- * and 3 with 6
- *
- * @param profile The profile slot to store the profile in
- * @param base The profile slot to copy from
- */
-void USB2DB15::GenerateRowSwapProfile(Profile &profile, Profile &base) {
-  profile.Copy(base);
-  profile.SwapButtons(PROFILE_BUTTON_1, PROFILE_BUTTON_4);
-  profile.SwapButtons(PROFILE_BUTTON_2, PROFILE_BUTTON_5);
-  profile.SwapButtons(PROFILE_BUTTON_3, PROFILE_BUTTON_6);
-}
-
-/**
- * Copies the base profile into the profile and switches to SNES style
- *
- * It accomplishes this switch but changing button 6 to button 7
- *
- * @param profile The profile slot to store the profile in
- * @param base The profile slot to copy from
- */
-void USB2DB15::GenerateSnesProfile(Profile &profile, Profile &base) {
-  profile.Copy(base);
-  profile.SetButton(BUTTON_7, PROFILE_BUTTON_6);
 }
 
 /**
@@ -209,7 +144,7 @@ void USB2DB15::GenerateSnesProfile(Profile &profile, Profile &base) {
  * @param controller The controller to read the raw input from
  * @return The value of DDRC that the raw input should produce
  */
-uint8_t USB2DB15::GetDDRC(Profile &profile, Controller &controller) {
+uint8_t USB2DB15::GetDDRC(Controller &controller) {
   uint8_t ddrc = 0;
 
   if (controller.GetButtonState(profile.bindings[PROFILE_BUTTON_UP])) {
@@ -251,7 +186,7 @@ uint8_t USB2DB15::GetDDRC(Profile &profile, Controller &controller) {
  * @param controller The controller to read the raw input from
  * @return The value of DDRD that the raw input should produce
  */
-uint8_t USB2DB15::GetDDRD(Profile &profile, Controller &controller) {
+uint8_t USB2DB15::GetDDRD(Controller &controller) {
   uint8_t ddrd = 0;
 
   if (controller.GetButtonState(profile.bindings[PROFILE_BUTTON_RIGHT])) {
@@ -288,36 +223,17 @@ uint8_t USB2DB15::GetDDRD(Profile &profile, Controller &controller) {
  * to decide which profile to use.
  *
  * @param controller The controller to read from
- * @param page The profile page to use. 0 for builtin, 1 user defined
  */
-void USB2DB15::SetProfile(Controller &controller, uint8_t page) {
-  if (controller.GetButtonState(profiles[0].bindings[PROFILE_BUTTON_1])) {
-    Serial.print("Using Profile: ");
-    Serial.println((0 + page * 6));
-    curProfile = 0 + page * 6;
-    EEPROM.update(CURRENT_PROFILE_ADDR, curProfile);
+void USB2DB15::SetProfile(Controller &controller) {
+  // For each numbered button check if it is pushed
+  // If it is use that profile and exit
+  for(uint8_t i = 0; i < MAX_PROFILES; i++) {
+    if(controller.GetButtonState(BUTTON_1 + i)) {
+      Serial.print("Using Profile: ");
+      Serial.println(i);
+      eeprom.SaveCurrentProfile(i);
+      eeprom.LoadProfile(i, profile);
+      return;
+    }
   }
-
-  if (controller.GetButtonState(profiles[0].bindings[PROFILE_BUTTON_2])) {
-    Serial.print("Using Profile: ");
-    Serial.println((1 + page * 6));
-    curProfile = 1 + page * 6;
-    EEPROM.update(CURRENT_PROFILE_ADDR, curProfile);
-  }
-
-  if (controller.GetButtonState(profiles[0].bindings[PROFILE_BUTTON_3])) {
-    Serial.print("Using Profile: ");
-    Serial.println((2 + page * 6));
-    curProfile = 2 + page * 6;
-    EEPROM.update(CURRENT_PROFILE_ADDR, curProfile);
-  }
-
-  if (controller.GetButtonState(profiles[0].bindings[PROFILE_BUTTON_4])) {
-    Serial.print("Using Profile: ");
-    Serial.println((3 + page * 6));
-    curProfile = 3 + page * 6;
-    EEPROM.update(CURRENT_PROFILE_ADDR, curProfile);
-  }
-  // if(ddrd & DDRD_5) return curProfile = 0;
-  // if(ddrc & DDRC_6) return curProfile = 0;
 }

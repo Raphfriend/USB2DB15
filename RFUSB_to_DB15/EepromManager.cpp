@@ -2,6 +2,7 @@
 // Created by Kitsune on 8/26/2020.
 //
 #include <EEPROM.h>
+#include <SPI.h>
 
 #include "device_descriptor.h"
 #include "EepromManager.h"
@@ -23,14 +24,14 @@ EepromManager::EepromManager() {
  * Initialize the EEPROM with default values
  */
 void EepromManager::Initialize() {
-  //Create the header
+  // Populate initial profiles
+  GenerateInitialProfiles();
+
+  //Create the header last only after everything completes
   EEPROM.update(0, EEPROM_BYTE_0);
   EEPROM.update(1, EEPROM_BYTE_1);
   EEPROM.update(2, EEPROM_BYTE_2);
   EEPROM.update(3, EEPROM_VERISON);
-
-  // Populate initial profiles
-  GenerateInitialProfiles();
 }
 
 /**
