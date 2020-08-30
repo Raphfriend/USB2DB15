@@ -15,6 +15,54 @@ PS3Controller::PS3Controller(PS3USB *p) {
 }
 
 /**
+ * Gets if the button has been clicked since the last check
+ *
+ * This function uses the aliases provide by the Host Shield Library
+ * to determine if a given button has been clicked. Only returns true
+ * once per button press
+ *
+ * @param button The button to check. Defined in "device_description.h"
+ * @return If the button has been clicked
+ */
+bool PS3Controller::GetButtonClick(uint8_t button) {
+  switch(button) {
+    case BUTTON_UP:
+      return ps3usb->getButtonClick(UP);
+    case BUTTON_DOWN:
+      return ps3usb->getButtonClick(DOWN);
+    case BUTTON_LEFT:
+      return ps3usb->getButtonClick(LEFT);
+    case BUTTON_RIGHT:
+      return ps3usb->getButtonClick(RIGHT);
+    case BUTTON_START:
+      return ps3usb->getButtonClick(START);
+    case BUTTON_COIN:
+      return ps3usb->getButtonClick(BACK);
+    case BUTTON_1:
+      return ps3usb->getButtonClick(SQUARE);
+    case BUTTON_2:
+      return ps3usb->getButtonClick(TRIANGLE);
+    case BUTTON_3:
+      return ps3usb->getButtonClick(R1);
+    case BUTTON_4:
+      return ps3usb->getButtonClick(X);
+    case BUTTON_5:
+      return ps3usb->getButtonClick(CIRCLE);
+    case BUTTON_6:
+      return ps3usb->getButtonClick(R2);
+    case BUTTON_7:
+      return ps3usb->getButtonClick(L1);
+    case BUTTON_8:
+      return ps3usb->getButtonClick(L2);
+    case BUTTON_9:
+      return ps3usb->getButtonClick(R3);
+    case BUTTON_10:
+      return ps3usb->getButtonClick(L3);
+  }
+  return false;
+}
+
+/**
  * Gets the State(pressed or not) of a given button
  *
  * This function uses the aliases provide by the Host Shield Library

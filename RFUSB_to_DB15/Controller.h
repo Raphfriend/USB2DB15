@@ -16,7 +16,8 @@
  */
 class Controller {
 public:
-  virtual bool GetButtonState(uint8_t button);
+  virtual bool GetButtonClick(uint8_t button); // Only returns true once per button press
+  virtual bool GetButtonState(uint8_t button); // returns true if the button is currently pressed
   virtual bool Connected();
 };
 

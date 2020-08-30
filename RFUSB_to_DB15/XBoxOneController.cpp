@@ -15,6 +15,54 @@ XBoxOneController::XBoxOneController(XBOXONE *p) {
 }
 
 /**
+ * Gets if the button has been clicked since the last check
+ *
+ * This function uses the aliases provide by the Host Shield Library
+ * to determine if a given button has been clicked. Only returns true
+ * once per button press
+ *
+ * @param button The button to check. Defined in "device_description.h"
+ * @return If the button has been clicked
+ */
+bool XBoxOneController::GetButtonClick(uint8_t button) {
+  switch(button) {
+    case BUTTON_UP:
+      return xbox->getButtonClick(UP);
+    case BUTTON_DOWN:
+      return xbox->getButtonClick(DOWN);
+    case BUTTON_LEFT:
+      return xbox->getButtonClick(LEFT);
+    case BUTTON_RIGHT:
+      return xbox->getButtonClick(RIGHT);
+    case BUTTON_START:
+      return xbox->getButtonClick(START);
+    case BUTTON_COIN:
+      return xbox->getButtonClick(BACK);
+    case BUTTON_1:
+      return xbox->getButtonClick(A);
+    case BUTTON_2:
+      return xbox->getButtonClick(B);
+    case BUTTON_3:
+      return xbox->getButtonClick(R2);
+    case BUTTON_4:
+      return xbox->getButtonClick(X);
+    case BUTTON_5:
+      return xbox->getButtonClick(Y);
+    case BUTTON_6:
+      return xbox->getButtonClick(R1);
+    case BUTTON_7:
+      return xbox->getButtonClick(L1);
+    case BUTTON_8:
+      return xbox->getButtonClick(L2);
+    case BUTTON_9:
+      return xbox->getButtonClick(R3);
+    case BUTTON_10:
+      return xbox->getButtonClick(L3);
+  }
+  return false;
+}
+
+/**
  * Gets the State(pressed or not) of a given button
  *
  * This function uses the aliases provide by the Host Shield Library

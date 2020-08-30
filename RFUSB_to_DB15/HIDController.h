@@ -47,7 +47,7 @@ struct Button {
 // Multiple Inheritance solves data sharing problems here, but can be slow
 class HIDController : public HIDUniversal, public Controller {
   Button buttons[MAX_HID_BUTTONS];
-  uint32_t buttonState;
+  uint32_t buttonState, lastButtonState, clickState;
 
 public:
   HIDController(USB *usb) : HIDUniversal(usb), Controller() {};
@@ -56,6 +56,7 @@ public:
   void ConfigButton(uint8_t button_id, uint8_t index, uint8_t mask, uint8_t value);
 
   bool Connected();
+  bool GetButtonClick(uint8_t button);
   bool GetButtonState(uint8_t button);
 
 protected:

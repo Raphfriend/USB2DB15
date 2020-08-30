@@ -45,6 +45,7 @@
 #include <usbhid.h>
 #include <hiduniversal.h>
 
+#include "EepromManager.h"
 #include "HIDController.h"
 #include "PS3Controller.h"
 #include "XBoxOneController.h"
@@ -73,10 +74,11 @@ USB Usb;
 PS3USB PS3(&Usb);
 XBOXONE Xbox(&Usb);
 
+EepromManager Eeprom;
 HIDController HIDCon(&Usb);
 PS3Controller PS3Con(&PS3);
 XBoxOneController XBoxCon(&Xbox);
-USB2DB15 Usb2db15(PS3Con, XBoxCon, HIDCon);
+USB2DB15 Usb2db15(PS3Con, XBoxCon, HIDCon, Eeprom);
 
 
 // JoystickHID Hid1(&Usb);
