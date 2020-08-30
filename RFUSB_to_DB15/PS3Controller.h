@@ -19,6 +19,7 @@ class PS3Controller : public Controller {
 public:
   PS3Controller(PS3USB *p);
 
+  bool GetButtonClick(uint8_t button);
   bool GetButtonState(uint8_t button);
   bool Connected();
 };
