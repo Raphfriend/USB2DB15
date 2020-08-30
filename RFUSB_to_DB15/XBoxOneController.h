@@ -20,6 +20,7 @@ class XBoxOneController : public Controller {
 public:
   XBoxOneController(XBOXONE *p);
 
+  bool GetButtonClick(uint8_t button);
   bool GetButtonState(uint8_t button);
   bool Connected();
 };
