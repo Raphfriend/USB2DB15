@@ -2,7 +2,6 @@
 // Created by Kitsune on 8/26/2020.
 //
 #include <EEPROM.h>
-#include <SPI.h>
 
 #include "device_descriptor.h"
 #include "EepromManager.h"
