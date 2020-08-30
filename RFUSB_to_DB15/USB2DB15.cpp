@@ -93,43 +93,41 @@ void USB2DB15::GenerateOutput() {
   uint8_t ddrc = 0;
   uint8_t ddrd = 0;
   uint8_t button = 0;
+  Controller *controller = NULL;
 
   // Select the Controller and Generate DDRC and DDRD
   if (ps3.Connected()) { // PS3
-    ddrc = GetDDRC(ps3);
-    ddrd = GetDDRD(ps3);
+    controller = &ps3;
   } else if (xbox.Connected()) { // XboxOne
-    ddrc = GetDDRC(xbox);
-    ddrd = GetDDRD(xbox);
+    controller = &xbox;
   } else if (hid.Connected()) { // Generic HID Controller
-    ddrc = GetDDRC(hid);
-    ddrd = GetDDRD(hid);
+    controller = &hid;
   }
 
-  if (ddrc == prevDDRC && ddrd == prevDDRD) {
-    return; // Nothing has changed
+  if(!controller) return; // If there isn't a controller we are done here
+
+  ddrc = GetDDRC(*controller);
+  ddrd = GetDDRD(*controller);
+
+  // Handle SELECT/COIN held presses
+  if (ddrd == DDRD_COIN) { // If only COIN is being held
+    if(prevDDRD != DDRD_COIN) {  // If COIN is newly the only button pressed
+      select_press_time = millis();
+    } else if ((millis() - select_press_time) >= SELECT_HOLD_DURATION && input_mode != PROFILE_BIND_MODE) {
+      Serial.println("Bind Mode");
+      input_mode = PROFILE_BIND_MODE;
+      cur_key = PROFILE_BUTTON_1;
+    }
   }
-  
+
+  if (input_mode == PROFILE_BIND_MODE) {
+    HandleProfileBindMode(ddrc, ddrd, *controller);
+  } else { // NORMAL_MODE or any unknown mode
+    HandleNormalMode(ddrc, ddrd, *controller);
+  }
+
   prevDDRC = ddrc;
   prevDDRD = ddrd;
-
-  // Check Special Button Combinations
-  // Change Profile
-  if ((ddrd & DDRD_COIN) && (ddrc & DDRC_UP)) {
-    if (ps3.Connected()) { // PS3
-      SetProfile(ps3);
-    } else if (xbox.Connected()) { // XboxOne
-      SetProfile(xbox);
-    } else if (hid.Connected()) { // Generic HID Controller
-      SetProfile(hid);
-    }
-    return;
-  }
-  // Output
-  DDRC = ddrc;
-  DDRD = ddrd;
-
-  debugOutput(ddrc, ddrd);
 }
 
 /**
@@ -214,6 +212,43 @@ uint8_t USB2DB15::GetDDRD(Controller &controller) {
   }
 
   return ddrd;
+}
+
+void USB2DB15::HandleNormalMode(uint8_t ddrc, uint8_t ddrd, Controller &controller) {
+  if (ddrc == prevDDRC && ddrd == prevDDRD) return;
+  // Check Special Button Combinations
+  // Change Profile
+  if ((ddrd & DDRD_COIN) && (ddrc & DDRC_UP)) {
+    SetProfile(controller);
+    return;
+  }
+  // Output
+  DDRC = ddrc;
+  DDRD = ddrd;
+
+  debugOutput(ddrc, ddrd);
+}
+
+void USB2DB15::HandleProfileBindMode(uint8_t ddrc, uint8_t ddrd, Controller &controller) {
+  // End Mode if SELECT/COIN is released
+  if(!(ddrd & DDRD_COIN)) {
+    Serial.println("Normal Mode");
+    eeprom.SaveProfile(eeprom.LoadCurrentProfile(), profile);
+    input_mode = NORMAL_MODE;
+    return;
+  }
+
+  // Ignore any keys after we have bound all 6 buttons
+  if(cur_key >= NUM_BUTTON_BINDINGS) return;
+
+  // Check if any raw inputs have been clicked
+  for(uint8_t i = BUTTON_1; i <= BUTTON_10; i++) {
+    if(controller.GetButtonClick(i)) {
+      profile.bindings[cur_key] = i;
+      cur_key++;
+      return;
+    }
+  }
 }
 
 /**

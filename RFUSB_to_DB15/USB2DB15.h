@@ -31,11 +31,12 @@
 #define DDRD_COIN   64  //D6
 #define DDRD_5      128 //D7
 
-/* Profile Pages */
-#define BUILT_IN_PROFILES 0
+/* Durations */
+#define SELECT_HOLD_DURATION 3000
 
-/* EEPROM Locations */
-#define CURRENT_PROFILE_ADDR 6
+/* Input Modes */
+#define NORMAL_MODE 0
+#define PROFILE_BIND_MODE 1
 
 /**
  * USB To DB15
@@ -52,6 +53,9 @@ class USB2DB15 {
     Profile profile;
     uint8_t prevDDRC = 0;
     uint8_t prevDDRD = 0;
+    uint8_t input_mode = NORMAL_MODE;
+    uint8_t cur_key = 0;
+    unsigned long select_press_time = 0;
 
   public:
     USB2DB15(PS3Controller &ps3, XBoxOneController &xbox, HIDController &hid, EepromManager &eeprom);
@@ -61,6 +65,8 @@ class USB2DB15 {
     uint8_t GetDDRC(Controller &controller);
     uint8_t GetDDRD(Controller &controller);
     void SetProfile(Controller &controller);
+    void HandleNormalMode(uint8_t ddrc, uint8_t ddrd, Controller &controller);
+    void HandleProfileBindMode(uint8_t ddrc, uint8_t ddrd, Controller &controller);
 };
 
 
