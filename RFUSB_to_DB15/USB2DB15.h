@@ -51,9 +51,16 @@ class USB2DB15 {
     HIDController &hid;
     EepromManager &eeprom;
     Profile profile;
+    uint8_t input_mode = NORMAL_MODE;
+
+    // Controller
+    uint16_t cur_vid, cur_pid;
+
+    // Output
     uint8_t prevDDRC = 0;
     uint8_t prevDDRD = 0;
-    uint8_t input_mode = NORMAL_MODE;
+
+    // Binding Mode
     uint8_t cur_key = 0;
     unsigned long select_press_time = 0;
 
@@ -64,7 +71,7 @@ class USB2DB15 {
   protected:
     uint8_t GetDDRC(Controller &controller);
     uint8_t GetDDRD(Controller &controller);
-    void SetProfile(Controller &controller);
+    void SetProfile(Controller &controller, uint8_t profile_num);
     void HandleNormalMode(uint8_t ddrc, uint8_t ddrd, Controller &controller);
     void HandleProfileBindMode(uint8_t ddrc, uint8_t ddrd, Controller &controller);
 };
