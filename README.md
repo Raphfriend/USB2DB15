@@ -111,6 +111,7 @@ To change the key bindings of a profile. First change to the profile you want to
 Press and Hold SELECT for 3 seconds, then while holding continuing to hold SELECT press buttons 1 - 6 in order.
 Finally release SELECT to lock in the binding.
 
+*XBoxOne controllers appear to the system as the same make and model and thus use the same profiles even if they are different controllers.
 ### 6. Where can I get more help, if I need it?
 
 Via the Arcade-Projects website forum or via Discord.
