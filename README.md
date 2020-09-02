@@ -98,12 +98,18 @@ See COMPATIBILITY.md for a detailed list
 - Hori Fighting Stick for PS3
 
 ### 5. Software Usage
-#### 5.1 Built in Profiles
-The adapter has 4 built in profiles.  They can be switched to by pressing UP + SELECT + Button 1-4.  The Button number is relative to the default profile not your current profile for consistency.
-- Button 1: Default Profile
-- Button 2: Default with the button rows swapped
-- Button 3: SNES style with Button 6 mapped to Button 7(L1)
-- Button 4: SNES style with the rows flipped 
+#### 5.1 Controller Profiles
+The Adapter can store profiles for up to 10 unique controller models*. Controllers of the same make and model will share the profiles.
+Each controller has 4 profiles associated with it. Should you plug in an 11th controller the system will replace the oldest controller you have set up.
+Next oldest for the 12th and so on. This may cause you to have to set up older controllers again if you resume using them.
+
+These can be accessed by pressing SELECT(COIN) + one of the four directions.
+Thus if you wanted the first profile you would press SELECT + UP, the Second SELECT + RIGHT, and so on.
+The adapter will remember what profile you were using and automatically switch to it when you use the controller again.
+
+To change the key bindings of a profile. First change to the profile you want to setup.
+Press and Hold SELECT for 3 seconds, then while holding continuing to hold SELECT press buttons 1 - 6 in order.
+Finally release SELECT to lock in the binding.
 
 ### 6. Where can I get more help, if I need it?
 
