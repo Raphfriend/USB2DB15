@@ -19,6 +19,8 @@ public:
   virtual bool GetButtonClick(uint8_t button); // Only returns true once per button press
   virtual bool GetButtonState(uint8_t button); // returns true if the button is currently pressed
   virtual bool Connected();
+  virtual uint16_t GetVid();
+  virtual uint16_t GetPid();
 };
 
 

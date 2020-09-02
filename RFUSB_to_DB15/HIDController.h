@@ -59,6 +59,8 @@ public:
   bool GetButtonClick(uint8_t button);
   bool GetButtonState(uint8_t button);
 
+  uint16_t GetVid();
+  uint16_t GetPid();
 protected:
   uint8_t OnInitSuccessful();
   void ParseHIDData(USBHID *hid, bool is_rpt_id, uint8_t len, uint8_t *buf);

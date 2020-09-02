@@ -126,3 +126,29 @@ bool XBoxOneController::Connected() {
   }
   return false;
 }
+
+/**
+ * Gets the Vendor ID for the controller
+ *
+ * As there is no way to currently get the exact vid out of the XBoxOne
+ * Controller Class we will use a hardcoded value. This is one of the possible
+ * VIDs for an XBoxOne controller
+ *
+ * @return The Controller's Vendor ID
+ */
+uint16_t XBoxOneController::GetVid() {
+  return XBOX_VID1;
+}
+
+/**
+ * Gets the Product ID for the controller
+ *
+ * As there is no way to currently get the exact vid out of the XBoxOne
+ * Controller Class we will use a hardcoded value. This is one of the possible
+ * VIDs for an XBoxOne controller
+ *
+ * @return The Controller's Product ID
+ */
+uint16_t XBoxOneController::GetPid() {
+  return XBOX_ONE_PID1;
+}

@@ -123,3 +123,19 @@ bool PS3Controller::GetButtonState(uint8_t button) {
 bool PS3Controller::Connected() {
   return ps3usb->PS3Connected;
 }
+
+/**
+ * Gets the Vendor ID for the controller
+ * @return The Controller's Vendor ID
+ */
+uint16_t PS3Controller::GetVid() {
+  return PS3_VID;  // The PS3 controller has a static VID
+}
+
+/**
+ * Gets the Product ID for the controller
+ * @return The Controller's Product ID
+ */
+uint16_t PS3Controller::GetPid() {
+  return PS3_PID; // The PS3 controller has a static PID
+}

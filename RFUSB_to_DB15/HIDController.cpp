@@ -68,6 +68,22 @@ bool HIDController::GetButtonState(uint8_t button) {
 }
 
 /**
+ * Gets the Vendor ID for the controller
+ * @return The Controller's Vendor ID
+ */
+uint16_t HIDController::GetVid() {
+  return VID;
+}
+
+/**
+ * Gets the Product ID for the controller
+ * @return The Controller's Product ID
+ */
+uint16_t HIDController::GetPid() {
+  return PID;
+}
+
+/**
  * Configures a button.
  *
  * This function is an alias for ConfigButton(uint8_t, uint8_t, uint8_t, uint8_t)
