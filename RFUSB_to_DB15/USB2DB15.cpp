@@ -74,10 +74,7 @@ void debugOutput(uint8_t ddrc, uint8_t ddrd) {
  * @param hid  The HID controller to use
  */
 USB2DB15::USB2DB15(PS3Controller &ps3, XBoxOneController &xbox, HIDController &hid, EepromManager &eeprom) :
-  ps3(ps3), xbox(xbox), hid(hid), eeprom(eeprom) {
-  uint8_t cur_profile = eeprom.LoadCurrentProfile();
-  eeprom.LoadProfile(cur_profile, profile);
-};
+  ps3(ps3), xbox(xbox), hid(hid), eeprom(eeprom) { };
 
 /**
  * Outputs the keys pressed on the controller to the DB15 connector
@@ -105,6 +102,14 @@ void USB2DB15::GenerateOutput() {
   }
 
   if(!controller) return; // If there isn't a controller we are done here
+
+  // Setup Profile
+  if(controller->GetVid() != cur_vid || controller->GetPid() != cur_pid) {
+    eeprom.SetCurrentController(controller->GetVid(), controller->GetPid());
+    eeprom.LoadProfile(eeprom.LoadCurrentProfile(), profile);
+    cur_vid = controller->GetVid();
+    cur_pid = controller->GetPid();
+  }
 
   ddrc = GetDDRC(*controller);
   ddrd = GetDDRD(*controller);
@@ -226,10 +231,14 @@ uint8_t USB2DB15::GetDDRD(Controller &controller) {
 void USB2DB15::HandleNormalMode(uint8_t ddrc, uint8_t ddrd, Controller &controller) {
   if (ddrc == prevDDRC && ddrd == prevDDRD) return;
   // Check Special Button Combinations
-  // Change Profile
-  if ((ddrd & DDRD_COIN) && (ddrc & DDRC_UP)) {
-    SetProfile(controller);
-    return;
+  // Change Profile  SELECT + DIRECTION
+  if (ddrd & DDRD_COIN) {
+    for(uint8_t i = 0; i < 4; i++) {
+      if(controller.GetButtonState(profile.bindings[PROFILE_BUTTON_UP + i])) {
+        SetProfile(controller, i);
+        return;
+      }
+    }
   }
   // Output
   DDRC = ddrc;
@@ -277,16 +286,11 @@ void USB2DB15::HandleProfileBindMode(uint8_t ddrc, uint8_t ddrd, Controller &con
  *
  * @param controller The controller to read from
  */
-void USB2DB15::SetProfile(Controller &controller) {
-  // For each numbered button check if it is pushed
-  // If it is use that profile and exit
-  for(uint8_t i = 0; i < MAX_PROFILES; i++) {
-    if(controller.GetButtonState(BUTTON_1 + i)) {
-      Serial.print("Using Profile: ");
-      Serial.println(i);
-      eeprom.SaveCurrentProfile(i);
-      eeprom.LoadProfile(i, profile);
-      return;
-    }
-  }
+void USB2DB15::SetProfile(Controller &controller, uint8_t profile_num) {
+  if(profile_num > MAX_PROFILES) return;
+
+  Serial.print("Using Profile: ");
+  Serial.println(profile_num);
+  eeprom.SaveCurrentProfile(profile_num);
+  eeprom.LoadProfile(profile_num, profile);
 }

@@ -22,6 +22,9 @@ public:
   bool GetButtonClick(uint8_t button);
   bool GetButtonState(uint8_t button);
   bool Connected();
+
+  uint16_t GetVid();
+  uint16_t GetPid();
 };
 
 

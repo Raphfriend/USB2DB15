@@ -10,7 +10,7 @@
 #define EEPROM_BYTE_0 'U'
 #define EEPROM_BYTE_1 '2'
 #define EEPROM_BYTE_2 'N'
-#define EEPROM_VERISON 1
+#define EEPROM_VERISON 2
 
 /**
  * EEPROM Layout
@@ -18,10 +18,19 @@
  * 0-2      'U2N' in ascii.  This tells us if the EEPROM has been initialized
  * 3        Version number in binary. Tells us what EEPROM layout we are using
  * 4-5      Reserved for future use
- * 6        Current Profile Number
- * 7        Current Number of Custom Device Descriptors
- * 8-19     Reserved for future use
- * 20-199   Profiles (10 profiles at 18 bytes each = 180)
+ * 6        Next Profile Block to use
+ * 7-15     Reserved for future use
+ * 16-735   Profiles (10 Profile Blocks at 72 bytes each)
+ */
+
+/**
+ * Profile Block
+ * Byte     Description
+ * 0-1      VID
+ * 2-3      PID
+ * 4        Current Profile
+ * 5-7      Reserved
+ * 8-71     Profile Data
  */
 
 /**
@@ -44,12 +53,16 @@
 
 // Address Locations
 
-#define CURRENT_PROFILE_ADDR 6
-#define PROFILE_START_ADDR 20
-#define PROFILE_SIZE 18
-#define MAX_PROFILES 10
+#define NEXT_PROFILE_BLOCK_ADDR 6
+#define PROFILE_START_ADDR 16
+#define PROFILE_BLOCK_HEADER_SIZE 8
+#define CURRENT_PROFILE_ADDR 4
+#define PROFILE_SIZE 72
+#define MAX_PROFILES 4
+#define MAX_PROFILE_BLOCKS 10
 
 class EepromManager {
+  uint8_t cur_profile_block;
 public:
   EepromManager();
   void Initialize();
@@ -60,10 +73,19 @@ public:
   uint8_t LoadCurrentProfile();
   void SaveCurrentProfile(uint8_t num);
 
+  void SetCurrentController(uint16_t vid, uint16_t pid);
 protected:
+  void InitializeProfileBlocks();
+
   void GenerateInitialProfiles();
   void GenerateDefaultProfile(Profile &profile);
   void SwapProfileRows(Profile &profile);
+
+  uint16_t GetProfileStartAddr();
+  uint16_t GetProfileBlockStartAddr();
+
+  uint16_t Read16Bit(uint16_t addr);
+  void Write16Bit(uint16_t addr, uint16_t value);
 };
 
 

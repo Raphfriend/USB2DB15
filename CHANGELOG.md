@@ -1,3 +1,9 @@
+## [0.12.0] - 2020-09-11
+### Changed
+- Profiles are now per controller rather than shared between all controllers
+- There are now only 4 profiles, they are mapped to SELECT + directional(UP, DOWN, LEFT, RIGHT)
+- Adapters can remember up to 10 controllers, if more then 10 are plugged in, the oldest one will be forgotten.
+
 ## [0.11.0] - 2020-08-30
 ### Added
 
