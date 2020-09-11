@@ -3,6 +3,11 @@
 //
 
 #include "USB2DB15.h"
+#include "LED.h"
+
+uint8_t LED::blinks;
+uint8_t LED::on;
+unsigned long LED::next_blink;
 
 /**
  * A debug function to print out which buttons are being press.
@@ -117,6 +122,7 @@ void USB2DB15::GenerateOutput() {
       Serial.println("Bind Mode");
       input_mode = PROFILE_BIND_MODE;
       cur_key = PROFILE_BUTTON_1;
+      LED::On();
     }
   }
 
@@ -253,6 +259,7 @@ void USB2DB15::HandleProfileBindMode(uint8_t ddrc, uint8_t ddrd, Controller &con
     Serial.println("Normal Mode");
     eeprom.SaveProfile(eeprom.LoadCurrentProfile(), profile);
     input_mode = NORMAL_MODE;
+    LED::Off();
     return;
   }
 
@@ -286,6 +293,7 @@ void USB2DB15::SetProfile(Controller &controller) {
       Serial.println(i);
       eeprom.SaveCurrentProfile(i);
       eeprom.LoadProfile(i, profile);
+      LED::Blink(i + 1);
       return;
     }
   }
