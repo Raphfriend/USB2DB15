@@ -50,6 +50,7 @@
 #include "PS3Controller.h"
 #include "XBoxOneController.h"
 #include "USB2DB15.h"
+#include "LED.h"
 
 #ifdef dobogusinclude
 #include <spi4teensy3.h>
@@ -84,6 +85,8 @@ USB2DB15 Usb2db15(PS3Con, XBoxCon, HIDCon, Eeprom);
 // JoystickHID Hid1(&Usb);
 
 void setup() {
+  pinMode(LED_PIN, OUTPUT);
+  
   Serial.begin(115200);
   
   while (!Serial);
@@ -101,6 +104,7 @@ void setup() {
 
 
 void loop() {
+  LED::Update();
 
   Usb.Task();
 
