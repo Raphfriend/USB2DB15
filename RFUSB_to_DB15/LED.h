@@ -7,7 +7,7 @@
 
 namespace LED {
   const uint8_t BLINK_RATE_RESET = 50;
-  const uint8_t BLINK_RATR_PROFILE = 150;
+  const uint8_t BLINK_RATE_PROFILE = 150;
 
   void On();
   void Off();
