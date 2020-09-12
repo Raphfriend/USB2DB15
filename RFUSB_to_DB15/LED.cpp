@@ -29,8 +29,8 @@ namespace LED {
    * Also resets the blink timer. Always ends with the LED off even if the
    * LED was on before it was called.
    *
-   * @param 1 num Number of times to blink
-   * @param 2 speed of blink
+   * @param num Number of times to blink
+   * @param speed of blink
    */
   void Blink(uint8_t num, uint8_t rate) {
     blinks = num;
