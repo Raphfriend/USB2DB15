@@ -71,6 +71,8 @@
   {0, 0, -1} // データ終端
   }; */
 
+#define ANALOG_BUTTON_PIN A6
+
 USB Usb;
 PS3USB PS3(&Usb);
 XBOXONE Xbox(&Usb);
@@ -83,17 +85,10 @@ USB2DB15 Usb2db15(PS3Con, XBoxCon, HIDCon, Eeprom);
 
 // JoystickHID Hid1(&Usb);
 
-// ANALOG TACTILE BUTTON
-int buttonValue;
-#define analogButtonPin A6
-
 void setup() {
   Serial.begin(115200);
 
   while (!Serial);
-
-  Serial.print("Using Profile: ");
-  Serial.println(EEPROM.read(CURRENT_PROFILE_ADDR));
 
   byte i, j;
 
@@ -107,10 +102,8 @@ void setup() {
 void loop() {
   LED::Update();
 
-  buttonValue = analogRead(analogButtonPin);
-
-  if (buttonValue > 100) {
-    resetEEPROM;
+  if (analogRead(ANALOG_BUTTON_PIN) > 100) {
+    Eeprom.Initialize();
   }
 
   Usb.Task();
@@ -120,12 +113,6 @@ void loop() {
   Usb2db15.GenerateOutput();
 
   delay(1);
-}
-
-void resetEEPROM() {
-  for (int i = 0 ; i < EEPROM.length() ; i++) {
-    EEPROM.write(i, 0);
-  }
 }
 
 //******************************************
