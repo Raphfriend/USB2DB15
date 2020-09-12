@@ -91,16 +91,7 @@ void USB2DB15::GenerateOutput() {
   uint8_t ddrc = 0;
   uint8_t ddrd = 0;
   uint8_t button = 0;
-  Controller *controller = NULL;
-
-  // Select the Controller and Generate DDRC and DDRD
-  if (ps3.Connected()) { // PS3
-    controller = &ps3;
-  } else if (xbox.Connected()) { // XboxOne
-    controller = &xbox;
-  } else if (hid.Connected()) { // Generic HID Controller
-    controller = &hid;
-  }
+  Controller *controller = GetActiveController();
 
   if(!controller) return; // If there isn't a controller we are done here
 
@@ -135,6 +126,23 @@ void USB2DB15::GenerateOutput() {
 
   prevDDRC = ddrc;
   prevDDRD = ddrd;
+}
+
+void USB2DB15::FactoryReset() {
+  eeprom.Initialize();
+  cur_pid = 0;
+  cur_vid = 0;
+}
+
+Controller* USB2DB15::GetActiveController() {
+  if (ps3.Connected()) { // PS3
+    return &ps3;
+  } else if (xbox.Connected()) { // XboxOne
+    return &xbox;
+  } else if (hid.Connected()) { // Generic HID Controller
+    return &hid;
+  }
+  return NULL;
 }
 
 /**

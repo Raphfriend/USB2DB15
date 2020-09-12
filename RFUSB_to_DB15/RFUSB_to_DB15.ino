@@ -103,7 +103,7 @@ void loop() {
   LED::Update();
 
   if (analogRead(ANALOG_BUTTON_PIN) > 100) {
-    Eeprom.Initialize();
+    Usb2db15.FactoryReset();
   }
 
   Usb.Task();
