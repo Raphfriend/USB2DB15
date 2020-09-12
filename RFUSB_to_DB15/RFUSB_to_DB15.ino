@@ -106,7 +106,7 @@ void loop() {
 
   if (analogRead(ANALOG_BUTTON_PIN) > 800) {
     if(!resetLock) {
-      LED::Blink(5);
+      LED::Blink(3, 50);
       Serial.println("Resetting");
       Usb2db15.FactoryReset();
       resetLock = 1;

@@ -5,12 +5,10 @@
 
 #define LED_PIN 8
 
-#define BLINK_HALF_LENGTH 150
-
 namespace LED {
   void On();
   void Off();
-  void Blink(uint8_t num);
+  void Blink(uint8_t num, uint8_t rate );
   void Update();
 };
 

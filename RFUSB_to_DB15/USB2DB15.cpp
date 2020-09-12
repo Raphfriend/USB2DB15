@@ -304,5 +304,5 @@ void USB2DB15::SetProfile(Controller &controller, uint8_t profile_num) {
   Serial.println(profile_num);
   eeprom.SaveCurrentProfile(profile_num);
   eeprom.LoadProfile(profile_num, profile);
-  LED::Blink(profile_num + 1);
+  LED::Blink(profile_num + 1, 150);
 }
