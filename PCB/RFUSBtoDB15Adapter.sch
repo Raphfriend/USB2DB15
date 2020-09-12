@@ -18002,11 +18002,6 @@ SJ1.</text>
 <wire x1="-114.3" y1="-45.72" x2="-121.92" y2="-45.72" width="0.1524" layer="91"/>
 <label x="-121.92" y="-45.72" size="1.778" layer="95"/>
 </segment>
-<segment>
-<pinref part="S1" gate="G$1" pin="2"/>
-<wire x1="-99.06" y1="-2.54" x2="-86.36" y2="-2.54" width="0.1524" layer="91"/>
-<label x="-93.98" y="-2.54" size="1.778" layer="95"/>
-</segment>
 </net>
 <net name="SCK" class="0">
 <segment>
@@ -18126,14 +18121,14 @@ SJ1.</text>
 </net>
 <net name="LED" class="0">
 <segment>
-<pinref part="ARDUINO-MINIPRO" gate="G$1" pin="D10"/>
-<wire x1="-121.92" y1="86.36" x2="-134.62" y2="86.36" width="0.1524" layer="91"/>
-<label x="-134.62" y="86.36" size="1.778" layer="95"/>
-</segment>
-<segment>
 <pinref part="LED" gate="G$1" pin="C"/>
 <wire x1="-139.7" y1="17.78" x2="-149.86" y2="17.78" width="0.1524" layer="91"/>
 <label x="-150.368" y="17.78" size="1.778" layer="95"/>
+</segment>
+<segment>
+<pinref part="ARDUINO-MINIPRO" gate="G$1" pin="D8"/>
+<wire x1="-86.36" y1="83.82" x2="-68.58" y2="83.82" width="0.1524" layer="91"/>
+<label x="-68.58" y="83.82" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="5VLED" class="0">
@@ -18142,6 +18137,18 @@ SJ1.</text>
 <pinref part="R1" gate="G$1" pin="1"/>
 <wire x1="-132.08" y1="17.78" x2="-129.54" y2="17.78" width="0.1524" layer="91"/>
 <label x="-134.874" y="19.558" size="1.778" layer="95"/>
+</segment>
+</net>
+<net name="RESET_MEM" class="0">
+<segment>
+<pinref part="ARDUINO-MINIPRO" gate="G$1" pin="A6"/>
+<wire x1="-121.92" y1="93.98" x2="-134.62" y2="93.98" width="0.1524" layer="91"/>
+<label x="-149.86" y="93.98" size="1.778" layer="95"/>
+</segment>
+<segment>
+<pinref part="S1" gate="G$1" pin="2"/>
+<wire x1="-99.06" y1="-2.54" x2="-86.36" y2="-2.54" width="0.1524" layer="91"/>
+<label x="-93.98" y="-2.54" size="1.778" layer="95"/>
 </segment>
 </net>
 </nets>

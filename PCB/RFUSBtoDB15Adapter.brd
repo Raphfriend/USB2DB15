@@ -3,7 +3,7 @@
 <eagle version="9.5.1">
 <drawing>
 <settings>
-<setting alwaysvectorfont="yes"/>
+<setting alwaysvectorfont="no"/>
 <setting verticaltext="up"/>
 </settings>
 <grid distance="50" unitdist="mil" unit="mil" style="lines" multiple="1" display="yes" altdistance="5" altunitdist="mil" altunit="mil"/>
@@ -2993,7 +2993,6 @@ design rules under a new name.</description>
 <signal name="RESET">
 <contactref element="ARDUINO-MINIPRO" pad="J7.10"/>
 <contactref element="J2" pad="5"/>
-<contactref element="S1" pad="2"/>
 <via x="39.37" y="33.02" extent="1-16" drill="0.35"/>
 <wire x1="32.19909375" y1="31.9358" x2="31.30090625" y2="31.9358" width="0.3556" layer="16"/>
 <wire x1="39.37" y1="33.02" x2="33.28329375" y2="33.02" width="0.3556" layer="16"/>
@@ -3012,10 +3011,8 @@ design rules under a new name.</description>
 <wire x1="38.735" y1="19.939" x2="38.735" y2="24.27505625" width="0.3556" layer="16"/>
 <wire x1="39.37" y1="29.21" x2="40.64" y2="30.48" width="0.3556" layer="16"/>
 <via x="40.64" y="30.48" extent="1-16" drill="0.35"/>
-<wire x1="41.91" y1="31.75" x2="40.64" y2="30.48" width="0.3556" layer="1"/>
-<wire x1="39.37" y1="33.02" x2="40.64" y2="33.02" width="0.3556" layer="1"/>
-<wire x1="40.64" y1="33.02" x2="41.91" y2="31.75" width="0.3556" layer="1"/>
-<wire x1="40.64" y1="30.48" x2="41.91" y2="32.41" width="0" layer="19" extent="1-1"/>
+<wire x1="40.64" y1="30.48" x2="39.37" y2="31.75" width="0.3556" layer="1"/>
+<wire x1="39.37" y1="31.75" x2="39.37" y2="33.02" width="0.3556" layer="1"/>
 </signal>
 <signal name="SCK">
 <contactref element="ARDUINO-MINIPRO" pad="J6.9"/>
@@ -3119,11 +3116,11 @@ design rules under a new name.</description>
 <wire x1="25.4" y1="43.18" x2="26.858" y2="44.638" width="0.381" layer="16"/>
 </signal>
 <signal name="LED">
-<contactref element="ARDUINO-MINIPRO" pad="J6.12"/>
 <contactref element="LED" pad="K"/>
 <wire x1="29.718" y1="17.78" x2="29.718" y2="19.558" width="0.3556" layer="1"/>
 <wire x1="29.718" y1="19.558" x2="31.75" y2="21.59" width="0.3556" layer="1"/>
-<wire x1="31.75" y1="21.59" x2="31.75" y2="22.86" width="0.3556" layer="1"/>
+<contactref element="ARDUINO-MINIPRO" pad="J7.2"/>
+<wire x1="16.51" y1="25.4" x2="29.718" y2="17.78" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="RAW">
 <contactref element="ARDUINO-MINIPRO" pad="J6.1"/>
@@ -3133,6 +3130,21 @@ design rules under a new name.</description>
 <contactref element="R1" pad="1"/>
 <wire x1="28.84" y1="15.24" x2="29.718" y2="15.24" width="0.508" layer="16"/>
 <wire x1="29.718" y1="15.24" x2="32.258" y2="17.78" width="0.508" layer="16"/>
+</signal>
+<signal name="RESET_MEM">
+<contactref element="ARDUINO-MINIPRO" pad="J3.2"/>
+<contactref element="S1" pad="2"/>
+<wire x1="41.91" y1="32.41" x2="41.25" y2="31.75" width="0.3556" layer="1"/>
+<wire x1="41.25" y1="31.75" x2="40.64" y2="31.75" width="0.3556" layer="1"/>
+<via x="40.64" y="31.75" extent="1-16" drill="0.35"/>
+<wire x1="40.64" y1="31.75" x2="39.37" y2="30.48" width="0.3556" layer="16"/>
+<wire x1="39.37" y1="30.48" x2="34.29" y2="30.48" width="0.3556" layer="16"/>
+<via x="34.29" y="30.48" extent="1-16" drill="0.35"/>
+<wire x1="34.29" y1="30.48" x2="33.02" y2="29.21" width="0.3556" layer="1"/>
+<wire x1="33.02" y1="29.21" x2="30.48" y2="29.21" width="0.3556" layer="1"/>
+<wire x1="30.48" y1="29.21" x2="29.21" y2="27.94" width="0.3556" layer="1"/>
+<wire x1="29.21" y1="27.94" x2="29.21" y2="25.4" width="0.3556" layer="1"/>
+<wire x1="29.21" y1="25.4" x2="26.67" y2="22.86" width="0.3556" layer="1"/>
 </signal>
 </signals>
 <mfgpreviewcolors>
