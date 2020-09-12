@@ -102,7 +102,7 @@ void setup() {
 void loop() {
   LED::Update();
 
-  if (analogRead(ANALOG_BUTTON_PIN) > 100) {
+  if (analogRead(ANALOG_BUTTON_PIN) > 500) {
     Usb2db15.FactoryReset();
   }
 
