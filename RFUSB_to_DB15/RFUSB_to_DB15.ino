@@ -83,6 +83,8 @@ PS3Controller PS3Con(&PS3);
 XBoxOneController XBoxCon(&Xbox);
 USB2DB15 Usb2db15(PS3Con, XBoxCon, HIDCon, Eeprom);
 
+uint8_t resetLock = 0;
+
 // JoystickHID Hid1(&Usb);
 
 void setup() {
@@ -102,8 +104,15 @@ void setup() {
 void loop() {
   LED::Update();
 
-  if (analogRead(ANALOG_BUTTON_PIN) > 500) {
-    Usb2db15.FactoryReset();
+  if (analogRead(ANALOG_BUTTON_PIN) > 800) {
+    if(!resetLock) {
+      LED::Blink(5);
+      Serial.println("Resetting");
+      Usb2db15.FactoryReset();
+      resetLock = 1;
+    }
+  } else {
+    resetLock = 0;
   }
 
   Usb.Task();

@@ -28,6 +28,9 @@ void EepromManager::Initialize() {
   // Populate initial profiles
   InitializeProfileBlocks();
 
+  // Set the next profile block address to the beginning
+  EEPROM.update(NEXT_PROFILE_BLOCK_ADDR, 0);
+
   //Create the header last only after everything completes
   EEPROM.update(0, EEPROM_BYTE_0);
   EEPROM.update(1, EEPROM_BYTE_1);
