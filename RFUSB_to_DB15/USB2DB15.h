@@ -67,8 +67,10 @@ class USB2DB15 {
   public:
     USB2DB15(PS3Controller &ps3, XBoxOneController &xbox, HIDController &hid, EepromManager &eeprom);
     void GenerateOutput();
+    void FactoryReset();
 
   protected:
+    Controller* GetActiveController();
     uint8_t GetDDRC(Controller &controller);
     uint8_t GetDDRD(Controller &controller);
     void SetProfile(Controller &controller, uint8_t profile_num);
