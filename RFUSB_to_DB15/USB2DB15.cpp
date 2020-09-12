@@ -5,10 +5,6 @@
 #include "USB2DB15.h"
 #include "LED.h"
 
-uint8_t LED::blinks;
-uint8_t LED::on;
-unsigned long LED::next_blink;
-
 /**
  * A debug function to print out which buttons are being press.
  * TODO allow this function to be stripped out of release build.
