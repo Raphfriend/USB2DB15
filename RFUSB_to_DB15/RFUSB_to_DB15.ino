@@ -50,6 +50,7 @@
 #include "PS3Controller.h"
 #include "XBoxOneController.h"
 #include "USB2DB15.h"
+#include "LED.h"
 
 #ifdef dobogusinclude
 #include <spi4teensy3.h>
@@ -57,18 +58,18 @@
 #include <SPI.h>
 
 /* Remaining Joysticks from old method
-const struct {
+  const struct {
   uint16_t vid;
   uint16_t pid;
   int joy_type;
-} Tbl_cnv_data[] = {
+  } Tbl_cnv_data[] = {
   {0x0ca3, 0x0024, TYPE_MDmini}, // MDmini標準コントローラ
   {0x054c, 0x0cda, TYPE_PSC}, // PlayStation Classic USB Controller
   {0x0f0d, 0x00c1, TYPE_8BITDO},
   {0x1345, 0x1030, TYPE_SNES}, // RetroFreak GAME CONTROLLER
   {0x0413, 0x502b, TYPE_RETROFREAK}, // RetroFreak CONTROLLER ADAPTER
   {0, 0, -1} // データ終端
-}; */
+  }; */
 
 USB Usb;
 PS3USB PS3(&Usb);
@@ -80,12 +81,15 @@ PS3Controller PS3Con(&PS3);
 XBoxOneController XBoxCon(&Xbox);
 USB2DB15 Usb2db15(PS3Con, XBoxCon, HIDCon, Eeprom);
 
-
 // JoystickHID Hid1(&Usb);
+
+// ANALOG TACTILE BUTTON
+int buttonValue;
+#define analogButtonPin A6
 
 void setup() {
   Serial.begin(115200);
-  
+
   while (!Serial);
 
   Serial.print("Using Profile: ");
@@ -97,10 +101,17 @@ void setup() {
     Serial.print(F("\r\nOSC did not start"));
     while (1);
   }
+  pinMode(LED_PIN, OUTPUT);
 }
 
-
 void loop() {
+  LED::Update();
+
+  buttonValue = analogRead(analogButtonPin);
+
+  if (buttonValue > 100) {
+    resetEEPROM;
+  }
 
   Usb.Task();
 
@@ -109,10 +120,13 @@ void loop() {
   Usb2db15.GenerateOutput();
 
   delay(1);
-
 }
 
-
+void resetEEPROM() {
+  for (int i = 0 ; i < EEPROM.length() ; i++) {
+    EEPROM.write(i, 0);
+  }
+}
 
 //******************************************
 // End of File

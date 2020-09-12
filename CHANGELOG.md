@@ -1,5 +1,18 @@
+## [0.13.0] - 2020-09-12
+### Added
+
+- Added a new LED class to control an LED connected to digital pin 8.
+	- LED::On(); Turns the LED ON
+	- LED::Off(): Turns the LED OFF
+	- LED::Blink(n); Blinks the LED where n equals the number of desired blinks
+	- The LED is set to turn ON when Bind mode is entered and remains on until Bind mode is exited, thus turning the LED OFF. 
+	- The LED will blink with a profile change and blinks an amount of times that corresponds to the profile number.
+- Added a resetEEPROM() function that clears all EEPROM memory, thus clearing profiles and bindings. This is controlled via a tactile switch connected to analog pin 6.
+
+
 ## [0.12.0] - 2020-09-11
 ### Changed
+
 - Profiles are now per controller rather than shared between all controllers
 - There are now only 4 profiles, they are mapped to SELECT + directional(UP, DOWN, LEFT, RIGHT)
 - Adapters can remember up to 10 controllers, if more then 10 are plugged in, the oldest one will be forgotten.
