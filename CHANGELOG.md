@@ -1,7 +1,7 @@
 ## [0.13.1] - 2020-09-12
 ### Added
 
-- Added Support of Nacon Daija in PS3 and PS4 modes
+- Added Support for Nacon Daija in PS3 and PS4 modes
 
 ## [0.13.0] - 2020-09-12
 ### Added
