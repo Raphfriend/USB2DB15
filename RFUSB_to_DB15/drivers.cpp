@@ -40,6 +40,10 @@ void setupController(uint16_t vid, uint16_t pid, HIDController *controller) {
       if(pid == PID_BROOK_UNIVERSAL) setupPS4(controller);
       break;
 
+    case VID_HONCAM:
+      if(pid == PID_HONCAM) setupHoncam(controller);
+      break;
+
     case VID_HORI:
       switch(pid) {
         case PID_HORI_CMDR:
@@ -73,7 +77,7 @@ void setupController(uint16_t vid, uint16_t pid, HIDController *controller) {
           setupHoriRAP3(controller);
       }
       break;
-
+    
     case VID_RAZER:
       if(pid == PID_RAZER_PANTHERA) setupPS4(controller);
       break;
@@ -191,6 +195,43 @@ void setupBuffaloClassic(HIDController *controller) {
   controller->ConfigButton(BUTTON_4, 2, 0x02);
   controller->ConfigButton(BUTTON_5, 2, 0x01);
   controller->ConfigButton(BUTTON_6, 2, 0x10);
+}
+
+/**************************
+ * Honcam GamePads
+ **************************/
+
+/**
+ * Configures a Honcam HC-J2003 and Compatible devices
+ *
+ * Honcam Button layout
+ * Byte 0x01   0x02   0x04   0x08   0x10   0x20   0x40   0x80
+ * 0:   Btn 1, Btn 4, Btn 5, Btn 2, Btn 7, Btn 3, Btn 8, Btn 6
+ * 1:   START, COIN,  Btn 9, Btn10, Btn11, NA,    NA,    NA
+ * 2:   NA,    NA,    NA,    NA,    NA,    NA,    NA,    NA
+ * 3:                   LEFT(0x00)/RIGHT(0xFF)
+ * 4:                   UP(0x00)/DOWN(0xFF)
+ *
+ * @param controller The HIDController that will be configured
+ */
+void setupHoncam(HIDController *controller) {
+  controller->ConfigButton(BUTTON_LEFT, 3, 0xFF, 0);
+  controller->ConfigButton(BUTTON_RIGHT, 3, 0xFF, 0xFF);
+  controller->ConfigButton(BUTTON_UP, 4, 0xFF, 0);
+  controller->ConfigButton(BUTTON_DOWN, 4, 0xFF, 0xFF);
+
+  controller->ConfigButton(BUTTON_COIN, 1, 0x02);
+  controller->ConfigButton(BUTTON_START, 1, 0x01);
+  controller->ConfigButton(BUTTON_1, 0, 0x01);
+  controller->ConfigButton(BUTTON_2, 0, 0x08);
+  controller->ConfigButton(BUTTON_3, 0, 0x20);
+  controller->ConfigButton(BUTTON_4, 0, 0x02);
+  controller->ConfigButton(BUTTON_5, 0, 0x04);
+  controller->ConfigButton(BUTTON_6, 0, 0x80);
+  controller->ConfigButton(BUTTON_7, 0, 0x10);
+  controller->ConfigButton(BUTTON_8, 0, 0x40);
+  controller->ConfigButton(BUTTON_9, 1, 0x04); 
+  controller->ConfigButton(BUTTON_10, 1, 0x08);
 }
 
 /**************************
