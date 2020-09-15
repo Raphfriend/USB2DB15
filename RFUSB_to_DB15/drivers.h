@@ -17,6 +17,7 @@
 #define VID_8BITDO              0x2D08 // 8BitDo
 #define VID_BROOK               0x0C12 // Brook
 #define VID_BUFFALO             0x0583 // Buffalo
+#define VID_HONCAM              0x20D6 // Honcam
 #define VID_HORI                0x0F0D // HORI
 #define VID_MADCATZ             0x0738 // Mad Catz
 #define VID_NACON               0x146B // Nacon
@@ -32,6 +33,7 @@
 #define PID_8BITDO_M30          0x5006 // 8BitDo M30 wired Controller
 #define PID_BUFFALO_CLASSIC     0x2060 // iBUFFALO SNES CLASSIC USB GAMEPAD
 #define PID_BROOK_UNIVERSAL     0x0C30 // Brook Universal Fighting PCB
+#define PID_HONCAM              0xA713 // Honcam HC-J2003
 #define PID_HORI_CMDR           0x0085 // HORI Fighting Commander
 #define PID_HORI_HORIPAD        0x0066 // HORIPAD FPS+(PS4)
 #define PID_HORI_LITE           0x00EE // HORI ワイヤードコントローラライト for PS4-102
@@ -71,6 +73,9 @@ void setup8BitDoM30(HIDController *controller);
 
 // Buffalo Controllers
 void setupBuffaloClassic(HIDController *controller);
+
+// Honcam Controllers
+void setupHoncam(HIDController *controller);
 
 // Hori Controllers
 void setupHoriFightingCmdr(HIDController *controller);

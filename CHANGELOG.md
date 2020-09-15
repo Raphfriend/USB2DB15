@@ -1,3 +1,7 @@
+## [0.13.2] - 2020-09-15
+### Added
+- Added Support for Honcam HC-J2003
+
 ## [0.13.1] - 2020-09-12
 ### Added
 
