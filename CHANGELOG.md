@@ -1,3 +1,8 @@
+## [0.13.4] - 2020-09-16
+### Added
+- Added Support for 8BitDo SFC30
+- Altered 8BitDo M30 to use D-INPUT mode
+
 ## [0.13.3] - 2020-09-16
 ### Added
 - Added Support for Generic SNES USB pad

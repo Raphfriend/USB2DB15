@@ -14,7 +14,7 @@
  * Vendor IDs
  ****************/
 
-#define VID_8BITDO              0x2D08 // 8BitDo
+#define VID_8BITDO              0x2DC8 // 8BitDo (D-INPUT MODE)
 #define VID_BROOK               0x0C12 // Brook
 #define VID_BUFFALO             0x0583 // Buffalo
 #define VID_HONCAM              0x20D6 // Honcam
@@ -31,6 +31,7 @@
  ****************/
 
 #define PID_8BITDO_M30          0x5006 // 8BitDo M30 wired Controller
+#define PID_8BITDO_SFC30        0xAB21 // 8BitDo SFC30 wired Controller
 #define PID_BUFFALO_CLASSIC     0x2060 // iBUFFALO SNES CLASSIC USB GAMEPAD
 #define PID_BROOK_UNIVERSAL     0x0C30 // Brook Universal Fighting PCB
 #define PID_GENERIC_SNES        0x0011 // Generic SNES pad
@@ -71,6 +72,7 @@ void setupController(uint16_t vid, uint16_t pid, HIDController *controller);
 
 // 8BitDo Controllers
 void setup8BitDoM30(HIDController *controller);
+void setup8BitDoSFC30(HIDController *controller);
 
 // Buffalo Controllers
 void setupBuffaloClassic(HIDController *controller);
