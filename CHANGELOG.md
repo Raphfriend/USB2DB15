@@ -1,3 +1,8 @@
+## [0.13.3] - 2020-09-16
+### Added
+- Added Support for Generic SNES USB pad
+- Refactored the Retrobit Saturn Wireless driver
+
 ## [0.13.2] - 2020-09-15
 ### Added
 - Added Support for Honcam HC-J2003

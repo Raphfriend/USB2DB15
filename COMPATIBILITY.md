@@ -10,6 +10,9 @@ This is a list of tested controllers. Please reach out to our Discord server if 
 ### Brook
 - Brook Universal Fighting PCB
 
+### Generic
+- Generic SNES USB pad
+
 ### Honcam
 - HC-J2003
 

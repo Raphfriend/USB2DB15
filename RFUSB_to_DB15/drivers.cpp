@@ -46,6 +46,9 @@ void setupController(uint16_t vid, uint16_t pid, HIDController *controller) {
 
     case VID_HORI:
       switch(pid) {
+        case PID_RETROBIT_SATURN:
+          setupRetrobit_Saturn(controller);
+          break;        
         case PID_HORI_CMDR:
           setupHoriFightingCmdr(controller);
           break;
@@ -82,9 +85,9 @@ void setupController(uint16_t vid, uint16_t pid, HIDController *controller) {
       if(pid == PID_RAZER_PANTHERA) setupPS4(controller);
       break;
 
-    case VID_RETROBIT:
-      if(pid == PID_RETROBIT_SATURN) setupHoriRAP3(controller);
-      break;
+    case VID_GENERIC:
+      if(pid == PID_GENERIC_SNES) setupGenericSNES(controller);
+      break;    
 
     case VID_SONY:
       switch(pid) {
@@ -97,7 +100,7 @@ void setupController(uint16_t vid, uint16_t pid, HIDController *controller) {
       }
       break;
 
-    case VID_UPCB :
+    case VID_UPCB:
       if(pid == PID_UPCB) setupPS4(controller);
       break;
 
@@ -198,6 +201,38 @@ void setupBuffaloClassic(HIDController *controller) {
 }
 
 /**************************
+ * Generic GamePads
+ **************************/
+
+/**
+ * Configures a Generic SNES pad and Compatible devices
+ *
+ * Generic SNES Button layout
+ * Byte 0x01   0x02   0x04   0x08   0x10   0x20   0x40   0x80
+ * 0-2:                          NA
+ * 3:                   LEFT(0x00)/RIGHT(0xFF)
+ * 4:                   UP(0x00)/DOWN(0xFF)
+ * 5:   NA,    NA,    NA,    NA,    Btn 2, Btn 5, Btn 4, Btn 1
+ * 6:   Btn 6, Btn 3, NA,    NA,    COIN,  START, NA,    NA
+ *
+ * @param controller The HIDController that will be configured
+ */
+void setupGenericSNES(HIDController *controller) {
+  controller->ConfigButton(BUTTON_LEFT, 3, 0xFF, 0);
+  controller->ConfigButton(BUTTON_RIGHT, 3, 0xFF, 0xFF);
+  controller->ConfigButton(BUTTON_UP, 4, 0xFF, 0);
+  controller->ConfigButton(BUTTON_DOWN, 4, 0xFF, 0xFF);
+  controller->ConfigButton(BUTTON_COIN, 6, 0x10);
+  controller->ConfigButton(BUTTON_START, 6, 0x20);
+  controller->ConfigButton(BUTTON_1, 5, 0x80);
+  controller->ConfigButton(BUTTON_2, 5, 0x10);
+  controller->ConfigButton(BUTTON_3, 6, 0x02);
+  controller->ConfigButton(BUTTON_4, 5, 0x40);
+  controller->ConfigButton(BUTTON_5, 5, 0x20); 
+  controller->ConfigButton(BUTTON_6, 6, 0x01);
+}
+
+/**************************
  * Honcam GamePads
  **************************/
 
@@ -219,7 +254,6 @@ void setupHoncam(HIDController *controller) {
   controller->ConfigButton(BUTTON_RIGHT, 3, 0xFF, 0xFF);
   controller->ConfigButton(BUTTON_UP, 4, 0xFF, 0);
   controller->ConfigButton(BUTTON_DOWN, 4, 0xFF, 0xFF);
-
   controller->ConfigButton(BUTTON_COIN, 1, 0x02);
   controller->ConfigButton(BUTTON_START, 1, 0x01);
   controller->ConfigButton(BUTTON_1, 0, 0x01);
@@ -298,6 +332,37 @@ void setupHoriRAP3(HIDController *controller) {
 }
 
 /**************************
+ * Retrobit GamePads
+ **************************/
+
+/**
+ * Configures a Retrobit Saturn 2.4G controller and Compatible devices
+ *
+ * Retrobit Saturn 2.4G Button layout
+ * Byte 0x01   0x02   0x04   0x08   0x10   0x20   0x40   0x80
+ * 0:   Btn 2, Btn 5, Btn 4, Btn 1, Btn 7, Btn 8, Btn 3, Btn 6
+ * 1:   COIN,  START, NA,    NA,    Btn 9, NA,    NA,    NA
+ * 2:   DPAD,  DPAD,  DPAD,  DPAD,  NA,    NA,    NA,    NA
+ *
+ * @param controller The HIDController that will be configured
+ */
+void setupRetrobit_Saturn(HIDController *controller) {
+  generateDPad(2, controller);
+
+  controller->ConfigButton(BUTTON_COIN, 1, 0x01);
+  controller->ConfigButton(BUTTON_START, 1, 0x02);
+  controller->ConfigButton(BUTTON_1, 0, 0x08);
+  controller->ConfigButton(BUTTON_2, 0, 0x01);
+  controller->ConfigButton(BUTTON_3, 0, 0x40);
+  controller->ConfigButton(BUTTON_4, 0, 0x04);
+  controller->ConfigButton(BUTTON_5, 0, 0x02);
+  controller->ConfigButton(BUTTON_6, 0, 0x80);
+  controller->ConfigButton(BUTTON_7, 0, 0x10);
+  controller->ConfigButton(BUTTON_8, 0, 0x20);
+  controller->ConfigButton(BUTTON_9, 1, 0x10);
+}
+
+/**************************
  * Sony GamePads
  **************************/
 
@@ -312,7 +377,6 @@ void setupHoriRAP3(HIDController *controller) {
  *
  * @param controller The HIDController that will be configured
  */
-
 void setupPS4(HIDController *controller) {
   generateDPad(5, controller);
 
