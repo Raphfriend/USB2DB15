@@ -1,4 +1,4 @@
-# USB2DB15 - Supergun Adapter
+# USB2DB15 - Supergun Adapter [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=A8YE92K9QM7NA)
 
 A simple Atmega328P based USB to DB15 adapter designed for use with a Supergun or Neo-Geo system.
 
@@ -45,7 +45,7 @@ If utilizing the Custom PCB in conjunction with an Arduino Pro Mini and Mini USB
 Due to variances of Mini Pro PCB's, A4 and A5 may be in different locations. Please pay attention to this.
 
 <p align="center">
-<img width="680" height="480" src="https://i.imgur.com/HWof8UF.png">
+<img width="680" height="460" src="https://i.imgur.com/rEngy5S.png">
  <br>
   <b>Custom PCB for Arduino Pro Mini</b><br>
 </p>
@@ -93,7 +93,7 @@ See COMPATIBILITY.md for a detailed list
 - RetroFreak CONTROLLER ADAPTER
 - iBUFFALO SNES CLASSIC USB GAMEPAD
 - MadCatz PS3 compatible controllers
-- Retrobit SEGA SaturnÂ® 8-Button Arcade Pad - 2.4 GHz Wireless
+- Retrobit SEGA Saturn® 8-Button Arcade Pad - 2.4 GHz Wireless
 - Hori Fighting Commander Controller for PS3 / PS4
 - Hori Fighting Stick for PS3
 
@@ -112,7 +112,14 @@ Press and Hold SELECT for 3 seconds, then while holding continuing to hold SELEC
 Finally release SELECT to lock in the binding.
 
 *XBoxOne controllers appear to the system as the same make and model and thus use the same profiles even if they are different controllers.
-### 6. Where can I get more help, if I need it?
+
+### Donation
+
+If this project has helped you, consider financing it and make a donation, so we can continue our work and acquire new controls to implement support.
+
+[![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=HYCK7DF7Q6XLY&source=url)
+
+### Where can I get more help, if I need it?
 
 Via the Arcade-Projects website forum or via Discord.
 
