@@ -18,11 +18,11 @@
 #define VID_BROOK               0x0C12 // Brook
 #define VID_BUFFALO             0x0583 // Buffalo
 #define VID_HONCAM              0x20D6 // Honcam
-#define VID_HORI                0x0F0D // HORI
+#define VID_HORI                0x0F0D // HORI (Also used by Retrobit)
 #define VID_MADCATZ             0x0738 // Mad Catz
 #define VID_NACON               0x146B // Nacon
 #define VID_RAZER               0x1532 // Razer
-#define VID_RETROBIT            0x0079 // Retrobit
+#define VID_GENERIC             0x0079 // Generic
 #define VID_SONY                0x054c // Sony
 #define VID_UPCB                0x04D8 // Universal PCB Project
 
@@ -33,6 +33,7 @@
 #define PID_8BITDO_M30          0x5006 // 8BitDo M30 wired Controller
 #define PID_BUFFALO_CLASSIC     0x2060 // iBUFFALO SNES CLASSIC USB GAMEPAD
 #define PID_BROOK_UNIVERSAL     0x0C30 // Brook Universal Fighting PCB
+#define PID_GENERIC_SNES        0x0011 // Generic SNES pad
 #define PID_HONCAM              0xA713 // Honcam HC-J2003
 #define PID_HORI_CMDR           0x0085 // HORI Fighting Commander
 #define PID_HORI_HORIPAD        0x0066 // HORIPAD FPS+(PS4)
@@ -45,7 +46,7 @@
 #define PID_NACON_DAIJA_PS3     0x0904 // Nacon Daija (PS3)
 #define PID_NACON_DAIJA_PS4     0x0D09 // Nacon Daija (PS4)
 #define PID_RAZER_PANTHERA      0x0401 // Razer Panthera
-#define PID_RETROBIT_SATURN     0x0011 // Retrobit Sega Saturn Wireless
+#define PID_RETROBIT_SATURN     0x00C1 // Retrobit Sega Saturn Wireless 2.4G
 #define PID_SONY_PS4_JP         0x09CC // PS4 Controller JP region
 #define PID_SONY_PS4_NA         0x05C4 // PS4 Controller NA region
 #define PID_SONY_PS4_ADAPTER    0x0BA0 // PS4 Wireless Adapter
@@ -74,12 +75,18 @@ void setup8BitDoM30(HIDController *controller);
 // Buffalo Controllers
 void setupBuffaloClassic(HIDController *controller);
 
+// Generic Controllers
+void setupGenericSNES(HIDController *controller);
+
 // Honcam Controllers
 void setupHoncam(HIDController *controller);
 
 // Hori Controllers
 void setupHoriFightingCmdr(HIDController *controller);
 void setupHoriRAP3(HIDController *controller);
+
+// Retrobit Controllers
+void setupRetrobit_Saturn(HIDController *controller);
 
 // Sony
 void setupPS4(HIDController *controller);
