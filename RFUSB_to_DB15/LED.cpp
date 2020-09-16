@@ -6,6 +6,7 @@
 
 namespace LED {
   uint8_t blinks;
+  uint8_t freq;
   uint8_t on;
   unsigned long next_blink;
 
@@ -24,16 +25,18 @@ namespace LED {
   }
 
   /**
-   * Blink {num} times. Calling this again overwrites the number of blinks.
+   * Blink {num} times, (rate) speed. Calling this again overwrites the number of blinks.
    * Also resets the blink timer. Always ends with the LED off even if the
    * LED was on before it was called.
    *
    * @param num Number of times to blink
+   * @param speed of blink
    */
-  void Blink(uint8_t num) {
+  void Blink(uint8_t num, uint8_t rate) {
     blinks = num;
+    freq = rate;
     on = true;
-    next_blink = millis() + BLINK_HALF_LENGTH;
+    next_blink = millis() + freq;
   }
 
   /**
@@ -43,7 +46,7 @@ namespace LED {
     if (blinks && millis() >= next_blink) {
       if (on) blinks--;
       on = !on;
-      next_blink = millis() + BLINK_HALF_LENGTH;
+      next_blink = millis() + freq;
     }
     if (on) {
       digitalWrite(LED_PIN, HIGH);
