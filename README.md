@@ -1,4 +1,4 @@
-# USB2DB15 - Supergun Adapter [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=A8YE92K9QM7NA)
+# USB2DB15 - Supergun Adapter [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=HYCK7DF7Q6XLY&source=url)
 
 A simple Atmega328P based USB to DB15 adapter designed for use with a Supergun or Neo-Geo system.
 
@@ -93,7 +93,7 @@ See COMPATIBILITY.md for a detailed list
 - RetroFreak CONTROLLER ADAPTER
 - iBUFFALO SNES CLASSIC USB GAMEPAD
 - MadCatz PS3 compatible controllers
-- Retrobit SEGA Saturn® 8-Button Arcade Pad - 2.4 GHz Wireless
+- Retrobit SEGA SaturnÂ® 8-Button Arcade Pad - 2.4 GHz Wireless
 - Hori Fighting Commander Controller for PS3 / PS4
 - Hori Fighting Stick for PS3
 
