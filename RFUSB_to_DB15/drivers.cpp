@@ -28,10 +28,17 @@
 
 void setupController(uint16_t vid, uint16_t pid, HIDController *controller) {
   switch (vid) {
-    case VID_8BITDO :
-      if(pid == PID_8BITDO_M30) setup8BitDoM30(controller);
+    case VID_8BITDO:
+      switch(pid) {
+        case PID_8BITDO_M30:
+          setup8BitDoM30(controller);
+          break;        
+        case PID_8BITDO_SFC30:
+          setup8BitDoSFC30(controller);
+          break;
+      }
       break;
-
+      
     case VID_BUFFALO:
       if(pid == PID_BUFFALO_CLASSIC) setupBuffaloClassic(controller);
       break;
@@ -115,6 +122,7 @@ void setupController(uint16_t vid, uint16_t pid, HIDController *controller) {
   }
 }
 
+/*
 /**************************
  * Utility functions
  **************************/
@@ -150,8 +158,8 @@ void generateDPad(uint8_t index, HIDController *controller) {
  *
  * 8BitDo M30 Button layout
  * Byte 0x01   0x02   0x04   0x08   0x10   0x20   0x40   0x80
- * 0:   Btn 6, Btn 3, NA,    Btn 4, Btn 1, NA,    Btn 5, Btn 4
- * 1:   NA,    NA,    COIN,  START, NA,    NA,    NA,    NA
+ * 0:   Btn 4, Btn 5, NA,    Btn 1, Btn 2, NA,    Btn 3, Btn 6
+ * 1:   Btn 7, Btn 8, COIN,  START, NA,    NA,    NA,    NA
  * 2:   DPAD,  DPAD,  DPAD,  DPAD,  NA,    NA,    NA,    NA
  *
  * @param controller The HIDController that will be configured
@@ -168,6 +176,36 @@ void setup8BitDoM30(HIDController *controller) {
   controller->ConfigButton(BUTTON_4, 0, 0x01);
   controller->ConfigButton(BUTTON_5, 0, 0x02);
   controller->ConfigButton(BUTTON_6, 0, 0x80);
+  controller->ConfigButton(BUTTON_7, 1, 0x01);
+  controller->ConfigButton(BUTTON_8, 1, 0x02);
+}
+
+/**
+ * Configures a 8BitDo SFC30 Wired Controller and Compatible devices
+ *
+ * 8BitDo SFC30 Button layout
+ * Byte 0x01   0x02   0x04   0x08   0x10   0x20   0x40   0x80
+ * 0:                   LEFT(0x00)/RIGHT(0xFF)
+ * 1:                   UP(0x00)/DOWN(0xFF)
+ * 2-3:                          NA
+ * 4:   NA,    NA,    NA,    NA,    Btn 5, Btn 4, NA,    Btn 2
+ * 5:   Btn 1, NA,    Btn 6, Btn 3, NA,    NA,    COIN,  START
+ *
+ * @param controller The HIDController that will be configured
+ */
+void setup8BitDoSFC30(HIDController *controller) {
+  controller->ConfigButton(BUTTON_LEFT, 0, 0xFF, 0);
+  controller->ConfigButton(BUTTON_RIGHT, 0, 0xFF, 0xFF);
+  controller->ConfigButton(BUTTON_UP, 1, 0xFF, 0);
+  controller->ConfigButton(BUTTON_DOWN, 1, 0xFF, 0xFF);
+  controller->ConfigButton(BUTTON_COIN, 5, 0x40);
+  controller->ConfigButton(BUTTON_START, 5, 0x80);
+  controller->ConfigButton(BUTTON_1, 5, 0x01);
+  controller->ConfigButton(BUTTON_2, 4, 0x80);
+  controller->ConfigButton(BUTTON_3, 5, 0x08);
+  controller->ConfigButton(BUTTON_4, 4, 0x20);
+  controller->ConfigButton(BUTTON_5, 4, 0x10); 
+  controller->ConfigButton(BUTTON_6, 5, 0x04);
 }
 
 /**************************

@@ -2,7 +2,8 @@
 This is a list of tested controllers. Please reach out to our Discord server if you have a controller not listed here and wish to be a tester.  You will need to test each beta version of the software for regressions
 
 ### 8BitDo
-- M30 Wired Controller
+- M30 Bluetooth Controller (Via wired connection. Place controller into D-INPUT mode by holding B + START upon powering ON controller.)
+- SFC30 (Via wired connection)
 
 ### Buffalo
 - SNES Classic GamePad
@@ -39,7 +40,7 @@ This is a list of tested controllers. Please reach out to our Discord server if 
 - Panthera
 
 ### Retrobit
-- Sega Saturn Wireless Controller
+- Sega Saturn Wireless Controller 2.4GHz (Via wireless USB receiver)
 
 ### Sony
 - Dual Shock 3
