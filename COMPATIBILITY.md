@@ -4,6 +4,7 @@ This is a list of tested controllers. Please reach out to our Discord server if 
 ### 8BitDo
 - M30 Bluetooth Controller (Via wired connection. Place controller into D-INPUT mode by holding B + START upon powering ON controller.)
 - SFC30 (Via wired connection)
+- NES & SNES Bluetooth Receivers (Firmware v1.33)
 
 ### Buffalo
 - SNES Classic GamePad

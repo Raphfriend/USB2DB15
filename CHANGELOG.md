@@ -1,3 +1,9 @@
+## [0.13.5] - 2020-09-18
+### Added
+- Added Support for 8BitDo NES & SNES Bluetooth wireless receivers
+	- Sony PS4 DS4 & Nintendo Switch Pro controllers tested and verified as working
+	- Note: 8BitDo receivers must be on Firmware v1.33 
+
 ## [0.13.4] - 2020-09-16
 ### Added
 - Added Support for 8BitDo SFC30
