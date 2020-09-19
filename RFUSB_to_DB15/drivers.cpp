@@ -67,6 +67,8 @@ void setupController(uint16_t vid, uint16_t pid, HIDController *controller) {
         case PID_HORI_RAP_PS3:
         case PID_HORI_RAP_PREMIUM:
         case PID_HORI_RAP_V_PS3:
+        case PID_HORI_FS3:
+        case PID_HORI_FSV3:                
         default:
           setupHoriRAP3(controller);
           break;
