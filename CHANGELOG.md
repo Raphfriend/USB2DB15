@@ -2,7 +2,12 @@
 ### Added
 - Added Support for 8BitDo NES & SNES Bluetooth wireless receivers
 	- Sony PS4 DS4 & Nintendo Switch Pro controllers tested and verified as working
-	- Note: 8BitDo receivers must be on Firmware v1.33 
+	- Note: 8BitDo receivers must be on Firmware v1.33
+- Added Support For Hori Fighting Stick Mini 4
+- Library updated: https://github.com/Raphfriend/USB_Host_Shield_2.0
+	- PS3USB.cpp
+	- PS3USB.h
+	- PS3Enums.h
 
 ## [0.13.4] - 2020-09-16
 ### Added
@@ -89,5 +94,4 @@
 
 - Added support to HORI Real Arcad Pro - Soul Calibur VI Edition for Xbox One [@kitsune](https://github.com/kitsune)
 - Library updated: https://github.com/Raphfriend/USB_Host_Shield_2.0
-
-
+	- XBOXONE.h
