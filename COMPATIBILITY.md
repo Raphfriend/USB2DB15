@@ -23,11 +23,11 @@ This is a list of tested controllers. Please reach out to our Discord server if 
 - HORI wireless controller lite
 - Fighting Stick 3
 - Fighting Commander (PS3 mode)
+- Fighting Stick Mini 4 (requires USB HOST SHIELD 2.0 update)
 - Real Arcade Pro.3 SA (PS3 mode)
 - Real Arcade Pro.3 Premium VLX (PS3 mode)
 - Real Arcade Pro V HAYABUSA (PS3 and PS4 modes)
 - Real Arcade Pro - Soul Calibur VI Edition for Xbox One (requires USB HOST SHIELD 2.0 update)
-- Hori Fighting Stick Mini 4 (requires USB HOST SHIELD 2.0 update)
 
 ### Mad Catz
 - Street Fighter IV - Arcade FightStick Tournament Edition PS3
