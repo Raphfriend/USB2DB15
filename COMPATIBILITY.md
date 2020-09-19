@@ -4,7 +4,7 @@ This is a list of tested controllers. Please reach out to our Discord server if 
 ### 8BitDo
 - M30 Bluetooth Controller (Via wired connection. Place controller into D-INPUT mode by holding B + START upon powering ON controller.)
 - SFC30 (Via wired connection)
-- NES & SNES Bluetooth Receivers (Firmware v1.33)
+- NES & SNES Bluetooth Receivers (Firmware v1.33) (requires USB HOST SHIELD 2.0 update)
 
 ### Buffalo
 - SNES Classic GamePad
@@ -26,7 +26,8 @@ This is a list of tested controllers. Please reach out to our Discord server if 
 - Real Arcade Pro.3 SA (PS3 mode)
 - Real Arcade Pro.3 Premium VLX (PS3 mode)
 - Real Arcade Pro V HAYABUSA (PS3 and PS4 modes)
-- Real Arcade Pro - Soul Calibur VI Edition for Xbox One
+- Real Arcade Pro - Soul Calibur VI Edition for Xbox One (requires USB HOST SHIELD 2.0 update)
+- Hori Fighting Stick Mini 4 (requires USB HOST SHIELD 2.0 update)
 
 ### Mad Catz
 - Street Fighter IV - Arcade FightStick Tournament Edition PS3
