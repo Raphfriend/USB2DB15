@@ -14,11 +14,11 @@
  * Vendor IDs
  ****************/
 
-#define VID_8BITDO              0x2DC8 // 8BitDo (D-INPUT MODE)
+#define VID_8BITDO              0x2DC8 // 8BitDo Bluetooth (D-INPUT MODE)
 #define VID_BROOK               0x0C12 // Brook
 #define VID_BUFFALO             0x0583 // Buffalo
 #define VID_HONCAM              0x20D6 // Honcam
-#define VID_HORI                0x0F0D // HORI (Also used by Retrobit)
+#define VID_HORI                0x0F0D // HORI (Also used by Retrobit 2.4GHz)
 #define VID_MADCATZ             0x0738 // Mad Catz
 #define VID_NACON               0x146B // Nacon
 #define VID_RAZER               0x1532 // Razer
@@ -30,8 +30,8 @@
  * Product IDs
  ****************/
 
-#define PID_8BITDO_M30          0x5006 // 8BitDo M30 wired Controller
-#define PID_8BITDO_SFC30        0xAB21 // 8BitDo SFC30 wired Controller
+#define PID_8BITDO_M30          0x5006 // 8BitDo M30 Bluetooth Wired Controller (D-INPUT MODE)
+#define PID_8BITDO_SFC30        0xAB21 // 8BitDo SFC30 Wired Controller
 #define PID_BUFFALO_CLASSIC     0x2060 // iBUFFALO SNES CLASSIC USB GAMEPAD
 #define PID_BROOK_UNIVERSAL     0x0C30 // Brook Universal Fighting PCB
 #define PID_GENERIC_SNES        0x0011 // Generic SNES pad
