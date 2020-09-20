@@ -38,7 +38,7 @@ void setupController(uint16_t vid, uint16_t pid, HIDController *controller) {
           break;
       }
       break;
-      
+
     case VID_BUFFALO:
       if(pid == PID_BUFFALO_CLASSIC) setupBuffaloClassic(controller);
       break;
@@ -282,7 +282,7 @@ void setupGenericSNES(HIDController *controller) {
  * Honcam Button layout
  * Byte 0x01   0x02   0x04   0x08   0x10   0x20   0x40   0x80
  * 0:   Btn 1, Btn 4, Btn 5, Btn 2, Btn 7, Btn 3, Btn 8, Btn 6
- * 1:   START, COIN,  Btn 9, Btn10, Btn11, NA,    NA,    NA
+ * 1:   COIN,  START, Btn 9, Btn10, Btn11, NA,    NA,    NA
  * 2:   NA,    NA,    NA,    NA,    NA,    NA,    NA,    NA
  * 3:                   LEFT(0x00)/RIGHT(0xFF)
  * 4:                   UP(0x00)/DOWN(0xFF)
@@ -294,8 +294,8 @@ void setupHoncam(HIDController *controller) {
   controller->ConfigButton(BUTTON_RIGHT, 3, 0xFF, 0xFF);
   controller->ConfigButton(BUTTON_UP, 4, 0xFF, 0);
   controller->ConfigButton(BUTTON_DOWN, 4, 0xFF, 0xFF);
-  controller->ConfigButton(BUTTON_COIN, 1, 0x02);
-  controller->ConfigButton(BUTTON_START, 1, 0x01);
+  controller->ConfigButton(BUTTON_COIN, 1, 0x01);
+  controller->ConfigButton(BUTTON_START, 1, 0x02);
   controller->ConfigButton(BUTTON_1, 0, 0x01);
   controller->ConfigButton(BUTTON_2, 0, 0x08);
   controller->ConfigButton(BUTTON_3, 0, 0x20);
