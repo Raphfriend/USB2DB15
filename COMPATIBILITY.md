@@ -18,6 +18,7 @@ This is a list of tested controllers. Please reach out to our Discord server if 
 
 ### Brook
 - Brook Universal Fighting PCB
+- Brook Retro Board
 
 ### Generic
 - Generic SNES USB pad
@@ -26,9 +27,10 @@ This is a list of tested controllers. Please reach out to our Discord server if 
 - HC-J2003
 
 ### HORI
-- HORIPAD
-- HORI wireless controller lite
+- HORIPAD 3 Mini
+- HORI Wireless Controller Lite
 - Fighting Stick 3
+- Fighting Stick V3
 - Fighting Commander (PS3 mode)
 - Fighting Stick Mini 4 (requires USB HOST SHIELD 2.0 update)
 - Real Arcade Pro.3 SA (PS3 mode)
@@ -56,6 +58,9 @@ This is a list of tested controllers. Please reach out to our Discord server if 
 - Dual Shock 3
 - PS4 Offical Controllers
 - PS4 Wireless Adapter
+
+### Toodles
+- MC Cthulhu
 
 ### Universal PCB Project
 - Universal PCB Firmware 29
