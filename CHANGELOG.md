@@ -1,3 +1,6 @@
+## [0.13.6] - 2020-09-28
+- Added Support for the Qanba Obsidian in both PS3 and PS4 modes
+
 ## [0.13.5] - 2020-09-18
 ### Added
 - Added Support for 8BitDo NES & SNES Bluetooth wireless receivers (requires USB HOST SHIELD 2.0 update)

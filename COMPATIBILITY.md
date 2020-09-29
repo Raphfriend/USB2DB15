@@ -47,6 +47,9 @@ This is a list of tested controllers. Please reach out to our Discord server if 
 ### Nacon
 - Daija (PS3 and PS4 Modes)
 
+### Qanba
+- Obsidian (PS3 and PS4 Modes)
+
 ### Razer
 - Panthera
 

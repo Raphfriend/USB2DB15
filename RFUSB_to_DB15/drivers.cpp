@@ -89,6 +89,17 @@ void setupController(uint16_t vid, uint16_t pid, HIDController *controller) {
           setupHoriRAP3(controller);
       }
       break;
+
+    case VID_QANBA:
+      switch(pid) {
+        case PID_QANBA_OBSIDIAN_PS4:
+          setupPS4(controller);
+          break;
+        case PID_QANBA_OBSIDIAN_PS3:
+        default:
+          setupHoriRAP3(controller);
+      }
+      break;
     
     case VID_RAZER:
       if(pid == PID_RAZER_PANTHERA) setupPS4(controller);

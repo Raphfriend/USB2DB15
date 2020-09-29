@@ -21,6 +21,7 @@
 #define VID_HORI                0x0F0D // HORI (Also used by Retrobit 2.4GHz)
 #define VID_MADCATZ             0x0738 // Mad Catz
 #define VID_NACON               0x146B // Nacon
+#define VID_QANBA               0x2C22 // Qanba
 #define VID_RAZER               0x1532 // Razer
 #define VID_GENERIC             0x0079 // Generic
 #define VID_SONY                0x054c // Sony
@@ -48,6 +49,8 @@
 #define PID_MADCATZ_SF_PS3      0x8838 // Mad Catz Street Fighter IV Tournament Edition (PS3)
 #define PID_NACON_DAIJA_PS3     0x0904 // Nacon Daija (PS3)
 #define PID_NACON_DAIJA_PS4     0x0D09 // Nacon Daija (PS4)
+#define PID_QANBA_OBSIDIAN_PS3  0x2302 // Qanba Obsidian (PS3)
+#define PID_QANBA_OBSIDIAN_PS4  0x2300 // Qanba Obsidian (PS4)
 #define PID_RAZER_PANTHERA      0x0401 // Razer Panthera
 #define PID_RETROBIT_SATURN     0x00C1 // Retrobit Sega Saturn Wireless 2.4G
 #define PID_SONY_PS4_JP         0x09CC // PS4 Controller JP region
