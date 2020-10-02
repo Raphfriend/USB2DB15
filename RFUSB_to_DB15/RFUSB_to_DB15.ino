@@ -7,10 +7,10 @@
 //
 //         USB Host Shield 2.0 modded lib:         https://github.com/Raphfriend/USB_Host_Shield_2.0
 //
-//         Compiled with Arduino 1.8.10
+//         Compiled with Arduino 1.8.13
 //
 //
-//                 Thanks to:
+//              Thanks to:
 //
 //              Oleg Mazurov for USB Host Shield 2.0 and libs
 //              HUYE (twitter @huye_4589) for USB controller -> ATARI ver 1.21
@@ -23,12 +23,6 @@
 //              SpaceJockey for beta testing
 //
 //
-//
-//
-//
-//
-//
-//
 //            メインプログラム、コントローラタイプ(TYPE_PS4, TYPE_MDmini) :
 //
 //            コントローラタイプ(TYPE_PSC, TYPE_RAP3, TYPE_RAP4, TYPE_SNES, TYPE_RETROFREAK) :
@@ -39,7 +33,6 @@
 #define POLLING_OVERRIDE 1000
 
 #include <XBOXONE.h>
-//#include <XBOXUSB.h>
 #include <PS3USB.h>
 #include <EEPROM.h>
 #include <usbhid.h>
@@ -56,20 +49,6 @@
 #include <spi4teensy3.h>
 #endif
 #include <SPI.h>
-
-/* Remaining Joysticks from old method
-  const struct {
-  uint16_t vid;
-  uint16_t pid;
-  int joy_type;
-  } Tbl_cnv_data[] = {
-  {0x0ca3, 0x0024, TYPE_MDmini}, // MDmini標準コントローラ
-  {0x054c, 0x0cda, TYPE_PSC}, // PlayStation Classic USB Controller
-  {0x0f0d, 0x00c1, TYPE_8BITDO},
-  {0x1345, 0x1030, TYPE_SNES}, // RetroFreak GAME CONTROLLER
-  {0x0413, 0x502b, TYPE_RETROFREAK}, // RetroFreak CONTROLLER ADAPTER
-  {0, 0, -1} // データ終端
-  }; */
 
 #define ANALOG_BUTTON_PIN A6
 
