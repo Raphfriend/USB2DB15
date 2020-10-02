@@ -8,7 +8,7 @@
 #include "HIDController.h"
 
 // Please Keep the IDs in Alphabetical order to help
-// other find the keys thank you
+// others find the keys thank you
 
 /****************
  * Vendor IDs
@@ -17,13 +17,13 @@
 #define VID_8BITDO              0x2DC8 // 8BitDo Bluetooth (D-INPUT MODE)
 #define VID_BROOK               0x0C12 // Brook
 #define VID_BUFFALO             0x0583 // Buffalo
+#define VID_GENERIC             0x0079 // Generic
 #define VID_HONCAM              0x20D6 // Honcam
 #define VID_HORI                0x0F0D // HORI (Also used by Retrobit 2.4GHz)
 #define VID_MADCATZ             0x0738 // Mad Catz
 #define VID_NACON               0x146B // Nacon
 #define VID_QANBA               0x2C22 // Qanba
 #define VID_RAZER               0x1532 // Razer
-#define VID_GENERIC             0x0079 // Generic
 #define VID_SONY                0x054c // Sony
 #define VID_UPCB                0x04D8 // Universal PCB Project
 
@@ -42,8 +42,8 @@
 #define PID_HORI_FSV3           0x0027 // HORI Fighting Stick V3
 #define PID_HORI_HORIPAD        0x0066 // HORIPAD FPS+(PS4)
 #define PID_HORI_LITE           0x00EE // HORI ワイヤードコントローラライト for PS4-102
-#define PID_HORI_RAP_PS3        0x0011 // HORI Real Arcade Pro.3 SA PS3コントローラ
 #define PID_HORI_RAP_PREMIUM    0x0026 // HORI Real Arcade リアルアーケードPro.3 Premium VLX
+#define PID_HORI_RAP_PS3        0x0011 // HORI Real Arcade Pro.3 SA PS3コントローラ
 #define PID_HORI_RAP_V_PS3      0x008B // HORI RAP V HAYABUSA Controller(PS3)
 #define PID_HORI_RAP_V_PS4      0x008A // HORI RAP V HAYABUSA Controller(PS4)
 #define PID_MADCATZ_SF_PS3      0x8838 // Mad Catz Street Fighter IV Tournament Edition (PS3)
@@ -53,9 +53,9 @@
 #define PID_QANBA_OBSIDIAN_PS4  0x2300 // Qanba Obsidian (PS4)
 #define PID_RAZER_PANTHERA      0x0401 // Razer Panthera
 #define PID_RETROBIT_SATURN     0x00C1 // Retrobit Sega Saturn Wireless 2.4G
+#define PID_SONY_PS4_ADAPTER    0x0BA0 // PS4 Wireless Adapter
 #define PID_SONY_PS4_JP         0x09CC // PS4 Controller JP region
 #define PID_SONY_PS4_NA         0x05C4 // PS4 Controller NA region
-#define PID_SONY_PS4_ADAPTER    0x0BA0 // PS4 Wireless Adapter
 #define PID_UPCB                0x1529 // Universal PCB Project
 
 /****************

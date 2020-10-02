@@ -18,7 +18,7 @@ bool HIDController::Connected() {
  * Gets if the button has been clicked since the last check
  *
  * This function checks the buttonState variable to see if the bit
- * corresponding to the button is set to true. Then checked lastButtonState
+ * corresponding to the button is set to true. Then checks lastButtonState
  * to make sure it wasn't previously pressed.
  *
  * @param button The button to check. Defined in "device_description.h"
@@ -101,7 +101,7 @@ void HIDController::ConfigButton(uint8_t button_id, uint8_t index, uint8_t mask)
 /**
  * Configures a Button.
  *
- * This functions configures at button for use in the ParseHIDData function.
+ * This functions configures a button for use in the ParseHIDData function.
  *
  * @param button_id The button id as defined in "device_descriptor.h"
  * @param index The index in the usb packet buffer that the button is located
@@ -146,7 +146,7 @@ uint8_t HIDController::OnInitSuccessful() {
 /**
  * Processes in incoming USB data packet
  *
- * This is a callback function defined by HIDUniversal and is called when ever
+ * This is a callback function defined by HIDUniversal and is called whenever
  * the controller sends data about it's current state. Do not call this
  * function directly
  *
