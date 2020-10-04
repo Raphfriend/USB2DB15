@@ -1,3 +1,6 @@
+## [0.13.7] - 2020-10-04
+- Extended `Mad Catz Street Fighter IV Tournament Edition (PS3)` entry in `drivers.cpp` & `drivers.h` to support both editions (Round 1 & Round 2) of the controller.
+
 ## [0.13.6] - 2020-09-28
 - Added Support for the Qanba Obsidian in both PS3 and PS4 modes
 
