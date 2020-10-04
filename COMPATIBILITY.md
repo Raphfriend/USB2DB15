@@ -39,7 +39,7 @@ This is a list of tested controllers. Please reach out to our Discord server if 
 - Real Arcade Pro - Soul Calibur VI Edition for Xbox One (requires USB HOST SHIELD 2.0 update)
 
 ### Mad Catz
-- Street Fighter IV - Arcade FightStick Tournament Edition PS3
+- Street Fighter IV - Arcade FightStick Tournament Edition PS3 (Round 1 & Round 2 versions)
 
 ### Microsoft
 - XboxOne Controller

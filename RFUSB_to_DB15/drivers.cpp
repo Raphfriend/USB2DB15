@@ -81,7 +81,13 @@ void setupController(uint16_t vid, uint16_t pid, HIDController *controller) {
       break;
 
     case VID_MADCATZ:
-      if(pid == PID_MADCATZ_SF_PS3) setupHoriRAP3(controller);
+      switch(pid) {
+        case PID_MADCATZ_SF_PS3_RND1:
+        case PID_MADCATZ_SF_PS3_RND2:
+        default:
+          setupHoriRAP3(controller);
+          break;
+      }
       break;
 
     case VID_NACON:

@@ -46,7 +46,8 @@
 #define PID_HORI_RAP_PS3        0x0011 // HORI Real Arcade Pro.3 SA PS3コントローラ
 #define PID_HORI_RAP_V_PS3      0x008B // HORI RAP V HAYABUSA Controller(PS3)
 #define PID_HORI_RAP_V_PS4      0x008A // HORI RAP V HAYABUSA Controller(PS4)
-#define PID_MADCATZ_SF_PS3      0x8838 // Mad Catz Street Fighter IV Tournament Edition (PS3)
+#define PID_MADCATZ_SF_PS3_RND1 0x8818 // Mad Catz Street Fighter IV Tournament Edition Round 1 (PS3)
+#define PID_MADCATZ_SF_PS3_RND2 0x8838 // Mad Catz Street Fighter IV Tournament Edition Round 2 (PS3)
 #define PID_NACON_DAIJA_PS3     0x0904 // Nacon Daija (PS3)
 #define PID_NACON_DAIJA_PS4     0x0D09 // Nacon Daija (PS4)
 #define PID_QANBA_OBSIDIAN_PS3  0x2302 // Qanba Obsidian (PS3)
