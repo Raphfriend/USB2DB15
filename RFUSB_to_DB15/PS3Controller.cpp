@@ -24,16 +24,48 @@ PS3Controller::PS3Controller(PS3USB *p) {
  * @param button The button to check. Defined in "device_description.h"
  * @return If the button has been clicked
  */
+
+/**
+ * PS3 analog | range of 0 to 255 | 117 to 137 = centre / OFF / dead space
+ * UP    LeftHatY | 0   = FULL-UP    - first registers at 116 
+ * DOWN  LeftHatY | 255 = FULL-DOWN  - first registers at 138 
+ * LEFT  LeftHatX | 0   = FULL-LEFT  - first registers at 116 
+ * RIGHT LeftHatX | 255 = FULL-RIGHT - first registers at 138 
+ */
+
+// lower values register analog nubs sooner / higher values register later (1 to 116)
+#define PS3_ANALOG_SENSITIVITY 32 
+ 
 bool PS3Controller::GetButtonClick(uint8_t button) {
   switch(button) {
+<<<<<<< HEAD
+<<<<<<< Updated upstream
+    case BUTTON_UP:
+      return ps3usb->getButtonClick(UP);
+=======
     case BUTTON_UP:                            
       return ps3usb->getButtonClick(UP) || ps3usb->getAnalogHat(LeftHatY) >= 0 && ps3usb->getAnalogHat(LeftHatY) <= 64;
+>>>>>>> 2060909865f2223379e4157642f42ad142c9f32d
     case BUTTON_DOWN:
       return ps3usb->getButtonClick(DOWN) || ps3usb->getAnalogHat(LeftHatY) <= 255 && ps3usb->getAnalogHat(LeftHatY) >= 190;
     case BUTTON_LEFT:
       return ps3usb->getButtonClick(LEFT) || ps3usb->getAnalogHat(LeftHatX) >= 0 && ps3usb->getAnalogHat(LeftHatX) <= 64;
     case BUTTON_RIGHT:
+<<<<<<< HEAD
+      return ps3usb->getButtonClick(RIGHT);
+=======
+    case BUTTON_UP:                            
+      return ps3usb->getButtonClick(UP) || ps3usb->getAnalogHat(LeftHatY) < 116 - PS3_ANALOG_SENSITIVITY;
+    case BUTTON_DOWN:
+      return ps3usb->getButtonClick(DOWN) || ps3usb->getAnalogHat(LeftHatY) > 138 + PS3_ANALOG_SENSITIVITY;
+    case BUTTON_LEFT:
+      return ps3usb->getButtonClick(LEFT) || ps3usb->getAnalogHat(LeftHatX) < 116 - PS3_ANALOG_SENSITIVITY;
+    case BUTTON_RIGHT:
+      return ps3usb->getButtonClick(RIGHT) || ps3usb->getAnalogHat(LeftHatX) > 138 + PS3_ANALOG_SENSITIVITY;
+>>>>>>> Stashed changes
+=======
       return ps3usb->getButtonClick(RIGHT) || ps3usb->getAnalogHat(LeftHatX) <= 255 && ps3usb->getAnalogHat(LeftHatX) >= 190;
+>>>>>>> 2060909865f2223379e4157642f42ad142c9f32d
     case BUTTON_START:
       return ps3usb->getButtonClick(START);
     case BUTTON_COIN:
@@ -74,13 +106,31 @@ bool PS3Controller::GetButtonClick(uint8_t button) {
 bool PS3Controller::GetButtonState(uint8_t button) {
   switch(button) {
     case BUTTON_UP:
+<<<<<<< HEAD
+<<<<<<< Updated upstream
+      return ps3usb->getButtonPress(UP);
+=======
       return ps3usb->getButtonPress(UP) || ps3usb->getAnalogHat(LeftHatY) >= 0 && ps3usb->getAnalogHat(LeftHatY) <= 64;
+>>>>>>> 2060909865f2223379e4157642f42ad142c9f32d
     case BUTTON_DOWN:
       return ps3usb->getButtonPress(DOWN) || ps3usb->getAnalogHat(LeftHatY) <= 255 && ps3usb->getAnalogHat(LeftHatY) >= 190;
     case BUTTON_LEFT:
       return ps3usb->getButtonPress(LEFT) || ps3usb->getAnalogHat(LeftHatX) >= 0 && ps3usb->getAnalogHat(LeftHatX) <= 64;
     case BUTTON_RIGHT:
+<<<<<<< HEAD
+      return ps3usb->getButtonPress(RIGHT);
+=======
+      return ps3usb->getButtonPress(UP) || ps3usb->getAnalogHat(LeftHatY) < 116 - PS3_ANALOG_SENSITIVITY;
+    case BUTTON_DOWN:
+      return ps3usb->getButtonPress(DOWN) || ps3usb->getAnalogHat(LeftHatY) > 138 + PS3_ANALOG_SENSITIVITY;
+    case BUTTON_LEFT:
+      return ps3usb->getButtonPress(LEFT) || ps3usb->getAnalogHat(LeftHatX) < 116 - PS3_ANALOG_SENSITIVITY;
+    case BUTTON_RIGHT:
+      return ps3usb->getButtonPress(RIGHT) || ps3usb->getAnalogHat(LeftHatX) > 138 + PS3_ANALOG_SENSITIVITY;
+>>>>>>> Stashed changes
+=======
       return ps3usb->getButtonPress(RIGHT) || ps3usb->getAnalogHat(LeftHatX) <= 255 && ps3usb->getAnalogHat(LeftHatX) >= 190;
+>>>>>>> 2060909865f2223379e4157642f42ad142c9f32d
     case BUTTON_START:
       return ps3usb->getButtonPress(START);
     case BUTTON_COIN:
