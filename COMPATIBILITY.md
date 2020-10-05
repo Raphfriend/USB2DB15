@@ -7,10 +7,11 @@ This is a list of tested controllers. Please reach out to our Discord server if 
 	- Place controller into D-INPUT mode by holding B + START upon powering ON controller
 	- Press SELECT + DPAD UP to enable digital DPAD
 - SFC30 (Via wired connection)
-- NES & SNES Bluetooth Receivers (Firmware v1.33) (requires USB HOST SHIELD 2.0 update)
+- NES & SNES Bluetooth Receivers (Firmware v1.33) 
   - NES & SNES Bluetooth receviers tested compatible with the following controllers:
     - Sony PS4 DS4
     - Nintendo Switch Pro controller
+    - 8BitDo SFC30
     - 8BitDo M30 Bluetooth controller (controller must be placed in MacOS mode by holding A + START upon powering on controller)
 
 ### Buffalo
