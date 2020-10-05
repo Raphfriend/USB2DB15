@@ -1,6 +1,14 @@
 ## [0.14.0] - 2020-10-05
 ### Added
-- Added spoort for Xbox 360
+- Added spoort for Xbox 360 controllers and compatible devices.
+### Changed
+- 8Bitdo NES/SNES wireless USB Bluetooth receviers are now handled by the XBOXUSB (360) USB Host Shield 2.0 library files.
+- 8Bitdo NES/SNES wireless USB Bluetooth recevier code removed from the PS3 USB Host Shield 2.0 library files.  
+- Library updated: https://github.com/Raphfriend/USB_Host_Shield_2.0
+	- USB Host Shield 2.0 files updated:
+		- PS3USB.cpp
+		- PS3USB.h
+		- PS3Enums.h
 
 ## [0.13.7] - 2020-10-04
 - Extended `Mad Catz Street Fighter IV Tournament Edition (PS3)` entry in `drivers.cpp` & `drivers.h` to support both editions (Round 1 & Round 2) of the controller.
