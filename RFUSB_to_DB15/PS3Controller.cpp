@@ -122,8 +122,6 @@ bool PS3Controller::GetButtonState(uint8_t button) {
  */
 bool PS3Controller::Connected() {
   return ps3usb->PS3Connected;
-  ps3usb->setLedOff();
-  ps3usb->setLedOn(LED1);
 }
 
 /**
