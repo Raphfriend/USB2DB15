@@ -1,3 +1,7 @@
+## [0.14.0] - 2020-10-05
+### Added
+- Added spoort for Xbox 360
+
 ## [0.13.7] - 2020-10-04
 - Extended `Mad Catz Street Fighter IV Tournament Edition (PS3)` entry in `drivers.cpp` & `drivers.h` to support both editions (Round 1 & Round 2) of the controller.
 
