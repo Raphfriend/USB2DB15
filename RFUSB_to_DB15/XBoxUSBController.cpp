@@ -27,13 +27,13 @@ XBoxUSBController::XBoxUSBController(XBOXUSB *p) {
 bool XBoxUSBController::GetButtonClick(uint8_t button) {
   switch(button) {
     case BUTTON_UP:
-      return xbox360->getButtonClick(UP) || xbox360->getAnalogHat(LeftHatY) > 7500;     
+      return xbox360->getButtonClick(UP) || xbox360->getAnalogHat(LeftHatY) <= 32767 && xbox360->getAnalogHat(LeftHatY) >= 16384;   
     case BUTTON_DOWN:
-      return xbox360->getButtonClick(DOWN) || xbox360->getAnalogHat(LeftHatY) < -7500;
+      return xbox360->getButtonClick(DOWN) || xbox360->getAnalogHat(LeftHatY) >= -32768 && xbox360->getAnalogHat(LeftHatY) <= -16384;
     case BUTTON_LEFT:
-      return xbox360->getButtonClick(LEFT) || xbox360->getAnalogHat(LeftHatX) < -7500;
+      return xbox360->getButtonClick(LEFT) || xbox360->getAnalogHat(LeftHatX) >= -32768 && xbox360->getAnalogHat(LeftHatX) <= -16384;
     case BUTTON_RIGHT:
-      return xbox360->getButtonClick(RIGHT) || xbox360->getAnalogHat(LeftHatX) > 7500;
+      return xbox360->getButtonClick(RIGHT) || xbox360->getAnalogHat(LeftHatX) <= 32767 && xbox360->getAnalogHat(LeftHatX) >= 16384;
     case BUTTON_START:
       return xbox360->getButtonClick(START);
     case BUTTON_COIN:
@@ -74,13 +74,13 @@ bool XBoxUSBController::GetButtonClick(uint8_t button) {
 bool XBoxUSBController::GetButtonState(uint8_t button) {
   switch(button) {
     case BUTTON_UP:
-      return xbox360->getButtonPress(UP) || xbox360->getAnalogHat(LeftHatY) > 7500;
+      return xbox360->getButtonPress(UP) || xbox360->getAnalogHat(LeftHatY) <= 32767 && xbox360->getAnalogHat(LeftHatY) >= 16384; 
     case BUTTON_DOWN:
-      return xbox360->getButtonPress(DOWN) || xbox360->getAnalogHat(LeftHatY) < -7500;
+      return xbox360->getButtonPress(DOWN) || xbox360->getAnalogHat(LeftHatY) >= -32768 && xbox360->getAnalogHat(LeftHatY) <= -16384;
     case BUTTON_LEFT:
-      return xbox360->getButtonPress(LEFT) || xbox360->getAnalogHat(LeftHatX) < -7500;
+      return xbox360->getButtonPress(LEFT) || xbox360->getAnalogHat(LeftHatX) >= -32768 && xbox360->getAnalogHat(LeftHatX) <= -16384;
     case BUTTON_RIGHT:
-      return xbox360->getButtonPress(RIGHT) || xbox360->getAnalogHat(LeftHatX) > 7500;
+      return xbox360->getButtonPress(RIGHT) || xbox360->getAnalogHat(LeftHatX) <= 32767 && xbox360->getAnalogHat(LeftHatX) >= 16384;
     case BUTTON_START:
       return xbox360->getButtonPress(START);
     case BUTTON_COIN:

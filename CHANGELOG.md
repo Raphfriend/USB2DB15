@@ -1,10 +1,21 @@
+## [0.14.1] - 2020-10-05
+### Added
+- Added analog nub support for PS3 and Xbox 360 controllers.
+- Added a temporary `#define ENABLE_SERIAL` to `HIDController.cpp` to free up some memory.
+- Added support for HORI Real Arcad Pro - Soul Calibur VI Edition - Xbox 360 (requires USB HOST SHIELD 2.0 update)
+	- Library updated: https://github.com/Raphfriend/USB_Host_Shield_2.0
+	- USB Host Shield 2.0 files updated:
+		- XBOXUSB.cpp
+		- XBOXUSB.h 
+
 ## [0.14.0] - 2020-10-05
 ### Added
-- Added spoort for Xbox 360 controllers and compatible devices.
+- Added support for Xbox 360 controllers and compatible devices. 
+	- This slightly breaks custom button mapping for Xbox 360 & Xbox One controllers. I am currently diagnosing the fault and will update with a solution ASAP.
 ### Changed
 - 8Bitdo NES/SNES wireless USB Bluetooth receviers are now handled by the XBOXUSB (360) USB Host Shield 2.0 library files.
 - 8Bitdo NES/SNES wireless USB Bluetooth recevier code removed from the PS3 USB Host Shield 2.0 library files.  
-- Library updated: https://github.com/Raphfriend/USB_Host_Shield_2.0
+	- Library updated: https://github.com/Raphfriend/USB_Host_Shield_2.0
 	- USB Host Shield 2.0 files updated:
 		- PS3USB.cpp
 		- PS3USB.h
@@ -22,7 +33,7 @@
 	- Sony PS4 DS4, Nintendo Switch Pro, 8BitDo M30 Bluetooth controllers tested and verified as working
 	- Note: 8BitDo receivers must be on Firmware v1.33
 - Added Support For Hori Fighting Stick Mini 4 (requires USB HOST SHIELD 2.0 update)
-- Library updated: https://github.com/Raphfriend/USB_Host_Shield_2.0
+	- Library updated: https://github.com/Raphfriend/USB_Host_Shield_2.0
 	- USB Host Shield 2.0 files updated:
 		- PS3USB.cpp
 		- PS3USB.h
@@ -111,7 +122,7 @@
 ## [0.9.1] - 2020-08-21
 ### Added
 
-- Added support to HORI Real Arcad Pro - Soul Calibur VI Edition for Xbox One (requires USB HOST SHIELD 2.0 update) [@kitsune](https://github.com/kitsune)
-- Library updated: https://github.com/Raphfriend/USB_Host_Shield_2.0
-- USB Host Shield 2.0 files updated:
-	- XBOXONE.h
+- Added support for HORI Real Arcad Pro - Soul Calibur VI Edition - Xbox One (requires USB HOST SHIELD 2.0 update) [@kitsune](https://github.com/kitsune)
+	- Library updated: https://github.com/Raphfriend/USB_Host_Shield_2.0
+	- USB Host Shield 2.0 files updated:
+		- XBOXONE.h

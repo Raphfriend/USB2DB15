@@ -5,6 +5,8 @@
 #include "drivers.h"
 #include "HIDController.h"
 
+//#define ENABLE_SERIAL
+
 /**
  * Returns if there is a controller connected and ready
  *
@@ -110,7 +112,7 @@ void HIDController::ConfigButton(uint8_t button_id, uint8_t index, uint8_t mask)
  */
 void HIDController::ConfigButton(uint8_t button_id, uint8_t index, uint8_t mask, uint8_t value) {
   if (button_id >= MAX_HID_BUTTONS) return;
-
+  #ifdef ENABLE_SERIAL
   Serial.print("Button ID: ");
   Serial.print(button_id, DEC);
   Serial.print(" Index: ");
@@ -119,7 +121,7 @@ void HIDController::ConfigButton(uint8_t button_id, uint8_t index, uint8_t mask,
   Serial.print(mask, BIN);
   Serial.print(" Value: ");
   Serial.println(value, DEC);
-
+  #endif
   buttons[button_id].index = index;
   buttons[button_id].mask = mask;
   buttons[button_id].value = value;
