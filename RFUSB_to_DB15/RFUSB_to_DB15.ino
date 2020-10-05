@@ -68,8 +68,6 @@ USB2DB15 Usb2db15(PS3Con, XBoxCon, XBox360Con, HIDCon, Eeprom);
 
 uint8_t resetLock = 0;
 
-// JoystickHID Hid1(&Usb);
-
 void setup() {
   Serial.begin(115200);
 

@@ -26,14 +26,14 @@ PS3Controller::PS3Controller(PS3USB *p) {
  */
 bool PS3Controller::GetButtonClick(uint8_t button) {
   switch(button) {
-    case BUTTON_UP:
-      return ps3usb->getButtonClick(UP);
+    case BUTTON_UP:                            
+      return ps3usb->getButtonClick(UP) || ps3usb->getAnalogHat(LeftHatY) >= 0 && ps3usb->getAnalogHat(LeftHatY) <= 64;
     case BUTTON_DOWN:
-      return ps3usb->getButtonClick(DOWN);
+      return ps3usb->getButtonClick(DOWN) || ps3usb->getAnalogHat(LeftHatY) <= 255 && ps3usb->getAnalogHat(LeftHatY) >= 190;
     case BUTTON_LEFT:
-      return ps3usb->getButtonClick(LEFT);
+      return ps3usb->getButtonClick(LEFT) || ps3usb->getAnalogHat(LeftHatX) >= 0 && ps3usb->getAnalogHat(LeftHatX) <= 64;
     case BUTTON_RIGHT:
-      return ps3usb->getButtonClick(RIGHT);
+      return ps3usb->getButtonClick(RIGHT) || ps3usb->getAnalogHat(LeftHatX) <= 255 && ps3usb->getAnalogHat(LeftHatX) >= 190;
     case BUTTON_START:
       return ps3usb->getButtonClick(START);
     case BUTTON_COIN:
@@ -74,13 +74,13 @@ bool PS3Controller::GetButtonClick(uint8_t button) {
 bool PS3Controller::GetButtonState(uint8_t button) {
   switch(button) {
     case BUTTON_UP:
-      return ps3usb->getButtonPress(UP);
+      return ps3usb->getButtonPress(UP) || ps3usb->getAnalogHat(LeftHatY) >= 0 && ps3usb->getAnalogHat(LeftHatY) <= 64;
     case BUTTON_DOWN:
-      return ps3usb->getButtonPress(DOWN);
+      return ps3usb->getButtonPress(DOWN) || ps3usb->getAnalogHat(LeftHatY) <= 255 && ps3usb->getAnalogHat(LeftHatY) >= 190;
     case BUTTON_LEFT:
-      return ps3usb->getButtonPress(LEFT);
+      return ps3usb->getButtonPress(LEFT) || ps3usb->getAnalogHat(LeftHatX) >= 0 && ps3usb->getAnalogHat(LeftHatX) <= 64;
     case BUTTON_RIGHT:
-      return ps3usb->getButtonPress(RIGHT);
+      return ps3usb->getButtonPress(RIGHT) || ps3usb->getAnalogHat(LeftHatX) <= 255 && ps3usb->getAnalogHat(LeftHatX) >= 190;
     case BUTTON_START:
       return ps3usb->getButtonPress(START);
     case BUTTON_COIN:

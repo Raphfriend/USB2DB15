@@ -71,7 +71,8 @@ void debugOutput(uint8_t ddrc, uint8_t ddrd) {
  * Contains logic around profiles.
  *
  * @param ps3 The PS3 controller to use
- * @param xbox The XBox controller to use
+ * @param xbox The XBox One controller to use
+ * @param xbox The XBox 360 controller to use
  * @param hid  The HID controller to use
  */
 USB2DB15::USB2DB15(PS3Controller &ps3, XBoxOneController &xbox, XBoxUSBController &xbox360, HIDController &hid, EepromManager &eeprom) :
