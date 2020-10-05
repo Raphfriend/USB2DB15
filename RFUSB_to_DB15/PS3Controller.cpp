@@ -78,7 +78,7 @@ bool PS3Controller::GetButtonState(uint8_t button) {
     case BUTTON_DOWN:
       return ps3usb->getButtonPress(DOWN) || ps3usb->getAnalogHat(LeftHatY) <= 255 && ps3usb->getAnalogHat(LeftHatY) >= 190;
     case BUTTON_LEFT:
-      return ps3usb->getButtonPress(LEFT) | ps3usb->getAnalogHat(LeftHatX) >= 0 && ps3usb->getAnalogHat(LeftHatX) <= 64;
+      return ps3usb->getButtonPress(LEFT) || ps3usb->getAnalogHat(LeftHatX) >= 0 && ps3usb->getAnalogHat(LeftHatX) <= 64;
     case BUTTON_RIGHT:
       return ps3usb->getButtonPress(RIGHT) || ps3usb->getAnalogHat(LeftHatX) <= 255 && ps3usb->getAnalogHat(LeftHatX) >= 190;
     case BUTTON_START:
