@@ -12,6 +12,7 @@
 #include "Profile.h"
 #include "PS3Controller.h"
 #include "XBoxOneController.h"
+#include "XBoxUSBController.h"
 #include "HIDController.h"
 
 // Output Constants
@@ -48,6 +49,7 @@
 class USB2DB15 {
     PS3Controller &ps3;
     XBoxOneController &xbox;
+    XBoxUSBController &xbox360;
     HIDController &hid;
     EepromManager &eeprom;
     Profile profile;
@@ -65,7 +67,7 @@ class USB2DB15 {
     unsigned long select_press_time = 0;
 
   public:
-    USB2DB15(PS3Controller &ps3, XBoxOneController &xbox, HIDController &hid, EepromManager &eeprom);
+    USB2DB15(PS3Controller &ps3, XBoxOneController &xbox, XBoxUSBController &xbox360, HIDController &hid, EepromManager &eeprom);
     void GenerateOutput();
     void FactoryReset();
 

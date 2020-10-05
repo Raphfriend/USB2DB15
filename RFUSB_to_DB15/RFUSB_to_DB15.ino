@@ -33,6 +33,7 @@
 #define POLLING_OVERRIDE 1000
 
 #include <XBOXONE.h>
+#include <XBOXUSB.h>
 #include <PS3USB.h>
 #include <EEPROM.h>
 #include <usbhid.h>
@@ -42,6 +43,7 @@
 #include "HIDController.h"
 #include "PS3Controller.h"
 #include "XBoxOneController.h"
+#include "XBoxUSBController.h"
 #include "USB2DB15.h"
 #include "LED.h"
 
@@ -55,12 +57,14 @@
 USB Usb;
 PS3USB PS3(&Usb);
 XBOXONE Xbox(&Usb);
+XBOXUSB Xbox360(&Usb);
 
 EepromManager Eeprom;
 HIDController HIDCon(&Usb);
 PS3Controller PS3Con(&PS3);
 XBoxOneController XBoxCon(&Xbox);
-USB2DB15 Usb2db15(PS3Con, XBoxCon, HIDCon, Eeprom);
+XBoxUSBController XBox360Con(&Xbox360);
+USB2DB15 Usb2db15(PS3Con, XBoxCon, XBox360Con, HIDCon, Eeprom);
 
 uint8_t resetLock = 0;
 

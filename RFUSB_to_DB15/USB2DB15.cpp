@@ -74,8 +74,8 @@ void debugOutput(uint8_t ddrc, uint8_t ddrd) {
  * @param xbox The XBox controller to use
  * @param hid  The HID controller to use
  */
-USB2DB15::USB2DB15(PS3Controller &ps3, XBoxOneController &xbox, HIDController &hid, EepromManager &eeprom) :
-  ps3(ps3), xbox(xbox), hid(hid), eeprom(eeprom) { };
+USB2DB15::USB2DB15(PS3Controller &ps3, XBoxOneController &xbox, XBoxUSBController &xbox360, HIDController &hid, EepromManager &eeprom) :
+  ps3(ps3), xbox(xbox), xbox360(xbox360), hid(hid), eeprom(eeprom) { };
 
 /**
  * Outputs the keys pressed on the controller to the DB15 connector
@@ -139,6 +139,8 @@ Controller* USB2DB15::GetActiveController() {
     return &ps3;
   } else if (xbox.Connected()) { // XboxOne
     return &xbox;
+  } else if (xbox360.Connected()) { // Xbox360
+    return &xbox360;    
   } else if (hid.Connected()) { // Generic HID Controller
     return &hid;
   }
