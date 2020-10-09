@@ -46,6 +46,7 @@
 #include "XBoxUSBController.h"
 #include "USB2DB15.h"
 #include "LED.h"
+#include "debug.h"
 
 #ifdef dobogusinclude
 #include <spi4teensy3.h>
@@ -69,6 +70,7 @@ USB2DB15 Usb2db15(PS3Con, XBoxCon, XBox360Con, HIDCon, Eeprom);
 uint8_t resetLock = 0;
 
 void setup() {
+  #ifndef RELEASE_MODE
   Serial.begin(115200);
 
   while (!Serial);
@@ -79,6 +81,7 @@ void setup() {
     Serial.print(F("\r\nOSC did not start"));
     while (1);
   }
+  #endif
   pinMode(LED_PIN, OUTPUT);
 }
 
@@ -88,7 +91,9 @@ void loop() {
   if (analogRead(ANALOG_BUTTON_PIN) > 800) {
     if(!resetLock) {
       LED::Blink(3, LED::BLINK_RATE_RESET);
+      #ifndef RELEASE_MODE
       Serial.println("Resetting");
+      #endif
       Usb2db15.FactoryReset();
       resetLock = 1;
     }

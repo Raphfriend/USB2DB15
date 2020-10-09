@@ -4,6 +4,7 @@
 
 #include "USB2DB15.h"
 #include "LED.h"
+#include "debug.h"
 
 /**
  * A debug function to print out which buttons are being press.
@@ -12,6 +13,7 @@
  * @param ddrc The value of DDRC
  * @param ddrd The value of DDRD
  */
+#ifndef RELEASE_MODE
 void debugOutput(uint8_t ddrc, uint8_t ddrd) {
   Serial.print("Output: ");
   if (ddrc & DDRC_UP) {
@@ -63,6 +65,7 @@ void debugOutput(uint8_t ddrc, uint8_t ddrd) {
   }
   Serial.println(" ");
 }
+#endif
 
 /**
  * Constructor for the USB2DB15 class
@@ -77,7 +80,7 @@ void debugOutput(uint8_t ddrc, uint8_t ddrd) {
  */
 USB2DB15::USB2DB15(PS3Controller &ps3, XBoxOneController &xbox, XBoxUSBController &xbox360, HIDController &hid, EepromManager &eeprom) :
   ps3(ps3), xbox(xbox), xbox360(xbox360), hid(hid), eeprom(eeprom) { };
-
+ 
 /**
  * Outputs the keys pressed on the controller to the DB15 connector
  *
@@ -112,8 +115,10 @@ void USB2DB15::GenerateOutput() {
     if(prevDDRD != DDRD_COIN) {  // If COIN is newly the only button pressed
       select_press_time = millis();
     } else if ((millis() - select_press_time) >= SELECT_HOLD_DURATION && input_mode != PROFILE_BIND_MODE) {
+      #ifndef RELEASE_MODE
       Serial.println("Bind Mode");
-      input_mode = PROFILE_BIND_MODE;
+      #endif
+      input_mode = PROFILE_BIND_MODE; 
       cur_key = PROFILE_BUTTON_1;
       LED::On();
     }
@@ -141,7 +146,7 @@ Controller* USB2DB15::GetActiveController() {
   } else if (xbox.Connected()) { // XboxOne
     return &xbox;
   } else if (xbox360.Connected()) { // Xbox360
-    return &xbox360;    
+    return &xbox360;
   } else if (hid.Connected()) { // Generic HID Controller
     return &hid;
   }
@@ -257,7 +262,9 @@ void USB2DB15::HandleNormalMode(uint8_t ddrc, uint8_t ddrd, Controller &controll
   DDRC = ddrc;
   DDRD = ddrd;
 
+  #ifndef RELEASE_MODE
   debugOutput(ddrc, ddrd);
+  #endif
 }
 
 /**
@@ -272,7 +279,9 @@ void USB2DB15::HandleNormalMode(uint8_t ddrc, uint8_t ddrd, Controller &controll
 void USB2DB15::HandleProfileBindMode(uint8_t ddrc, uint8_t ddrd, Controller &controller) {
   // End Mode if SELECT/COIN is released
   if(!(ddrd & DDRD_COIN)) {
+    #ifndef RELEASE_MODE
     Serial.println("Normal Mode");
+    #endif
     eeprom.SaveProfile(eeprom.LoadCurrentProfile(), profile);
     input_mode = NORMAL_MODE;
     LED::Off();
@@ -303,8 +312,10 @@ void USB2DB15::HandleProfileBindMode(uint8_t ddrc, uint8_t ddrd, Controller &con
 void USB2DB15::SetProfile(Controller &controller, uint8_t profile_num) {
   if(profile_num > MAX_PROFILES) return;
 
+  #ifndef RELEASE_MODE
   Serial.print("Using Profile: ");
   Serial.println(profile_num);
+  #endif
   eeprom.SaveCurrentProfile(profile_num);
   eeprom.LoadProfile(profile_num, profile);
   LED::Blink(profile_num + 1, LED::BLINK_RATE_PROFILE);
