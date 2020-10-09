@@ -1,4 +1,6 @@
-## [0.14.1] - 2020-10-09
+## [0.14.2] - 2020-10-09
+
+
 ### Added
 - Added analog nub support for Xbox One controllers.
 - Added `debug.h` to control serial output.
@@ -8,6 +10,19 @@
 - Fixed an issue surrounding PS3 analog support.
 	- File altered `PS3Controller.cpp`
 - Removed the temporary `#define ENABLE_SERIAL` as it has been superseded by `debug.h` 
+
+## PCB 1.1 
+
+### Changed
+
+- DB15 on schematic was right, but the footprint was inverted, forcing to solder the connector pins on the top side, it's now fixed.
+- LED pin is now on D8 pin, so can reflec the code. 
+- We are now using a 3 pin DUO COLOR LED (center cathode) for a adicitional USB status, 
+so if there's any USB controller inserted and working, one LED color will be on, else, off. 
+- Reset eeprom memory circuit inserted
+- PCB was downsized
+
+
 
 ## [0.14.1] - 2020-10-05
 ### Added
