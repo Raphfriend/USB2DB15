@@ -1,5 +1,6 @@
 //
 // Created by Kitsune on 8/21/2020.
+// Modified by Frank_fjs on 10/9/2020.
 //
 
 #include "XBoxOneController.h"
@@ -25,15 +26,24 @@ XBoxOneController::XBoxOneController(XBOXONE *p) {
  * @return If the button has been clicked
  */
 bool XBoxOneController::GetButtonClick(uint8_t button) {
+  // Added to fix an issue regarding the USB Host Shield Xbox library
+  // XBOXUSB.cpp | Line 291 | bool XBOXUSB::getButtonClick(ButtonEnum b)
+  // Creates an issue surrounding L2 & R2 where a false GetButtonClick is registered 
+  // upon holding SELECT to enter BIND mode
+  // TODO Find the source of the issue and fix properly
+  // Frank_fjs 9/10/2020  
+  if(!GetButtonState(button)) {
+    return false;
+  }
   switch(button) {
     case BUTTON_UP:
-      return xbox->getButtonClick(UP);
+      return xbox->getButtonClick(UP) || xbox->getAnalogHat(LeftHatY) <= 32767 && xbox->getAnalogHat(LeftHatY) >= 16384;
     case BUTTON_DOWN:
-      return xbox->getButtonClick(DOWN);
+      return xbox->getButtonClick(DOWN) || xbox->getAnalogHat(LeftHatY) >= -32768 && xbox->getAnalogHat(LeftHatY) <= -16384;
     case BUTTON_LEFT:
-      return xbox->getButtonClick(LEFT);
+      return xbox->getButtonClick(LEFT) || xbox->getAnalogHat(LeftHatX) >= -32768 && xbox->getAnalogHat(LeftHatX) <= -16384;
     case BUTTON_RIGHT:
-      return xbox->getButtonClick(RIGHT);
+      return xbox->getButtonClick(RIGHT) || xbox->getAnalogHat(LeftHatX) <= 32767 && xbox->getAnalogHat(LeftHatX) >= 16384;
     case BUTTON_START:
       return xbox->getButtonClick(START);
     case BUTTON_COIN:
@@ -74,13 +84,13 @@ bool XBoxOneController::GetButtonClick(uint8_t button) {
 bool XBoxOneController::GetButtonState(uint8_t button) {
   switch(button) {
     case BUTTON_UP:
-      return xbox->getButtonPress(UP);
+      return xbox->getButtonPress(UP) || xbox->getAnalogHat(LeftHatY) <= 32767 && xbox->getAnalogHat(LeftHatY) >= 16384;
     case BUTTON_DOWN:
-      return xbox->getButtonPress(DOWN);
+      return xbox->getButtonPress(DOWN) || xbox->getAnalogHat(LeftHatY) >= -32768 && xbox->getAnalogHat(LeftHatY) <= -16384;
     case BUTTON_LEFT:
-      return xbox->getButtonPress(LEFT);
+      return xbox->getButtonPress(LEFT) || xbox->getAnalogHat(LeftHatX) >= -32768 && xbox->getAnalogHat(LeftHatX) <= -16384;
     case BUTTON_RIGHT:
-      return xbox->getButtonPress(RIGHT);
+      return xbox->getButtonPress(RIGHT) || xbox->getAnalogHat(LeftHatX) <= 32767 && xbox->getAnalogHat(LeftHatX) >= 16384;
     case BUTTON_START:
       return xbox->getButtonPress(START);
     case BUTTON_COIN:

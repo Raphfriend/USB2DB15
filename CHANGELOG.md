@@ -1,3 +1,14 @@
+## [0.14.1] - 2020-10-09
+### Added
+- Added analog nub support for Xbox One controllers.
+- Added `debug.h` to control serial output.
+### Changed
+- Fixed an issue with button mapping surrounding Xbox One and Xbox 360 controllers.
+	- Files altered: `XboxOneController.cpp` `XboxUSBContrtoller.cpp` 
+- Fixed an issue surrounding PS3 analog support.
+	- File altered `PS3Controller.cpp`
+- Removed the temporary `#define ENABLE_SERIAL` as it has been superseded by `debug.h` 
+
 ## [0.14.1] - 2020-10-05
 ### Added
 - Added analog nub support for PS3 and Xbox 360 controllers.

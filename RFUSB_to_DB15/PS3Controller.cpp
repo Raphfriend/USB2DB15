@@ -1,5 +1,6 @@
 //
 // Created by Kitsune on 8/21/2020.
+// Modified by Frank_fjs on 10/9/2020. 
 //
 
 #include "PS3Controller.h"
@@ -26,26 +27,50 @@ PS3Controller::PS3Controller(PS3USB *p) {
  */
 
 /**
- * PS3 analog | range of 0 to 255 | 117 to 137 = centre / OFF / dead space
+ * PS3 analog | range of 0 to 255 | 117 to 137 = centre / OFF 
  * UP    LeftHatY | 0   = FULL-UP    - first registers at 116 
  * DOWN  LeftHatY | 255 = FULL-DOWN  - first registers at 138 
  * LEFT  LeftHatX | 0   = FULL-LEFT  - first registers at 116 
  * RIGHT LeftHatX | 255 = FULL-RIGHT - first registers at 138 
+ * 
+ * #define PS3_ANALOG_SENSITIVITY
+ * 
+ * Lower value registers analog nub sooner 
+ * Higher value registers analog nub later 
+ * valid range of 1 to 116
+ * 
+ * bool disableAnalog;
+ * 
+ * Safeguard to prevent controllers with digital buttons 
+ * connected to analog outputs from registering false alerts
  */
-
-// lower values register analog nubs sooner / higher values register later (1 to 116)
 #define PS3_ANALOG_SENSITIVITY 32 
- 
+bool disableAnalog;
+
 bool PS3Controller::GetButtonClick(uint8_t button) {
+  // Values of 0 trigger LeftHatX (DOWN) and LeftHatY (UP)
+  // Controllers with digital buttons acting as analog buttons output 0 constantly
+  // Thus we need to check for this scenario and disable analog output
+  if(ps3usb->getAnalogHat(LeftHatX) == 0 && ps3usb->getAnalogHat(LeftHatY) == 0) 
+    disableAnalog = true; 
+  else 
+    disableAnalog = false; 
+
   switch(button) {
-    case BUTTON_UP:                            
-      return ps3usb->getButtonClick(UP) || ps3usb->getAnalogHat(LeftHatY) < 116 - PS3_ANALOG_SENSITIVITY;
+    case BUTTON_UP:
+      if(disableAnalog) 
+        return ps3usb->getButtonClick(UP);  
+      else 
+        return ps3usb->getButtonClick(UP) || ps3usb->getAnalogHat(LeftHatY) < 117 - PS3_ANALOG_SENSITIVITY;
     case BUTTON_DOWN:
-      return ps3usb->getButtonClick(DOWN) || ps3usb->getAnalogHat(LeftHatY) > 138 + PS3_ANALOG_SENSITIVITY;
+      return ps3usb->getButtonClick(DOWN) || ps3usb->getAnalogHat(LeftHatY) > 137 + PS3_ANALOG_SENSITIVITY;
     case BUTTON_LEFT:
-      return ps3usb->getButtonClick(LEFT) || ps3usb->getAnalogHat(LeftHatX) < 116 - PS3_ANALOG_SENSITIVITY;
+      if(disableAnalog) 
+        return ps3usb->getButtonClick(LEFT);  
+      else 
+        return ps3usb->getButtonClick(LEFT) || ps3usb->getAnalogHat(LeftHatX) < 117 - PS3_ANALOG_SENSITIVITY;
     case BUTTON_RIGHT:
-      return ps3usb->getButtonClick(RIGHT) || ps3usb->getAnalogHat(LeftHatX) > 138 + PS3_ANALOG_SENSITIVITY;
+      return ps3usb->getButtonClick(RIGHT) || ps3usb->getAnalogHat(LeftHatX) > 137 + PS3_ANALOG_SENSITIVITY;
     case BUTTON_START:
       return ps3usb->getButtonClick(START);
     case BUTTON_COIN:
@@ -84,15 +109,29 @@ bool PS3Controller::GetButtonClick(uint8_t button) {
  * @return If the requested button is pressed
  */
 bool PS3Controller::GetButtonState(uint8_t button) {
+  // Values of 0 trigger LeftHatX (DOWN) and LeftHatY (UP)
+  // Controllers with digital buttons acting as analog buttons output 0 constantly
+  // Thus we need to check for this scenario and disable analog output  
+  if(ps3usb->getAnalogHat(LeftHatX) == 0 && ps3usb->getAnalogHat(LeftHatY) == 0) 
+    disableAnalog = true; 
+  else
+    disableAnalog = false; 
+
   switch(button) {
     case BUTTON_UP:
-      return ps3usb->getButtonPress(UP) || ps3usb->getAnalogHat(LeftHatY) < 116 - PS3_ANALOG_SENSITIVITY;
+      if(disableAnalog) 
+        return ps3usb->getButtonPress(UP);  
+      else 
+        return ps3usb->getButtonPress(UP) || ps3usb->getAnalogHat(LeftHatY) < 117 - PS3_ANALOG_SENSITIVITY; 
     case BUTTON_DOWN:
-      return ps3usb->getButtonPress(DOWN) || ps3usb->getAnalogHat(LeftHatY) > 138 + PS3_ANALOG_SENSITIVITY;
+      return ps3usb->getButtonPress(DOWN) || ps3usb->getAnalogHat(LeftHatY) > 137 + PS3_ANALOG_SENSITIVITY;
     case BUTTON_LEFT:
-      return ps3usb->getButtonPress(LEFT) || ps3usb->getAnalogHat(LeftHatX) < 116 - PS3_ANALOG_SENSITIVITY;
+      if(disableAnalog) 
+        return ps3usb->getButtonPress(LEFT);  
+      else 
+        return ps3usb->getButtonPress(LEFT) || ps3usb->getAnalogHat(LeftHatX) < 117 - PS3_ANALOG_SENSITIVITY;  
     case BUTTON_RIGHT:
-      return ps3usb->getButtonPress(RIGHT) || ps3usb->getAnalogHat(LeftHatX) > 138 + PS3_ANALOG_SENSITIVITY;
+      return ps3usb->getButtonPress(RIGHT) || ps3usb->getAnalogHat(LeftHatX) > 137 + PS3_ANALOG_SENSITIVITY;
     case BUTTON_START:
       return ps3usb->getButtonPress(START);
     case BUTTON_COIN:

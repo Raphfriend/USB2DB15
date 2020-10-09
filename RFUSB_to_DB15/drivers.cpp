@@ -3,6 +3,7 @@
 //
 
 #include "drivers.h"
+#include "debug.h"
 
 /**
  * Looks up a controller based on VID and PID and configures a HIDController to
@@ -132,11 +133,15 @@ void setupController(uint16_t vid, uint16_t pid, HIDController *controller) {
       break;
 
     default:
+      #ifndef RELEASE_MODE
       Serial.println("Failed to find a driver for device. Using RAP PS3 as fallback");
+      #endif
+      #ifndef REDUCED_SERIAL_OUTPUT
       Serial.print("VID: ");
       Serial.print(vid, HEX);
       Serial.print(" PID ");
       Serial.println(pid, HEX);
+      #endif
       setupHoriRAP3(controller);
       break;
   }

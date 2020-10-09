@@ -6,6 +6,7 @@
 
 #include "device_descriptor.h"
 #include "EepromManager.h"
+#include "debug.h"
 
 EepromManager::EepromManager() {
   if(EEPROM.read(0) != EEPROM_BYTE_0 ||
@@ -83,8 +84,10 @@ void EepromManager::SetCurrentController(uint16_t vid, uint16_t pid) {
 
   for(uint8_t i = 0; i < MAX_PROFILE_BLOCKS; i++) {
     if(vid == Read16Bit(addr) && pid == Read16Bit(addr + 2)) {
+      #ifndef RELEASE_MODE
       Serial.print("Found Controller.  Using Profile Block: ");
       Serial.println(i);
+      #endif
       found = 1;
       cur_profile_block = i;
       break;
@@ -93,8 +96,10 @@ void EepromManager::SetCurrentController(uint16_t vid, uint16_t pid) {
   }
   if(!found) {
     cur_profile_block = EEPROM.read(NEXT_PROFILE_BLOCK_ADDR);
+    #ifndef RELEASE_MODE
     Serial.print("Could Not find Controller. Generating Profile Block:");
     Serial.println(cur_profile_block);
+    #endif
     // Write the vid and pid to EEPROM
     Write16Bit(GetProfileBlockStartAddr(), vid);
     Write16Bit(GetProfileBlockStartAddr() + 2, pid);

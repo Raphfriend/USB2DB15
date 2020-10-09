@@ -1,5 +1,6 @@
 //
 // Created by Kitsune on 8/21/2020.
+// Modified by Frank_fjs on 10/9/2020.
 //
 
 #include "XBoxUSBController.h"
@@ -25,6 +26,15 @@ XBoxUSBController::XBoxUSBController(XBOXUSB *p) {
  * @return If the button has been clicked
  */
 bool XBoxUSBController::GetButtonClick(uint8_t button) {
+  // Added to fix an issue regarding the USB Host Shield Xbox library
+  // XBOXUSB.cpp | Line 291 | bool XBOXUSB::getButtonClick(ButtonEnum b)
+  // Creates an issue surrounding L2 & R2 where a false GetButtonClick is registered 
+  // upon holding SELECT to enter BIND mode
+  // TODO Find the source of the issue and fix properly
+  // Frank_fjs 9/10/2020
+  if(!GetButtonState(button)) {
+    return false;
+  }
   switch(button) {
     case BUTTON_UP:
       return xbox360->getButtonClick(UP) || xbox360->getAnalogHat(LeftHatY) <= 32767 && xbox360->getAnalogHat(LeftHatY) >= 16384;   
