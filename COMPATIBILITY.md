@@ -12,7 +12,7 @@ This is a list of tested controllers. Please reach out to our Discord server if 
     - Sony PS4 DS4
     - Nintendo Switch Pro controller
     - 8BitDo SFC30
-    - 8BitDo M30 Bluetooth controller (controller must be placed in MacOS mode by holding A + START upon powering on controller)
+    - 8BitDo M30 Bluetooth controller (controller must be placed in either MacOS mode by holding A + START or X-Input mode by holding X + START upon powering on controller)
 
 ### Buffalo
 - SNES Classic GamePad
@@ -49,6 +49,7 @@ This is a list of tested controllers. Please reach out to our Discord server if 
 - Daija (PS3 and PS4 Modes)
 
 ### Qanba
+- Crystal (PS3 and PS4 Modes)
 - Obsidian (PS3 and PS4 Modes)
 
 ### Razer
