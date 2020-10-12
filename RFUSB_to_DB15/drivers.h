@@ -50,6 +50,7 @@
 #define PID_MADCATZ_SF_PS3_RND2 0x8838 // Mad Catz Street Fighter IV Tournament Edition Round 2 (PS3)
 #define PID_NACON_DAIJA_PS3     0x0904 // Nacon Daija (PS3)
 #define PID_NACON_DAIJA_PS4     0x0D09 // Nacon Daija (PS4)
+#define PID_QANBA_CRYSTAL_PS4   0x2200 // Qanba Crystal (PS4)
 #define PID_QANBA_OBSIDIAN_PS3  0x2302 // Qanba Obsidian (PS3)
 #define PID_QANBA_OBSIDIAN_PS4  0x2300 // Qanba Obsidian (PS4)
 #define PID_RAZER_PANTHERA      0x0401 // Razer Panthera

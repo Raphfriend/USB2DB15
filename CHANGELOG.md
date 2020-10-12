@@ -1,6 +1,13 @@
+## [0.14.3] - 2020-10-12
+### Added
+- Added Support for the Qanba Crystal in both PS3 and PS4 modes (PS3 mode requires USB HOST SHIELD 2.0 update).
+	- Library updated: https://github.com/Raphfriend/USB_Host_Shield_2.0
+	- USB Host Shield 2.0 files updated:
+		- PS3USB.cpp
+		- PS3USB.h
+		- PS3Enums.h
+
 ## [0.14.2] - 2020-10-09
-
-
 ### Added
 - Added analog nub support for Xbox One controllers.
 - Added `debug.h` to control serial output.
@@ -22,13 +29,11 @@ so if there's any USB controller inserted and working, one LED color will be on,
 - Reset eeprom memory circuit inserted
 - PCB was downsized
 
-
-
 ## [0.14.1] - 2020-10-05
 ### Added
 - Added analog nub support for PS3 and Xbox 360 controllers.
 - Added a temporary `#define ENABLE_SERIAL` to `HIDController.cpp` to free up some memory.
-- Added support for HORI Real Arcad Pro - Soul Calibur VI Edition - Xbox 360 (requires USB HOST SHIELD 2.0 update)
+- Added support for HORI Real Arcad Pro - Soul Calibur VI Edition - Xbox 360 (requires USB HOST SHIELD 2.0 update).
 	- Library updated: https://github.com/Raphfriend/USB_Host_Shield_2.0
 	- USB Host Shield 2.0 files updated:
 		- XBOXUSB.cpp
