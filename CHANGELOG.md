@@ -1,3 +1,8 @@
+## [0.14.4] - 2020-10-12
+### Changed
+- Exiting bind mode after binding at least one button will clear the binds for any buttons that weren't bound
+    - If you do not bind any keys, the old profile will be used instead
+
 ## [0.14.3] - 2020-10-12
 ### Added
 - Added Support for the Qanba Crystal in both PS3 and PS4 modes (PS3 mode requires USB HOST SHIELD 2.0 update).

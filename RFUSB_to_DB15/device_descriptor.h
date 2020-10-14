@@ -45,5 +45,6 @@
 #define BUTTON_8          17  // L2
 #define BUTTON_9          18  // R3
 #define BUTTON_10         19  // L3
+#define BUTTON_NULL       255 // No button at all
 
 #endif //USB2DB15_DEVICE_DESCRIPTOR_H
