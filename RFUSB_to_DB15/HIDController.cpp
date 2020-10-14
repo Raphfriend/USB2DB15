@@ -61,6 +61,8 @@ bool HIDController::GetButtonState(uint8_t button) {
       return (buttonState & MASK_RIGHT)  || (buttonState & MASK_UP_RIGHT) || (buttonState & MASK_DOWN_RIGHT);
     case BUTTON_LEFT :
       return (buttonState & MASK_LEFT)  || (buttonState & MASK_UP_LEFT) || (buttonState & MASK_DOWN_LEFT);
+    case BUTTON_NULL:
+      return false;
     default:
       // MASK_UP is the farthest right and BUTTON_UP is zero, so shift the
       // mask button times to get the correct mask for the button
