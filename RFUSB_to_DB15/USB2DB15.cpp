@@ -282,6 +282,11 @@ void USB2DB15::HandleProfileBindMode(uint8_t ddrc, uint8_t ddrd, Controller &con
     #ifndef RELEASE_MODE
     Serial.println("Normal Mode");
     #endif
+    if (cur_key > PROFILE_BUTTON_1) {
+      for(;cur_key < NUM_BUTTON_BINDINGS; cur_key++) {
+        profile.bindings[cur_key] = BUTTON_NULL;
+      }
+    }
     eeprom.SaveProfile(eeprom.LoadCurrentProfile(), profile);
     input_mode = NORMAL_MODE;
     LED::Off();
