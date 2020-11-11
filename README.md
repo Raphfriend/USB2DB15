@@ -1,4 +1,4 @@
-# USB2DB15 - Supergun Adapter [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=HYCK7DF7Q6XLY&source=url)
+# USB2DB15 - Supergun Adapter [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=YAAANGZGUM5H2&item_name=USB2DB15&currency_code=USD)
 
 A simple Atmega328P based USB to DB15 adapter designed for use with a Supergun or Neo-Geo system.
 
@@ -117,7 +117,7 @@ Finally release SELECT to lock in the binding.
 
 If this project has helped you, consider financing it and make a donation, so we can continue our work and acquire new controls to implement support.
 
-[![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=HYCK7DF7Q6XLY&source=url)
+[![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=YAAANGZGUM5H2&item_name=USB2DB15&currency_code=USD)
 
 ### Where can I get more help, if I need it?
 
