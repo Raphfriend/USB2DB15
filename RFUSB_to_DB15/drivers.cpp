@@ -6,35 +6,35 @@
 #include "debug.h"
 
 /**
- * Looks up a controller based on VID and PID and configures a HIDController to
- * work with it.
- *
- * This function takes in a VID and PID as well as a controller to configure.
- * It will look up the exact controller and invoke the proper setup function to
- * configure it. If it cannot find the controller it defaults to using the
- * HoriRAP3 setup.
- *
- * When adding new controllers to this make sure to define the VID and PID in
- * "drivers.h". If an existing setup function works completely for the
- * controller then you should use it, but if they differ even a little bit
- * please create a new function instead of adding logic to an existing setup
- * function.
- *
- * Vendor and Product IDs are defined in drivers.h
- *
- * @param vid The Vendor ID for the controller.
- * @param pid The Product ID for the controller.
- * @param controller A pointer to the HIDController that you want to configure.
- */
+   Looks up a controller based on VID and PID and configures a HIDController to
+   work with it.
+
+   This function takes in a VID and PID as well as a controller to configure.
+   It will look up the exact controller and invoke the proper setup function to
+   configure it. If it cannot find the controller it defaults to using the
+   HoriRAP3 setup.
+
+   When adding new controllers to this make sure to define the VID and PID in
+   "drivers.h". If an existing setup function works completely for the
+   controller then you should use it, but if they differ even a little bit
+   please create a new function instead of adding logic to an existing setup
+   function.
+
+   Vendor and Product IDs are defined in drivers.h
+
+   @param vid The Vendor ID for the controller.
+   @param pid The Product ID for the controller.
+   @param controller A pointer to the HIDController that you want to configure.
+*/
 
 void setupController(uint16_t vid, uint16_t pid, HIDController *controller) {
   switch (vid) {
 
     case VID_8BITDO:
-      switch(pid) {
+      switch (pid) {
         case PID_8BITDO_M30:
           setup8BitDoM30(controller);
-          break;        
+          break;
         case PID_8BITDO_SFC30:
           setup8BitDoSFC30(controller);
           break;
@@ -42,26 +42,31 @@ void setupController(uint16_t vid, uint16_t pid, HIDController *controller) {
       break;
 
     case VID_BUFFALO:
-      if(pid == PID_BUFFALO_CLASSIC) setupBuffaloClassic(controller);
+      if (pid == PID_BUFFALO_CLASSIC) setupBuffaloClassic(controller);
       break;
 
     case VID_BROOK:
-      if(pid == PID_BROOK_UNIVERSAL) setupPS4(controller);
+      if (pid == PID_BROOK_UNIVERSAL) setupPS4(controller);
       break;
 
     case VID_GENERIC:
-      if(pid == PID_GENERIC_SNES) setupGenericSNES(controller);
-      break;   
-    
+      if (pid == PID_GENERIC_SNES) setupGenericSNES(controller);
+      break;
+
+    case VID_DAEMON:
+      if (pid == PID_DAEMON_SNES) setupDaemonSNES(controller);
+      if (pid == PID_DAEMON_SATURN) setupDaemonSaturn(controller);
+      break;
+
     case VID_HONCAM:
-      if(pid == PID_HONCAM) setupHoncam(controller);
+      if (pid == PID_HONCAM) setupHoncam(controller);
       break;
 
     case VID_HORI:
-      switch(pid) {
+      switch (pid) {
         case PID_RETROBIT_SATURN:
           setupRetrobit_Saturn(controller);
-          break;        
+          break;
         case PID_HORI_CMDR:
           setupHoriFightingCmdr(controller);
           break;
@@ -74,7 +79,7 @@ void setupController(uint16_t vid, uint16_t pid, HIDController *controller) {
         case PID_HORI_RAP_PREMIUM:
         case PID_HORI_RAP_V_PS3:
         case PID_HORI_FS3:
-        case PID_HORI_FSV3:                
+        case PID_HORI_FSV3:
         default:
           setupHoriRAP3(controller);
           break;
@@ -82,7 +87,7 @@ void setupController(uint16_t vid, uint16_t pid, HIDController *controller) {
       break;
 
     case VID_MADCATZ:
-      switch(pid) {
+      switch (pid) {
         case PID_MADCATZ_SF_PS3_RND1:
         case PID_MADCATZ_SF_PS3_RND2:
         default:
@@ -92,7 +97,7 @@ void setupController(uint16_t vid, uint16_t pid, HIDController *controller) {
       break;
 
     case VID_NACON:
-      switch(pid) {
+      switch (pid) {
         case PID_NACON_DAIJA_PS4:
           setupPS4(controller);
           break;
@@ -103,7 +108,7 @@ void setupController(uint16_t vid, uint16_t pid, HIDController *controller) {
       break;
 
     case VID_QANBA:
-      switch(pid) {
+      switch (pid) {
         case PID_QANBA_CRYSTAL_PS4:
         case PID_QANBA_OBSIDIAN_PS4:
           setupPS4(controller);
@@ -113,13 +118,13 @@ void setupController(uint16_t vid, uint16_t pid, HIDController *controller) {
           setupHoriRAP3(controller);
       }
       break;
-    
+
     case VID_RAZER:
-      if(pid == PID_RAZER_PANTHERA) setupPS4(controller);
+      if (pid == PID_RAZER_PANTHERA) setupPS4(controller);
       break;
 
     case VID_SONY:
-      switch(pid) {
+      switch (pid) {
         case PID_SONY_PS4_JP:
         case PID_SONY_PS4_NA:
         case PID_SONY_PS4_ADAPTER:
@@ -130,40 +135,40 @@ void setupController(uint16_t vid, uint16_t pid, HIDController *controller) {
       break;
 
     case VID_UPCB:
-      if(pid == PID_UPCB) setupPS4(controller);
+      if (pid == PID_UPCB) setupPS4(controller);
       break;
 
     default:
-      #ifndef RELEASE_MODE
+#ifndef RELEASE_MODE
       Serial.println("Failed to find a driver for device. Using RAP PS3 as fallback");
-      #endif
-      #ifndef REDUCED_SERIAL_OUTPUT
+#endif
+#ifndef REDUCED_SERIAL_OUTPUT
       Serial.print("VID: ");
       Serial.print(vid, HEX);
       Serial.print(" PID ");
       Serial.println(pid, HEX);
-      #endif
+#endif
       setupHoriRAP3(controller);
       break;
   }
 }
 
 /*
-/**************************
- * Utility functions
+  /**************************
+   Utility functions
  **************************/
 
 /**
- * Configures a D-Pad using the lower 4 bits of the provided byte
- *
- * This function only works for DPads who are in the lower 4 bits
- * of the byte. The mask is hardcoded to 0x0F because of this
- *
- * @param index The index of the byte where the dpad is located in the USB
- *              data packet.  See HIDUniversal#ParseHIDData in the Host
- *              Shield Library for the data packet.
- * @param controller The HIDController that will be configured
- */
+   Configures a D-Pad using the lower 4 bits of the provided byte
+
+   This function only works for DPads who are in the lower 4 bits
+   of the byte. The mask is hardcoded to 0x0F because of this
+
+   @param index The index of the byte where the dpad is located in the USB
+                data packet.  See HIDUniversal#ParseHIDData in the Host
+                Shield Library for the data packet.
+   @param controller The HIDController that will be configured
+*/
 void generateDPad(uint8_t index, HIDController *controller) {
   controller->ConfigButton(BUTTON_UP, index, DPAD_MASK, DPAD_UP);
   controller->ConfigButton(BUTTON_UP_RIGHT, index, DPAD_MASK, DPAD_UP_RIGHT);
@@ -176,20 +181,20 @@ void generateDPad(uint8_t index, HIDController *controller) {
 }
 
 /**************************
- * 8BitDo GamePads
+   8BitDo GamePads
  **************************/
 
 /**
- * Configures an 8BitDo M30 Wired Controller and Compatible devices
- *
- * 8BitDo M30 Button layout
- * Byte 0x01   0x02   0x04   0x08   0x10   0x20   0x40   0x80
- * 0:   Btn 4, Btn 5, NA,    Btn 1, Btn 2, NA,    Btn 3, Btn 6
- * 1:   Btn 7, Btn 8, COIN,  START, NA,    NA,    NA,    NA
- * 2:   DPAD,  DPAD,  DPAD,  DPAD,  NA,    NA,    NA,    NA
- *
- * @param controller The HIDController that will be configured
- */
+   Configures an 8BitDo M30 Wired Controller and Compatible devices
+
+   8BitDo M30 Button layout
+   Byte 0x01   0x02   0x04   0x08   0x10   0x20   0x40   0x80
+   0:   Btn 4, Btn 5, NA,    Btn 1, Btn 2, NA,    Btn 3, Btn 6
+   1:   Btn 7, Btn 8, COIN,  START, NA,    NA,    NA,    NA
+   2:   DPAD,  DPAD,  DPAD,  DPAD,  NA,    NA,    NA,    NA
+
+   @param controller The HIDController that will be configured
+*/
 void setup8BitDoM30(HIDController *controller) {
   // DPad setup
   generateDPad(2, controller);
@@ -207,57 +212,57 @@ void setup8BitDoM30(HIDController *controller) {
 }
 
 /**
- * Configures an 8BitDo SFC30 Wired Controller and Compatible devices
- *
- * 8BitDo SFC30 Button layout
- * Byte 0x01   0x02   0x04   0x08   0x10   0x20   0x40   0x80
- * 0:                   LEFT(0x00)/RIGHT(0xFF)
- * 1:                   UP(0x00)/DOWN(0xFF)
- * 2-3:                          NA
- * 4:   NA,    NA,    NA,    NA,    Btn 5, Btn 4, NA,    Btn 2
- * 5:   Btn 1, NA,    Btn 6, Btn 3, NA,    NA,    COIN,  START
- *
- * @param controller The HIDController that will be configured
- */
+   Configures an 8BitDo SFC30 Wired Controller and Compatible devices
+
+   8BitDo SFC30 Button layout
+   Byte 0x01   0x02   0x04   0x08   0x10   0x20   0x40   0x80
+   0:                   LEFT(0x00)/RIGHT(0xFF)
+   1:                   UP(0x00)/DOWN(0xFF)
+   2-3:                          NA
+   4:   NA,    NA,    NA,    NA,    Btn 5, Btn 4, NA,    Btn 2
+   5:   Btn 1, NA,    Btn 6, Btn 3, NA,    NA,    COIN,  START
+
+   @param controller The HIDController that will be configured
+*/
 void setup8BitDoSFC30(HIDController *controller) {
   // DPad setup
   controller->ConfigButton(BUTTON_LEFT, 0, 0xFF, 0);
   controller->ConfigButton(BUTTON_RIGHT, 0, 0xFF, 0xFF);
   controller->ConfigButton(BUTTON_UP, 1, 0xFF, 0);
   controller->ConfigButton(BUTTON_DOWN, 1, 0xFF, 0xFF);
-  // Button setup  
+  // Button setup
   controller->ConfigButton(BUTTON_COIN, 5, 0x40);
   controller->ConfigButton(BUTTON_START, 5, 0x80);
   controller->ConfigButton(BUTTON_1, 5, 0x01);
   controller->ConfigButton(BUTTON_2, 4, 0x80);
   controller->ConfigButton(BUTTON_3, 5, 0x08);
   controller->ConfigButton(BUTTON_4, 4, 0x20);
-  controller->ConfigButton(BUTTON_5, 4, 0x10); 
+  controller->ConfigButton(BUTTON_5, 4, 0x10);
   controller->ConfigButton(BUTTON_6, 5, 0x04);
 }
 
 /**************************
- * Buffalo GamePads
+   Buffalo GamePads
  **************************/
 
 /**
- * Configures an iBuffalo Classic USB GamePad and Compatible devices
- *
- * iBuffalo SNES Button layout
- * Byte 0x01   0x02   0x04   0x08   0x10   0x20   0x40   0x80
- * 0:                   LEFT(0x00)/RIGHT(0xFF)
- * 1:                   UP(0x00)/DOWN(0xFF)
- * 2:   Btn 5, Btn 4, Btn 2, Btn 1, Btn 6, Btn 3, COIN,  START
- *
- * @param controller The HIDController that will be configured
- */
+   Configures an iBuffalo Classic USB GamePad and Compatible devices
+
+   iBuffalo SNES Button layout
+   Byte 0x01   0x02   0x04   0x08   0x10   0x20   0x40   0x80
+   0:                   LEFT(0x00)/RIGHT(0xFF)
+   1:                   UP(0x00)/DOWN(0xFF)
+   2:   Btn 5, Btn 4, Btn 2, Btn 1, Btn 6, Btn 3, COIN,  START
+
+   @param controller The HIDController that will be configured
+*/
 void setupBuffaloClassic(HIDController *controller) {
-  // DPad setup  
+  // DPad setup
   controller->ConfigButton(BUTTON_LEFT, 0, 0xFF, 0);
   controller->ConfigButton(BUTTON_RIGHT, 0, 0xFF, 0xFF);
   controller->ConfigButton(BUTTON_UP, 1, 0xFF, 0);
   controller->ConfigButton(BUTTON_DOWN, 1, 0xFF, 0xFF);
-  // Button setup  
+  // Button setup
   controller->ConfigButton(BUTTON_COIN, 2, 0x40);
   controller->ConfigButton(BUTTON_START, 2, 0x80);
   controller->ConfigButton(BUTTON_1, 2, 0x08);
@@ -269,63 +274,123 @@ void setupBuffaloClassic(HIDController *controller) {
 }
 
 /**************************
- * Generic GamePads
+   Generic GamePads
  **************************/
 
 /**
- * Configures a Generic SNES pad and Compatible devices
- *
- * Generic SNES Button layout
- * Byte 0x01   0x02   0x04   0x08   0x10   0x20   0x40   0x80
- * 0-2:                          NA
- * 3:                   LEFT(0x00)/RIGHT(0xFF)
- * 4:                   UP(0x00)/DOWN(0xFF)
- * 5:   NA,    NA,    NA,    NA,    Btn 2, Btn 5, Btn 4, Btn 1
- * 6:   Btn 6, Btn 3, NA,    NA,    COIN,  START, NA,    NA
- *
- * @param controller The HIDController that will be configured
- */
+   Configures a Generic SNES pad and Compatible devices
+
+   Generic SNES Button layout
+   Byte 0x01   0x02   0x04   0x08   0x10   0x20   0x40   0x80
+   0-2:                          NA
+   3:                   LEFT(0x00)/RIGHT(0xFF)
+   4:                   UP(0x00)/DOWN(0xFF)
+   5:   NA,    NA,    NA,    NA,    Btn 2, Btn 5, Btn 4, Btn 1
+   6:   Btn 6, Btn 3, NA,    NA,    COIN,  START, NA,    NA
+
+   @param controller The HIDController that will be configured
+*/
 void setupGenericSNES(HIDController *controller) {
-  // DPad setup  
+  // DPad setup
   controller->ConfigButton(BUTTON_LEFT, 3, 0xFF, 0);
   controller->ConfigButton(BUTTON_RIGHT, 3, 0xFF, 0xFF);
   controller->ConfigButton(BUTTON_UP, 4, 0xFF, 0);
   controller->ConfigButton(BUTTON_DOWN, 4, 0xFF, 0xFF);
-  // Button setup  
+  // Button setup
   controller->ConfigButton(BUTTON_COIN, 6, 0x10);
   controller->ConfigButton(BUTTON_START, 6, 0x20);
   controller->ConfigButton(BUTTON_1, 5, 0x80);
   controller->ConfigButton(BUTTON_2, 5, 0x10);
   controller->ConfigButton(BUTTON_3, 6, 0x02);
   controller->ConfigButton(BUTTON_4, 5, 0x40);
-  controller->ConfigButton(BUTTON_5, 5, 0x20); 
+  controller->ConfigButton(BUTTON_5, 5, 0x20);
   controller->ConfigButton(BUTTON_6, 6, 0x01);
 }
 
+
 /**************************
- * Honcam GamePads
+   Daemon
  **************************/
 
 /**
- * Configures a Honcam HC-J2003 and Compatible devices
- *
- * Honcam Button layout
- * Byte 0x01   0x02   0x04   0x08   0x10   0x20   0x40   0x80
- * 0:   Btn 1, Btn 4, Btn 5, Btn 2, Btn 7, Btn 3, Btn 8, Btn 6
- * 1:   COIN,  START, Btn 9, Btn10, Btn11, NA,    NA,    NA
- * 2:   NA,    NA,    NA,    NA,    NA,    NA,    NA,    NA
- * 3:                   LEFT(0x00)/RIGHT(0xFF)
- * 4:                   UP(0x00)/DOWN(0xFF)
- *
- * @param controller The HIDController that will be configured
- */
+   Configures a Generic SNES pad and Compatible devices
+
+   Generic SNES Button layout
+   Byte 0x01   0x02   0x04   0x08   0x10   0x20   0x40   0x80
+   0-2:                          NA
+   3:                   LEFT(0x00)/RIGHT(0xFF)
+   4:                   UP(0x00)/DOWN(0xFF)
+   5:   NA,    NA,    NA,    NA,    Btn 2, Btn 5, Btn 4, Btn 1
+   6:   Btn 6, Btn 3, NA,    NA,    COIN,  START, NA,    NA
+
+   @param controller The HIDController that will be configured
+*/
+void setupDaemonSNES(HIDController *controller) {
+  // DPad setup
+  controller->ConfigButton(BUTTON_LEFT, 3, 0xFF, 0xFF);
+  controller->ConfigButton(BUTTON_RIGHT, 3, 0xFF, 0x01);
+  controller->ConfigButton(BUTTON_UP, 4, 0xFF, 0xFF);
+  controller->ConfigButton(BUTTON_DOWN, 4, 0xFF, 0x01);
+  // Button setup
+  controller->ConfigButton(BUTTON_COIN, 0, 0x40);
+  controller->ConfigButton(BUTTON_START, 0, 0x80);
+  controller->ConfigButton(BUTTON_1, 0, 0x04);
+  controller->ConfigButton(BUTTON_2, 0, 0x08);
+  controller->ConfigButton(BUTTON_3, 0, 0x20);
+  controller->ConfigButton(BUTTON_4, 0, 0x01);
+  controller->ConfigButton(BUTTON_5, 0, 0x02);
+  controller->ConfigButton(BUTTON_6, 0, 0x10);
+
+}
+
+
+void setupDaemonSaturn(HIDController *controller) {
+  // DPad setup
+  controller->ConfigButton(BUTTON_LEFT,  2, 0xFF, 0xFF);
+  controller->ConfigButton(BUTTON_RIGHT, 2, 0xFF, 0x01);
+  controller->ConfigButton(BUTTON_UP, 3, 0xFF, 0xFF);
+  controller->ConfigButton(BUTTON_DOWN, 3, 0xFF, 0x01);
+  // Button setup
+  controller->ConfigButton(BUTTON_COIN, 0, 0x08 );
+  controller->ConfigButton(BUTTON_START, 0, 0x80 );
+  controller->ConfigButton(BUTTON_1, 0, 0x40);
+  controller->ConfigButton(BUTTON_2, 0, 0x20);
+  controller->ConfigButton(BUTTON_3, 0, 0x10);
+  controller->ConfigButton(BUTTON_4, 0, 0x04);
+  controller->ConfigButton(BUTTON_5, 0, 0x01);
+  controller->ConfigButton(BUTTON_6, 0, 0x02);
+  controller->ConfigButton(BUTTON_7, 1, 0x01);
+
+
+}
+
+
+
+/**************************
+   Honcam GamePads
+ **************************/
+
+/**
+   Configures a Honcam HC-J2003 and Compatible devices
+
+   Honcam Button layout
+   Byte 0x01   0x02   0x04   0x08   0x10   0x20   0x40   0x80
+   0:   Btn 1, Btn 4, Btn 5, Btn 2, Btn 7, Btn 3, Btn 8, Btn 6
+   1:   COIN,  START, Btn 9, Btn10, Btn11, NA,    NA,    NA
+   2:   NA,    NA,    NA,    NA,    NA,    NA,    NA,    NA
+   3:                   LEFT(0x00)/RIGHT(0xFF)
+   4:                   UP(0x00)/DOWN(0xFF)
+
+   @param controller The HIDController that will be configured
+*/
+
 void setupHoncam(HIDController *controller) {
-  // DPad setup  
+  // DPad setup
   controller->ConfigButton(BUTTON_LEFT, 3, 0xFF, 0);
   controller->ConfigButton(BUTTON_RIGHT, 3, 0xFF, 0xFF);
   controller->ConfigButton(BUTTON_UP, 4, 0xFF, 0);
   controller->ConfigButton(BUTTON_DOWN, 4, 0xFF, 0xFF);
-  // Button setup  
+  // Button setup
   controller->ConfigButton(BUTTON_COIN, 1, 0x01);
   controller->ConfigButton(BUTTON_START, 1, 0x02);
   controller->ConfigButton(BUTTON_1, 0, 0x01);
@@ -336,25 +401,27 @@ void setupHoncam(HIDController *controller) {
   controller->ConfigButton(BUTTON_6, 0, 0x80);
   controller->ConfigButton(BUTTON_7, 0, 0x10);
   controller->ConfigButton(BUTTON_8, 0, 0x40);
-  controller->ConfigButton(BUTTON_9, 1, 0x04); 
+  controller->ConfigButton(BUTTON_9, 1, 0x04);
   controller->ConfigButton(BUTTON_10, 1, 0x08);
 }
 
+
+
 /**************************
- * Hori GamePads
+   Hori GamePads
  **************************/
 
 /**
- * Configures a Hori Fighting Commander and Compatible devices
- *
- * Fighting Commander Button layout
- * Byte 0x01   0x02   0x04   0x08   0x10   0x20   0x40   0x80
- * 0:   Btn 1, Btn 4, Btn 5, Btn 2, Btn 7, Btn 3, Btn 8, Btn 6
- * 1:   COIN,  START, NA,    NA,    NA,    NA,    NA,    NA
- * 2:   DPAD,  DPAD,  DPAD,  DPAD,  NA,    NA,    NA,    NA
- *
- * @param controller The HIDController that will be configured
- */
+   Configures a Hori Fighting Commander and Compatible devices
+
+   Fighting Commander Button layout
+   Byte 0x01   0x02   0x04   0x08   0x10   0x20   0x40   0x80
+   0:   Btn 1, Btn 4, Btn 5, Btn 2, Btn 7, Btn 3, Btn 8, Btn 6
+   1:   COIN,  START, NA,    NA,    NA,    NA,    NA,    NA
+   2:   DPAD,  DPAD,  DPAD,  DPAD,  NA,    NA,    NA,    NA
+
+   @param controller The HIDController that will be configured
+*/
 void setupHoriFightingCmdr(HIDController *controller) {
   // DPad setup
   generateDPad(2, controller);
@@ -372,22 +439,22 @@ void setupHoriFightingCmdr(HIDController *controller) {
 }
 
 /**************************
- * Hori GamePads
+   Hori GamePads
  **************************/
 
 /**
- * Configures a Hori Real Arcade Pro and Compatible devices
- *
- * RAP Button layout
- * Byte 0x01   0x02   0x04   0x08   0x10   0x20   0x40   0x80
- * 0:   Btn 1, Btn 4, Btn 5, Btn 2, Btn 7, Btn 3, Btn 8, Btn 6
- * 1:   COIN,  START, Btn 9, Btn10, NA,    NA,    NA,    NA
- * 2:   DPAD,  DPAD,  DPAD,  DPAD,  NA,    NA,    NA,    NA
- *
- * @param controller The HIDController that will be configured
- */
+   Configures a Hori Real Arcade Pro and Compatible devices
+
+   RAP Button layout
+   Byte 0x01   0x02   0x04   0x08   0x10   0x20   0x40   0x80
+   0:   Btn 1, Btn 4, Btn 5, Btn 2, Btn 7, Btn 3, Btn 8, Btn 6
+   1:   COIN,  START, Btn 9, Btn10, NA,    NA,    NA,    NA
+   2:   DPAD,  DPAD,  DPAD,  DPAD,  NA,    NA,    NA,    NA
+
+   @param controller The HIDController that will be configured
+*/
 void setupHoriRAP3(HIDController *controller) {
-  // DPad setup  
+  // DPad setup
   generateDPad(2, controller);
   // Button setup
   controller->ConfigButton(BUTTON_COIN, 1, 0x01);
@@ -405,22 +472,22 @@ void setupHoriRAP3(HIDController *controller) {
 }
 
 /**************************
- * Retrobit GamePads
+   Retrobit GamePads
  **************************/
 
 /**
- * Configures a Retrobit Saturn 2.4G controller and Compatible devices
- *
- * Retrobit Saturn 2.4G Button layout
- * Byte 0x01   0x02   0x04   0x08   0x10   0x20   0x40   0x80
- * 0:   Btn 2, Btn 5, Btn 4, Btn 1, Btn 7, Btn 8, Btn 3, Btn 6
- * 1:   COIN,  START, NA,    NA,    Btn 9, NA,    NA,    NA
- * 2:   DPAD,  DPAD,  DPAD,  DPAD,  NA,    NA,    NA,    NA
- *
- * @param controller The HIDController that will be configured
- */
+   Configures a Retrobit Saturn 2.4G controller and Compatible devices
+
+   Retrobit Saturn 2.4G Button layout
+   Byte 0x01   0x02   0x04   0x08   0x10   0x20   0x40   0x80
+   0:   Btn 2, Btn 5, Btn 4, Btn 1, Btn 7, Btn 8, Btn 3, Btn 6
+   1:   COIN,  START, NA,    NA,    Btn 9, NA,    NA,    NA
+   2:   DPAD,  DPAD,  DPAD,  DPAD,  NA,    NA,    NA,    NA
+
+   @param controller The HIDController that will be configured
+*/
 void setupRetrobit_Saturn(HIDController *controller) {
-  // DPad setup  
+  // DPad setup
   generateDPad(2, controller);
   // Button setup
   controller->ConfigButton(BUTTON_COIN, 1, 0x01);
@@ -437,22 +504,22 @@ void setupRetrobit_Saturn(HIDController *controller) {
 }
 
 /**************************
- * Sony GamePads
+   Sony GamePads
  **************************/
 
 /**
- * Configures a Sony PS4 DS4 controller and Compatible devices
- *
- * PS4 DS4 Button layout
- * Byte 0x01   0x02   0x04   0x08   0x10   0x20   0x40   0x80
- * 0-4:                          NA
- * 5:   DPAD,  DPAD,  DPAD,  DPAD,  Btn 1, Btn 4, Btn 5, Btn 2
- * 6:   Btn 7, Btn 3, Btn 8, Btn 6, COIN,  START, NA,    NA
- *
- * @param controller The HIDController that will be configured
- */
+   Configures a Sony PS4 DS4 controller and Compatible devices
+
+   PS4 DS4 Button layout
+   Byte 0x01   0x02   0x04   0x08   0x10   0x20   0x40   0x80
+   0-4:                          NA
+   5:   DPAD,  DPAD,  DPAD,  DPAD,  Btn 1, Btn 4, Btn 5, Btn 2
+   6:   Btn 7, Btn 3, Btn 8, Btn 6, COIN,  START, NA,    NA
+
+   @param controller The HIDController that will be configured
+*/
 void setupPS4(HIDController *controller) {
-  // DPad setup  
+  // DPad setup
   generateDPad(5, controller);
   // Button setup
   controller->ConfigButton(BUTTON_COIN, 6, 0x10);

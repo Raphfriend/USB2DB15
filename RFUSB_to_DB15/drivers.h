@@ -26,6 +26,8 @@
 #define VID_RAZER               0x1532 // Razer
 #define VID_SONY                0x054c // Sony
 #define VID_UPCB                0x04D8 // Universal PCB Project
+#define VID_DAEMON               0x2341 // Daemon
+
 
 /****************
  * Product IDs
@@ -44,6 +46,8 @@
 #define PID_HORI_LITE           0x00EE // HORI ワイヤードコントローラライト for PS4-102
 #define PID_HORI_RAP_PREMIUM    0x0026 // HORI Real Arcade リアルアーケードPro.3 Premium VLX
 #define PID_HORI_RAP_PS3        0x0011 // HORI Real Arcade Pro.3 SA PS3コントローラ
+#define PID_DAEMON_SNES         0x8036 // Daemon SNES
+#define PID_DAEMON_SATURN         0x8030 // Daemon Saturn
 #define PID_HORI_RAP_V_PS3      0x008B // HORI RAP V HAYABUSA Controller(PS3)
 #define PID_HORI_RAP_V_PS4      0x008A // HORI RAP V HAYABUSA Controller(PS4)
 #define PID_MADCATZ_SF_PS3_RND1 0x8818 // Mad Catz Street Fighter IV Tournament Edition Round 1 (PS3)
@@ -86,6 +90,13 @@ void setupBuffaloClassic(HIDController *controller);
 
 // Generic Controllers
 void setupGenericSNES(HIDController *controller);
+
+// Daemon SNES
+void setupDaemonSNES(HIDController *controller);
+
+// Daemon Saturn
+void setupDaemonSaturn(HIDController *controller);
+
 
 // Honcam Controllers
 void setupHoncam(HIDController *controller);

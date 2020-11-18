@@ -24,6 +24,27 @@ This is a list of tested controllers. Please reach out to our Discord server if 
 ### Generic
 - Generic SNES USB pad
 
+### DaemonBite Retro Controllers To USB Adapters:
+	- NES/SNES (2341:8037)
+	- SEGA Saturn (2341:8030)
+	
+	DaemonBite Retro Controllers To USB Adapters project uses an Arduino Pro Micro, when the code is burned, will show as Leonardo and a VID/PID will be attached. Each controller code own especific output patterns and can't use same ID Hardwares on the USB2DB15 adapter, so we choose to change the PID on Saturn and on (NES/SNES is standard) to make the code working well. It won't change anything on the right functionalities for both adapters in any device (Windows PC or MiSTer, for example).
+	
+	- To do that, just find Arduino > avr > boards.txt file; 
+	- Save this file in a another place so you don't lose it. 
+	- Find something like it: 
+		micro.build.vid=0x2341
+		micro.build.pid=0x8037
+		micro.build.usb_product="Arduino Micro"
+
+	- Change for something like it:
+
+			micro.build.vid=0x2341		
+			micro.build.pid=0x8037
+			micro.build.usb_product="Arduino Micro"
+	- Save the file.
+
+
 ### Honcam
 - HC-J2003
 
