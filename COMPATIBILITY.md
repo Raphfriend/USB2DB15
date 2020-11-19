@@ -40,7 +40,7 @@ This is a list of tested controllers. Please reach out to our Discord server if 
 	- Change for something like it:
 
 			micro.build.vid=0x2341		
-			micro.build.pid=0x8037
+			micro.build.pid=0x8030 (PID used for Saturn)
 			micro.build.usb_product="Arduino Micro"
 	- Save the file.
 
