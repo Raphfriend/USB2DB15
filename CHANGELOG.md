@@ -1,3 +1,11 @@
+## [0.14.5] - 2020-11-18
+### Added
+- Added Support for the DaemonBite Retro Controllers To USB Adapters:
+	- NES/SNES
+	- SEGA Saturn
+	
+	Check the COMPATIBILITY.md for more instructions.
+
 ## [0.14.4] - 2020-10-12
 ### Changed
 - Exiting bind mode after binding at least one button will clear the binds for any buttons that weren't bound
