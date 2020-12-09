@@ -11,6 +11,7 @@ This is a list of tested controllers. Please reach out to our Discord server if 
   - NES & SNES Bluetooth receviers tested compatible with the following controllers:
     - Sony PS4 DS4
     - Nintendo Switch Pro controller
+    - 8BitDo Arcade Stick (November 2020 version) on Switch mode and Firmware 1.03
     - 8BitDo SFC30
     - 8BitDo M30 Bluetooth controller (controller must be placed in either MacOS mode by holding A + START or X-Input mode by holding X + START upon powering on controller)
 
