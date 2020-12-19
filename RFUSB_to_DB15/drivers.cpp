@@ -134,6 +134,10 @@ void setupController(uint16_t vid, uint16_t pid, HIDController *controller) {
       }
       break;
 
+    case VID_SEGATOYS:
+      if (pid == PID_SEGA_ACS) setupSegaAstroCityMini(controller);
+      break;
+
     case VID_UPCB:
       if (pid == PID_UPCB) setupPS4(controller);
       break;
@@ -532,4 +536,37 @@ void setupPS4(HIDController *controller) {
   controller->ConfigButton(BUTTON_6, 6, 0x08);
   controller->ConfigButton(BUTTON_7, 6, 0x01);
   controller->ConfigButton(BUTTON_8, 6, 0x04);
+}
+
+/**************************
+ * Sega GamePads
+ **************************/
+
+/**
+ * Configures an 8BitDo SFC30 Wired Controller and Compatible devices
+ *
+ * 8BitDo SFC30 Button layout
+ * Byte 0x01   0x02   0x04   0x08   0x10   0x20   0x40   0x80
+ * 3:                   LEFT(0x00)/RIGHT(0xFF)
+ * 4:                   UP(0x00)/DOWN(0xFF)
+ * 5:   NA,    NA,    NA,    NA,    Btn 2, Btn 5, Btn 4, Btn 1
+ * 6:   Btn 3, Btn 6, NA,    NA,    COIN,  START, NA,    NA
+ *
+ * @param controller The HIDController that will be configured
+ */
+void setupSegaAstroCityMini(HIDController *controller) {
+  // DPad setup
+  controller->ConfigButton(BUTTON_LEFT, 3, 0xFF, 0);
+  controller->ConfigButton(BUTTON_RIGHT, 3, 0xFF, 0xFF);
+  controller->ConfigButton(BUTTON_UP, 4, 0xFF, 0);
+  controller->ConfigButton(BUTTON_DOWN, 4, 0xFF, 0xFF);
+  // Button setup
+  controller->ConfigButton(BUTTON_COIN, 6, 0x10);
+  controller->ConfigButton(BUTTON_START, 6, 0x20);
+  controller->ConfigButton(BUTTON_1, 5, 0x80);
+  controller->ConfigButton(BUTTON_2, 5, 0x10);
+  controller->ConfigButton(BUTTON_3, 6, 0x01);
+  controller->ConfigButton(BUTTON_4, 5, 0x40);
+  controller->ConfigButton(BUTTON_5, 5, 0x20);
+  controller->ConfigButton(BUTTON_6, 6, 0x02);
 }

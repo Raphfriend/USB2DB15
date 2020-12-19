@@ -27,6 +27,7 @@
 #define VID_SONY                0x054c // Sony
 #define VID_UPCB                0x04D8 // Universal PCB Project
 #define VID_DAEMON              0x2341 // DaemonBite Retro Controllers (Standard Arduino Leonardo VID)
+#define VID_SEGATOYS            0x0CA3 // Sega Toys
 
 
 /****************
@@ -63,6 +64,7 @@
 #define PID_SONY_PS4_JP         0x09CC // PS4 Controller JP region
 #define PID_SONY_PS4_NA         0x05C4 // PS4 Controller NA region
 #define PID_UPCB                0x1529 // Universal PCB Project
+#define PID_SEGA_ACS            0x0028 // Arcade stick for Astro City Mini - ACS-1003
 
 /****************
  * D Pad Constants
@@ -110,5 +112,8 @@ void setupRetrobit_Saturn(HIDController *controller);
 
 // Sony
 void setupPS4(HIDController *controller);
+
+// Sega
+void setupSegaAstroCityMini(HIDController *controller);
 
 #endif //USB2DB15_DRIVERS_H
