@@ -81,7 +81,6 @@ This is a list of tested controllers. Please reach out to our Discord server if 
 - Sega Saturn Wireless Controller 2.4GHz (Via wireless USB receiver)
 	- Press START + UP to enable digital DPAD
 ### SEGA
-
 - Astro City Mini Arcade Stick
 
 ### Sony
