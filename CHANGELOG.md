@@ -1,3 +1,7 @@
+## [0.14.6] - 2020-12-19
+### Added
+- Added Support for the Astro City Mini Arcade Stick:
+	
 ## [0.14.5] - 2020-11-18
 ### Added
 - Added Support for the DaemonBite Retro Controllers To USB Adapters:
