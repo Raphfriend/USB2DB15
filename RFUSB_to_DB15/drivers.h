@@ -24,11 +24,12 @@
 #define VID_NACON               0x146B // Nacon
 #define VID_QANBA               0x2C22 // Qanba
 #define VID_RAZER               0x1532 // Razer
+#define VID_SEGATOYS            0x0CA3 // Sega Toys
+#define VID_SHANWAN             0x2563 // Shenzhen ShanWan Technology Co., Ltd.
 #define VID_SONY                0x054c // Sony
 #define VID_UPCB                0x04D8 // Universal PCB Project
 #define VID_DAEMON              0x2341 // DaemonBite Retro Controllers (Standard Arduino Leonardo VID)
-#define VID_SEGATOYS            0x0CA3 // Sega Toys
-#define VID_SHANWAN             0x2563 // Shenzhen ShanWan Technology Co., Ltd.
+
 
 
 /****************
@@ -56,17 +57,19 @@
 #define PID_MADCATZ_SF_PS3_RND2 0x8838 // Mad Catz Street Fighter IV Tournament Edition Round 2 (PS3)
 #define PID_NACON_DAIJA_PS3     0x0904 // Nacon Daija (PS3)
 #define PID_NACON_DAIJA_PS4     0x0D09 // Nacon Daija (PS4)
+#define PID_NEOGEO_MINI_PAD     0x0575 // Neo Geo Mini Pad
 #define PID_QANBA_CRYSTAL_PS4   0x2200 // Qanba Crystal (PS4)
 #define PID_QANBA_OBSIDIAN_PS3  0x2302 // Qanba Obsidian (PS3)
 #define PID_QANBA_OBSIDIAN_PS4  0x2300 // Qanba Obsidian (PS4)
-#define PID_RAZER_PANTHERA      0x0401 // Razer Panthera
+#define PID_RAZER_PANTHERA      0x0401 // Razer Panthera (PS4)
+#define PID_RAZER_PANTHERA_EVO  0x1008 // Razer Panthera EVO (PS4)
 #define PID_RETROBIT_SATURN     0x00C1 // Retrobit Sega Saturn Wireless 2.4G
 #define PID_SONY_PS4_ADAPTER    0x0BA0 // PS4 Wireless Adapter
 #define PID_SONY_PS4_JP         0x09CC // PS4 Controller JP region
 #define PID_SONY_PS4_NA         0x05C4 // PS4 Controller NA region
 #define PID_UPCB                0x1529 // Universal PCB Project
 #define PID_SEGA_ACS            0x0028 // Arcade stick for Astro City Mini - ACS-1003
-#define PID_NEOGEO_MINI_PAD     0x0575 // Neo Geo Mini Pad
+
 
 /****************
  * D Pad Constants
