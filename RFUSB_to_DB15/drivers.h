@@ -28,6 +28,7 @@
 #define VID_UPCB                0x04D8 // Universal PCB Project
 #define VID_DAEMON              0x2341 // DaemonBite Retro Controllers (Standard Arduino Leonardo VID)
 #define VID_SEGATOYS            0x0CA3 // Sega Toys
+#define VID_SHANWAN             0x2563 // Shenzhen ShanWan Technology Co., Ltd.
 
 
 /****************
@@ -65,6 +66,7 @@
 #define PID_SONY_PS4_NA         0x05C4 // PS4 Controller NA region
 #define PID_UPCB                0x1529 // Universal PCB Project
 #define PID_SEGA_ACS            0x0028 // Arcade stick for Astro City Mini - ACS-1003
+#define PID_NEOGEO_MINI_PAD     0x0575 // Neo Geo Mini Pad
 
 /****************
  * D Pad Constants
@@ -115,5 +117,8 @@ void setupPS4(HIDController *controller);
 
 // Sega
 void setupSegaAstroCityMini(HIDController *controller);
+
+// NeoGeo
+void setupNeoGeoMini(HIDController *controller);
 
 #endif //USB2DB15_DRIVERS_H
