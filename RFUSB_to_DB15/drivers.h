@@ -109,16 +109,20 @@ void setupHoncam(HIDController *controller);
 void setupHoriFightingCmdr(HIDController *controller);
 void setupHoriRAP3(HIDController *controller);
 
+// NeoGeo
+void setupNeoGeoMini(HIDController *controller);
+
 // Retrobit Controllers
 void setupRetrobit_Saturn(HIDController *controller);
-
-// Sony
-void setupPS4(HIDController *controller);
 
 // Sega
 void setupSegaAstroCityMini(HIDController *controller);
 
-// NeoGeo
-void setupNeoGeoMini(HIDController *controller);
+// Sony
+void setupPS4(HIDController *controller);
+
+
+
+
 
 #endif //USB2DB15_DRIVERS_H
