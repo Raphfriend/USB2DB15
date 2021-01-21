@@ -1,3 +1,8 @@
+## [0.14.7] - 2021-01-21
+### Added
+- Added Support for the Neo Geo Mini Pad.
+- Added Support for Razer Panthera EVO (PS4).
+
 ## [0.14.6] - 2020-12-19
 ### Added
 - Added Support for the Astro City Mini Arcade Stick.
