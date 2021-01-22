@@ -138,6 +138,10 @@ void setupController(uint16_t vid, uint16_t pid, HIDController *controller) {
       if (pid == PID_SEGA_ACS) setupSegaAstroCityMini(controller);
       break;
 
+    case VID_SHANWAN:
+      if (pid == PID_NEOGEO_MINI_PAD) setupNeoGeoMini(controller);
+      break;
+
     case VID_UPCB:
       if (pid == PID_UPCB) setupPS4(controller);
       break;
@@ -569,4 +573,31 @@ void setupSegaAstroCityMini(HIDController *controller) {
   controller->ConfigButton(BUTTON_4, 5, 0x40);
   controller->ConfigButton(BUTTON_5, 5, 0x20);
   controller->ConfigButton(BUTTON_6, 6, 0x02);
+}
+
+/**************************
+ * ShanWan GamePads
+ **************************/
+
+/**
+ * Configures a Neo Geo Mini Pad and Compatible devices
+ *
+ * Neo Geo Mini Pad Button layout
+ * Byte 0x01   0x02   0x04   0x08   0x10   0x20   0x40   0x80
+ * 0:   Btn 4, Btn 2, Btn 1, Btn 3, NA,    NA,    NA,    NA
+ * 1:   COIN,  START, NA,    NA,    NA,    NA,    NA,    NA
+ * 2:   DPAD,  DPAD,  DPAD,  DPAD,  NA,    NA,    NA,    NA
+ *
+ * @param controller The HIDController that will be configured
+ */
+void setupNeoGeoMini(HIDController *controller) {
+  // DPad setup
+  generateDPad(2, controller);
+  // Button setup
+  controller->ConfigButton(BUTTON_COIN, 1, 0x01);
+  controller->ConfigButton(BUTTON_START, 1, 0x02);
+  controller->ConfigButton(BUTTON_1, 0, 0x04);
+  controller->ConfigButton(BUTTON_2, 0, 0x02);
+  controller->ConfigButton(BUTTON_3, 0, 0x08);
+  controller->ConfigButton(BUTTON_4, 0, 0x01);
 }
