@@ -1,3 +1,7 @@
+## [0.14.8] - 2021-02-25
+### Added
+- Added Support for Sony Playstation 5 DualSense
+
 ## [0.14.7] - 2021-01-21
 ### Added
 - Added Support for the Neo Geo Mini Pad.

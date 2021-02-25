@@ -91,6 +91,7 @@ This is a list of tested controllers. Please reach out to our Discord server if 
 - Dual Shock 3
 - PS4 Offical Controllers
 - PS4 Wireless Adapter
+- PS5 DualSense
 
 ### Toodles
 - MC Cthulhu
