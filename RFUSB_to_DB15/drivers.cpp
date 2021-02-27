@@ -128,14 +128,14 @@ void setupController(uint16_t vid, uint16_t pid, HIDController *controller) {
       if (pid == PID_SONY_PS5_NA) setupPS5(controller);
 
       switch (pid) {       
+        case PID_SONY_PS5_NA:
+          setupPS5(controller);
+          break;
         case PID_SONY_PS4_JP:
         case PID_SONY_PS4_NA:
         case PID_SONY_PS4_ADAPTER:
         default:
           setupPS4(controller);
-          break;
-          case PID_SONY_PS5_NA:
-          setupPS5(controller);
           break;
       }
       break;
@@ -554,7 +554,7 @@ void setupPS4(HIDController *controller) {
  *
  * PS5 DualSense Button layout
  * Byte 0x01   0x02   0x04   0x08   0x10   0x20   0x40   0x80
- * 0-4:                          NA
+ * 0-7:                          NA
  * 8:   DPAD,  DPAD,  DPAD,  DPAD,  Btn 1, Btn 4, Btn 5, Btn 2
  * 9:   Btn 7, Btn 3, Btn 8, Btn 6, COIN,  START, NA,    NA
  *
