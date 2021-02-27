@@ -124,9 +124,6 @@ void setupController(uint16_t vid, uint16_t pid, HIDController *controller) {
       break;
 
     case VID_SONY:
-
-      if (pid == PID_SONY_PS5_NA) setupPS5(controller);
-
       switch (pid) {       
         case PID_SONY_PS5_NA:
           setupPS5(controller);
