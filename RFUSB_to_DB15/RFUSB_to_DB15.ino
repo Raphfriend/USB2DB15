@@ -3,7 +3,7 @@
 //
 //         Author:           Raph_friend
 //         Date:             06.07.2020
-//         Version:          0.14.4
+//         Version:          0.14.8
 //
 //         USB Host Shield 2.0 modded lib:         https://github.com/Raphfriend/USB_Host_Shield_2.0
 //

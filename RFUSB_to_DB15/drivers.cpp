@@ -124,7 +124,10 @@ void setupController(uint16_t vid, uint16_t pid, HIDController *controller) {
       break;
 
     case VID_SONY:
-      switch (pid) {
+      switch (pid) {       
+        case PID_SONY_PS5_NA:
+          setupPS5(controller);
+          break;
         case PID_SONY_PS4_JP:
         case PID_SONY_PS4_NA:
         case PID_SONY_PS4_ADAPTER:
@@ -541,6 +544,35 @@ void setupPS4(HIDController *controller) {
   controller->ConfigButton(BUTTON_7, 6, 0x01);
   controller->ConfigButton(BUTTON_8, 6, 0x04);
 }
+
+
+/**
+ * Configures a Sony PS5 DualSense controller and Compatible devices
+ *
+ * PS5 DualSense Button layout
+ * Byte 0x01   0x02   0x04   0x08   0x10   0x20   0x40   0x80
+ * 0-7:                          NA
+ * 8:   DPAD,  DPAD,  DPAD,  DPAD,  Btn 1, Btn 4, Btn 5, Btn 2
+ * 9:   Btn 7, Btn 3, Btn 8, Btn 6, COIN,  START, NA,    NA
+ *
+ * @param controller The HIDController that will be configured
+ */
+void setupPS5(HIDController *controller) {
+  // DPad setup
+  generateDPad(8, controller);
+  // Button setup
+  controller->ConfigButton(BUTTON_COIN, 9, 0x10);
+  controller->ConfigButton(BUTTON_START, 9, 0x20);
+  controller->ConfigButton(BUTTON_1, 8, 0x10);
+  controller->ConfigButton(BUTTON_2, 8, 0x80);
+  controller->ConfigButton(BUTTON_3, 9, 0x02);
+  controller->ConfigButton(BUTTON_4, 8, 0x20);
+  controller->ConfigButton(BUTTON_5, 8, 0x40);
+  controller->ConfigButton(BUTTON_6, 9, 0x08);
+  controller->ConfigButton(BUTTON_7, 9, 0x01);
+  controller->ConfigButton(BUTTON_8, 9, 0x04);
+}
+
 
 /**************************
  * Sega GamePads
