@@ -38,8 +38,10 @@
 
 #define PID_8BITDO_M30          0x5006 // 8BitDo M30 Bluetooth Wired Controller (D-INPUT MODE)
 #define PID_8BITDO_SFC30        0xAB21 // 8BitDo SFC30 Wired Controller
+#define PID_8BITDO_SNES_BT      0x3101 // 8BitDo Snes BT adapter
 #define PID_BUFFALO_CLASSIC     0x2060 // iBUFFALO SNES CLASSIC USB GAMEPAD
 #define PID_BROOK_UNIVERSAL     0x0C30 // Brook Universal Fighting PCB
+#define PID_BROOK_FB     0x0ef7 // FIGHTING BOARD PS3/PS4 (PS4 Mode)
 #define PID_GENERIC_SNES        0x0011 // Generic SNES pad
 #define PID_HONCAM              0xA713 // Honcam HC-J2003
 #define PID_HORI_CMDR           0x0085 // HORI Fighting Commander
