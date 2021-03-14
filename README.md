@@ -74,7 +74,7 @@ Due to variances of Mini Pro PCB's, A4 and A5 may be in different locations. Ple
 <p align="center">
 <img width="680" height="460" src="https://i.imgur.com/sYRVOBI.png">
  <br>
-  <b>Custom PCB for Arduino Pro Mini 1.1</b><br>
+  <b>Custom PCB 1.1 for Arduino Pro Mini</b><br>
 </p>
 
 
