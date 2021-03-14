@@ -54,7 +54,7 @@ A basic understanding of Arduino and its programming environment is required. Vi
 * DB15 female connector.
 
 <p align="center">
-  <img width="480" height="480" src="https://i.imgur.com/voZmPqe.jpg">
+  <img width="680" height="480" src="https://i.imgur.com/UeZuOrb.jpg">
  <br>
   <b>DB15 female connector, Arduino Nano and Usb Host Shield Mini</b><br>
 <br>
