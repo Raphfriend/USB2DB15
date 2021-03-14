@@ -56,7 +56,7 @@ A basic understanding of Arduino and its programming environment is required. Vi
 <p align="center">
   <img width="680" height="480" src="https://i.imgur.com/UeZuOrb.jpg">
  <br>
-  <b>DB15 female connector, Arduino Nano and Usb Host Shield Mini</b><br>
+  <b>Arduino Pro Mini and Usb Host Shield Mini</b><br>
 <br>
 	</p>  	
     
