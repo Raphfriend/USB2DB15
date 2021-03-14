@@ -19,6 +19,7 @@ This is a list of tested controllers. Please reach out to our Discord server if 
 - SNES Classic GamePad
 
 ### Brook
+- Brook FIGHTING BOARD PS3/PS4
 - Brook Universal Fighting PCB
 - Brook Retro Board
 
