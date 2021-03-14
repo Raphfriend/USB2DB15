@@ -4,7 +4,7 @@ A simple Atmega328P based USB to DB15 adapter designed for use with a Supergun o
 
 
 <p align="center">
-  <img width="680" height="420" src="https://i.imgur.com/rgD6F0P.png">
+  <img width="680" height="420" src="https://i.imgur.com/wUzNxtB.png">
  <br>
   <b>USB2DB15 with a Sega Astro City Mini Arcade Stick</b><br>
 <br>
@@ -12,19 +12,19 @@ A simple Atmega328P based USB to DB15 adapter designed for use with a Supergun o
 
 ### 1. Features:
 
-- 1ms polling;
-- Open Source firmware;
-- 5 save slots for custom remapping types;
-- 10 save slots for different controllers;
-- Status LED;
-- Protection circuit for your belevod controllers;
-- DB15 pinout standard ready for Minigun and HAS superguns. 
+- 1ms polling
+- Open Source firmware
+- 5 save slots for custom remapping types
+- 10 save slots for different controllers
+- Status LED
+- Protection circuit for your belevod controllers
+- DB15 pinout standard ready for Minigun and HAS superguns
 
 
 ### 2. Technical information:
 
 The USB2DB15 adapter is an Open Sourced device based on an AVR microcontroller. It adapts a USB controller for use on a Jamma PCB via a SUPERGUN or a Neo-Geo console.
-At present a variety of common controllers are supported; such as ones that follow the PS3, PS4 and Xbox One protocol. Due to the diversity of controllers available and differing standards there may be some controllers that do not work at all or that do not work as intended. Please be patient during these early stages and feel free to contact the developers with additional information and requests for help via GitHub.
+At present a variety of common controllers are supported; such as ones that follow the PS3/PS4 DualShock, PS5 DualSense and Xbox 360/One protocol. Due to the diversity of controllers available and differing standards there may be some controllers that do not work at all or that do not work as intended. Please be patient during these early stages and feel free to contact the developers with additional information and requests for help via GitHub.
 
 We are using a modified USB Host Shield 2.0 library for controller IDs that aren't natively supported. 
 
@@ -122,10 +122,15 @@ Thus if you wanted the first profile you would press SELECT + UP, the Second SEL
 The adapter will remember what profile you were using and automatically switch to it when you use the controller again.
 
 To change the key bindings of a profile. First change to the profile you want to setup.
-Press and Hold SELECT for 3 seconds, then while holding continuing to hold SELECT press buttons 1 - 6 in order.
+While holding SELECT for at least 3 seconds, press buttons 1 - 6 in order. Then release SELECT to lock in the binding.
 Finally release SELECT to lock in the binding.
 
 *XBoxOne controllers appear to the system as the same make and model and thus use the same profiles even if they are different controllers.
+
+
+### LEGAL
+
+USB2DB15 or any of its maintainers are in no way associated with or endorsed by Nintendo, Sony, SNK, Microsoft, 8BitDo, Sega, Brook, Mad Catz, Nacon, Honcam, DaemonBite, Buffalo, Qanba, Razer, Retrobit, Toodles, Hori or any other company not implicitly indicated. All other brands or product names are the property of their respective holders.
 
 ### Donation
 
