@@ -17,7 +17,7 @@ A simple Atmega328P based USB to DB15 adapter designed for use with a Supergun o
 - Open Source firmware, so everyone on the community can colabore
 - DB15 pinout standard ready for Neo Geo, Minigun, and HAS superguns
 - 4 customizable and storable mapping configurations
-- 10 customizable controller profiles
+- 10 customizable and storable controller profiles
 - Status LED
 - Protection circuit for your belevod controllers
 
