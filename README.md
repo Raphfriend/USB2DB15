@@ -25,8 +25,7 @@ A simple Atmega328P based USB to DB15 adapter designed for use with a Supergun o
 
 ### 2. Technical information:
 
-The USB2DB15 adapter is an Open Sourced device based on an AVR microcontroller. It adapts a USB controller for use on a Jamma PCB via a SUPERGUN or a Neo-Geo console.
-At present a variety of common controllers are supported; such as ones that follow the PS3/PS4 DualShock, PS5 DualSense and Xbox 360/One protocol. Due to the diversity of controllers available and differing standards there may be some controllers that do not work at all or that do not work as intended. Please be patient during these early stages and feel free to contact the developers with additional information and requests for help via GitHub.
+The USB2DB15 adapter is an Open Sourced device based on an AVR microcontroller. It adapts a USB controller for use on a Jamma PCB via a Supergun or Neo-Geo hardware with controller ports. Presently, a variety of common controllers are supported; such as ones that follow the PS3/PS4 DualShock, PS5 DualSense and Xbox 360/One protocols. Due to the diversity of controllers available and differing standards there may be some controllers that will not work with the USB2DB15 or may not work as intended. Please be patient during these early stages and feel free to contact the developers with additional information and requests for help with your USB2DB15 adapter via our communication channels (GitHub, Discord, Arcade-Projects forum).
 
 We are using a modified USB Host Shield 2.0 library for controller IDs that aren't natively supported. 
 
