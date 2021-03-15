@@ -12,13 +12,15 @@ A simple Atmega328P based USB to DB15 adapter designed for use with a Supergun o
 
 ### 1. Features:
 
-- 1ms polling
-- Open Source firmware
-- 5 save slots for custom remapping types
-- 10 save slots for different controllers
+- USB input to support most modern HID compatible controllers
+- 1ms polling, it means low latency and fast response from USB2DB15
+- Open Source firmware, so everyone on the community can colabore
+- DB15 pinout standard ready for Neo Geo, Minigun, and HAS superguns
+- 4 customizable and storable mapping configurations
+- 10 customizable controller profiles
 - Status LED
 - Protection circuit for your belevod controllers
-- DB15 pinout standard ready for Minigun and HAS superguns
+
 
 
 ### 2. Technical information:
@@ -109,7 +111,7 @@ If you are not using a prefabricated PCB, please view the schematic for wiring i
 
 ### 5. Supported Controllers:
 
-See COMPATIBILITY.md for a detailed list
+[See Compatibility.md for a detailed list of supported controllers.](COMPATIBILITY.md)
 
 ### 6. Software Usage
 #### 6.1 Controller Profiles
@@ -126,7 +128,6 @@ While holding SELECT for at least 3 seconds, press buttons 1 - 6 in order. Then 
 Finally release SELECT to lock in the binding.
 
 *XBoxOne controllers appear to the system as the same make and model and thus use the same profiles even if they are different controllers.
-
 
 ### LEGAL
 
