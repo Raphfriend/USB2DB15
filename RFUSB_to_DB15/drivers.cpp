@@ -38,10 +38,7 @@ void setupController(uint16_t vid, uint16_t pid, HIDController *controller) {
         case PID_8BITDO_SFC30:
           setup8BitDoSFC30(controller);
           break;
-        case  PID_8BITDO_SNES_BT:
-        setupSegaAstroCityMini(controller);
-          break;
-        
+             
       }
       break;
 
