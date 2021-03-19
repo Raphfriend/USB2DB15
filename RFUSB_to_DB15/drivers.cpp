@@ -38,6 +38,7 @@ void setupController(uint16_t vid, uint16_t pid, HIDController *controller) {
         case PID_8BITDO_SFC30:
           setup8BitDoSFC30(controller);
           break;
+             
       }
       break;
 
@@ -46,7 +47,7 @@ void setupController(uint16_t vid, uint16_t pid, HIDController *controller) {
       break;
 
     case VID_BROOK:
-      if (pid == PID_BROOK_UNIVERSAL) setupPS4(controller);
+      if ((pid == PID_BROOK_UNIVERSAL) || (pid == PID_BROOK_FB)) setupPS4(controller);
       break;
 
     case VID_GENERIC:

@@ -1,3 +1,7 @@
+## [0.14.9] - 2021-03-14
+### Added
+- Added Support for Brook FIGHTING BOARD PS3/PS4
+
 ## [0.14.8] - 2021-02-25
 ### Added
 - Added Support for Sony Playstation 5 DualSense
