@@ -62,11 +62,11 @@ Open RFUSB_to_DB15.ino in your Arduino IDE.
 
 2. If your programmer has a jumper for using 5V or 3.3V, set it to 5V. The USB2DB15 will be powered by the programmer while flashing the software. Plug in the USB programmer.
 
-![5V](./HowToPictures/5vh.jpg)
+![5Vh](./HowToPictures/5vh.jpg)
 
 3. In the Arduino Software, set the flashing mode to 5V as well.
 
-![5V](./HowToPictures/5v.png)
+![5V](./HowToPictures/5V.png)
 
 4. Set the appropriate COM Port for your FTDI Programmer. This should be recognized by the Arduino IDE.
 
