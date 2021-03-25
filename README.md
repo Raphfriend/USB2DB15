@@ -108,12 +108,16 @@ If you are not using a prefabricated PCB, please view the schematic for wiring i
 9. Open the INO file with the Arduino IDE (with the Arduino Uno connected to your PC) and select Sketch -> Upload.
 10. Wait for the sketch to be uploaded as indicated in the console window at the bottom of the Arduino IDE software.
 
-### 5. Supported Controllers:
+### 5. How flash/upload USB2DB15 firmware:
+
+[See FLASHING.md for instructions.](FLASHING.md)
+
+### 6. Supported Controllers:
 
 [See Compatibility.md for a detailed list of supported controllers.](COMPATIBILITY.md)
 
-### 6. Software Usage
-#### 6.1 Controller Profiles
+### 7. Software Usage
+#### 7.1 Controller Profiles
 The Adapter can store profiles for up to 10 unique controller models*. Controllers of the same make and model will share the profiles.
 Each controller has 4 profiles associated with it. Should you plug in an 11th controller the system will replace the oldest controller you have set up.
 Next oldest for the 12th and so on. This may cause you to have to set up older controllers again if you resume using them.
