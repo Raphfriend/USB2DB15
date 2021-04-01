@@ -1,4 +1,4 @@
-## [0.14.9] - 2021-03-31
+## [0.14.10] - 2021-03-31
 
 ### Added
 - Added Support for the Hori Fighting Edge PS4
