@@ -1,7 +1,7 @@
-## [0.14.9] - 2021-03-31
+## [0.14.10] - 2021-03-31
 
 ### Added
-- Added Support for the XBOX 360 Hori Fighting Edge
+- Added Support for the Hori Fighting Edge PS4
 - Added Support for the PXN 0082 Arcade Stick
 	- Library updated: https://github.com/Raphfriend/USB_Host_Shield_2.0
 	- USB Host Shield 2.0 files updated:
