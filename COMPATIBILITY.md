@@ -61,6 +61,7 @@ This is a list of tested controllers. Please reach out to our Discord server if 
 - Real Arcade Pro.3 Premium VLX (PS3 mode)
 - Real Arcade Pro V HAYABUSA (PS3 and PS4 modes)
 - Real Arcade Pro - Soul Calibur VI Edition for Xbox One (requires USB HOST SHIELD 2.0 update)
+- XBOX 360 Hori Fighting Edge (requires USB HOST SHIELD 2.0 update)
 
 ### Mad Catz
 - Street Fighter IV - Arcade FightStick Tournament Edition PS3 (Round 1 & Round 2 versions)
@@ -70,6 +71,9 @@ This is a list of tested controllers. Please reach out to our Discord server if 
 
 ### Nacon
 - Daija (PS3 and PS4 Modes)
+
+### PXN 
+ - PXN 0082 Arcade Stick
 
 ### Qanba
 - Crystal (PS3 and PS4 Modes)
