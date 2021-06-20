@@ -95,7 +95,10 @@ The remainder is plug and play.
 
 If you are not using a prefabricated PCB, please view the schematic for wiring information.
 
-#### 4.1. Arduino Uno + USB Host Shield:
+#### 4.1. Arduino Mini Pro + USB Shield Mini:
+[See FLASHING.md for instructions.](FLASHING.md)
+
+#### 4.2. Arduino Uno + USB Host Shield:
 
 1. Install Arduino IDE.
 2. Mount the USB Host Shield to the Arduino Uno correctly.
@@ -107,9 +110,6 @@ If you are not using a prefabricated PCB, please view the schematic for wiring i
 8. Obtain the INO firmware (RFUSB_to_DB15.ino).
 9. Open the INO file with the Arduino IDE (with the Arduino Uno connected to your PC) and select Sketch -> Upload.
 10. Wait for the sketch to be uploaded as indicated in the console window at the bottom of the Arduino IDE software.
-
-#### 4.2. Arduino Mini Pro + USB Shield Mini:
-[See FLASHING.md for instructions.](FLASHING.md)
 
 ### 5. How flash/update USB2DB15 firmware:
 
