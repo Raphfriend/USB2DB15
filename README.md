@@ -108,6 +108,9 @@ If you are not using a prefabricated PCB, please view the schematic for wiring i
 9. Open the INO file with the Arduino IDE (with the Arduino Uno connected to your PC) and select Sketch -> Upload.
 10. Wait for the sketch to be uploaded as indicated in the console window at the bottom of the Arduino IDE software.
 
+#### 4.2. Arduino Mini Pro + USB Shield Mini:
+[See FLASHING.md for instructions.](FLASHING.md)
+
 ### 5. How flash/update USB2DB15 firmware:
 
 [See FLASHING.md for instructions.](FLASHING.md)
