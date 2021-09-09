@@ -65,6 +65,8 @@ This is a list of tested controllers. Please reach out to our Discord server if 
 
 ### Mad Catz
 - Street Fighter IV - Arcade FightStick Tournament Edition PS3 (Round 1 & Round 2 versions)
+- Street Fighter V Arcade FightStick TE2+ (PS4 Mode)
+- Street Fighter V Arcade FightStick TES+ (PS4 Mode)
 
 ### Microsoft
 - XboxOne Controller
@@ -82,6 +84,7 @@ This is a list of tested controllers. Please reach out to our Discord server if 
 ### Razer
 - Panthera
 - Panthera EVO
+- Raiju Ultimate 
 
 ### Retrobit
 - Sega Saturn Wireless Controller 2.4GHz (Via wireless USB receiver)
@@ -97,6 +100,7 @@ This is a list of tested controllers. Please reach out to our Discord server if 
 - PS4 Offical Controllers
 - PS4 Wireless Adapter
 - PS5 DualSense
+- PlayStation Classic Controller
 
 ### Toodles
 - MC Cthulhu

@@ -57,6 +57,8 @@
 #define PID_HORI_RAP_V_PS4      0x008A // HORI RAP V HAYABUSA Controller(PS4)
 #define PID_MADCATZ_SF_PS3_RND1 0x8818 // Mad Catz Street Fighter IV Tournament Edition Round 1 (PS3)
 #define PID_MADCATZ_SF_PS3_RND2 0x8838 // Mad Catz Street Fighter IV Tournament Edition Round 2 (PS3)
+#define PID_MADCATZ_TE2P_PS4    0x8481 // Mad Catz SFV Arcade FightStick TE2+ (PS4 Mode)
+#define PID_MADCATZ_TESP_PS4    0x8384 // Mad Catz SFV Arcade FightStick TES+ (PS4 Mode)
 #define PID_NACON_DAIJA_PS3     0x0904 // Nacon Daija (PS3)
 #define PID_NACON_DAIJA_PS4     0x0D09 // Nacon Daija (PS4)
 #define PID_NEOGEO_MINI_PAD     0x0575 // Neo Geo Mini Pad
@@ -65,11 +67,13 @@
 #define PID_QANBA_OBSIDIAN_PS4  0x2300 // Qanba Obsidian (PS4)
 #define PID_RAZER_PANTHERA      0x0401 // Razer Panthera (PS4)
 #define PID_RAZER_PANTHERA_EVO  0x1008 // Razer Panthera EVO (PS4)
+#define PID_RAZER_RAIJU_ULT     0x1004 // Razer Raiju Ultimate (PS4)
 #define PID_RETROBIT_SATURN     0x00C1 // Retrobit Sega Saturn Wireless 2.4G
 #define PID_SONY_PS4_ADAPTER    0x0BA0 // PS4 Wireless Adapter
 #define PID_SONY_PS4_JP         0x09CC // PS4 Controller JP region
 #define PID_SONY_PS4_NA         0x05C4 // PS4 Controller NA region
 #define PID_SONY_PS5_NA         0x0CE6 // PS5 Controller NA region
+#define PID_SONY_PSC	          0x0CDA // Playstation Classic Controller
 #define PID_UPCB                0x1529 // Universal PCB Project
 #define PID_SEGA_ACS            0x0028 // Arcade stick for Astro City Mini - ACS-1003
 
@@ -115,8 +119,14 @@ void setupHoncam(HIDController *controller);
 void setupHoriFightingCmdr(HIDController *controller);
 void setupHoriRAP3(HIDController *controller);
 
+// MadCatz 
+void setupMadCatzTE2Plus(HIDController *controller);
+
 // NeoGeo
 void setupNeoGeoMini(HIDController *controller);
+
+// Razer 
+void setupRJU(HIDController *controller);
 
 // Retrobit Controllers
 void setupRetrobit_Saturn(HIDController *controller);
@@ -127,6 +137,8 @@ void setupSegaAstroCityMini(HIDController *controller);
 // Sony
 void setupPS4(HIDController *controller);
 void setupPS5(HIDController *controller);
+void setupPSC(HIDController *controller);
+
 
 
 
