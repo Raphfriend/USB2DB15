@@ -1,3 +1,13 @@
+## [0.14.11] - 2021-09-09
+
+### Added
+
+- Added Support for the Mad Catz Street Fighter V Arcade FightStick TE2+ (PS4 Mode)
+- Added Support for the Mad Catz Street Fighter V Arcade FightStick TES+ (PS4 Mode)
+- Added Support for Razer Raiju Ultimate 
+- Added Support for Sony PlayStation Classic Controller
+
+
 ## [0.14.10] - 2021-03-31
 
 ### Added

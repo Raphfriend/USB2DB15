@@ -7,7 +7,7 @@
 //
 //         USB Host Shield 2.0 modded lib:         https://github.com/Raphfriend/USB_Host_Shield_2.0
 //
-//         Compiled with Arduino 1.8.13
+//         Compiled with Arduino 1.8.15
 //
 //
 //              Thanks to:

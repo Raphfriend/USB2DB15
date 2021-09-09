@@ -87,12 +87,18 @@ void setupController(uint16_t vid, uint16_t pid, HIDController *controller) {
       }
       break;
 
-    case VID_MADCATZ:
-      switch (pid) {
-        case PID_MADCATZ_SF_PS3_RND1:
-        case PID_MADCATZ_SF_PS3_RND2:
-        default:
-          setupHoriRAP3(controller);
+     case VID_MADCATZ: 
+			switch (pid) {
+			  case PID_MADCATZ_TESP_PS4: 
+				  setupPS4(controller);
+          break;
+		  	case PID_MADCATZ_TE2P_PS4: 
+					setupMadCatzTE2Plus(controller);
+          break;				
+		  	case PID_MADCATZ_SF_PS3_RND1:
+				case PID_MADCATZ_SF_PS3_RND2:
+				default: 
+				  setupHoriRAP3(controller);
           break;
       }
       break;
@@ -121,11 +127,15 @@ void setupController(uint16_t vid, uint16_t pid, HIDController *controller) {
       break;
 
     case VID_RAZER:
-      if (pid == PID_RAZER_PANTHERA) setupPS4(controller);
+  if ((pid == PID_RAZER_PANTHERA) || (pid == PID_RAZER_PANTHERA_EVO)) setupPS4(controller);
+  if (pid == PID_RAZER_RAIJU_ULT) setupRJU(controller);
       break;
 
     case VID_SONY:
-      switch (pid) {       
+      switch (pid) { 
+		case PID_SONY_PSC:
+          setupPSC(controller);
+          break;      
         case PID_SONY_PS5_NA:
           setupPS5(controller);
           break;
@@ -484,6 +494,74 @@ void setupHoriRAP3(HIDController *controller) {
 }
 
 /**************************
+ * Mad Catz GamePads
+ **************************/
+
+/**
+ * @brief Mad Catz SFV Arcade FightStick TE2+
+ *
+ * Mad Catz SFV Arcade FightStick TE2+ Button layout
+ * Byte 0x01   0x02   0x04   0x08   0x10   0x20   0x40   0x80
+ * 0:
+ * 1:
+ * 2:
+ *
+ * @param controller The HIDController that will be configured
+ */
+void setupMadCatzTE2Plus(HIDController *controller) {
+  /** DPad */
+  generateDPad(5, controller);
+  /** Buttons */
+  controller->ConfigButton(BUTTON_COIN,  6, 0x40);
+  controller->ConfigButton(BUTTON_START, 6, 0x80);
+  controller->ConfigButton(BUTTON_1,     5, 0x1F);
+  controller->ConfigButton(BUTTON_2,     5, 0x8F);
+  controller->ConfigButton(BUTTON_3,     6, 0x02);
+  controller->ConfigButton(BUTTON_4,     5, 0x2F);
+  controller->ConfigButton(BUTTON_5,     5, 0x4F);
+  controller->ConfigButton(BUTTON_6,     6, 0x08);
+  controller->ConfigButton(BUTTON_7,     6, 0x01);
+  controller->ConfigButton(BUTTON_8,     6, 0x04);
+}
+
+
+
+/**************************
+ * Razer
+ **************************/
+
+
+/**
+ * Configures a Razer controllers and Compatible devices
+ *
+ * PS4 DS4 Button layout
+ * Byte 0x01   0x02   0x04   0x08   0x10   0x20   0x40   0x80
+ * 0-4:                          NA
+ * 5:   DPAD,  DPAD,  DPAD,  DPAD,  Btn 1, Btn 4, Btn 5, Btn 2
+ * 6:   Btn 7, Btn 3, Btn 8, Btn 6, COIN,  START, NA,    NA
+ *
+ * @param controller The HIDController that will be configured
+ */
+void setupRJU(HIDController *controller) {
+  // DPad setup
+  generateDPad(5, controller);
+  // Button setup
+  controller->ConfigButton(BUTTON_COIN, 6, 0x10);
+  controller->ConfigButton(BUTTON_START, 6, 0x20);
+  controller->ConfigButton(BUTTON_1, 5, 0x10);
+  controller->ConfigButton(BUTTON_2, 5, 0x80);
+  controller->ConfigButton(BUTTON_3, 6, 0x02);
+  controller->ConfigButton(BUTTON_4, 5, 0x20);
+  controller->ConfigButton(BUTTON_5, 5, 0x40);
+  controller->ConfigButton(BUTTON_6, 6, 0x08);
+  controller->ConfigButton(BUTTON_7, 6, 0x01);
+  controller->ConfigButton(BUTTON_8, 6, 0x04);;
+}
+
+
+
+
+/**************************
  * Retrobit GamePads
  **************************/
 
@@ -518,6 +596,43 @@ void setupRetrobit_Saturn(HIDController *controller) {
 /**************************
  * Sony GamePads
  **************************/
+
+
+/**
+ * @brief Configures a Sony PlayStation Classic Controller USB and Compatible devices
+ *
+ * Playstation Classic Button layout
+ * Byte 0x01   0x02   0x04   0x08   0x10   0x20   0x40   0x80
+ * 0:                   LEFT(0x00)/RIGHT(0xFF)
+ * 1:                   UP(0x00)/DOWN(0xFF)
+ * 2:   Btn 5, Btn 4, Btn 2, Btn 1, Btn 6, Btn 3, COIN,  START
+ *
+ * @param controller The HIDController that will be configured
+ */
+void setupPSC(HIDController *controller) {
+	/** DPad */
+	controller->ConfigButton(BUTTON_UP,         1, 0xFF, 0x04);
+	controller->ConfigButton(BUTTON_UP_RIGHT,   1, 0xFF, 0x08);
+	controller->ConfigButton(BUTTON_RIGHT,      1, 0xFF, 0x18);
+	controller->ConfigButton(BUTTON_DOWN_RIGHT, 1, 0xFF, 0x28);
+	controller->ConfigButton(BUTTON_DOWN,       1, 0xFF, 0x24);
+	controller->ConfigButton(BUTTON_DOWN_LEFT,  1, 0xFF, 0x20);
+	controller->ConfigButton(BUTTON_LEFT,       1, 0xFF, 0x10);
+	controller->ConfigButton(BUTTON_UP_LEFT,    1, 0xFF, 0x00);
+	/** Button */
+	controller->ConfigButton(BUTTON_COIN  , 1, 0x01);
+	controller->ConfigButton(BUTTON_START , 1, 0x02);
+	controller->ConfigButton(BUTTON_1     , 0, 0x08); // Q
+	controller->ConfigButton(BUTTON_2     , 0, 0x01); // T
+	controller->ConfigButton(BUTTON_3     , 0, 0x80); // R1
+	controller->ConfigButton(BUTTON_4     , 0, 0x04); // X
+	controller->ConfigButton(BUTTON_5     , 0, 0x02); // B
+	controller->ConfigButton(BUTTON_6     , 0, 0x20); // R2
+	controller->ConfigButton(BUTTON_7     , 0, 0x40); // L1
+	controller->ConfigButton(BUTTON_8     , 0, 0x10); // L2
+}
+
+
 
 /**
  * Configures a Sony PS4 DS4 controller and Compatible devices
