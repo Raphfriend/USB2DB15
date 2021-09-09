@@ -55,8 +55,14 @@ void setupController(uint16_t vid, uint16_t pid, HIDController *controller) {
       break;
 
     case VID_DAEMON:
-      if (pid == PID_DAEMON_SNES) setupDaemonSNES(controller);
-      if (pid == PID_DAEMON_SATURN) setupDaemonSaturn(controller);
+      switch(pid) {
+        case PID_DAEMON_SNES:
+          setupDaemonSNES(controller);
+          break;
+        case PID_DAEMON_SATURN:
+          setupDaemonSaturn(controller);
+          break;
+      }
       break;
 
     case VID_HONCAM:
@@ -87,8 +93,8 @@ void setupController(uint16_t vid, uint16_t pid, HIDController *controller) {
       }
       break;
 
-     case VID_MADCATZ: 
-			switch (pid) {
+      case VID_MADCATZ:
+        switch (pid) {
 			  case PID_MADCATZ_TESP_PS4: 
 				  setupPS4(controller);
           break;
@@ -127,13 +133,20 @@ void setupController(uint16_t vid, uint16_t pid, HIDController *controller) {
       break;
 
     case VID_RAZER:
-  if ((pid == PID_RAZER_PANTHERA) || (pid == PID_RAZER_PANTHERA_EVO)) setupPS4(controller);
-  if (pid == PID_RAZER_RAIJU_ULT) setupRJU(controller);
+      switch (pid) {
+        case PID_RAZER_PANTHERA:
+        case PID_RAZER_PANTHERA_EVO:
+          setupPS4(controller);
+          break;
+        case PID_RAZER_RAIJU_ULT:
+          setupRJU(controller);
+          break;
+      }
       break;
 
     case VID_SONY:
       switch (pid) { 
-		case PID_SONY_PSC:
+		    case PID_SONY_PSC:
           setupPSC(controller);
           break;      
         case PID_SONY_PS5_NA:
@@ -502,9 +515,9 @@ void setupHoriRAP3(HIDController *controller) {
  *
  * Mad Catz SFV Arcade FightStick TE2+ Button layout
  * Byte 0x01   0x02   0x04   0x08   0x10   0x20   0x40   0x80
- * 0:
- * 1:
- * 2:
+ * 0-4:
+ * 5:   DPAD,  DPAD,  DPAD,  DPAD,  BTN 1, BTN 4, BTN 5, BTN 2
+ * 6:   BTN 7, BTN 3, BTN 8, BTN 6, NA,    NA,    COIN,  START
  *
  * @param controller The HIDController that will be configured
  */
@@ -514,11 +527,11 @@ void setupMadCatzTE2Plus(HIDController *controller) {
   /** Buttons */
   controller->ConfigButton(BUTTON_COIN,  6, 0x40);
   controller->ConfigButton(BUTTON_START, 6, 0x80);
-  controller->ConfigButton(BUTTON_1,     5, 0x1F);
-  controller->ConfigButton(BUTTON_2,     5, 0x8F);
+  controller->ConfigButton(BUTTON_1,     5, 0x10);
+  controller->ConfigButton(BUTTON_2,     5, 0x80);
   controller->ConfigButton(BUTTON_3,     6, 0x02);
-  controller->ConfigButton(BUTTON_4,     5, 0x2F);
-  controller->ConfigButton(BUTTON_5,     5, 0x4F);
+  controller->ConfigButton(BUTTON_4,     5, 0x20);
+  controller->ConfigButton(BUTTON_5,     5, 0x40);
   controller->ConfigButton(BUTTON_6,     6, 0x08);
   controller->ConfigButton(BUTTON_7,     6, 0x01);
   controller->ConfigButton(BUTTON_8,     6, 0x04);
