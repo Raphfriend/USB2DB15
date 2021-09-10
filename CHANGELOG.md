@@ -1,3 +1,9 @@
+## [0.14.12] - 2021-09-09
+
+### Added
+
+- Added Support for Mad Catz Street Fighter V FightStick Alpha
+
 ## [0.14.11] - 2021-09-09
 
 ### Added

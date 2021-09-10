@@ -65,6 +65,7 @@ This is a list of tested controllers. Please reach out to our Discord server if 
 
 ### Mad Catz
 - Street Fighter IV - Arcade FightStick Tournament Edition PS3 (Round 1 & Round 2 versions)
+- Street Fighter V FightStick Alpha(PS3 and PS4 Modes)
 - Street Fighter V Arcade FightStick TE2+ (PS4 Mode)
 - Street Fighter V Arcade FightStick TES+ (PS4 Mode)
 

@@ -93,18 +93,20 @@ void setupController(uint16_t vid, uint16_t pid, HIDController *controller) {
       }
       break;
 
-      case VID_MADCATZ:
-        switch (pid) {
-			  case PID_MADCATZ_TESP_PS4: 
-				  setupPS4(controller);
+    case VID_MADCATZ:
+      switch (pid) {
+        case PID_MADCATZ_FSA_PS4:
+        case PID_MADCATZ_TESP_PS4:
+          setupPS4(controller);
           break;
-		  	case PID_MADCATZ_TE2P_PS4: 
-					setupMadCatzTE2Plus(controller);
-          break;				
-		  	case PID_MADCATZ_SF_PS3_RND1:
-				case PID_MADCATZ_SF_PS3_RND2:
-				default: 
-				  setupHoriRAP3(controller);
+        case PID_MADCATZ_TE2P_PS4:
+          setupMadCatzTE2Plus(controller);
+          break;
+        case PID_MADCATZ_FSA_PS3:
+        case PID_MADCATZ_SF_PS3_RND1:
+        case PID_MADCATZ_SF_PS3_RND2:
+        default:
+          setupHoriRAP3(controller);
           break;
       }
       break;

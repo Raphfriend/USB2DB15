@@ -55,6 +55,8 @@
 #define PID_DAEMON_SATURN       0x8030 // DaemonBite Retro Controllers Saturn (Modded PID to suit the USB2DB15, check COMPATIBILITY.md)
 #define PID_HORI_RAP_V_PS3      0x008B // HORI RAP V HAYABUSA Controller(PS3)
 #define PID_HORI_RAP_V_PS4      0x008A // HORI RAP V HAYABUSA Controller(PS4)
+#define PID_MADCATZ_FSA_PS4     0x8180 // Mad Catz Fight Stick Alpha (PS4)
+#define PID_MADCATZ_FSA_PS3     0x3180 // Mad Catz Fight Stick Alpha (PS3)
 #define PID_MADCATZ_SF_PS3_RND1 0x8818 // Mad Catz Street Fighter IV Tournament Edition Round 1 (PS3)
 #define PID_MADCATZ_SF_PS3_RND2 0x8838 // Mad Catz Street Fighter IV Tournament Edition Round 2 (PS3)
 #define PID_MADCATZ_TE2P_PS4    0x8481 // Mad Catz SFV Arcade FightStick TE2+ (PS4 Mode)
