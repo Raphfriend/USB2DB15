@@ -353,8 +353,8 @@ void setupGenericSNES(HIDController *controller) {
  * 0:                   LEFT(0x00)/RIGHT(0xFF)
  * 1:                   UP(0x00)/DOWN(0xFF)
  * 2-4:                          NA
- * 5:   NA,    NA,    NA,    NA,    Btn 1, Btn 2, Btn 4, Btn 5
- * 6:   Btn 3, Btn 6, NA,    NA,    START, NA,    COIN,  NA
+ * 5:   NA,    NA,    NA,    NA,    Btn 1, Btn 2, Btn 5, Btn 6
+ * 6:   Btn 3, NA,    Btn 6, NA,    START, NA,    COIN,  NA
  *
  * @param controller The HIDController that will be configured
  */
@@ -370,9 +370,9 @@ void setupShittyZeroDelay1(HIDController *controller) {
   controller->ConfigButton(BUTTON_1, 5, 0x10);
   controller->ConfigButton(BUTTON_2, 5, 0x20);
   controller->ConfigButton(BUTTON_3, 6, 0x01);
-  controller->ConfigButton(BUTTON_4, 5, 0x40);
-  controller->ConfigButton(BUTTON_5, 5, 0x80);
-  controller->ConfigButton(BUTTON_6, 6, 0x02);
+  controller->ConfigButton(BUTTON_4, 6, 0x04);
+  controller->ConfigButton(BUTTON_5, 5, 0x40);
+  controller->ConfigButton(BUTTON_6, 5, 0x80);
 }
 
 /**************************
