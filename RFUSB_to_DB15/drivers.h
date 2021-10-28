@@ -31,7 +31,6 @@
 #define VID_DAEMON              0x2341 // DaemonBite Retro Controllers (Standard Arduino Leonardo VID)
 
 
-
 /****************
  * Product IDs
  ****************/
@@ -78,6 +77,7 @@
 #define PID_SONY_PSC	          0x0CDA // Playstation Classic Controller
 #define PID_UPCB                0x1529 // Universal PCB Project
 #define PID_SEGA_ACS            0x0028 // Arcade stick for Astro City Mini - ACS-1003
+#define PID_SHITTY_ZERO_DELAY_1 0x0006 // Shitty Zero Delay PCB 01
 
 
 /****************
@@ -141,6 +141,8 @@ void setupPS4(HIDController *controller);
 void setupPS5(HIDController *controller);
 void setupPSC(HIDController *controller);
 
+// Shitty Zero Delay
+void setupShittyZeroDelay1(HIDController *controller);
 
 
 
