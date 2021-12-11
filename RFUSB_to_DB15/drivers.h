@@ -49,6 +49,7 @@
 #define PID_HORI_FSV3           0x0027 // HORI Fighting Stick V3
 #define PID_HORI_HORIPAD        0x0066 // HORIPAD FPS+(PS4)
 #define PID_HORI_LITE           0x00EE // HORI ワイヤードコントローラライト for PS4-102
+#define PID_HORI_POKKEN         0x0092 // HORI Pokken Controller
 #define PID_HORI_RAP_PREMIUM    0x0026 // HORI Real Arcade リアルアーケードPro.3 Premium VLX
 #define PID_HORI_RAP_PS3        0x0011 // HORI Real Arcade Pro.3 SA PS3コントローラ
 #define PID_DAEMON_SNES         0x8036 // DaemonBite Retro Controllers SNES (Standard Arduino Leonardo PID)
@@ -119,6 +120,7 @@ void setupHoncam(HIDController *controller);
 
 // Hori Controllers
 void setupHoriFightingCmdr(HIDController *controller);
+void setupHoriPokken(HIDController *controller);
 void setupHoriRAP3(HIDController *controller);
 
 // MadCatz 

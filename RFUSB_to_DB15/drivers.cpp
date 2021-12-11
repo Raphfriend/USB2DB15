@@ -82,6 +82,9 @@ void setupController(uint16_t vid, uint16_t pid, HIDController *controller) {
         case PID_HORI_RAP_V_PS4:
           setupPS4(controller);
           break;
+        case PID_HORI_POKKEN:
+          setupHoriPokken(controller);
+          break;
         case PID_HORI_RAP_PS3:
         case PID_HORI_RAP_PREMIUM:
         case PID_HORI_RAP_V_PS3:
@@ -475,9 +478,38 @@ void setupHoriFightingCmdr(HIDController *controller) {
   controller->ConfigButton(BUTTON_8, 0, 0x40);
 }
 
-/**************************
- * Hori GamePads
- **************************/
+/**
+ * Configures a Hori Pokken and Compatible devices
+ *
+ * Fighting Commander Button layout
+ * Byte 0x01   0x02   0x04   0x08   0x10   0x20   0x40   0x80
+ * 0:   Btn 1, Btn 4, Btn 5, Btn 2, Btn 7, Btn 3, Btn 8, Btn 6
+ * 1:   COIN,  START, NA,    NA,    NA,    NA,    NA,    NA
+ * 2:   NA,    NA,    NA,    NA,    NA,    NA,    NA,    NA
+ * 3:                   LEFT(0x00)/RIGHT(0xFF)
+ * 4:                   UP(0x00)/DOWN(0xFF)
+ * @param controller The HIDController that will be configured
+ */
+
+void setupHoriPokken(HIDController *controller) {
+  // DPad setup
+  controller->ConfigButton(BUTTON_LEFT, 3, 0xFF, 0);
+  controller->ConfigButton(BUTTON_RIGHT, 3, 0xFF, 0xFF);
+  controller->ConfigButton(BUTTON_UP, 4, 0xFF, 0);
+  controller->ConfigButton(BUTTON_DOWN, 4, 0xFF, 0xFF);
+  // Button setup
+  controller->ConfigButton(BUTTON_COIN, 1, 0x01);
+  controller->ConfigButton(BUTTON_START, 1, 0x02);
+  controller->ConfigButton(BUTTON_1, 0, 0x01);
+  controller->ConfigButton(BUTTON_2, 0, 0x08);
+  controller->ConfigButton(BUTTON_3, 0, 0x20);
+  controller->ConfigButton(BUTTON_4, 0, 0x02);
+  controller->ConfigButton(BUTTON_5, 0, 0x04);
+  controller->ConfigButton(BUTTON_6, 0, 0x80);
+  controller->ConfigButton(BUTTON_7, 0, 0x10);
+  controller->ConfigButton(BUTTON_8, 0, 0x40);
+}
+
 
 /**
  * Configures a Hori Real Arcade Pro and Compatible devices
