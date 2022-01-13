@@ -52,7 +52,7 @@ void setupController(uint16_t vid, uint16_t pid, HIDController *controller) {
 
     case VID_GENERIC:
       if (pid == PID_GENERIC_SNES) setupGenericSNES(controller);
-      if (pid == PID_SHITTY_ZERO_DELAY_1) setupShittyZeroDelay1(controller);
+      if (pid == PID_GENERIC_ZERO_DELAY) setupGenericZeroDelay(controller);
       break;
 
     case VID_DAEMON:
@@ -346,19 +346,19 @@ void setupGenericSNES(HIDController *controller) {
 }
 
 /**
- * Configures a Generic Shitty Zero Delay Board - 0x0006 PID
+ * Configures a Generic Zero Delay Board - 0x0006 PID
  *
- * Generic Shitty Zero Delay Button layout
+ * Generic Generic Zero Delay Button layout
  * Byte 0x01   0x02   0x04   0x08   0x10   0x20   0x40   0x80
  * 0:                   LEFT(0x00)/RIGHT(0xFF)
  * 1:                   UP(0x00)/DOWN(0xFF)
  * 2-4:                          NA
  * 5:   NA,    NA,    NA,    NA,    Btn 1, Btn 2, Btn 5, Btn 6
- * 6:   Btn 3, NA,    Btn 6, NA,    START, NA,    COIN,  NA
+ * 6:   Btn 3, NA,    Btn 4, NA,    START, NA,    COIN,  NA
  *
  * @param controller The HIDController that will be configured
  */
-void setupShittyZeroDelay1(HIDController *controller) {
+void setupGenericZeroDelay(HIDController *controller) {
   // DPad setup
   controller->ConfigButton(BUTTON_LEFT, 0, 0xFF, 0);
   controller->ConfigButton(BUTTON_RIGHT, 0, 0xFF, 0xFF);
