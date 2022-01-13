@@ -31,7 +31,6 @@
 #define VID_DAEMON              0x2341 // DaemonBite Retro Controllers (Standard Arduino Leonardo VID)
 
 
-
 /****************
  * Product IDs
  ****************/
@@ -43,6 +42,7 @@
 #define PID_BROOK_UNIVERSAL     0x0C30 // Brook Universal Fighting PCB
 #define PID_BROOK_FB            0x0ef7 // FIGHTING BOARD PS3/PS4 (PS4 Mode)
 #define PID_GENERIC_SNES        0x0011 // Generic SNES pad
+#define PID_GENERIC_ZERO_DELAY  0x0006 // Generic Zero Delay PCB 01
 #define PID_HONCAM              0xA713 // Honcam HC-J2003
 #define PID_HORI_CMDR           0x0085 // HORI Fighting Commander
 #define PID_HORI_FS3            0x0010 // HORI Fighting Stick 3
@@ -106,6 +106,7 @@ void setupBuffaloClassic(HIDController *controller);
 
 // Generic Controllers
 void setupGenericSNES(HIDController *controller);
+void setupGenericZeroDelay(HIDController *controller);
 
 // Daemon SNES
 void setupDaemonSNES(HIDController *controller);
@@ -140,9 +141,5 @@ void setupSegaAstroCityMini(HIDController *controller);
 void setupPS4(HIDController *controller);
 void setupPS5(HIDController *controller);
 void setupPSC(HIDController *controller);
-
-
-
-
 
 #endif //USB2DB15_DRIVERS_H
