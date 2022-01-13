@@ -25,6 +25,7 @@ This is a list of tested controllers. Please reach out to our Discord server if 
 
 ### Generic
 - Generic SNES USB pad
+- Generic Zero Delay Controller
 
 ### DaemonBite Retro Controllers To USB Adapters:
 - NES/SNES (2341:8037)

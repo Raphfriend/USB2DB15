@@ -4,7 +4,7 @@ A simple Atmega328P based USB to DB15 adapter designed for use with a Supergun o
 
 
 <p align="center">
-  <img width="680" height="420" src="https://i.imgur.com/wUzNxtB.png">
+  <img width="680" src="https://i.imgur.com/wUzNxtB.png">
  <br>
   <b>USB2DB15 with a Sega Astro City Mini Arcade Stick</b><br>
 <br>
@@ -39,7 +39,7 @@ Alternatively you can simply use a breadboard to tie it all together.
 A basic understanding of Arduino and its programming environment is required. Visit arduino.cc to help you get started.
 
 <p align="center">
-  <img width="380" height="280" src="https://i.imgur.com/nXCXxz3.png">
+  <img width="380" src="https://i.imgur.com/nXCXxz3.png">
  <br>
   <b>USB2DB15 pinout standard</b><br>
 <br>
@@ -55,7 +55,7 @@ A basic understanding of Arduino and its programming environment is required. Vi
 * DB15 female connector.
 
 <p align="center">
-  <img width="680" height="480" src="https://i.imgur.com/UeZuOrb.jpg">
+  <img width="680" src="https://i.imgur.com/UeZuOrb.jpg">
  <br>
   <b>Arduino Pro Mini and Usb Host Shield Mini</b><br>
 <br>
@@ -73,7 +73,7 @@ If utilizing the Custom PCB in conjunction with an Arduino Pro Mini and Mini USB
 Due to variances of Mini Pro PCB's, A4 and A5 may be in different locations. Please pay attention to this.
 
 <p align="center">
-<img width="680" height="460" src="https://i.imgur.com/sYRVOBI.png">
+<img width="680" src="https://i.imgur.com/sYRVOBI.png">
  <br>
   <b>Custom PCB 1.1 for Arduino Pro Mini</b><br>
 </p>
@@ -86,7 +86,7 @@ Download the  <a href="https://github.com/Raphfriend/USB_Host_Shield_2.0">USB Ho
 If you have a USB Host Shield Mini, you will need to CUT the trace after the 2K2 resistor near the USB VBUS pin. Solder a wire from JP2 of the CUSTOM PCB to the through-hole VIA labelled '5V' as depicted in the picture below.
 
 <p align="center">
-  <img width="460" height="200" src="https://i.imgur.com/vGgNsPl.png">
+  <img width="460" src="https://i.imgur.com/vGgNsPl.png">
 </p>
 
 This enables devices that require +5V power to function correctly, as by default the USB Host Shield Mini only supplies 3.3V to the VBUS pin of the USB connector.
@@ -147,10 +147,10 @@ Via the Arcade-Projects website forum or via Discord.
 
 <p align="center">
 <a href="https://www.arcade-projects.com/forums/index.php?thread/14205-open-source-usb-to-db15-for-supergun-adapter/">
-  <img width="460" height="200" src="https://i.imgur.com/7arl7Zn.png">
+  <img width="460" src="https://i.imgur.com/7arl7Zn.png">
 </p>
 
 <p align="center">
 <a href="https://discord.gg/XKCjtpH">
-  <img width="460" height="200" src="https://i.imgur.com/LZJjOUJ.png">
+  <img width="460" src="https://i.imgur.com/LZJjOUJ.png">
 </p>

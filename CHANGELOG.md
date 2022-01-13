@@ -1,3 +1,7 @@
+## [0.14.13] - 2022-01-12
+### Added
+- Added Support for Generic Zero Delay Controller
+
 ## [0.14.12] - 2021-09-09
 
 ### Added
