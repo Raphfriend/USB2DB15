@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE eagle SYSTEM "eagle.dtd">
-<eagle version="9.5.1">
+<eagle version="9.6.2">
 <drawing>
 <settings>
 <setting alwaysvectorfont="no"/>
@@ -9137,7 +9137,7 @@ www.ligitek.com or other producers.</description>
 <part name="SUPPLY5" library="supply2" library_urn="urn:adsk.eagle:library:372" deviceset="GND" device=""/>
 <part name="FRAME1" library="SparkFun-Aesthetics" library_urn="urn:adsk.eagle:library:507" deviceset="FRAME-A4L" device="">
 <attribute name="CNAME" value="USB2DB15 adapter for Supergun/Neogeo"/>
-<attribute name="CREVISION" value="1.1"/>
+<attribute name="CREVISION" value="1.2"/>
 <attribute name="DESIGNER" value="Design: Raph_friend"/>
 </part>
 <part name="J1" library="SparkFun-Connectors" library_urn="urn:adsk.eagle:library:513" deviceset="CONN_05" device="" package3d_urn="urn:adsk.eagle:package:38104/1" value="0"/>
@@ -9551,6 +9551,16 @@ START Button on GND.</text>
 <wire x1="63.5" y1="81.28" x2="45.72" y2="81.28" width="0.1524" layer="91"/>
 <label x="45.72" y="81.28" size="1.778" layer="95"/>
 </segment>
+<segment>
+<pinref part="J1" gate="G$1" pin="2"/>
+<wire x1="-137.16" y1="-40.64" x2="-147.32" y2="-40.64" width="0.1524" layer="91"/>
+<label x="-147.066" y="-40.64" size="1.778" layer="95" rot="R180"/>
+</segment>
+<segment>
+<pinref part="J2" gate="G$1" pin="2"/>
+<wire x1="-96.52" y1="-40.64" x2="-88.9" y2="-40.64" width="0.1524" layer="91"/>
+<label x="-93.98" y="-40.64" size="1.778" layer="95"/>
+</segment>
 </net>
 <net name="DTR" class="0">
 <segment>
@@ -9691,16 +9701,6 @@ START Button on GND.</text>
 <pinref part="JP2" gate="G$1" pin="1"/>
 <wire x1="-24.638" y1="57.404" x2="-9.398" y2="57.404" width="0.1524" layer="91"/>
 <label x="-7.112" y="57.404" size="1.778" layer="95" rot="R180"/>
-</segment>
-<segment>
-<pinref part="J1" gate="G$1" pin="2"/>
-<wire x1="-137.16" y1="-40.64" x2="-147.32" y2="-40.64" width="0.1524" layer="91"/>
-<label x="-147.066" y="-40.64" size="1.778" layer="95" rot="R180"/>
-</segment>
-<segment>
-<pinref part="J2" gate="G$1" pin="2"/>
-<wire x1="-96.52" y1="-40.64" x2="-88.9" y2="-40.64" width="0.1524" layer="91"/>
-<label x="-93.98" y="-40.64" size="1.778" layer="95"/>
 </segment>
 <segment>
 <pinref part="S1" gate="G$1" pin="2"/>
