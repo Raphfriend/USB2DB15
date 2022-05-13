@@ -6,7 +6,7 @@
 
 #include <stdint.h>
 
-#include "controller.h"
+#include "Controller.h"
 #include "device_descriptor.h"
 #include "EepromManager.h"
 #include "Profile.h"

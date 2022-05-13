@@ -21,8 +21,6 @@ A simple Atmega328P based USB to DB15 adapter designed for use with a Supergun o
 - Status LED
 - Protection circuit for your belevod controllers
 
-
-
 ### 2. Technical information:
 
 The USB2DB15 adapter is an Open Sourced device based on an AVR microcontroller. It adapts a USB controller for use on a Jamma PCB via a Supergun or Neo-Geo hardware with controller ports. Presently, a variety of common controllers are supported; such as ones that follow the PS3/PS4 DualShock, PS5 DualSense and Xbox 360/One protocols. Due to the diversity of controllers available and differing standards there may be some controllers that will not work with the USB2DB15 or may not work as intended. Please be patient during these early stages and feel free to contact the developers with additional information and requests for help with your USB2DB15 adapter via our communication channels (GitHub, Discord, Arcade-Projects forum).
@@ -32,7 +30,12 @@ We are using a modified USB Host Shield 2.0 library for controller IDs that aren
 In regards to hardware there are currently two options:
 
 - A Custom PCB that accommodates and integrates an Arduino Pro Mini, USB Shield Mini and other relevant hardware.
-- A Standalone PCB that incorporates all the required hardware in a standalone form (currently in development).
+- USB2DB15 2.0 Ver, a Standalone PCB that incorporates all the required hardware in a standalone form.
+- USB2DB15 CS Ver, same from 2.0 Ver, but now aimed for PCB conzolization, you will have screw terminals and a 20 pin header (compatible with Brook Fighting Board Cable 20-pin).
+
+
+
+
 
 Alternatively you can simply use a breadboard to tie it all together. 
 
@@ -75,7 +78,7 @@ Due to variances of Mini Pro PCB's, A4 and A5 may be in different locations. Ple
 <p align="center">
 <img width="680" src="https://i.imgur.com/sYRVOBI.png">
  <br>
-  <b>Custom PCB 1.1 for Arduino Pro Mini</b><br>
+  <b>Custom PCB 1.2 for Arduino Pro Mini</b><br>
 </p>
 
 
@@ -95,7 +98,7 @@ The remainder is plug and play.
 
 If you are not using a prefabricated PCB, please view the schematic for wiring information.
 
-#### 4.1. Arduino Mini Pro + USB Shield Mini:
+#### 4.1. Arduino Pro Mini + USB Shield Mini:
 [See FLASHING.md for instructions.](FLASHING.md)
 
 #### 4.2. Arduino Uno + USB Host Shield:
@@ -131,19 +134,65 @@ Finally release SELECT to lock in the binding.
 
 *XBoxOne controllers appear to the system as the same make and model and thus use the same profiles even if they are different controllers.
 
-### LEGAL
+###Shell
 
-USB2DB15 or any of its maintainers are in no way associated with or endorsed by Nintendo, Sony, SNK, Microsoft, 8BitDo, Sega, Brook, Mad Catz, Nacon, Honcam, DaemonBite, Buffalo, Qanba, Razer, Retrobit, Toodles, Hori or any other company not implicitly indicated. All other brands or product names are the property of their respective holders.
+You can find the 3D printed shell by [avramce](https://twitter.com/avramce "avramce") clicking [here](https://www.thingiverse.com/thing:5170415 "here").
 
-### Donation
+###How it looks in real life?
 
-If this project has helped you, consider financing it and make a donation, so we can continue our work and acquire new controls to implement support.
+When you put all the parts together, USB2DB15 should look like this.
+<p align="center">
+  <img width="680" src="https://i.imgur.com/S0fqrp9.jpg">
+
+  <b>Setup and photo by <a href="https://twitter.com/Focux11">@Focux</a> </b>
+	</p>  	
+<p align="center">
+  <img width="680" src="https://i.imgur.com/m0nqRHR.jpg">
+  
+  <b>Setup and photo by <a href="https://twitter.com/_atrac17">@_atrac17</a> </b>
+	</p>  	
+
+### Support this project
+
+If you have found USB2DB15 useful, please consider funding it and making a donation so that we may continue our work and obtain additional controllers, equipment, and everything else required to keep this project alive.
 
 [![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=HYCK7DF7Q6XLY&source=url)
 
+
+### Is this product available to buy? YES!
+
+We sell USB2DB15 directly. You will receive a premium edition that is somewhat different from the open-source version but has the same features.
+You can choose from a variety of shell color options, and you will get detailed instructions following your purchase.
+There are two versions: the standard DB15 and the CS Ver., which is aimed for Jamma PCB consolizations. 
+
+
+
+
+<a href="https://ko-fi.com/s/b6c3d01043">Access our shop by clicking here or on the images. </a>
+
+<p align="center">
+<a href="https://ko-fi.com/s/b6c3d01043">
+  <img width="460" src="https://i.imgur.com/MU63FKN.jpg">
+</p>
+
+<p align="center">
+<a href="https://ko-fi.com/s/b6c3d01043">
+  <img width="460" src="https://i.imgur.com/XsNq3t4.jpg">
+</p>
+
+<p align="center">
+<a href="https://ko-fi.com/s/b6c3d01043">
+  <img width="460" src="https://i.imgur.com/l4fS8WO.jpg">
+</p>
+
+<p align="center">
+<a href="https://ko-fi.com/s/b6c3d01043">
+  <img width="460" src="https://i.imgur.com/xEf0cEx.jpg">
+</p>
+
 ### Where can I get more help, if I need it?
 
-Via the Arcade-Projects website forum or via Discord.
+Via Arcade-Projects forum or RF Projects Discord server.
 
 <p align="center">
 <a href="https://www.arcade-projects.com/forums/index.php?thread/14205-open-source-usb-to-db15-for-supergun-adapter/">
@@ -154,3 +203,8 @@ Via the Arcade-Projects website forum or via Discord.
 <a href="https://discord.gg/XKCjtpH">
   <img width="460" src="https://i.imgur.com/LZJjOUJ.png">
 </p>
+
+
+### LEGAL
+
+USB2DB15 or any of its maintainers are in no way associated with or endorsed by Nintendo, Sony, SNK, Microsoft, 8BitDo, Sega, Brook, Mad Catz, Nacon, Honcam, DaemonBite, Buffalo, Qanba, Razer, Retrobit, Toodles, Hori or any other company not implicitly indicated. All other brands or product names are the property of their respective holders.

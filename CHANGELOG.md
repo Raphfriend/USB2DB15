@@ -1,3 +1,7 @@
+## [0.14.14] - 2022-03-25
+### Added
+- Added Support for PowerA FUSION Wired FightPad Gaming Controller for PlayStation 4
+
 ## [0.14.13] - 2022-01-12
 ### Added
 - Added Support for Generic Zero Delay Controller
