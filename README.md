@@ -134,11 +134,11 @@ Finally release SELECT to lock in the binding.
 
 *XBoxOne controllers appear to the system as the same make and model and thus use the same profiles even if they are different controllers.
 
-###Shell
+### Shell
 
 You can find the 3D printed shell by [avramce](https://twitter.com/avramce "avramce") clicking [here](https://www.thingiverse.com/thing:5170415 "here").
 
-###How it looks in real life?
+### How it looks in real life?
 
 When you put all the parts together, USB2DB15 should look like this.
 <p align="center">
