@@ -143,13 +143,13 @@ You can find the 3D printed shell by [avramce](https://twitter.com/avramce "avra
 When you put all the parts together, USB2DB15 should look like this.
 <p align="center">
   <img width="680" src="https://i.imgur.com/S0fqrp9.jpg">
-
+	 <br>
   <b>Setup and photo by <a href="https://twitter.com/Focux11">@Focux</a> </b>
 	</p>  	
 <p align="center">
   <img width="680" src="https://i.imgur.com/m0nqRHR.jpg">
-  
-  <b>Setup and photo by <a href="https://twitter.com/_atrac17">@_atrac17</a> </b>
+	 <br>
+    <b>Setup and photo by <a href="https://twitter.com/_atrac17">@_atrac17</a> </b>
 	</p>  	
 
 ### Support this project
