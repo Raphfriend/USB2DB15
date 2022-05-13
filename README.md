@@ -168,7 +168,7 @@ There are two versions: the standard DB15 and the CS Ver., which is aimed for Ja
 
 
 
-<a href="https://ko-fi.com/s/b6c3d01043">Access our shop by clicking here or on the images. </a>
+<a href="https://ko-fi.com/s/b6c3d01043">Access our shop by clicking here or on the images below. </a>
 
 <p align="center">
 <a href="https://ko-fi.com/s/b6c3d01043">
