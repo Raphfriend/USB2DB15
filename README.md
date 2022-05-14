@@ -13,33 +13,33 @@ A simple Atmega328P based USB to DB15 adapter designed for use with a Supergun o
 ### 1. Features:
 
 - USB input to support most modern HID compatible controllers
-- 1ms polling, it means low latency and fast response from USB2DB15
-- Open Source firmware, so everyone on the community can colabore
-- DB15 pinout standard ready for Neo Geo, Minigun, and HAS superguns
+- 1ms polling, meaning a low latency and fast response from the USB2DB15
+- Open Source firmware, so everyone on the community can collaborate
+- DB15 pinout standard, ready for Neo Geo, Minigun, and HAS Superguns
 - 4 customizable and storable mapping configurations
 - 10 customizable and storable controller profiles
 - Status LED
-- Protection circuit for your belevod controllers
+- Protection circuit for your beloved controllers
 
 ### 2. Technical information:
 
-The USB2DB15 adapter is an Open Sourced device based on an AVR microcontroller. It adapts a USB controller for use on a Jamma PCB via a Supergun or Neo-Geo hardware with controller ports. Presently, a variety of common controllers are supported; such as ones that follow the PS3/PS4 DualShock, PS5 DualSense and Xbox 360/One protocols. Due to the diversity of controllers available and differing standards there may be some controllers that will not work with the USB2DB15 or may not work as intended. Please be patient during these early stages and feel free to contact the developers with additional information and requests for help with your USB2DB15 adapter via our communication channels (GitHub, Discord, Arcade-Projects forum).
+The USB2DB15 adapter is an Open Sourced device based on an AVR microcontroller. It adapts a USB controller for use with a Jamma PCB via a Supergun or Neo-Geo hardware with controller ports. Presently, a variety of common controllers are supported; such as ones that follow the PS3/PS4 DualShock, PS5 DualSense and Xbox 360/One protocols. Due to the diversity of controllers available and differing standards there may be some controllers that will not work with the USB2DB15 or may not work as intended. Please be patient during these early stages. Feel free to contact the developers with additional information and requests for help with your USB2DB15 adapter via our communication channels (GitHub, Discord, Arcade-Projects forum).
 
-We are using a modified USB Host Shield 2.0 library for controller IDs that aren't natively supported. 
+We are using a modified USB Host Shield 2.0 library for controller IDs that aren't natively supported.
 
 In regards to hardware there are currently two options:
 
 - A Custom PCB that accommodates and integrates an Arduino Pro Mini, USB Shield Mini and other relevant hardware.
-- USB2DB15 2.0 Ver, a Standalone PCB that incorporates all the required hardware in a standalone form.
-- USB2DB15 CS Ver, same from 2.0 Ver, but now aimed for PCB conzolization, you will have screw terminals and a 20 pin header (compatible with Brook Fighting Board Cable 20-pin).
+- USB2DB15 2.0 Ver, a pre-built, single PCB that incorporates all the required hardware in a standalone form.
+- USB2DB15 CS Ver, same as 2.0 Ver, but with a focus on PCB consolization. In place of the DB15 controller connector, this board has screw terminals and a 20 pin header which is compatible with a 20-pin Brook Fighting Board Cable.
 
 
 
 
 
-Alternatively you can simply use a breadboard to tie it all together. 
+Alternatively you can simply use a breadboard to connect it all together. 
 
-A basic understanding of Arduino and its programming environment is required. Visit arduino.cc to help you get started.
+If you are building the open source version for yourself, a basic understanding of Arduino and its programming environment is required. Visit [arduino.cc] to help you get started.
 
 <p align="center">
   <img width="380" src="https://i.imgur.com/nXCXxz3.png">
@@ -49,9 +49,9 @@ A basic understanding of Arduino and its programming environment is required. Vi
 
 
 
-### 3. Required hardware:
+### 3. Open Source Required Hardware:
 
-* We are using an Atmega328P AVR. Any Arduino that utilizes this microcontroller such as the Mini Pro, Nano and Uno are suitable. The Custom PCB accommodates an Arduino Mini Pro and USB Host Shield Mini.
+* The USB2DB15 uses an Atmega328P AVR. Any Arduino that utilizes this microcontroller such as the Mini Pro, Nano, and Uno are suitable. The Custom PCB accommodates an Arduino Mini Pro and USB Host Shield Mini.
 * USB Host Shield Mini if using an Arduino Pro Mini / Nano. Full sized USB Host Shield for Uno.
 * An FTDI programmer is required for the Arduino Pro Mini. This is not required if using an Arduino Nano or Uno.
 * USB2DB15 Custom PCB or a breadboard to complete all the connections between the AVR and USB Host Shield.
@@ -86,7 +86,7 @@ Due to variances of Mini Pro PCB's, A4 and A5 may be in different locations. Ple
 
 Download the  <a href="https://github.com/Raphfriend/USB_Host_Shield_2.0">USB Host Shield 2.0 library</a>  and install it to the Arduino IDE. Open the INO file (RFUSB_to_DB15.ino) and program it to your AVR.  
 
-If you have a USB Host Shield Mini, you will need to CUT the trace after the 2K2 resistor near the USB VBUS pin. Solder a wire from JP2 of the CUSTOM PCB to the through-hole VIA labelled '5V' as depicted in the picture below.
+If you have a USB Host Shield Mini, you will need to CUT the trace after the 2K2 resistor near the USB VBUS pin. Solder a wire from JP2 of the CUSTOM PCB to the through-hole VIA labeled '5V' as depicted in the picture below.
 
 <p align="center">
   <img width="460" src="https://i.imgur.com/vGgNsPl.png">
@@ -132,43 +132,43 @@ To change the key bindings of a profile. First change to the profile you want to
 While holding SELECT for at least 3 seconds, press buttons 1 - 6 in order. Then release SELECT to lock in the binding.
 Finally release SELECT to lock in the binding.
 
-*XBoxOne controllers appear to the system as the same make and model and thus use the same profiles even if they are different controllers.
+*XBox One controllers appear to the system as the same make and model and thus use the same profiles even if they are different controllers.
 
-###Shell
+### Shell
 
-You can find the 3D printed shell by [avramce](https://twitter.com/avramce "avramce") clicking [here](https://www.thingiverse.com/thing:5170415 "here").
+[AvramCE](https://twitter.com/avramce) has created a [3D printed case](https://www.thingiverse.com/thing:5170415) that you can print for your USB2DB15.
 
-###How it looks in real life?
+### How it looks in real life?
 
 When you put all the parts together, USB2DB15 should look like this.
 <p align="center">
   <img width="680" src="https://i.imgur.com/S0fqrp9.jpg">
-
+	 <br>
   <b>Setup and photo by <a href="https://twitter.com/Focux11">@Focux</a> </b>
 	</p>  	
 <p align="center">
   <img width="680" src="https://i.imgur.com/m0nqRHR.jpg">
-  
-  <b>Setup and photo by <a href="https://twitter.com/_atrac17">@_atrac17</a> </b>
+	 <br>
+    <b>Setup and photo by <a href="https://twitter.com/_atrac17">@_atrac17</a> </b>
 	</p>  	
 
 ### Support this project
 
-If you have found USB2DB15 useful, please consider funding it and making a donation so that we may continue our work and obtain additional controllers, equipment, and everything else required to keep this project alive.
+If you have found USB2DB15 useful, please consider funding it and making a donation so that we may continue our work by obtaining additional controllers, equipment, and everything else required to keep this project alive and growing.
 
 [![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=HYCK7DF7Q6XLY&source=url)
 
 
 ### Is this product available to buy? YES!
 
-We sell USB2DB15 directly. You will receive a premium edition that is somewhat different from the open-source version but has the same features.
+We sell the USB2DB15 directly. You will receive a premium edition that is slightly different from the open-source version but has the same features.
 You can choose from a variety of shell color options, and you will get detailed instructions following your purchase.
-There are two versions: the standard DB15 and the CS Ver., which is aimed for Jamma PCB consolizations. 
+There are two versions: the standard DB15 and the CS Ver., which is targeted towards Jamma PCB consolizations. 
 
 
 
 
-<a href="https://ko-fi.com/s/b6c3d01043">Access our shop by clicking here or on the images. </a>
+<a href="https://ko-fi.com/s/b6c3d01043">Access our shop by clicking here or on the images below. </a>
 
 <p align="center">
 <a href="https://ko-fi.com/s/b6c3d01043">
