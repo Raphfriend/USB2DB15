@@ -1,6 +1,7 @@
-## [0.14.14] - 2022-03-25
+## [0.14.14] - 2022-05-14
 ### Added
 - Added Support for PowerA FUSION Wired FightPad Gaming Controller for PlayStation 4
+- Added Support for FeralAI Pico Fighting Board GP2040 (PS3/DirectInput Mode) 
 
 ## [0.14.13] - 2022-01-12
 ### Added
