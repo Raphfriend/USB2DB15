@@ -48,6 +48,7 @@ void setupController(uint16_t vid, uint16_t pid, HIDController *controller) {
 
     case VID_BROOK:
       if ((pid == PID_BROOK_UNIVERSAL) || (pid == PID_BROOK_FB)) setupPS4(controller);
+      if (pid == PID_PS4_Wired) setupPS4(controller);
       break;
 
     case VID_GENERIC:
@@ -558,8 +559,8 @@ void setupMadCatzTE2Plus(HIDController *controller) {
   /** DPad */
   generateDPad(5, controller);
   /** Buttons */
-  controller->ConfigButton(BUTTON_COIN,  6, 0x40);
-  controller->ConfigButton(BUTTON_START, 6, 0x80);
+  controller->ConfigButton(BUTTON_COIN,  6, 0x10);
+  controller->ConfigButton(BUTTON_START, 6, 0x20);
   controller->ConfigButton(BUTTON_1,     5, 0x10);
   controller->ConfigButton(BUTTON_2,     5, 0x80);
   controller->ConfigButton(BUTTON_3,     6, 0x02);
