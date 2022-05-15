@@ -47,6 +47,9 @@ This is a list of tested controllers. Please reach out to our Discord server if 
 			micro.build.usb_product="Arduino Micro"
 	- Save the file.
 
+### FeralAI
+
+- Pico Fighting Board GP2040 (PS3/DirectInput Mode)
 
 ### Honcam
 - HC-J2003
@@ -75,6 +78,9 @@ This is a list of tested controllers. Please reach out to our Discord server if 
 
 ### Nacon
 - Daija (PS3 and PS4 Modes)
+
+### PowerA
+ - FUSION Wired FightPad Gaming Controller for PlayStation 4
 
 ### PXN 
  - PXN 0082 Arcade Stick

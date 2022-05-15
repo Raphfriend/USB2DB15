@@ -64,6 +64,7 @@
 #define PID_NACON_DAIJA_PS3     0x0904 // Nacon Daija (PS3)
 #define PID_NACON_DAIJA_PS4     0x0D09 // Nacon Daija (PS4)
 #define PID_NEOGEO_MINI_PAD     0x0575 // Neo Geo Mini Pad
+#define PID_FUSION_PS4          0x792A // PowerA FUSION Wired FightPad Gaming Controller (PS4)
 #define PID_QANBA_CRYSTAL_PS4   0x2200 // Qanba Crystal (PS4)
 #define PID_QANBA_OBSIDIAN_PS3  0x2302 // Qanba Obsidian (PS3)
 #define PID_QANBA_OBSIDIAN_PS4  0x2300 // Qanba Obsidian (PS4)

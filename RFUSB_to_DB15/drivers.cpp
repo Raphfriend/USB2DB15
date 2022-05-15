@@ -68,6 +68,7 @@ void setupController(uint16_t vid, uint16_t pid, HIDController *controller) {
 
     case VID_HONCAM:
       if (pid == PID_HONCAM) setupHoncam(controller);
+      if (pid == PID_FUSION_PS4) setupPS4(controller);
       break;
 
     case VID_HORI:
