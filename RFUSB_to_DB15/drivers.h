@@ -29,7 +29,6 @@
 #define VID_SONY                0x054c // Sony
 #define VID_UPCB                0x04D8 // Universal PCB Project
 #define VID_DAEMON              0x2341 // DaemonBite Retro Controllers (Standard Arduino Leonardo VID)
-#define PID_PS4_Wired           0x1E1B // Generic Gamepad PS4 Wired
 
 
 /****************
@@ -80,6 +79,7 @@
 #define PID_SONY_PSC	          0x0CDA // Playstation Classic Controller
 #define PID_UPCB                0x1529 // Universal PCB Project
 #define PID_SEGA_ACS            0x0028 // Arcade stick for Astro City Mini - ACS-1003
+#define PID_PS4_Wired           0x1E1B // Generic Gamepad PS4 Wired
 
 
 /****************
