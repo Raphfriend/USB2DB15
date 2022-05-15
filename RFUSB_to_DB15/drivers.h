@@ -29,6 +29,7 @@
 #define VID_SONY                0x054c // Sony
 #define VID_UPCB                0x04D8 // Universal PCB Project
 #define VID_DAEMON              0x2341 // DaemonBite Retro Controllers (Standard Arduino Leonardo VID)
+#define PID_PS4_Wired           0x1E1B // Generic Gamepad PS4 Wired
 
 
 /****************
