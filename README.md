@@ -39,7 +39,7 @@ In regards to hardware there are currently two options:
 
 Alternatively you can simply use a breadboard to connect it all together. 
 
-If you are building the open source version for yourself, a basic understanding of Arduino and its programming environment is required. Visit [arduino.cc] to help you get started.
+If you are building the open source version for yourself, a basic understanding of Arduino and its programming environment is required. Visit [arduino.cc](https://arduino.cc) to help you get started.
 
 <p align="center">
   <img width="380" src="https://i.imgur.com/nXCXxz3.png">
