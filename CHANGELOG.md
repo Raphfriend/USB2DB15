@@ -3,7 +3,7 @@
 - Fixed an issue with button mapping surrounding Mad Catz Street Fighter V Arcade FightStick TE2+ (PS4 Mode) controller.
 
 ### Added
-- Added Support for Generic Controller for PlayStation 4
+- Added Support for Feir Wired FR-225C Controller for PlayStation 4
 
 ## [0.14.14] - 2022-05-14
 ### Added
