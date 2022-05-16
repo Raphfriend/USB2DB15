@@ -79,7 +79,7 @@
 #define PID_SONY_PSC	          0x0CDA // Playstation Classic Controller
 #define PID_UPCB                0x1529 // Universal PCB Project
 #define PID_SEGA_ACS            0x0028 // Arcade stick for Astro City Mini - ACS-1003
-#define PID_PS4_Wired           0x1E1B // Generic Gamepad PS4 Wired
+#define PID_FEIR_PS4            0x1E1B // Feir Wired FR-225C Controller for PlayStation 4
 
 
 /****************
