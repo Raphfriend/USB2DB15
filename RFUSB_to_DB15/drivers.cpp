@@ -48,7 +48,7 @@ void setupController(uint16_t vid, uint16_t pid, HIDController *controller) {
 
     case VID_BROOK:
       if ((pid == PID_BROOK_UNIVERSAL) || (pid == PID_BROOK_FB)) setupPS4(controller);
-      if (pid == PID_PS4_Wired) setupPS4(controller);
+      if (pid == PID_FEIR_PS4) setupPS4(controller);
       break;
 
     case VID_GENERIC:
