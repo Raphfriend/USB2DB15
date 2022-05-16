@@ -47,6 +47,10 @@ This is a list of tested controllers. Please reach out to our Discord server if 
 			micro.build.usb_product="Arduino Micro"
 	- Save the file.
 
+### Feir
+
+- Feir Wired FR-225C Controller for PlayStation 4
+
 ### FeralAI
 
 - Pico Fighting Board GP2040 (PS3/DirectInput Mode)
