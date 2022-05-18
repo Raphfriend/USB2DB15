@@ -128,6 +128,10 @@ void setupHoncam(HIDController *controller);
 void setupHoriFightingCmdr(HIDController *controller);
 void setupHoriRAP3(HIDController *controller);
 
+// Logitech
+
+void setupLogitech(HIDController *controller);
+
 // MadCatz 
 void setupMadCatzTE2Plus(HIDController *controller);
 
