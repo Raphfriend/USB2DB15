@@ -17,9 +17,11 @@
 #define VID_8BITDO              0x2DC8 // 8BitDo Bluetooth (D-INPUT MODE)
 #define VID_BROOK               0x0C12 // Brook
 #define VID_BUFFALO             0x0583 // Buffalo
+#define VID_DAEMON              0x2341 // DaemonBite Retro Controllers (Standard Arduino Leonardo VID)
 #define VID_GENERIC             0x0079 // Generic
 #define VID_HONCAM              0x20D6 // Honcam
 #define VID_HORI                0x0F0D // HORI (Also used by Retrobit 2.4GHz)
+#define VID_LOGITECH            0x046D // Logitech
 #define VID_MADCATZ             0x0738 // Mad Catz
 #define VID_NACON               0x146B // Nacon
 #define VID_QANBA               0x2C22 // Qanba
@@ -28,7 +30,6 @@
 #define VID_SHANWAN             0x2563 // Shenzhen ShanWan Technology Co., Ltd.
 #define VID_SONY                0x054c // Sony
 #define VID_UPCB                0x04D8 // Universal PCB Project
-#define VID_DAEMON              0x2341 // DaemonBite Retro Controllers (Standard Arduino Leonardo VID)
 
 
 /****************
@@ -41,6 +42,8 @@
 #define PID_BUFFALO_CLASSIC     0x2060 // iBUFFALO SNES CLASSIC USB GAMEPAD
 #define PID_BROOK_UNIVERSAL     0x0C30 // Brook Universal Fighting PCB
 #define PID_BROOK_FB            0x0ef7 // FIGHTING BOARD PS3/PS4 (PS4 Mode)
+#define PID_DAEMON_SNES         0x8036 // DaemonBite Retro Controllers SNES (Standard Arduino Leonardo PID)
+#define PID_DAEMON_SATURN       0x8030 // DaemonBite Retro Controllers Saturn (Modded PID to suit the USB2DB15, check COMPATIBILITY.md)
 #define PID_GENERIC_SNES        0x0011 // Generic SNES pad
 #define PID_GENERIC_ZERO_DELAY  0x0006 // Generic Zero Delay PCB 01
 #define PID_HONCAM              0xA713 // Honcam HC-J2003
@@ -51,10 +54,9 @@
 #define PID_HORI_LITE           0x00EE // HORI ワイヤードコントローラライト for PS4-102
 #define PID_HORI_RAP_PREMIUM    0x0026 // HORI Real Arcade リアルアーケードPro.3 Premium VLX
 #define PID_HORI_RAP_PS3        0x0011 // HORI Real Arcade Pro.3 SA PS3コントローラ
-#define PID_DAEMON_SNES         0x8036 // DaemonBite Retro Controllers SNES (Standard Arduino Leonardo PID)
-#define PID_DAEMON_SATURN       0x8030 // DaemonBite Retro Controllers Saturn (Modded PID to suit the USB2DB15, check COMPATIBILITY.md)
 #define PID_HORI_RAP_V_PS3      0x008B // HORI RAP V HAYABUSA Controller(PS3)
 #define PID_HORI_RAP_V_PS4      0x008A // HORI RAP V HAYABUSA Controller(PS4)
+#define PID_LOGITECH            0xC216 // Logitech F310
 #define PID_MADCATZ_FSA_PS4     0x8180 // Mad Catz Fight Stick Alpha (PS4)
 #define PID_MADCATZ_FSA_PS3     0x3180 // Mad Catz Fight Stick Alpha (PS3)
 #define PID_MADCATZ_SF_PS3_RND1 0x8818 // Mad Catz Street Fighter IV Tournament Edition Round 1 (PS3)
