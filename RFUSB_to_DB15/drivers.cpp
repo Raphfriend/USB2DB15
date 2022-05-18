@@ -95,6 +95,10 @@ void setupController(uint16_t vid, uint16_t pid, HIDController *controller) {
           break;
       }
       break;
+		  
+	case VID_LOGITECH:
+      if (pid == PID_LOGITECH) setupLogitech(controller);
+      break;
 
     case VID_MADCATZ:
       switch (pid) {
@@ -148,6 +152,11 @@ void setupController(uint16_t vid, uint16_t pid, HIDController *controller) {
           break;
       }
       break;
+		  
+    case VID_SEGATOYS:
+      if (pid == PID_SEGA_ACS) setupSegaAstroCityMini(controller);
+      break;
+
 
     case VID_SONY:
       switch (pid) { 
@@ -166,10 +175,6 @@ void setupController(uint16_t vid, uint16_t pid, HIDController *controller) {
       }
       break;
 
-    case VID_SEGATOYS:
-      if (pid == PID_SEGA_ACS) setupSegaAstroCityMini(controller);
-      break;
-
     case VID_SHANWAN:
       if (pid == PID_NEOGEO_MINI_PAD) setupNeoGeoMini(controller);
       break;
@@ -179,6 +184,7 @@ void setupController(uint16_t vid, uint16_t pid, HIDController *controller) {
       break;
 
     default:
+		  
 #ifndef RELEASE_MODE
       Serial.println("Failed to find a driver for device. Using RAP PS3 as fallback");
 #endif
@@ -539,6 +545,42 @@ void setupHoriRAP3(HIDController *controller) {
   controller->ConfigButton(BUTTON_9, 1, 0x08);
   controller->ConfigButton(BUTTON_10, 1, 0x04);
 }
+
+
+/**************************
+ * Logitech GamePads
+ **************************/
+
+/**
+ * Configures a Logitech F310 and Compatible devices
+ *
+ * RAP Button layout
+ * Byte 0x01   0x02   0x04   0x08   0x10   0x20   0x40   0x80
+ * 0:   Btn 1, Btn 4, Btn 5, Btn 2, Btn 7, Btn 3, Btn 8, Btn 6
+ * 1:   COIN,  START, Btn 9, Btn10, NA,    NA,    NA,    NA
+ * 2:   DPAD,  DPAD,  DPAD,  DPAD,  NA,    NA,    NA,    NA
+ *
+ * @param controller The HIDController that will be configured
+ */
+void setupLogitech(HIDController *controller) {
+  // DPad setup
+  generateDPad(2, controller);
+  // Button setup
+  controller->ConfigButton(BUTTON_COIN, 1, 0x01);
+  controller->ConfigButton(BUTTON_START, 1, 0x02);
+  controller->ConfigButton(BUTTON_1, 0, 0x01);
+  controller->ConfigButton(BUTTON_2, 0, 0x08);
+  controller->ConfigButton(BUTTON_3, 0, 0x20);
+  controller->ConfigButton(BUTTON_4, 0, 0x02);
+  controller->ConfigButton(BUTTON_5, 0, 0x04);
+  controller->ConfigButton(BUTTON_6, 0, 0x80);
+  controller->ConfigButton(BUTTON_7, 0, 0x10);
+  controller->ConfigButton(BUTTON_8, 0, 0x40);
+  controller->ConfigButton(BUTTON_9, 1, 0x08);
+  controller->ConfigButton(BUTTON_10, 1, 0x04);
+}
+
+
 
 /**************************
  * Mad Catz GamePads
