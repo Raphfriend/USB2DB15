@@ -532,17 +532,17 @@ void setupHoriRAP3(HIDController *controller) {
   // DPad setup
   generateDPad(2, controller);
   // Button setup
-  controller->ConfigButton(BUTTON_COIN, 1, 0x01);
+  controller->ConfigButton(BUTTON_COIN,  1, 0x01);
   controller->ConfigButton(BUTTON_START, 1, 0x02);
-  controller->ConfigButton(BUTTON_1, 0, 0x01);
-  controller->ConfigButton(BUTTON_2, 0, 0x08);
-  controller->ConfigButton(BUTTON_3, 0, 0x20);
-  controller->ConfigButton(BUTTON_4, 0, 0x02);
-  controller->ConfigButton(BUTTON_5, 0, 0x04);
-  controller->ConfigButton(BUTTON_6, 0, 0x80);
-  controller->ConfigButton(BUTTON_7, 0, 0x10);
-  controller->ConfigButton(BUTTON_8, 0, 0x40);
-  controller->ConfigButton(BUTTON_9, 1, 0x08);
+  controller->ConfigButton(BUTTON_1,  0, 0x01);
+  controller->ConfigButton(BUTTON_2,  0, 0x08);
+  controller->ConfigButton(BUTTON_3,  0, 0x20);
+  controller->ConfigButton(BUTTON_4,  0, 0x02);
+  controller->ConfigButton(BUTTON_5,  0, 0x04);
+  controller->ConfigButton(BUTTON_6,  0, 0x80);
+  controller->ConfigButton(BUTTON_7,  0, 0x10);
+  controller->ConfigButton(BUTTON_8,  0, 0x40);
+  controller->ConfigButton(BUTTON_9,  1, 0x08);
   controller->ConfigButton(BUTTON_10, 1, 0x04);
 }
 
@@ -555,27 +555,27 @@ void setupHoriRAP3(HIDController *controller) {
  * Configures a Logitech F310 and Compatible devices
  *
  * Logitech F310 Button layout
- * Byte 0x01   0x02   0x04   0x08   0x10   0x20   0x40   0x80
- * 0:   Btn 1, Btn 4, Btn 5, Btn 2, Btn 7, Btn 3, Btn 8, Btn 6
- * 1:   COIN,  START, Btn 9, Btn10, NA,    NA,    NA,    NA
- * 2:   DPAD,  DPAD,  DPAD,  DPAD,  NA,    NA,    NA,    NA
+ * Byte   0x01   0x02   0x04   0x08   0x10   0x20   0x40   0x80
+ * 0-3:                           n/a
+ * 4:     DPAD ,  DPAD, DPAD,  DPAD, btn 3,  btn 1, btn 2, btn 4
+ * 5:     btn 5, btn 6, btn 7, btn 8, coin , start,   n/a,   n/a 
  *
  * @param controller The HIDController that will be configured
  */
 void setupLogitech(HIDController *controller) {
   // DPad setup
-  generateDPad(2, controller);
+  generateDPad(4, controller);
   // Button setup
-  controller->ConfigButton(BUTTON_COIN, 1, 0x10);
-  controller->ConfigButton(BUTTON_START, 1, 0x20 );
-  controller->ConfigButton(BUTTON_1, 0, 0x28);
-  controller->ConfigButton(BUTTON_2, 0, 0x48);
-  controller->ConfigButton(BUTTON_3, 0, 0x18);
-  controller->ConfigButton(BUTTON_4, 0, 0x88);
-  controller->ConfigButton(BUTTON_5, 0, 0x08);
-  controller->ConfigButton(BUTTON_6, 1, 0x80);
-  controller->ConfigButton(BUTTON_7, 1, 0x04);
-  controller->ConfigButton(BUTTON_8, 1, 0x08);
+  controller->ConfigButton(BUTTON_COIN,  5, 0x10);
+  controller->ConfigButton(BUTTON_START, 5, 0x20);
+  controller->ConfigButton(BUTTON_1, 4, 0x20);
+  controller->ConfigButton(BUTTON_2, 4, 0x40);
+  controller->ConfigButton(BUTTON_3, 4, 0x10);
+  controller->ConfigButton(BUTTON_4, 4, 0x80);
+  controller->ConfigButton(BUTTON_5, 5, 0x01);
+  controller->ConfigButton(BUTTON_6, 5, 0x02);
+  controller->ConfigButton(BUTTON_7, 5, 0x04);
+  controller->ConfigButton(BUTTON_8, 5, 0x08);
   
 }
 
