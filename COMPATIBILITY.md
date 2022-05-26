@@ -47,8 +47,10 @@ This is a list of tested controllers. Please reach out to our Discord server if 
 			micro.build.usb_product="Arduino Micro"
 	- Save the file.
 
-### FeralAI
+### Feir
+- Feir Wired FR-225C Controller for PlayStation 4
 
+### FeralAI
 - Pico Fighting Board GP2040 (PS3/DirectInput Mode)
 
 ### Honcam
@@ -66,6 +68,9 @@ This is a list of tested controllers. Please reach out to our Discord server if 
 - Real Arcade Pro.3 Premium VLX (PS3 mode)
 - Real Arcade Pro V HAYABUSA (PS3 and PS4 modes)
 - Real Arcade Pro - Soul Calibur VI Edition for Xbox One (requires USB HOST SHIELD 2.0 update)
+
+### Logitech
+- F310 
 
 ### Mad Catz
 - Street Fighter IV - Arcade FightStick Tournament Edition PS3 (Round 1 & Round 2 versions)

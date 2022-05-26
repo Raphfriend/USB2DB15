@@ -1,3 +1,20 @@
+## [0.14.15] - 2022-05-26
+
+### Changed
+- Fixed an issue with button mapping surrounding Mad Catz Street Fighter V Arcade FightStick TE2+ (PS4 Mode) controller.
+
+### Added
+- Added Support for Logitech F310
+	- Library updated: https://github.com/Raphfriend/USB_Host_Shield_2.0
+	- USB Host Shield 2.0 files updated:
+		- hidescriptorparser.cpp
+		- hidescriptorparser.h
+		- Usb.cpp
+		
+
+### Added
+- Added Support for Feir Wired FR-225C Controller for PlayStation 4
+
 ## [0.14.14] - 2022-05-14
 ### Added
 - Added Support for PowerA FUSION Wired FightPad Gaming Controller for PlayStation 4
