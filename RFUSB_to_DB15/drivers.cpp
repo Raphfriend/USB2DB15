@@ -132,6 +132,7 @@ void setupController(uint16_t vid, uint16_t pid, HIDController *controller) {
     case VID_QANBA:
       switch (pid) {
         case PID_QANBA_CRYSTAL_PS4:
+        case PID_QANBA_DRONE_PS4:
         case PID_QANBA_OBSIDIAN_PS4:
           setupPS4(controller);
           break;
