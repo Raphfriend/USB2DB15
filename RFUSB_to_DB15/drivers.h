@@ -75,7 +75,8 @@
 #define PID_RAZER_PANTHERA_EVO  0x1008 // Razer Panthera EVO (PS4)
 #define PID_RAZER_RAIJU_ULT     0x1004 // Razer Raiju Ultimate (PS4)
 #define PID_RETROBIT_SATURN     0x00C1 // Retrobit Sega Saturn Wireless 2.4G
-#define PID_SEGA_ACS            0x0028 // Arcade stick for Astro City Mini - ACS-1003
+#define PID_SEGA_ACS_1002       0x0027 // Control Pad for Astro City Mini - ACS-1002
+#define PID_SEGA_ACS_1003       0x0028 // Arcade stick for Astro City Mini - ACS-1003
 #define PID_SONY_PS4_ADAPTER    0x0BA0 // PS4 Wireless Adapter
 #define PID_SONY_PS4_JP         0x09CC // PS4 Controller JP region
 #define PID_SONY_PS4_NA         0x05C4 // PS4 Controller NA region
