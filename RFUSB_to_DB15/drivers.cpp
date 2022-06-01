@@ -154,7 +154,12 @@ void setupController(uint16_t vid, uint16_t pid, HIDController *controller) {
       break;
 		  
     case VID_SEGATOYS:
-      if (pid == PID_SEGA_ACS) setupSegaAstroCityMini(controller);
+      switch (pid) {
+        case PID_SEGA_ACS_1002:
+        case PID_SEGA_ACS_1003:
+          setupSegaAstroCityMini(controller);
+          break;
+      }
       break;
 
 
