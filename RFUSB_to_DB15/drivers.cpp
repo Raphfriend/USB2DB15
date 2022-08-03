@@ -50,7 +50,11 @@ void setupController(uint16_t vid, uint16_t pid, HIDController *controller) {
       if ((pid == PID_BROOK_UNIVERSAL) || (pid == PID_BROOK_FB)) setupPS4(controller);
       if (pid == PID_FEIR_PS4) setupPS4(controller);
       break;
-
+		  
+    case VID_FIRE:
+      if (pid == PID_FIRE_NEOGEOX_AS) setupFireNEOGEOXAS(controller);
+      break;
+		  
     case VID_GENERIC:
       if (pid == PID_GENERIC_SNES) setupGenericSNES(controller);
       if (pid == PID_GENERIC_ZERO_DELAY) setupGenericZeroDelay(controller);
@@ -322,6 +326,33 @@ void setupBuffaloClassic(HIDController *controller) {
   controller->ConfigButton(BUTTON_4, 2, 0x02);
   controller->ConfigButton(BUTTON_5, 2, 0x01);
   controller->ConfigButton(BUTTON_6, 2, 0x10);
+}
+
+/**************************
+ * Fire GamePads
+ **************************/
+
+/**
+ * Configures a Fire NEOGEOX Arcade Stick and Compatible devices
+ *
+ * NEOGEOX Arcade Stick Button layout
+ * Byte 0x01   0x02   0x04   0x08
+ * 0:   Btn 1, Btn 4, Btn 5, Btn 2,
+ * 1:   COIN,  START, Btn 9, Btn10, NA,    NA,    NA,    NA
+ * 2:   DPAD,  DPAD,  DPAD,  DPAD,  NA,    NA,    NA,    NA
+ *
+ * @param controller The HIDController that will be configured
+ */
+void setupFireNEOGEOXAS(HIDController *controller) {
+  // DPad setup
+  generateDPad(2, controller);
+  // Button setup
+  controller->ConfigButton(BUTTON_COIN,  1, 0x01);
+  controller->ConfigButton(BUTTON_START, 1, 0x02);
+  controller->ConfigButton(BUTTON_1,  0, 0x08);
+  controller->ConfigButton(BUTTON_2,  0, 0x04);
+  controller->ConfigButton(BUTTON_4,  0, 0x01);
+  controller->ConfigButton(BUTTON_5,  0, 0x02);
 }
 
 /**************************
