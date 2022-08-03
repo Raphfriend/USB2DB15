@@ -18,6 +18,7 @@
 #define VID_BROOK               0x0C12 // Brook
 #define VID_BUFFALO             0x0583 // Buffalo
 #define VID_DAEMON              0x2341 // DaemonBite Retro Controllers (Standard Arduino Leonardo VID)
+#define VID_FIRE                0x1292 // Fire International Ltd.
 #define VID_GENERIC             0x0079 // Generic
 #define VID_HONCAM              0x20D6 // Honcam
 #define VID_HORI                0x0F0D // HORI (Also used by Retrobit 2.4GHz)
@@ -45,6 +46,7 @@
 #define PID_DAEMON_SNES         0x8036 // DaemonBite Retro Controllers SNES (Standard Arduino Leonardo PID)
 #define PID_DAEMON_SATURN       0x8030 // DaemonBite Retro Controllers Saturn (Modded PID to suit the USB2DB15, check COMPATIBILITY.md)
 #define PID_FEIR_PS4            0x1E1B // Feir Wired FR-225C Controller for PlayStation 4
+#define PID_FIRE_NEOGEOX_AS     0x4e47 // Fire NEOGEOX Arcade Stick
 #define PID_FUSION_PS4          0x792A // PowerA FUSION Wired FightPad Gaming Controller (PS4)
 #define PID_GENERIC_SNES        0x0011 // Generic SNES pad
 #define PID_GENERIC_ZERO_DELAY  0x0006 // Generic Zero Delay PCB 01
@@ -121,6 +123,8 @@ void setupDaemonSNES(HIDController *controller);
 // Daemon Saturn
 void setupDaemonSaturn(HIDController *controller);
 
+// Fire
+void setupFireNEOGEOXAS(HIDController *controller);
 
 // Honcam Controllers
 void setupHoncam(HIDController *controller);
