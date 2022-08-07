@@ -336,9 +336,9 @@ void setupBuffaloClassic(HIDController *controller) {
  * Configures a Fire NEOGEOX Arcade Stick and Compatible devices
  *
  * NEOGEOX Arcade Stick Button layout
- * Byte 0x01   0x02   0x04   0x08
- * 0:   Btn 1, Btn 4, Btn 5, Btn 2,
- * 1:   COIN,  START, Btn 9, Btn10, NA,    NA,    NA,    NA
+ * Byte 0x01   0x02   0x04   0x08   0x10   0x20   0x40   0x80
+ * 0:   Btn 4, Btn 5, Btn 2, Btn 1, NA,    NA,    NA,    NA
+ * 1:   COIN,  START, NA,    NA,    NA,    NA,    NA,    NA
  * 2:   DPAD,  DPAD,  DPAD,  DPAD,  NA,    NA,    NA,    NA
  *
  * @param controller The HIDController that will be configured
