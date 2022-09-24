@@ -1,4 +1,5 @@
-# USB2DB15 - Supergun Adapter [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=HYCK7DF7Q6XLY&source=url)
+# USB2DB15 - Supergun Adapter  
+[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/raph_friend)
 
 A simple Atmega328P based USB to DB15 adapter designed for use with a Supergun or Neo-Geo system.
 
@@ -156,7 +157,7 @@ When you put all the parts together, USB2DB15 should look like this.
 
 If you have found USB2DB15 useful, please consider funding it and making a donation so that we may continue our work by obtaining additional controllers, equipment, and everything else required to keep this project alive and growing.
 
-[![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=HYCK7DF7Q6XLY&source=url)
+[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/raph_friend)
 
 
 ### Is this product available to buy? YES!
