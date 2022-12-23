@@ -32,10 +32,11 @@ void setupController(uint16_t vid, uint16_t pid, HIDController *controller) {
 
     case VID_8BITDO:
       switch (pid) {
-        case PID_8BITDO_M30:
+       case PID_8BITDO_M30:
           setup8BitDoM30(controller);
           break;
-        case PID_8BITDO_SFC30:
+
+       case PID_8BITDO_SFC30:
           setup8BitDoSFC30(controller);
           break;
              
@@ -51,6 +52,10 @@ void setupController(uint16_t vid, uint16_t pid, HIDController *controller) {
       if (pid == PID_FEIR_PS4) setupPS4(controller);
       break;
 
+    case VID_FIRE:
+      if (pid == PID_FIRE_NEOGEOX_AS) setupFireNEOGEOXAS(controller);
+      break;
+
     case VID_GENERIC:
       if (pid == PID_GENERIC_SNES) setupGenericSNES(controller);
       if (pid == PID_GENERIC_ZERO_DELAY) setupGenericZeroDelay(controller);
@@ -64,6 +69,9 @@ void setupController(uint16_t vid, uint16_t pid, HIDController *controller) {
         case PID_DAEMON_SATURN:
           setupDaemonSaturn(controller);
           break;
+        case PID_DAEMON_MD:
+          setupDaemonMD(controller);
+          break;  
       }
       break;
 
@@ -132,6 +140,7 @@ void setupController(uint16_t vid, uint16_t pid, HIDController *controller) {
     case VID_QANBA:
       switch (pid) {
         case PID_QANBA_CRYSTAL_PS4:
+        case PID_QANBA_DRONE_PS4:
         case PID_QANBA_OBSIDIAN_PS4:
           setupPS4(controller);
           break;
@@ -154,9 +163,12 @@ void setupController(uint16_t vid, uint16_t pid, HIDController *controller) {
       break;
 		  
     case VID_SEGATOYS:
-      if (pid == PID_SEGA_ACS) setupSegaAstroCityMini(controller);
-      break;
-
+       switch (pid) {
+        case PID_SEGA_ACS_1002:
+        case PID_SEGA_ACS_1003:
+          setupSegaAstroCityMini(controller);
+          break;
+      }
 
     case VID_SONY:
       switch (pid) { 
@@ -320,6 +332,33 @@ void setupBuffaloClassic(HIDController *controller) {
 }
 
 /**************************
+ * Fire GamePads
+ **************************/
+
+/**
+ * Configures a Fire NEOGEOX Arcade Stick and Compatible devices
+ *
+ * NEOGEOX Arcade Stick Button layout
+ * Byte 0x01   0x02   0x04   0x08   0x10   0x20   0x40   0x80
+ * 0:   Btn 4, Btn 5, Btn 2, Btn 1, NA,    NA,    NA,    NA
+ * 1:   COIN,  START, NA,    NA,    NA,    NA,    NA,    NA
+ * 2:   DPAD,  DPAD,  DPAD,  DPAD,  NA,    NA,    NA,    NA
+ *
+ * @param controller The HIDController that will be configured
+ */
+void setupFireNEOGEOXAS(HIDController *controller) {
+  // DPad setup
+  generateDPad(2, controller);
+  // Button setup
+  controller->ConfigButton(BUTTON_COIN,  1, 0x01);
+  controller->ConfigButton(BUTTON_START, 1, 0x02);
+  controller->ConfigButton(BUTTON_1,  0, 0x08);
+  controller->ConfigButton(BUTTON_2,  0, 0x04);
+  controller->ConfigButton(BUTTON_4,  0, 0x01);
+  controller->ConfigButton(BUTTON_5,  0, 0x02);
+}
+
+/**************************
  * Generic GamePads
  **************************/
 
@@ -400,21 +439,41 @@ void setupGenericZeroDelay(HIDController *controller) {
  *
  * @param controller The HIDController that will be configured
  */
+
+void setupDaemonMD(HIDController *controller) {
+  // DPad setup
+  controller->ConfigButton(BUTTON_LEFT,  2, 0xFF, 0xFF);
+  controller->ConfigButton(BUTTON_RIGHT, 2, 0xFF, 0x01);
+  controller->ConfigButton(BUTTON_UP, 3, 0xFF, 0xFF);
+  controller->ConfigButton(BUTTON_DOWN, 3, 0xFF, 0x01);
+  // Button setup
+  controller->ConfigButton(BUTTON_COIN, 0, 0x80); 
+  controller->ConfigButton(BUTTON_START, 0, 0x40); 
+  controller->ConfigButton(BUTTON_1, 0, 0x08);
+  controller->ConfigButton(BUTTON_2, 0, 0x10);
+  controller->ConfigButton(BUTTON_3, 0, 0x20);
+  controller->ConfigButton(BUTTON_4, 0, 0x01);
+  controller->ConfigButton(BUTTON_5, 0, 0x02);
+  controller->ConfigButton(BUTTON_6, 0, 0x04);
+  //controller->ConfigButton(BUTTON_7, 1, 0x01); home button
+
+}
+
 void setupDaemonSNES(HIDController *controller) {
   // DPad setup
-  controller->ConfigButton(BUTTON_LEFT, 3, 0xFF, 0xFF);
-  controller->ConfigButton(BUTTON_RIGHT, 3, 0xFF, 0x01);
-  controller->ConfigButton(BUTTON_UP, 4, 0xFF, 0xFF);
-  controller->ConfigButton(BUTTON_DOWN, 4, 0xFF, 0x01);
+  controller->ConfigButton(BUTTON_LEFT, 1, 0xFF, 0xFF);
+  controller->ConfigButton(BUTTON_RIGHT, 1, 0xFF, 0x01);
+  controller->ConfigButton(BUTTON_UP, 2, 0xFF, 0xFF);
+  controller->ConfigButton(BUTTON_DOWN, 2, 0xFF, 0x01);
   // Button setup
   controller->ConfigButton(BUTTON_COIN, 0, 0x40);
   controller->ConfigButton(BUTTON_START, 0, 0x80);
   controller->ConfigButton(BUTTON_1, 0, 0x04);
   controller->ConfigButton(BUTTON_2, 0, 0x08);
-  controller->ConfigButton(BUTTON_3, 0, 0x20);
+  controller->ConfigButton(BUTTON_3, 0, 0x10);
   controller->ConfigButton(BUTTON_4, 0, 0x01);
   controller->ConfigButton(BUTTON_5, 0, 0x02);
-  controller->ConfigButton(BUTTON_6, 0, 0x10);
+  controller->ConfigButton(BUTTON_6, 0, 0x20);
 
 }
 
