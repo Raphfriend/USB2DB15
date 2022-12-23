@@ -15,9 +15,11 @@
  ****************/
 
 #define VID_8BITDO              0x2DC8 // 8BitDo Bluetooth (D-INPUT MODE)
+#define VID_8BITDO_M30          0x057E // 8BitDo M30
 #define VID_BROOK               0x0C12 // Brook
 #define VID_BUFFALO             0x0583 // Buffalo
 #define VID_DAEMON              0x2341 // DaemonBite Retro Controllers (Standard Arduino Leonardo VID)
+#define VID_FIRE                0x1292 // Fire International Ltd.
 #define VID_GENERIC             0x0079 // Generic
 #define VID_HONCAM              0x20D6 // Honcam
 #define VID_HORI                0x0F0D // HORI (Also used by Retrobit 2.4GHz)
@@ -44,7 +46,9 @@
 #define PID_BROOK_FB            0x0ef7 // FIGHTING BOARD PS3/PS4 (PS4 Mode)
 #define PID_DAEMON_SNES         0x8036 // DaemonBite Retro Controllers SNES (Standard Arduino Leonardo PID)
 #define PID_DAEMON_SATURN       0x8030 // DaemonBite Retro Controllers Saturn (Modded PID to suit the USB2DB15, check COMPATIBILITY.md)
+#define PID_DAEMON_MD           0x8031 // DaemonBite Retro Controllers Megadrive (Modded PID to suit the USB2DB15, check COMPATIBILITY.md)
 #define PID_FEIR_PS4            0x1E1B // Feir Wired FR-225C Controller for PlayStation 4
+#define PID_FIRE_NEOGEOX_AS     0x4e47 // Fire NEOGEOX Arcade Stick
 #define PID_FUSION_PS4          0x792A // PowerA FUSION Wired FightPad Gaming Controller (PS4)
 #define PID_GENERIC_SNES        0x0011 // Generic SNES pad
 #define PID_GENERIC_ZERO_DELAY  0x0006 // Generic Zero Delay PCB 01
@@ -69,18 +73,20 @@
 #define PID_NACON_DAIJA_PS4     0x0D09 // Nacon Daija (PS4)
 #define PID_NEOGEO_MINI_PAD     0x0575 // Neo Geo Mini Pad
 #define PID_QANBA_CRYSTAL_PS4   0x2200 // Qanba Crystal (PS4)
+#define PID_QANBA_DRONE_PS4     0x2000 // Qanba Drone (PS4)
 #define PID_QANBA_OBSIDIAN_PS3  0x2302 // Qanba Obsidian (PS3)
 #define PID_QANBA_OBSIDIAN_PS4  0x2300 // Qanba Obsidian (PS4)
 #define PID_RAZER_PANTHERA      0x0401 // Razer Panthera (PS4)
 #define PID_RAZER_PANTHERA_EVO  0x1008 // Razer Panthera EVO (PS4)
 #define PID_RAZER_RAIJU_ULT     0x1004 // Razer Raiju Ultimate (PS4)
 #define PID_RETROBIT_SATURN     0x00C1 // Retrobit Sega Saturn Wireless 2.4G
-#define PID_SEGA_ACS            0x0028 // Arcade stick for Astro City Mini - ACS-1003
+#define PID_SEGA_ACS_1002       0x0027 // Control Pad for Astro City Mini - ACS-1002
+#define PID_SEGA_ACS_1003       0x0028 // Arcade stick for Astro City Mini - ACS-1003
 #define PID_SONY_PS4_ADAPTER    0x0BA0 // PS4 Wireless Adapter
 #define PID_SONY_PS4_JP         0x09CC // PS4 Controller JP region
 #define PID_SONY_PS4_NA         0x05C4 // PS4 Controller NA region
 #define PID_SONY_PS5_NA         0x0CE6 // PS5 Controller NA region
-#define PID_SONY_PSC	          0x0CDA // Playstation Classic Controller
+#define PID_SONY_PSC	        0x0CDA // Playstation Classic Controller
 #define PID_UPCB                0x1529 // Universal PCB Project
 
 
@@ -114,12 +120,18 @@ void setupBuffaloClassic(HIDController *controller);
 void setupGenericSNES(HIDController *controller);
 void setupGenericZeroDelay(HIDController *controller);
 
+// Daemon MEGA DRIVE/GENESIS
+
+void setupDaemonMD(HIDController *controller);
+
 // Daemon SNES
 void setupDaemonSNES(HIDController *controller);
 
 // Daemon Saturn
 void setupDaemonSaturn(HIDController *controller);
 
+// Fire
+void setupFireNEOGEOXAS(HIDController *controller);
 
 // Honcam Controllers
 void setupHoncam(HIDController *controller);

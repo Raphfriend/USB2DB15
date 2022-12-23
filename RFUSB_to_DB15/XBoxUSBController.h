@@ -6,6 +6,7 @@
 #define USB2DB15_XBOXUSBCONTROLLER_H
 
 #include <XBOXUSB.h>
+#include <XBOXRECV.h>
 #include "Controller.h"
 
 /**

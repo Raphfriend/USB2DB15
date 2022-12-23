@@ -1,3 +1,24 @@
+## [0.14.16] - 2022-12-23
+
+### Changed
+- DaemonBite SNES to USB Adapters: Changed D-Pad working comeback and exchanged button L/R layoyut. [@babapus](https://github.com/babapus)
+- PID separation for SEGATOYS devices (ACS-1002, ACS-1003). [@babapus](https://github.com/babapus)
+
+### Added
+
+- Added Support for Astro City Mini Control Pad (ACS-1002) [@babapus](https://github.com/babapus)
+- Added Support for Brook Wingman XB Converter Wireless Adapter OG and 2
+- Added Support for DaemonBite SEGA MEGA DRIVE/GENESIS to USB Adapters
+	Check the COMPATIBILITY.md for more instructions.
+
+- Added Support for the Fire NEOGEO X Arcade Stick [@babapus](https://github.com/babapus)
+- Added Support for Qanba Drone PS4 [@thespoonydragoony](https://github.com/thespoonydragoony)
+
+- Added Support for XBOX SERIES S|X
+	- Library updated: https://github.com/Raphfriend/USB_Host_Shield_2.0
+	- USB Host Shield 2.0 files updated:
+		- XBOXONE.h
+
 ## [0.14.15] - 2022-05-26
 
 ### Changed
@@ -10,9 +31,7 @@
 		- hidescriptorparser.cpp
 		- hidescriptorparser.h
 		- Usb.cpp
-		
 
-### Added
 - Added Support for Feir Wired FR-225C Controller for PlayStation 4
 
 ## [0.14.14] - 2022-05-14

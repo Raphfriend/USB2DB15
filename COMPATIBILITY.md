@@ -22,15 +22,13 @@ This is a list of tested controllers. Please reach out to our Discord server if 
 - Brook FIGHTING BOARD PS3/PS4
 - Brook Universal Fighting PCB
 - Brook Retro Board
-
-### Generic
-- Generic SNES USB pad
-- Generic Zero Delay Controller
+- Brook Wingman XB Converter Wireless Adapter OG and 2
 
 ### DaemonBite Retro Controllers To USB Adapters:
-- NES/SNES (2341:8037)
-- SEGA Saturn (2341:8030)
-	
+- NES/SNES (VID/PID 2341:8037)
+- SEGA Saturn (VID/PID 2341:8030)
+- SEGA MegaDrive/Genesis (VID/PID 2341:8031)
+
 	DaemonBite Retro Controllers To USB Adapters project uses an Arduino Pro Micro, when the code is burned, will show as Leonardo and a VID/PID will be attached. Each controller code own especific output patterns and can't use same ID Hardwares on the USB2DB15 adapter, so we choose to change the PID on Saturn and on (NES/SNES is standard) to make the code working well. It won't change anything on the right functionalities for both adapters in any device (Windows PC or MiSTer, for example).
 	
 	- To do that, just find Arduino > avr > boards.txt file; 
@@ -52,6 +50,10 @@ This is a list of tested controllers. Please reach out to our Discord server if 
 
 ### FeralAI
 - Pico Fighting Board GP2040 (PS3/DirectInput Mode)
+
+### Generic
+- Generic SNES USB pad
+- Generic Zero Delay Controller
 
 ### Honcam
 - HC-J2003
@@ -79,7 +81,8 @@ This is a list of tested controllers. Please reach out to our Discord server if 
 - Street Fighter V Arcade FightStick TES+ (PS4 Mode)
 
 ### Microsoft
-- XboxOne Controller
+- Xbox One Controller
+- Xbox Series S|X Controller
 
 ### Nacon
 - Daija (PS3 and PS4 Modes)
@@ -92,6 +95,7 @@ This is a list of tested controllers. Please reach out to our Discord server if 
 
 ### Qanba
 - Crystal (PS3 and PS4 Modes)
+- Drone (PS4)
 - Obsidian (PS3 and PS4 Modes)
 
 ### Razer
@@ -104,6 +108,7 @@ This is a list of tested controllers. Please reach out to our Discord server if 
 	- Press START + UP to enable digital DPAD
 ### SEGA
 - Astro City Mini Arcade Stick
+- Astro City Mini Control Pad
 
 ### SNK
 - Neo Geo Mini Pad
