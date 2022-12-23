@@ -32,11 +32,11 @@ void setupController(uint16_t vid, uint16_t pid, HIDController *controller) {
 
     case VID_8BITDO:
       switch (pid) {
-       case PID_8BITDO_M30:
+        case PID_8BITDO_M30:
           setup8BitDoM30(controller);
           break;
 
-       case PID_8BITDO_SFC30:
+        case PID_8BITDO_SFC30:
           setup8BitDoSFC30(controller);
           break;
              
