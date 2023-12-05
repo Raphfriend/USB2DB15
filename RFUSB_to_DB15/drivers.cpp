@@ -191,6 +191,10 @@ void setupController(uint16_t vid, uint16_t pid, HIDController *controller) {
       if (pid == PID_NEOGEO_MINI_PAD) setupNeoGeoMini(controller);
       break;
 
+    case VID_TAITO:
+      if (pid == PID_TAITO_EGRET_II) setupTaitoEgret2(controller);
+      break;
+
     case VID_UPCB:
       if (pid == PID_UPCB) setupPS4(controller);
       break;
@@ -427,15 +431,14 @@ void setupGenericZeroDelay(HIDController *controller) {
  **************************/
 
 /**
- * Configures a Generic SNES pad and Compatible devices
+ * Configures a Generic Megadrive pad and Compatible devices
  *
  * Generic SNES Button layout
  * Byte 0x01   0x02   0x04   0x08   0x10   0x20   0x40   0x80
- * 0-2:                          NA
- * 3:                   LEFT(0x00)/RIGHT(0xFF)
- * 4:                   UP(0x00)/DOWN(0xFF)
- * 5:   NA,    NA,    NA,    NA,    Btn 2, Btn 5, Btn 4, Btn 1
- * 6:   Btn 6, Btn 3, NA,    NA,    COIN,  START, NA,    NA
+ * 0:   Btn 4, Btn 5, Btn 6, Btn 1, Btn 2, Btn 3, START, COIN
+ * 1:                          NA
+ * 2:                   LEFT(0x00)/RIGHT(0xFF)
+ * 3:                   UP(0x00)/DOWN(0xFF)
  *
  * @param controller The HIDController that will be configured
  */
@@ -459,6 +462,20 @@ void setupDaemonMD(HIDController *controller) {
 
 }
 
+/**
+ * Configures a Generic SNES pad and Compatible devices
+ *
+ * Generic SNES Button layout
+ * Byte 0x01   0x02   0x04   0x08   0x10   0x20   0x40   0x80
+ * 0-2:                          NA
+ * 3:                   LEFT(0x00)/RIGHT(0xFF)
+ * 4:                   UP(0x00)/DOWN(0xFF)
+ * 5:   NA,    NA,    NA,    NA,    Btn 2, Btn 5, Btn 4, Btn 1
+ * 6:   Btn 6, Btn 3, NA,    NA,    COIN,  START, NA,    NA
+ *
+ * @param controller The HIDController that will be configured
+ */
+
 void setupDaemonSNES(HIDController *controller) {
   // DPad setup
   controller->ConfigButton(BUTTON_LEFT, 1, 0xFF, 0xFF);
@@ -477,6 +494,18 @@ void setupDaemonSNES(HIDController *controller) {
 
 }
 
+/**
+ * Configures a Generic Saturn pad and Compatible devices
+ *
+ * Generic SNES Button layout
+ * Byte 0x01   0x02   0x04   0x08   0x10   0x20   0x40   0x80
+ * 0:   Btn 5, Btn 6, Btn 4, COIN,  Btn 3, Btn 2, Btn 1, START
+ * 1:   Btn 7, NA,    NA,    NA,    NA,    NA,    NA,    NA
+ * 2:                   LEFT(0xFF)/RIGHT(0x01)
+ * 3:                   UP(0xFF)/DOWN(0x01)
+ *
+ * @param controller The HIDController that will be configured
+ */
 
 void setupDaemonSaturn(HIDController *controller) {
   // DPad setup
@@ -895,4 +924,39 @@ void setupNeoGeoMini(HIDController *controller) {
   controller->ConfigButton(BUTTON_2, 0, 0x02);
   controller->ConfigButton(BUTTON_3, 0, 0x08);
   controller->ConfigButton(BUTTON_4, 0, 0x01);
+}
+
+
+/**************************
+ * Taito GamePads
+ **************************/
+
+/**
+ * Configures a Taito Egret II mini and Compatible devices
+ *
+ * Taito Egret Button layout
+ * Byte 0x01   0x02   0x04   0x08   0x10   0x20   0x40   0x80
+ * 0:   Btn 6, Btn 3, Btn 2, Btn 5, Btn 1, NA,    COIN,  START
+ * 1:   Btn 4, NA,    NA,    NA,    NA,    NA,    NA,    NA
+ * 2:                   LEFT(0x00)/RIGHT(0xFF)
+ * 3:                   UP(0x00)/DOWN(0xFF)
+ *
+ * @param controller The HIDController that will be configured
+ */
+
+void setupTaitoEgret2(HIDController *controller) {
+  // DPad setup
+  controller->ConfigButton(BUTTON_LEFT, 2, 0xFF, 0);
+  controller->ConfigButton(BUTTON_RIGHT, 2, 0xFF, 0xFF);
+  controller->ConfigButton(BUTTON_UP, 3, 0xFF, 0);
+  controller->ConfigButton(BUTTON_DOWN, 3, 0xFF, 0xFF);
+  // Button Setup
+  controller->ConfigButton(BUTTON_COIN, 0, 0x40);
+  controller->ConfigButton(BUTTON_START, 0, 0x80);
+  controller->ConfigButton(BUTTON_1, 0, 0x10);
+  controller->ConfigButton(BUTTON_2, 0, 0x04);
+  controller->ConfigButton(BUTTON_3, 0, 0x02);
+  controller->ConfigButton(BUTTON_4, 1, 0x01);
+  controller->ConfigButton(BUTTON_5, 0, 0x08);
+  controller->ConfigButton(BUTTON_6, 0, 0x01);
 }

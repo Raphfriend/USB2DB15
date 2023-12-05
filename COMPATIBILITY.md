@@ -120,6 +120,9 @@ This is a list of tested controllers. Please reach out to our Discord server if 
 - PS5 DualSense
 - PlayStation Classic Controller
 
+### Taito
+- Egret II Mini Controller
+
 ### Toodles
 - MC Cthulhu
 
