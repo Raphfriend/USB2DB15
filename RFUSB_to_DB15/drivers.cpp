@@ -944,7 +944,7 @@ void setupNeoGeoMini(HIDController *controller) {
  * @param controller The HIDController that will be configured
  */
 
-void setupTaitoEgret2(controller) {
+void setupTaitoEgret2(HIDController *controller) {
   // DPad setup
   controller->ConfigButton(BUTTON_LEFT, 2, 0xFF, 0);
   controller->ConfigButton(BUTTON_RIGHT, 2, 0xFF, 0xFF);
