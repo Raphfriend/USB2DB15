@@ -1,3 +1,7 @@
+## [0.14.17] - 2023-12-05
+
+- Added Support for Taito Egret II Mini Controller
+
 ## [0.14.16] - 2022-12-23
 
 ### Changed
