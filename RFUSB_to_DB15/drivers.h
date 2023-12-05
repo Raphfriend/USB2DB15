@@ -87,7 +87,7 @@
 #define PID_SONY_PS4_JP         0x09CC // PS4 Controller JP region
 #define PID_SONY_PS4_NA         0x05C4 // PS4 Controller NA region
 #define PID_SONY_PS5_NA         0x0CE6 // PS5 Controller NA region
-#define PID_SONY_PSC	          0x0CDA // Playstation Classic Controller
+#define PID_SONY_PSC            0x0CDA // Playstation Classic Controller
 #define PID_TAITO_EGRET_II      0x0703 // Taito Egret II Mini Controller
 #define PID_UPCB                0x1529 // Universal PCB Project
 
