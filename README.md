@@ -121,17 +121,11 @@ If you are not using a prefabricated PCB, please view the schematic for wiring i
 
 ### 6. Software Usage
 #### 6.1 Controller Profiles
-The Adapter can store profiles for up to 10 unique controller models*. Controllers of the same make and model will share the profiles.
-Each controller has 4 profiles associated with it. Should you plug in an 11th controller the system will replace the oldest controller you have set up.
-Next oldest for the 12th and so on. This may cause you to have to set up older controllers again if you resume using them.
+The adapter can store profiles for up to 10 unique controller models*. Controllers of the same make and model share the same profiles. Each controller has four associated profiles. If you connect an 11th controller model, the adapter will replace the oldest stored controller profile. Connecting a 12th controller will replace the next oldest profile, and so on. This may require you to set up older controllers again if you use them later.
 
-These can be accessed by pressing SELECT(COIN) + one of the four directions.
-Thus if you wanted the first profile you would press SELECT + UP, the Second SELECT + RIGHT, and so on.
-The adapter will remember what profile you were using and automatically switch to it when you use the controller again.
+Profiles can be selected by pressing SELECT (COIN) together with one of the four directions. For example, press SELECT + UP for Profile 1, SELECT + RIGHT for Profile 2, and so on. The adapter remembers the last profile used for each controller and will automatically switch to it the next time that controller is connected.
 
-To change the key bindings of a profile. First change to the profile you want to setup.
-While holding SELECT for at least 3 seconds, press buttons 1 - 6 in order. Then release SELECT to lock in the binding.
-Finally release SELECT to lock in the binding.
+To change the button bindings for a profile, first switch to the profile you want to configure. Then hold SELECT for at least three seconds and press buttons 1 through 6 in order. Release SELECT to save the new button bindings.
 
 *XBox One controllers appear to the system as the same make and model and thus use the same profiles even if they are different controllers.
 
