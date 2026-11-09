@@ -1,7 +1,7 @@
 # USB2DB15 - Supergun Adapter  
 [![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/raph_friend)
 
-A simple Atmega328P based USB to DB15 adapter designed for use with a Supergun or Neo-Geo system.
+A simple ATmega328P-based USB-to-DB15 adapter designed for use with a Supergun or Neo Geo system.
 
 
 <p align="center">
@@ -15,7 +15,7 @@ A simple Atmega328P based USB to DB15 adapter designed for use with a Supergun o
 
 - USB input to support most modern HID compatible controllers
 - 1ms polling, meaning a low latency and fast response from the USB2DB15
-- Open Source firmware, so everyone on the community can collaborate
+- Open-source firmware, so everyone in the community can collaborate
 - DB15 pinout standard, ready for Neo Geo, Minigun, and HAS Superguns
 - 4 customizable and storable mapping configurations
 - 10 customizable and storable controller profiles
@@ -24,21 +24,21 @@ A simple Atmega328P based USB to DB15 adapter designed for use with a Supergun o
 
 ### 2. Technical information:
 
-The USB2DB15 adapter is an Open Sourced device based on an AVR microcontroller. It adapts a USB controller for use with a Jamma PCB via a Supergun or Neo-Geo hardware with controller ports. Presently, a variety of common controllers are supported; such as ones that follow the PS3/PS4 DualShock, PS5 DualSense and Xbox 360/One protocols. Due to the diversity of controllers available and differing standards there may be some controllers that will not work with the USB2DB15 or may not work as intended. Please be patient during these early stages. Feel free to contact the developers with additional information and requests for help with your USB2DB15 adapter via our communication channels (GitHub, Discord, Arcade-Projects forum).
+The USB2DB15 adapter is an open-source device based on an AVR microcontroller. It adapts a USB controller for use with a JAMMA PCB through a Supergun or with Neo Geo hardware that has controller ports. A variety of common controllers are supported, including controllers that follow the PS3/PS4 DualShock, PS5 DualSense, and Xbox 360/One protocols. Due to the diversity of controllers and differing standards, some controllers may not work with USB2DB15 or may not work as intended. Please be patient during these early stages. Feel free to contact the developers with additional information or requests for help with your USB2DB15 adapter through our communication channels (GitHub, Discord, and the Arcade-Projects forum).
 
 We are using a modified USB Host Shield 2.0 library for controller IDs that aren't natively supported.
 
-In regards to hardware there are currently two options:
+With regard to hardware, there are currently three options:
 
 - A Custom PCB that accommodates and integrates an Arduino Pro Mini, USB Shield Mini and other relevant hardware.
-- USB2DB15 2.0 Ver, a pre-built, single PCB that incorporates all the required hardware in a standalone form.
-- USB2DB15 CS Ver, same as 2.0 Ver, but with a focus on PCB consolization. In place of the DB15 controller connector, this board has screw terminals and a 20 pin header which is compatible with a 20-pin Brook Fighting Board Cable.
+- USB2DB15 2.0 Ver, a pre-built single PCB that incorporates all required hardware in a standalone form.
+- USB2DB15 CS Ver, similar to 2.0 Ver but focused on PCB consolization. In place of the DB15 controller connector, this board has screw terminals and a 20-pin header compatible with a 20-pin Brook Fighting Board Cable.
 
 
 
 
 
-Alternatively you can simply use a breadboard to connect it all together. 
+Alternatively, you can simply use a breadboard to connect it all together.
 
 If you are building the open source version for yourself, a basic understanding of Arduino and its programming environment is required. Visit [arduino.cc](https://arduino.cc) to help you get started.
 
@@ -52,10 +52,10 @@ If you are building the open source version for yourself, a basic understanding 
 
 ### 3. Open Source Required Hardware:
 
-* The USB2DB15 uses an Atmega328P AVR. Any Arduino that utilizes this microcontroller such as the Mini Pro, Nano, and Uno are suitable. The Custom PCB accommodates an Arduino Mini Pro and USB Host Shield Mini.
+* The USB2DB15 uses an ATmega328P AVR. Any Arduino that uses this microcontroller, such as the Pro Mini, Nano, or Uno, is suitable. The custom PCB accommodates an Arduino Pro Mini and USB Host Shield Mini.
 * USB Host Shield Mini if using an Arduino Pro Mini / Nano. Full sized USB Host Shield for Uno.
 * An FTDI programmer is required for the Arduino Pro Mini. This is not required if using an Arduino Nano or Uno.
-* USB2DB15 Custom PCB or a breadboard to complete all the connections between the AVR and USB Host Shield.
+* A USB2DB15 custom PCB or a breadboard to complete all connections between the AVR and USB Host Shield.
 * DB15 female connector.
 
 <p align="center">
@@ -66,7 +66,7 @@ If you are building the open source version for yourself, a basic understanding 
 	</p>  	
     
   		   
-If utilizing the Custom PCB in conjunction with an Arduino Pro Mini and Mini USB Shield, a BOM is available from the repositories section within the PCB folder. 
+If using the custom PCB with an Arduino Pro Mini and USB Host Shield Mini, a BOM is available in the repository's `BOM` folder.
 
 ##### Jumper settings:
 
@@ -74,7 +74,7 @@ If utilizing the Custom PCB in conjunction with an Arduino Pro Mini and Mini USB
 - SJ2: Bridge this jumper ONLY to enable 5V protection.
 - JP2: 5V solder point (see information below regarding USB VBUS).
 
-Due to variances of Mini Pro PCB's, A4 and A5 may be in different locations. Please pay attention to this.
+Due to variations among Pro Mini PCBs, A4 and A5 may be in different locations. Please pay attention to this.
 
 <p align="center">
 <img width="680" src="https://i.imgur.com/sYRVOBI.png">
@@ -85,19 +85,19 @@ Due to variances of Mini Pro PCB's, A4 and A5 may be in different locations. Ple
 
 ### 4. Installation:
 
-Download the  <a href="https://github.com/Raphfriend/USB_Host_Shield_2.0">USB Host Shield 2.0 library</a>  and install it to the Arduino IDE. Open the INO file (RFUSB_to_DB15.ino) and program it to your AVR.  
+Download the <a href="https://github.com/Raphfriend/USB_Host_Shield_2.0">USB Host Shield 2.0 library</a> and install it in the Arduino IDE. Open the INO file (`RFUSB_to_DB15.ino`) and upload it to your AVR.
 
-If you have a USB Host Shield Mini, you will need to CUT the trace after the 2K2 resistor near the USB VBUS pin. Solder a wire from JP2 of the CUSTOM PCB to the through-hole VIA labeled '5V' as depicted in the picture below.
+If you have a USB Host Shield Mini, you will need to cut the trace after the 2.2 kΩ resistor near the USB VBUS pin. Solder a wire from JP2 on the custom PCB to the through-hole via labeled `5V`, as shown in the picture below.
 
 <p align="center">
   <img width="460" src="https://i.imgur.com/vGgNsPl.png">
 </p>
 
-This enables devices that require +5V power to function correctly, as by default the USB Host Shield Mini only supplies 3.3V to the VBUS pin of the USB connector.
+This enables devices that require +5 V power to function correctly, because the USB Host Shield Mini supplies only 3.3 V to the VBUS pin of the USB connector by default.
 
-The remainder is plug and play. 
+The remainder is plug and play.
 
-If you are not using a prefabricated PCB, please view the schematic for wiring information.
+If you are not using a prefabricated PCB, see the schematic for wiring information.
 
 #### 4.1. Arduino Pro Mini + USB Shield Mini:
 [See FLASHING.md for instructions.](FLASHING.md)
@@ -106,32 +106,61 @@ If you are not using a prefabricated PCB, please view the schematic for wiring i
 
 1. Install Arduino IDE.
 2. Mount the USB Host Shield to the Arduino Uno correctly.
-3. Connect the Arduino Uno to your PC via its USB B cable. 
-4. In the Arduino IDE navigate to "Tools" -> "Board" -> "Arduino AVR Boards" and select "Arduino Uno".
-5. In the Arduino IDE navigate to "Tools" -> "Port" and choose the Arduino Device. 
-6. In the Arduino IDE navigate to "Tools" -> "Programmer" and select "AVRISP MKII".
-7. Obtain the library path (Arduino IDE -> File -> Preference-> Settings->Sketchbook location) and drop the required library "USB_Host_Shield_20" to the library directory.
-8. Obtain the INO firmware (RFUSB_to_DB15.ino).
-9. Open the INO file with the Arduino IDE (with the Arduino Uno connected to your PC) and select Sketch -> Upload.
-10. Wait for the sketch to be uploaded as indicated in the console window at the bottom of the Arduino IDE software.
+3. Connect the Arduino Uno to your PC via its USB Type-B cable.
+4. In the Arduino IDE, navigate to "Tools" -> "Board" -> "Arduino AVR Boards" and select "Arduino Uno".
+5. In the Arduino IDE, navigate to "Tools" -> "Port" and choose the Arduino device.
+6. In the Arduino IDE, navigate to "Tools" -> "Programmer" and select "AVRISP MKII".
+7. Find the library path in Arduino IDE: "File" -> "Preferences" -> "Sketchbook location", then copy the required `USB_Host_Shield_20` library into the `libraries` directory.
+8. Open the firmware INO file (`RFUSB_to_DB15.ino`).
+9. With the Arduino Uno connected to your PC, select "Sketch" -> "Upload".
+10. Wait for the sketch to upload, as indicated in the console window at the bottom of the Arduino IDE.
 
 ### 5. Supported Controllers:
 
 [See Compatibility.md for a detailed list of supported controllers.](COMPATIBILITY.md)
 
+#### 5.1. DualShock 4 and DualSense left analog stick
+
+USB DualShock 4 and DualSense controllers can use the left analog stick as an additional digital directional input. The analog stick and physical D-pad are combined, so either input can control the DB15 directions.
+
+For these controllers, the firmware applies Hit Box-style SOCD cleaning after combining both directional sources:
+
+| Simultaneous directions | DB15 output |
+| --- | --- |
+| Left + Right | Neutral |
+| Up + Down | Up |
+
+This prevents opposite horizontal directions from reaching the game and makes vertical conflicts deterministic. The feature is enabled automatically for supported DualShock 4 and DualSense USB reports; no separate profile or user configuration is required.
+
+#### 5.2. Release mode and Serial diagnostics
+
+`RFUSB_to_DB15/BuildConfig.h` contains the following build-time setting:
+
+```cpp
+#define USB2DB15_RELEASE_MODE 1
+```
+
+Use release mode (`1`) for competitive play. It disables all firmware Serial output, preventing diagnostic messages from occupying the serial transmit buffer and delaying controller polling or DB15 updates.
+
+Use diagnostic mode (`0`) when troubleshooting a controller:
+
+```cpp
+#define USB2DB15_RELEASE_MODE 0
+```
+
+Upload the firmware again after changing the setting, then open the Arduino Serial Monitor at 115200 baud. Set the value back to `1` and upload again before competitive play.
+
 ### 6. Software Usage
 #### 6.1 Controller Profiles
-The Adapter can store profiles for up to 10 unique controller models*. Controllers of the same make and model will share the profiles.
-Each controller has 4 profiles associated with it. Should you plug in an 11th controller the system will replace the oldest controller you have set up.
-Next oldest for the 12th and so on. This may cause you to have to set up older controllers again if you resume using them.
+The adapter can store profiles for up to 10 unique controller models*. Controllers of the same make and model share profiles.
+Each controller has 4 associated profiles. If you plug in an 11th controller, the system replaces the oldest controller you have set up, then the next oldest for the 12th, and so on. This may require you to set up older controllers again when you resume using them.
 
-These can be accessed by pressing SELECT(COIN) + one of the four directions.
-Thus if you wanted the first profile you would press SELECT + UP, the Second SELECT + RIGHT, and so on.
+These can be accessed by pressing SELECT (COIN) plus one of the four directions.
+For example, press SELECT + UP for the first profile, SELECT + RIGHT for the second, and so on.
 The adapter will remember what profile you were using and automatically switch to it when you use the controller again.
 
-To change the key bindings of a profile. First change to the profile you want to setup.
-While holding SELECT for at least 3 seconds, press buttons 1 - 6 in order. Then release SELECT to lock in the binding.
-Finally release SELECT to lock in the binding.
+To change a profile's key bindings, first switch to the profile you want to set up.
+While holding SELECT for at least 3 seconds, press buttons 1–6 in order. Then release SELECT to lock in the binding.
 
 *XBox One controllers appear to the system as the same make and model and thus use the same profiles even if they are different controllers.
 
@@ -139,7 +168,7 @@ Finally release SELECT to lock in the binding.
 
 [AvramCE](https://twitter.com/avramce) has created a [3D printed case](https://www.thingiverse.com/thing:5170415) that you can print for your USB2DB15.
 
-### How it looks in real life?
+### How does it look in real life?
 
 When you put all the parts together, USB2DB15 should look like this.
 <p align="center">
@@ -160,11 +189,11 @@ If you have found USB2DB15 useful, please consider funding it and making a donat
 [![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/raph_friend)
 
 
-### Is this product available to buy? YES!
+### Is this product available to buy? Yes!
 
-We sell the USB2DB15 directly. You will receive a premium edition that is slightly different from the open-source version but has the same features.
+We sell USB2DB15 directly. You will receive a premium edition that is slightly different from the open-source version but has the same features.
 You can choose from a variety of shell color options, and you will get detailed instructions following your purchase.
-There are two versions: the standard DB15 and the CS Ver., which is targeted towards Jamma PCB consolizations. 
+There are two versions: the standard DB15 and the CS Ver., which is targeted toward JAMMA PCB consolization.
 
 
 
@@ -191,7 +220,7 @@ There are two versions: the standard DB15 and the CS Ver., which is targeted tow
   <img width="460" src="https://i.imgur.com/xEf0cEx.jpg">
 </p>
 
-### Where can I get more help, if I need it?
+### Where can I get more help if I need it?
 
 Via Arcade-Projects forum or RF Projects Discord server.
 
@@ -208,4 +237,4 @@ Via Arcade-Projects forum or RF Projects Discord server.
 
 ### LEGAL
 
-USB2DB15 or any of its maintainers are in no way associated with or endorsed by Nintendo, Sony, SNK, Microsoft, 8BitDo, Sega, Brook, Mad Catz, Nacon, Honcam, DaemonBite, Buffalo, Qanba, Razer, Retrobit, Toodles, Hori or any other company not implicitly indicated. All other brands or product names are the property of their respective holders.
+Neither USB2DB15 nor any of its maintainers is associated with or endorsed by Nintendo, Sony, SNK, Microsoft, 8BitDo, Sega, Brook, Mad Catz, Nacon, Honcam, DaemonBite, Buffalo, Qanba, Razer, Retro-Bit, Toodles, Hori, or any other company not explicitly indicated. All other brands and product names are the property of their respective holders.
