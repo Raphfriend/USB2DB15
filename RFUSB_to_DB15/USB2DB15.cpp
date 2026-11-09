@@ -97,7 +97,16 @@ void USB2DB15::GenerateOutput() {
   uint8_t button = 0;
   Controller *controller = GetActiveController();
 
-  if(!controller) return; // If there isn't a controller we are done here
+  if (!controller) {
+    // Release every DB15 output immediately when the active controller is removed.
+    if (prevDDRC || prevDDRD) {
+      DDRC = 0;
+      DDRD = 0;
+      prevDDRC = 0;
+      prevDDRD = 0;
+    }
+    return;
+  }
 
   // Setup Profile
   if(controller->GetVid() != cur_vid || controller->GetPid() != cur_pid) {

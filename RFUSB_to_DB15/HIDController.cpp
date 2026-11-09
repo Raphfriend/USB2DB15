@@ -5,6 +5,7 @@
 #include "drivers.h"
 #include "HIDController.h"
 #include "debug.h"
+#include "analog_mappings.h"
 
 /**
  * Returns if there is a controller connected and ready
@@ -12,7 +13,87 @@
  * @return If there is a controller connected and ready
  */
 bool HIDController::Connected() {
-  isReady();
+  return isReady();
+}
+
+bool HIDController::ConfigReport(uint8_t length, int16_t id) {
+  if (length > 64 || id < -1 || id > 255) return false;
+  inputReportLength = length;
+  inputReportId = id;
+  return true;
+}
+
+bool HIDController::ConfigAnalog(uint8_t x, uint8_t y, uint8_t lx, uint8_t hx,
+                                uint8_t ly, uint8_t hy, bool ix, bool iy,
+                                uint8_t reportLength, int16_t reportId) {
+  return ConfigAnalogAxes(x, y, 8, false, false, lx, hx, ly, hy, ix, iy,
+                          reportLength, reportId);
+}
+
+bool HIDController::ConfigAnalogAxes(uint8_t x, uint8_t y, uint8_t bits,
+                                    bool signedValue, bool bigEndian,
+                                    int32_t lx, int32_t hx, int32_t ly, int32_t hy,
+                                    bool ix, bool iy, uint8_t reportLength, int16_t reportId) {
+  analogEnabled = false;
+  if (bits != 8 && bits != 16) return false;
+  const uint8_t width = bits / 8;
+  const int32_t minimum = signedValue ? (bits == 8 ? -128L : -32768L) : 0L;
+  const int32_t maximum = signedValue ? (bits == 8 ? 127L : 32767L) : (bits == 8 ? 255L : 65535L);
+  if (x > 64 - width || y > 64 - width || abs((int)x - (int)y) < width || lx >= hx || ly >= hy ||
+      lx < minimum || ly < minimum || hx > maximum || hy > maximum ||
+      reportLength > 64 || reportId < -1 || reportId > 255 ||
+      (reportLength && (x + width > reportLength || y + width > reportLength))) return false;
+  analogX = x; analogY = y;
+  analogBits = bits; analogSigned = signedValue; analogBigEndian = bigEndian;
+  lowX = lx; highX = hx; lowY = ly; highY = hy;
+  invertX = ix; invertY = iy;
+  ConfigReport(reportLength, reportId);
+  analogEnabled = true;
+  return true;
+}
+
+// Assemble the integer explicitly without relying on alignment or pointer casts.
+static int32_t readAxis(const uint8_t *buf, uint8_t index, uint8_t bits,
+                        bool signedValue, bool bigEndian) {
+  if (bits == 8) return signedValue ? (int32_t)(int8_t)buf[index] : (int32_t)buf[index];
+  uint16_t value = bigEndian ? ((uint16_t)buf[index] << 8) | buf[index + 1]
+                            : ((uint16_t)buf[index + 1] << 8) | buf[index];
+  return signedValue ? (int32_t)(int16_t)value : (int32_t)value;
+}
+
+enum CardinalDirection {
+  DIRECTION_UP = 0x01,
+  DIRECTION_RIGHT = 0x02,
+  DIRECTION_DOWN = 0x04,
+  DIRECTION_LEFT = 0x08
+};
+
+static uint8_t getDirections(uint32_t state) {
+  uint8_t directions = 0;
+  if (state & (MASK_UP | MASK_UP_RIGHT | MASK_UP_LEFT)) directions |= DIRECTION_UP;
+  if (state & (MASK_RIGHT | MASK_UP_RIGHT | MASK_DOWN_RIGHT)) directions |= DIRECTION_RIGHT;
+  if (state & (MASK_DOWN | MASK_DOWN_RIGHT | MASK_DOWN_LEFT)) directions |= DIRECTION_DOWN;
+  if (state & (MASK_LEFT | MASK_UP_LEFT | MASK_DOWN_LEFT)) directions |= DIRECTION_LEFT;
+  return directions;
+}
+
+static uint32_t getDirectionState(uint8_t directions) {
+  uint32_t state = 0;
+  if (directions & DIRECTION_UP) state |= MASK_UP;
+  if (directions & DIRECTION_RIGHT) state |= MASK_RIGHT;
+  if (directions & DIRECTION_DOWN) state |= MASK_DOWN;
+  if (directions & DIRECTION_LEFT) state |= MASK_LEFT;
+  return state;
+}
+
+static uint8_t applyHitBoxSocd(uint8_t directions) {
+  if ((directions & DIRECTION_LEFT) && (directions & DIRECTION_RIGHT)) {
+    directions &= ~(DIRECTION_LEFT | DIRECTION_RIGHT);
+  }
+  if ((directions & DIRECTION_UP) && (directions & DIRECTION_DOWN)) {
+    directions &= ~DIRECTION_DOWN;
+  }
+  return directions;
 }
 
 /**
@@ -128,6 +209,10 @@ void HIDController::ConfigButton(uint8_t button_id, uint8_t index, uint8_t mask,
   buttons[button_id].value = value;
 }
 
+void HIDController::EnableHitBoxSocd(bool enabled) {
+  analogSocdEnabled = enabled;
+}
+
 /**
  * Handle any setup that needs to happen when a controller is plugged in
  *
@@ -145,6 +230,7 @@ uint8_t HIDController::OnInitSuccessful() {
   #endif
   ResetController();
   setupController(VID, PID, this);
+  setupAnalogMapping(VID, PID, this);
   return 0;
 }
 
@@ -167,6 +253,9 @@ uint8_t HIDController::OnInitSuccessful() {
  * @param buf The buffer
  */
 void HIDController::ParseHIDData(USBHID *hid, bool is_rpt_id, uint8_t len, uint8_t *buf) {
+  // Ignore unrelated reports without releasing the current gamepad state.
+  if ((inputReportLength && len != inputReportLength) ||
+      (inputReportId >= 0 && (!len || buf[0] != inputReportId))) return;
   uint8_t value = 0;
   buttonState = 0;
 
@@ -174,11 +263,30 @@ void HIDController::ParseHIDData(USBHID *hid, bool is_rpt_id, uint8_t len, uint8
   // UP is the left most bit, BUTTON_10 is right most
   for(uint8_t i = 0; i < MAX_HID_BUTTONS; i++) {
     buttonState <<= 1;  // Shift to the next bit
-    if (buttons[i].mask == 0) continue; // Skip this bit as there is no button associated with it
+    if (buttons[i].mask == 0 || buttons[i].index >= len) continue;
 
     value = buf[buttons[i].index] & buttons[i].mask;  // Get the bits we care about
     if(value == buttons[i].value) {
       buttonState |= 1;  // Set the final bit
+    }
+  }
+
+  if (analogEnabled && analogX + analogBits / 8 <= len && analogY + analogBits / 8 <= len) {
+    const int32_t x = readAxis(buf, analogX, analogBits, analogSigned, analogBigEndian);
+    const int32_t y = readAxis(buf, analogY, analogBits, analogSigned, analogBigEndian);
+    if (analogSocdEnabled) {
+      uint8_t directions = getDirections(buttonState);
+      if (x < lowX)  directions |= invertX ? DIRECTION_RIGHT : DIRECTION_LEFT;
+      if (x > highX) directions |= invertX ? DIRECTION_LEFT : DIRECTION_RIGHT;
+      if (y < lowY)  directions |= invertY ? DIRECTION_DOWN : DIRECTION_UP;
+      if (y > highY) directions |= invertY ? DIRECTION_UP : DIRECTION_DOWN;
+      buttonState &= ~MASK_DIRECTIONS;
+      buttonState |= getDirectionState(applyHitBoxSocd(directions));
+    } else {
+      if (x < lowX)  buttonState |= invertX ? MASK_RIGHT : MASK_LEFT;
+      if (x > highX) buttonState |= invertX ? MASK_LEFT : MASK_RIGHT;
+      if (y < lowY)  buttonState |= invertY ? MASK_DOWN : MASK_UP;
+      if (y > highY) buttonState |= invertY ? MASK_UP : MASK_DOWN;
     }
   }
 
@@ -196,6 +304,11 @@ void HIDController::ParseHIDData(USBHID *hid, bool is_rpt_id, uint8_t len, uint8
  * are unset and should not be used.
  */
 void HIDController::ResetController() {
+  analogEnabled = false;
+  analogSocdEnabled = false;
+  inputReportLength = 0;
+  inputReportId = -1;
+  buttonState = lastButtonState = clickState = 0;
   for(uint8_t i = 0; i < MAX_HID_BUTTONS; i++) {
     buttons[i].mask = 0;
   }

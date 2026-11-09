@@ -9,6 +9,8 @@
 #include <XBOXRECV.h>
 #include "Controller.h"
 
+class NeoGeoXboxUSB;
+
 /**
  * Wrapper for the USB Host Shield XBoxOne Controller
  *
@@ -17,9 +19,10 @@
  */
 class XBoxUSBController : public Controller {
   XBOXUSB *xbox360;
+  NeoGeoXboxUSB *neoGeo;
 
 public:
-  XBoxUSBController(XBOXUSB *p);
+  XBoxUSBController(XBOXUSB *p, NeoGeoXboxUSB *neo);
 
   bool GetButtonClick(uint8_t button);
   bool GetButtonState(uint8_t button);

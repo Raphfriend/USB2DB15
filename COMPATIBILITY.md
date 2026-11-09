@@ -6,6 +6,10 @@ This is a list of tested controllers. Please reach out to our Discord server if 
 	- Via wired connection
 	- Place controller into D-INPUT mode by holding B + START upon powering ON controller
 	- Press SELECT + DPAD UP to enable digital DPAD
+- M30 Mega Drive 2.4 GHz Controller
+	- Via the original 2.4 GHz USB receiver in XInput mode
+- NEOGEO Wireless Controller
+	- Via the original 2.4 GHz USB receiver in XInput mode
 - SFC30 (Via wired connection)
 - NES & SNES Bluetooth Receivers (Firmware v1.33) 
   - NES & SNES Bluetooth receviers tested compatible with the following controllers:
@@ -62,6 +66,7 @@ This is a list of tested controllers. Please reach out to our Discord server if 
 - HORIPAD 3 Mini
 - Hori Fighting Edge PS4 (requires USB HOST SHIELD 2.0 update)
 - HORI Wireless Controller Lite
+- HORI Fighting Stick Alpha SPF-013 (PS4 and PS5 modes)
 - Fighting Stick 3
 - Fighting Stick V3
 - Fighting Commander (PS3 mode)
@@ -122,6 +127,12 @@ This is a list of tested controllers. Please reach out to our Discord server if 
 
 ### Toodles
 - MC Cthulhu
+
+### Taito
+- Egret II Mini Controller
+
+### Victrix
+- Victrix Pro FS with Touch Pad for PS4
 
 ### Universal PCB Project
 - Universal PCB Firmware 29

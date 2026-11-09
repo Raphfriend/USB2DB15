@@ -1,3 +1,20 @@
+## [1.0] - 2026-11-09
+
+### Added
+- Added 8BitDo NEOGEO 2.4 GHz receiver support in XInput mode.
+- Added 8BitDo M30 Mega Drive 2.4 GHz receiver support in XInput mode.
+- Added Taito Egret II Mini controller support. [@kitsune](https://github.com/kitsune)
+- Added Victrix Pro FS PS4 controller identification. [@zedahmad](https://github.com/zedahmad)
+- Added HORI Fighting Stick Alpha SPF-013 support in PS4 and PS5 modes.
+- Added left analog stick directional input and Hit Box SOCD cleaning for DualShock 4 and DualSense controllers.
+
+### Changed
+- Improved low-latency input processing by removing artificial main-loop delays.
+- Released all DB15 outputs immediately when an active controller disconnects.
+- Added `USB2DB15_RELEASE_MODE` at the top of `BuildConfig.h`, included first by `RFUSB_to_DB15.ino` and shared by every firmware source file.
+- Set `USB2DB15_RELEASE_MODE` to `1` for competitive play. This disables all Serial output so serial transmission cannot block controller polling or DB15 updates.
+- Set `USB2DB15_RELEASE_MODE` to `0` in `BuildConfig.h`, upload the firmware again, then open the Serial Monitor at 115200 baud to restore diagnostic output.
+
 ## [0.14.16] - 2022-12-23
 
 ### Changed
@@ -259,4 +276,4 @@ so if there's any USB controller inserted and working, one LED color will be on,
 - Added support for HORI Real Arcad Pro - Soul Calibur VI Edition - Xbox One (requires USB HOST SHIELD 2.0 update) [@kitsune](https://github.com/kitsune)
 	- Library updated: https://github.com/Raphfriend/USB_Host_Shield_2.0
 	- USB Host Shield 2.0 files updated:
-		- XBOXONE.h
+	- XBOXONE.h

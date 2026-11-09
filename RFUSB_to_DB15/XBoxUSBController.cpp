@@ -4,6 +4,7 @@
 //
 
 #include "XBoxUSBController.h"
+#include "NeoGeoXboxUSB.h"
 #include "device_descriptor.h"
 
 /**
@@ -11,8 +12,9 @@
  *
  * @param p Pointer to the XBoxUSB Controller to Wrap
  */
-XBoxUSBController::XBoxUSBController(XBOXUSB *p) {
+XBoxUSBController::XBoxUSBController(XBOXUSB *p, NeoGeoXboxUSB *neo) {
   xbox360 = p;
+  neoGeo = neo;
 }
 
 /**
@@ -34,6 +36,26 @@ bool XBoxUSBController::GetButtonClick(uint8_t button) {
   // Frank_fjs 9/10/2020
   if(!GetButtonState(button)) {
     return false;
+  }
+  if (neoGeo && neoGeo->isReady()) {
+    switch(button) {
+      case BUTTON_UP: return neoGeo->getButtonClick(UP);
+      case BUTTON_DOWN: return neoGeo->getButtonClick(DOWN);
+      case BUTTON_LEFT: return neoGeo->getButtonClick(LEFT);
+      case BUTTON_RIGHT: return neoGeo->getButtonClick(RIGHT);
+      case BUTTON_START: return neoGeo->getButtonClick(START);
+      case BUTTON_COIN: return neoGeo->getButtonClick(BACK);
+      case BUTTON_1: return neoGeo->getButtonClick(A);
+      case BUTTON_2: return neoGeo->getButtonClick(B);
+      case BUTTON_3: return neoGeo->getButtonClick(R2);
+      case BUTTON_4: return neoGeo->getButtonClick(X);
+      case BUTTON_5: return neoGeo->getButtonClick(Y);
+      case BUTTON_6: return neoGeo->getButtonClick(R1);
+      case BUTTON_7: return neoGeo->getButtonClick(L1);
+      case BUTTON_8: return neoGeo->getButtonClick(L2);
+      case BUTTON_9: return neoGeo->getButtonClick(R3);
+      case BUTTON_10: return neoGeo->getButtonClick(L3);
+    }
   }
   switch(button) {
     case BUTTON_UP:
@@ -82,6 +104,26 @@ bool XBoxUSBController::GetButtonClick(uint8_t button) {
  * @return If the requested button is pressed
  */
 bool XBoxUSBController::GetButtonState(uint8_t button) {
+  if (neoGeo && neoGeo->isReady()) {
+    switch(button) {
+      case BUTTON_UP: return neoGeo->getButtonPress(UP);
+      case BUTTON_DOWN: return neoGeo->getButtonPress(DOWN);
+      case BUTTON_LEFT: return neoGeo->getButtonPress(LEFT);
+      case BUTTON_RIGHT: return neoGeo->getButtonPress(RIGHT);
+      case BUTTON_START: return neoGeo->getButtonPress(START);
+      case BUTTON_COIN: return neoGeo->getButtonPress(BACK);
+      case BUTTON_1: return neoGeo->getButtonPress(A);
+      case BUTTON_2: return neoGeo->getButtonPress(B);
+      case BUTTON_3: return neoGeo->getButtonPress(R2);
+      case BUTTON_4: return neoGeo->getButtonPress(X);
+      case BUTTON_5: return neoGeo->getButtonPress(Y);
+      case BUTTON_6: return neoGeo->getButtonPress(R1);
+      case BUTTON_7: return neoGeo->getButtonPress(L1);
+      case BUTTON_8: return neoGeo->getButtonPress(L2);
+      case BUTTON_9: return neoGeo->getButtonPress(R3);
+      case BUTTON_10: return neoGeo->getButtonPress(L3);
+    }
+  }
   switch(button) {
     case BUTTON_UP:
       return xbox360->getButtonPress(UP) || xbox360->getAnalogHat(LeftHatY) <= 32767 && xbox360->getAnalogHat(LeftHatY) >= 16384; 
@@ -130,11 +172,8 @@ bool XBoxUSBController::GetButtonState(uint8_t button) {
  * @return true if an XBoxUSB controller is connected to the system
  */
 bool XBoxUSBController::Connected() {
-  if (xbox360->Xbox360Connected) {
-    xbox360->setRumbleOff();
-    return true;
-  }
-  return false;
+  // A connection check must not send a control request on every loop.
+  return (neoGeo && neoGeo->isReady()) || xbox360->Xbox360Connected;
 }
 
 /**
@@ -147,6 +186,7 @@ bool XBoxUSBController::Connected() {
  * @return The Controller's Vendor ID
  */
 uint16_t XBoxUSBController::GetVid() {
+  if (neoGeo && neoGeo->isReady()) return 0x2DC8;
   return XBOX_VID;
 }
 
@@ -160,5 +200,6 @@ uint16_t XBoxUSBController::GetVid() {
  * @return The Controller's Product ID
  */
 uint16_t XBoxUSBController::GetPid() {
+  if (neoGeo && neoGeo->isReady()) return 0x3106;
   return XBOX_WIRED_PID;
 }
