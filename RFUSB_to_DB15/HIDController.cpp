@@ -5,7 +5,6 @@
 #include "drivers.h"
 #include "HIDController.h"
 #include "debug.h"
-#include "analog_mappings.h"
 
 /**
  * Returns if there is a controller connected and ready
@@ -208,7 +207,6 @@ uint8_t HIDController::OnInitSuccessful() {
   #endif
   ResetController();
   setupController(VID, PID, this);
-  setupAnalogMapping(VID, PID, this);
   return 0;
 }
 

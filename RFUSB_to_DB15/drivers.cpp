@@ -184,12 +184,14 @@ void setupController(uint16_t vid, uint16_t pid, HIDController *controller) {
           break;      
         case PID_SONY_PS5_NA:
           setupPS5(controller);
+          controller->ConfigAnalogStick(1, 2, 96, 159, 96, 159, 64, 1);
           break;
         case PID_SONY_PS4_JP:
         case PID_SONY_PS4_NA:
         case PID_SONY_PS4_ADAPTER:
         default:
           setupPS4(controller);
+          controller->ConfigAnalogStick(1, 2, 96, 159, 96, 159, 64, 1);
           break;
       }
       break;
