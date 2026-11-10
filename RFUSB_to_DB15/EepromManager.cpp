@@ -6,7 +6,7 @@
 
 #include "device_descriptor.h"
 #include "EepromManager.h"
-#include "debug.h"
+#include "BuildConfig.h"
 
 EepromManager::EepromManager() {
   if(EEPROM.read(0) != EEPROM_BYTE_0 ||

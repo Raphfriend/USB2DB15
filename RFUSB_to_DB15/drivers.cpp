@@ -3,7 +3,7 @@
 //
 
 #include "drivers.h"
-#include "debug.h"
+#include "BuildConfig.h"
 
 /**
  * Looks up a controller based on VID and PID and configures a HIDController to

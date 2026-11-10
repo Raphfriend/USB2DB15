@@ -4,7 +4,7 @@
 
 #include "USB2DB15.h"
 #include "LED.h"
-#include "debug.h"
+#include "BuildConfig.h"
 
 /**
  * A debug function to print out which buttons are being press.

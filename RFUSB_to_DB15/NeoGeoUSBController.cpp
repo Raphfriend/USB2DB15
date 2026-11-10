@@ -3,7 +3,7 @@
 // Modified by Frank_fjs on 10/9/2020.
 //
 
-#include "NeoGeoXboxUSB.h"
+#include "NeoGeoUSBController.h"
 #include "device_descriptor.h"
 
 /**
@@ -53,6 +53,7 @@ bool NeoGeoUSBController::GetButtonClick(uint8_t button) {
     case BUTTON_8: return neoGeo->getButtonClick(L2);
     case BUTTON_9: return neoGeo->getButtonClick(R3);
     case BUTTON_10: return neoGeo->getButtonClick(L3);
+  }
 
   return false;
 }
@@ -128,5 +129,5 @@ uint16_t NeoGeoUSBController::GetVid() {
  * @return The Controller's Product ID
  */
 uint16_t NeoGeoUSBController::GetPid() {
-  retrun NEOGEO_PID;
+  return NEOGEO_PID;
 }

@@ -8,8 +8,8 @@
 #include "Controller.h"
 #include "NeoGeoXboxUSB.h"
 
-#define XBOX_VID    0x2DC8
-#define XBOX_PID    0x3106
+#define NEOGEO_VID 0x2DC8
+#define NEOGEO_PID 0x3106
 
 /**
  * Wrapper for the USB Host Shield XBoxOne Controller
@@ -21,7 +21,7 @@ class NeoGeoUSBController : public Controller {
     NeoGeoXboxUSB *neoGeo;
 
 public:
-    NeoGeoUSBController(XBOXUSB *p, NeoGeoXboxUSB *neo);
+    NeoGeoUSBController(NeoGeoXboxUSB *neo);
 
     bool GetButtonClick(uint8_t button);
     bool GetButtonState(uint8_t button);

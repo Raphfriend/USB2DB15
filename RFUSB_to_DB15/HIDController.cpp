@@ -4,7 +4,7 @@
 
 #include "drivers.h"
 #include "HIDController.h"
-#include "debug.h"
+#include "BuildConfig.h"
 
 /**
  * Returns if there is a controller connected and ready
@@ -159,7 +159,8 @@ uint16_t HIDController::GetPid() {
  * @param index The index in the usb packet buffer that the button is located at
  * @param mask The bit mask to target the bits that make up the button
  */
-void HIDController::ConfigButton(uint8_t button_id, uint8_t index, uint8_t mask) {
+// Keep this setup helper shared by controller layouts. It only runs at device initialization.
+void __attribute__((noinline)) HIDController::ConfigButton(uint8_t button_id, uint8_t index, uint8_t mask) {
   ConfigButton(button_id, index, mask, mask);
 }
 
@@ -173,7 +174,7 @@ void HIDController::ConfigButton(uint8_t button_id, uint8_t index, uint8_t mask)
  * @param mask The bit mask to target the bits that make up the button
  * @param value The value the byte should equal after the bit mask is applied
  */
-void HIDController::ConfigButton(uint8_t button_id, uint8_t index, uint8_t mask, uint8_t value) {
+void __attribute__((noinline)) HIDController::ConfigButton(uint8_t button_id, uint8_t index, uint8_t mask, uint8_t value) {
   if (button_id >= MAX_HID_BUTTONS) return;
   #ifndef REDUCED_SERIAL_OUTPUT
   Serial.print("Button ID: ");
@@ -229,9 +230,10 @@ uint8_t HIDController::OnInitSuccessful() {
  * @param buf The buffer
  */
 void HIDController::ParseHIDData(USBHID *hid, bool is_rpt_id, uint8_t len, uint8_t *buf) {
-  // Ignore unrelated reports without releasing the current gamepad state.
-  if ((inputReportLength && len != inputReportLength) ||
-      (inputReportId >= 0 && (!len || buf[0] != inputReportId))) return;
+  // Ignore reports that do not match the configured HID input report.
+  // Keep the last decoded controller state unchanged.
+  if (inputReportLength != 0 && len != inputReportLength) return;
+  if (inputReportId >= 0 && (len == 0 || buf[0] != inputReportId)) return;
   uint8_t value = 0;
   buttonState = 0;
 
