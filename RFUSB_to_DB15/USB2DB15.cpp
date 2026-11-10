@@ -78,8 +78,8 @@ void debugOutput(uint8_t ddrc, uint8_t ddrd) {
  * @param xbox The XBox 360 controller to use
  * @param hid  The HID controller to use
  */
-USB2DB15::USB2DB15(PS3Controller &ps3, XBoxOneController &xbox, XBoxUSBController &xbox360, HIDController &hid, EepromManager &eeprom) :
-  ps3(ps3), xbox(xbox), xbox360(xbox360), hid(hid), eeprom(eeprom) { };
+USB2DB15::USB2DB15(PS3Controller &ps3, XBoxOneController &xbox, XBoxUSBController &xbox360, HIDController &hid, NeoGeoUSBController &neogeo, EepromManager &eeprom) :
+  ps3(ps3), xbox(xbox), xbox360(xbox360), hid(hid), neogeo(neogeo), eeprom(eeprom) { };
  
 /**
  * Outputs the keys pressed on the controller to the DB15 connector
@@ -152,6 +152,8 @@ void USB2DB15::FactoryReset() {
 Controller* USB2DB15::GetActiveController() {
   if (ps3.Connected()) { // PS3
     return &ps3;
+  } else if (neogeo.Connected()) { // NeoGeo Xbox USB
+    return &neogeo;
   } else if (xbox.Connected()) { // XboxOne
     return &xbox;
   } else if (xbox360.Connected()) { // Xbox360
