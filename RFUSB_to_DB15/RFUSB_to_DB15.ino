@@ -69,8 +69,8 @@ EepromManager Eeprom;
 HIDController HIDCon(&Usb);
 PS3Controller PS3Con(&PS3);
 XBoxOneController XBoxCon(&Xbox);
-XBoxUSBController XBox360Con(&Xbox360, &NeoGeo);
-USB2DB15 Usb2db15(PS3Con, XBoxCon, XBox360Con, HIDCon, Eeprom);
+XBoxUSBController XBox360Con(&Xbox360);
+USB2DB15 Usb2db15(PS3Con, XBoxCon, XBox360Con, HIDCon, NeoGeo, Eeprom);
 
 uint8_t resetLock = 0;
 
