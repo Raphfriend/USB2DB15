@@ -15,20 +15,44 @@
  */
 #ifndef RELEASE_MODE
 void debugOutput(uint8_t ddrc, uint8_t ddrd) {
-  Serial.print(F("Output: "));
-  if (ddrc & DDRC_UP) Serial.print(F("UP "));
-  if (ddrd & DDRD_DOWN) Serial.print(F("DOWN "));
-  if (ddrc & DDRC_LEFT) Serial.print(F("LEFT "));
-  if (ddrd & DDRD_RIGHT) Serial.print(F("RIGHT "));
-  if (ddrc & DDRC_START) Serial.print(F("START "));
-  if (ddrd & DDRD_COIN) Serial.print(F("SELECT "));
-  if (ddrc & DDRC_1) Serial.print(F("A "));
-  if (ddrd & DDRD_2) Serial.print(F("B "));
-  if (ddrc & DDRC_3) Serial.print(F("C "));
-  if (ddrd & DDRD_4) Serial.print(F("X "));
-  if (ddrd & DDRD_5) Serial.print(F("Y "));
-  if (ddrc & DDRC_6) Serial.print(F("Z "));
-  Serial.println();
+  Serial.print("Output: ");
+  if (ddrc & DDRC_UP) {
+    Serial.print("UP ");
+  }
+  if (ddrd & DDRD_DOWN) {
+    Serial.print("DOWN ");
+  }
+  if (ddrc & DDRC_LEFT) {
+    Serial.print("LEFT ");
+  }
+  if (ddrd & DDRD_RIGHT) {
+    Serial.print("RIGHT ");
+  }
+  if (ddrc & DDRC_START) {
+    Serial.print("START ");
+  }
+  if (ddrd & DDRD_COIN) {
+    Serial.print("SELECT ");
+  }
+  if (ddrc & DDRC_1) {
+    Serial.print("A ");
+  }
+  if (ddrd & DDRD_2) {
+    Serial.print("B ");
+  }
+  if (ddrc & DDRC_3) {
+    Serial.print("C ");
+  }
+  if (ddrd & DDRD_4) {
+    Serial.print("X ");
+  }
+  if (ddrd & DDRD_5) {
+    Serial.print("Y ");
+  }
+  if (ddrc & DDRC_6) {
+    Serial.print("Z ");
+  }
+  Serial.println(" ");
 }
 #endif
 

@@ -245,10 +245,14 @@ void setupController(uint16_t vid, uint16_t pid, HIDController *controller) {
  * @param controller The HIDController that will be configured
  */
 void generateDPad(uint8_t index, HIDController *controller) {
-  // Direction IDs and hat values both run clockwise from 0 to 7.
-  for (uint8_t direction = BUTTON_UP; direction <= BUTTON_UP_LEFT; ++direction) {
-    controller->ConfigButton(direction, index, DPAD_MASK, direction);
-  }
+  controller->ConfigButton(BUTTON_UP, index, DPAD_MASK, DPAD_UP);
+  controller->ConfigButton(BUTTON_UP_RIGHT, index, DPAD_MASK, DPAD_UP_RIGHT);
+  controller->ConfigButton(BUTTON_RIGHT, index, DPAD_MASK, DPAD_RIGHT);
+  controller->ConfigButton(BUTTON_DOWN_RIGHT, index, DPAD_MASK, DPAD_DOWN_RIGHT);
+  controller->ConfigButton(BUTTON_DOWN, index, DPAD_MASK, DPAD_DOWN);
+  controller->ConfigButton(BUTTON_DOWN_LEFT, index, DPAD_MASK, DPAD_DOWN_LEFT);
+  controller->ConfigButton(BUTTON_LEFT, index, DPAD_MASK, DPAD_LEFT);
+  controller->ConfigButton(BUTTON_UP_LEFT, index, DPAD_MASK, DPAD_UP_LEFT);
 }
 
 /**************************
