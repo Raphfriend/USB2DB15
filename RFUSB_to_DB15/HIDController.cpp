@@ -278,7 +278,7 @@ void HIDController::ParseHIDData(USBHID *hid, bool is_rpt_id, uint8_t len, uint8
   // UP is the left most bit, BUTTON_10 is right most
   for(uint8_t i = 0; i < MAX_HID_BUTTONS; i++) {
     buttonState <<= 1;  // Shift to the next bit
-    if (buttons[i].mask == 0 || buttons[i].index >= len) continue;
+    if (buttons[i].mask == 0) continue; // Skip this bit as there is no button associated with it
 
     value = buf[buttons[i].index] & buttons[i].mask;  // Get the bits we care about
     if(value == buttons[i].value) {
