@@ -7,6 +7,17 @@
 #include "device_descriptor.h"
 #include "EepromManager.h"
 #include "BuildConfig.h"
+#include "drivers.h"
+
+// Profile blocks created before the loop initialization fix may contain
+// incomplete data. Migrate only the affected Hori Alpha blocks once.
+static const uint8_t HORI_ALPHA_PROFILE_MARKER = 0xA6;
+
+static bool isHoriAlpha(uint16_t vid, uint16_t pid) {
+  return vid == VID_HORI &&
+         (pid == PID_HORI_FIGHTING_STICK_ALPHA_PS4 ||
+          pid == PID_HORI_FIGHTING_STICK_ALPHA_PS5);
+}
 
 EepromManager::EepromManager() {
   if(EEPROM.read(0) != EEPROM_BYTE_0 ||
@@ -64,7 +75,7 @@ void EepromManager::LoadProfile(uint8_t num, Profile &profile) {
   int start_addr = GetProfileStartAddr() + (num * PROFILE_SIZE);
   if (num >= MAX_PROFILES) return;
 
-  for(uint8_t i;i < NUM_BUTTON_BINDINGS; i++) {
+  for(uint8_t i = 0; i < NUM_BUTTON_BINDINGS; i++) {
     profile.bindings[i] = EEPROM.read(start_addr + i);
   }
 }
@@ -73,7 +84,7 @@ void EepromManager::SaveProfile(uint8_t num, Profile &profile) {
   int start_addr = GetProfileStartAddr() + (num * PROFILE_SIZE);
   if (num >= MAX_PROFILES) return;
 
-  for(uint8_t i;i < NUM_BUTTON_BINDINGS; i++) {
+  for(uint8_t i = 0; i < NUM_BUTTON_BINDINGS; i++) {
     EEPROM.update(start_addr + i, profile.bindings[i]);
   }
 }
@@ -90,16 +101,17 @@ void EepromManager::SetCurrentController(uint16_t vid, uint16_t pid) {
       #endif
       found = 1;
       cur_profile_block = i;
+      if (isHoriAlpha(vid, pid) && EEPROM.read(addr + 5) != HORI_ALPHA_PROFILE_MARKER) {
+        EEPROM.update(addr + CURRENT_PROFILE_ADDR, 0);
+        GenerateInitialProfiles();
+        EEPROM.update(addr + 5, HORI_ALPHA_PROFILE_MARKER);
+      }
       break;
     }
     addr += PROFILE_SIZE;
   }
   if(!found) {
     cur_profile_block = EEPROM.read(NEXT_PROFILE_BLOCK_ADDR);
-    #ifndef RELEASE_MODE
-    Serial.print("Could Not find Controller. Generating Profile Block:");
-    Serial.println(cur_profile_block);
-    #endif
     // Write the vid and pid to EEPROM
     Write16Bit(GetProfileBlockStartAddr(), vid);
     Write16Bit(GetProfileBlockStartAddr() + 2, pid);
@@ -107,6 +119,9 @@ void EepromManager::SetCurrentController(uint16_t vid, uint16_t pid) {
     EEPROM.update(GetProfileBlockStartAddr() + 4, 0);
     // Generate Default profiles
     GenerateInitialProfiles();
+    if (isHoriAlpha(vid, pid)) {
+      EEPROM.update(GetProfileBlockStartAddr() + 5, HORI_ALPHA_PROFILE_MARKER);
+    }
     // Update Next Profile Block.  Mod block by 10 to loop around
     EEPROM.update(NEXT_PROFILE_BLOCK_ADDR, (cur_profile_block + 1) % 10);
   }

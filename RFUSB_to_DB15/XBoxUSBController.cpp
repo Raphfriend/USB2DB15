@@ -132,11 +132,7 @@ bool XBoxUSBController::GetButtonState(uint8_t button) {
  * @return true if an XBoxUSB controller is connected to the system
  */
 bool XBoxUSBController::Connected() {
-  if (xbox360->Xbox360Connected) {
-    xbox360->setRumbleOff();
-    return true;
-  }
-  return false;
+  return xbox360->Xbox360Connected;
 }
 
 /**

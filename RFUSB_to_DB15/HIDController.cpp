@@ -12,6 +12,7 @@
  * @return If there is a controller connected and ready
  */
 bool HIDController::Connected() {
+  if (horiDirect) return bAddress != 0;
   return isReady();
 }
 
@@ -176,7 +177,7 @@ void __attribute__((noinline)) HIDController::ConfigButton(uint8_t button_id, ui
  */
 void __attribute__((noinline)) HIDController::ConfigButton(uint8_t button_id, uint8_t index, uint8_t mask, uint8_t value) {
   if (button_id >= MAX_HID_BUTTONS) return;
-  #ifndef REDUCED_SERIAL_OUTPUT
+  #if defined(USB2DB15_VERBOSE_CONFIG)
   Serial.print("Button ID: ");
   Serial.print(button_id, DEC);
   Serial.print(" Index: ");
@@ -203,12 +204,48 @@ void __attribute__((noinline)) HIDController::ConfigButton(uint8_t button_id, ui
  * @return error number, zero for no error
  */
 uint8_t HIDController::OnInitSuccessful() {
-  #ifndef RELEASE_MODE
+  #if defined(USB2DB15_VERBOSE_CONFIG)
   Serial.println("Detected HID device. ");
   #endif
   ResetController();
+  horiDirect = (VID == VID_HORI &&
+                (PID == PID_HORI_FIGHTING_STICK_ALPHA_PS4 ||
+                 PID == PID_HORI_FIGHTING_STICK_ALPHA_PS5));
+  if (horiDirect) {
+    epInfo[1].epAddr = 4;
+    epInfo[1].maxPktSize = 64;
+    epInfo[1].bmSndToggle = 0;
+    epInfo[1].bmRcvToggle = 0;
+    epInfo[1].bmNakPower = USB_NAK_NOWAIT;
+    pUsb->setEpInfoEntry(bAddress, 2, epInfo);
+
+    // The SPF-013 starts reporting on EP84 after its interface 3 report
+    // descriptor has been requested. The standalone Hori test performs this
+    // request before polling, so mirror that sequence here.
+    uint8_t descriptor[64];
+    pUsb->ctrlReq(bAddress, 0, 0x81, 0x06, 0x00, 0x22,
+                  3, 229, sizeof(descriptor), descriptor, nullptr);
+  }
   setupController(VID, PID, this);
   return 0;
+}
+
+uint8_t HIDController::Poll() {
+  if (!horiDirect) return HIDUniversal::Poll();
+  if (!bAddress) return 0;
+
+  static uint32_t nextRead = 0;
+  uint32_t now = millis();
+  if ((int32_t)(now - nextRead) < 0) return 0;
+  nextRead = now + 6;
+
+  uint8_t report[64];
+  uint16_t length = sizeof(report);
+  uint8_t result = pUsb->inTransfer(bAddress, 4, &length, report);
+  if (result == 0 && length >= 12) {
+    ParseHIDData(nullptr, false, (uint8_t)length, report);
+  }
+  return result;
 }
 
 /**

@@ -15,55 +15,20 @@
  */
 #ifndef RELEASE_MODE
 void debugOutput(uint8_t ddrc, uint8_t ddrd) {
-  Serial.print("Output: ");
-  if (ddrc & DDRC_UP) {
-    Serial.print("UP ");
-  }
-
-  if (ddrd & DDRD_DOWN) {
-    Serial.print("DOWN ");
-  }
-
-  if (ddrc & DDRC_LEFT) {
-    Serial.print("LEFT ");
-  }
-
-  if (ddrd & DDRD_RIGHT) {
-    Serial.print("RIGHT ");
-  }
-
-  if (ddrc & DDRC_START) {
-    Serial.print("START ");
-  }
-
-  if (ddrd & DDRD_COIN) {
-    Serial.print("SELECT ");
-  }
-
-  if (ddrc & DDRC_1) {
-    Serial.print("A ");
-  }
-
-  if (ddrd & DDRD_2) {
-    Serial.print("B ");
-  }
-
-  if (ddrc & DDRC_3) {
-    Serial.print("C ");
-  }
-
-  if (ddrd & DDRD_4) {
-    Serial.print("X ");
-  }
-
-  if (ddrd & DDRD_5) {
-    Serial.print("Y ");
-  }
-
-  if (ddrc & DDRC_6) {
-    Serial.print("Z ");
-  }
-  Serial.println(" ");
+  Serial.print(F("Output: "));
+  if (ddrc & DDRC_UP) Serial.print(F("UP "));
+  if (ddrd & DDRD_DOWN) Serial.print(F("DOWN "));
+  if (ddrc & DDRC_LEFT) Serial.print(F("LEFT "));
+  if (ddrd & DDRD_RIGHT) Serial.print(F("RIGHT "));
+  if (ddrc & DDRC_START) Serial.print(F("START "));
+  if (ddrd & DDRD_COIN) Serial.print(F("SELECT "));
+  if (ddrc & DDRC_1) Serial.print(F("A "));
+  if (ddrd & DDRD_2) Serial.print(F("B "));
+  if (ddrc & DDRC_3) Serial.print(F("C "));
+  if (ddrd & DDRD_4) Serial.print(F("X "));
+  if (ddrd & DDRD_5) Serial.print(F("Y "));
+  if (ddrc & DDRC_6) Serial.print(F("Z "));
+  Serial.println();
 }
 #endif
 
@@ -94,7 +59,6 @@ USB2DB15::USB2DB15(PS3Controller &ps3, XBoxOneController &xbox, XBoxUSBControlle
 void USB2DB15::GenerateOutput() {
   uint8_t ddrc = 0;
   uint8_t ddrd = 0;
-  uint8_t button = 0;
   Controller *controller = GetActiveController();
 
   if (!controller) {
@@ -125,7 +89,7 @@ void USB2DB15::GenerateOutput() {
       select_press_time = millis();
     } else if ((millis() - select_press_time) >= SELECT_HOLD_DURATION && input_mode != PROFILE_BIND_MODE) {
       #ifndef RELEASE_MODE
-      Serial.println("Bind Mode");
+      Serial.println(F("Bind Mode"));
       #endif
       input_mode = PROFILE_BIND_MODE; 
       cur_key = PROFILE_BUTTON_1;
@@ -258,10 +222,9 @@ uint8_t USB2DB15::GetDDRD(Controller &controller) {
  * @param controller The controller pull raw input from
  */
 void USB2DB15::HandleNormalMode(uint8_t ddrc, uint8_t ddrd, Controller &controller) {
-  if (ddrc == prevDDRC && ddrd == prevDDRD) return;
   // Check Special Button Combinations
   // Change Profile  SELECT + DIRECTION
-  if (ddrd & DDRD_COIN) {
+  if ((ddrd & DDRD_COIN) && (ddrc != prevDDRC || ddrd != prevDDRD)) {
     for(uint8_t i = 0; i < 4; i++) {
       if(controller.GetButtonState(profile.bindings[PROFILE_BUTTON_UP + i])) {
         SetProfile(controller, i);
@@ -269,6 +232,7 @@ void USB2DB15::HandleNormalMode(uint8_t ddrc, uint8_t ddrd, Controller &controll
       }
     }
   }
+  if (ddrc == prevDDRC && ddrd == prevDDRD) return;
   // Output
   DDRC = ddrc;
   DDRD = ddrd;
@@ -290,9 +254,6 @@ void USB2DB15::HandleNormalMode(uint8_t ddrc, uint8_t ddrd, Controller &controll
 void USB2DB15::HandleProfileBindMode(uint8_t ddrc, uint8_t ddrd, Controller &controller) {
   // End Mode if SELECT/COIN is released
   if(!(ddrd & DDRD_COIN)) {
-    #ifndef RELEASE_MODE
-    Serial.println("Normal Mode");
-    #endif
     if (cur_key > PROFILE_BUTTON_1) {
       for(;cur_key < NUM_BUTTON_BINDINGS; cur_key++) {
         profile.bindings[cur_key] = BUTTON_NULL;
@@ -329,7 +290,7 @@ void USB2DB15::SetProfile(Controller &controller, uint8_t profile_num) {
   if(profile_num > MAX_PROFILES) return;
 
   #ifndef RELEASE_MODE
-  Serial.print("Using Profile: ");
+  Serial.print(F("Using Profile: "));
   Serial.println(profile_num);
   #endif
   eeprom.SaveCurrentProfile(profile_num);

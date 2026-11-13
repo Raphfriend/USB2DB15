@@ -78,7 +78,6 @@ uint8_t resetLock = 0;
 void setup() {
   #ifndef RELEASE_MODE
   Serial.begin(115200);
-  while (!Serial);
   #endif
   if (Usb.Init() == -1) {
     #ifndef RELEASE_MODE
@@ -95,9 +94,6 @@ void loop() {
   if (analogRead(ANALOG_BUTTON_PIN) > 800) {
     if(!resetLock) {
       LED::Blink(3, LED::BLINK_RATE_RESET);
-      #ifndef RELEASE_MODE
-      Serial.println("Resetting");
-      #endif
       Usb2db15.FactoryReset();
       resetLock = 1;
     }

@@ -55,12 +55,13 @@ class HIDController : public HIDUniversal, public Controller {
   uint8_t analogLowX, analogHighX, analogLowY, analogHighY;
   uint8_t inputReportLength;
   int16_t inputReportId;
+  bool horiDirect;
 
 public:
   HIDController(USB *usb) : HIDUniversal(usb), Controller(),
     buttonState(0), lastButtonState(0), clickState(0), analogEnabled(false),
     analogX(0), analogY(0), analogLowX(0), analogHighX(0),
-    analogLowY(0), analogHighY(0), inputReportLength(0), inputReportId(-1) {
+    analogLowY(0), analogHighY(0), inputReportLength(0), inputReportId(-1), horiDirect(false) {
     ResetController();
   }
 
@@ -79,6 +80,7 @@ public:
 
   uint16_t GetVid();
   uint16_t GetPid();
+  uint8_t Poll() override;
 protected:
   uint8_t OnInitSuccessful();
   void ParseHIDData(USBHID *hid, bool is_rpt_id, uint8_t len, uint8_t *buf);

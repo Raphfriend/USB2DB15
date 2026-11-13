@@ -1,8 +1,5 @@
 #include "M30XboxUSB.h"
 
-static const uint16_t M30_RECEIVER_VENDOR_ID = 0x045E;
-static const uint16_t M30_RECEIVER_PRODUCT_ID = 0x028E;
-
 M30XboxUSB::M30XboxUSB(USB *usb) : XBOXUSB(usb), probing(false),
   probeDeadline(0), nextProbe(0) {}
 
@@ -13,11 +10,10 @@ uint8_t M30XboxUSB::Init(uint8_t parent, uint8_t port, bool lowspeed) {
 
   // The M30 shares the wired Xbox 360 VID/PID. Probe input first so a
   // controller that already reports data stays on the original path.
-  USB_DEVICE_DESCRIPTOR descriptor;
-  if (pUsb->getDevDescr(bAddress, 0, sizeof(descriptor),
-                        reinterpret_cast<uint8_t*>(&descriptor)) == 0 &&
-      descriptor.idVendor == M30_RECEIVER_VENDOR_ID &&
-      descriptor.idProduct == M30_RECEIVER_PRODUCT_ID) {
+  uint8_t descriptor[18];
+  if (pUsb->getDevDescr(bAddress, 0, sizeof(descriptor), descriptor) == 0 &&
+      descriptor[8] == 0x5E && descriptor[9] == 0x04 &&
+      descriptor[10] == 0x8E && descriptor[11] == 0x02) {
     probing = true;
     nextProbe = millis();
     probeDeadline = millis() + 750;
@@ -28,6 +24,28 @@ uint8_t M30XboxUSB::Init(uint8_t parent, uint8_t port, bool lowspeed) {
 uint8_t M30XboxUSB::Release() {
   probing = false;
   return XBOXUSB::Release();
+}
+
+uint8_t M30XboxUSB::Poll() {
+  if (!probing) return XBOXUSB::Poll();
+
+  if ((long)(millis() - nextProbe) >= 0) {
+    nextProbe = millis() + 4;
+    uint8_t buffer[32];
+    uint16_t length = sizeof(buffer);
+    const uint8_t result = pUsb->inTransfer(bAddress,
+      epInfo[XBOX_INPUT_PIPE].epAddr, &length, buffer);
+    if (result == 0 && length != 0) {
+      probing = false;
+      return 0;
+    }
+  }
+
+  if ((long)(millis() - probeDeadline) >= 0) {
+    probing = false;
+    SendM30Start();
+  }
+  return 0;
 }
 
 void M30XboxUSB::SendM30Start() {
@@ -43,27 +61,4 @@ void M30XboxUSB::SendM30Start() {
                           3, commands[i])) return;
     if (i == 1) delay(8);
   }
-}
-
-uint8_t M30XboxUSB::Poll() {
-  if (!probing) return XBOXUSB::Poll();
-
-  if ((long)(millis() - nextProbe) >= 0) {
-    nextProbe = millis() + 4;
-    uint8_t buffer[32];
-    uint16_t length = sizeof(buffer);
-    const uint8_t result = pUsb->inTransfer(bAddress,
-      epInfo[XBOX_INPUT_PIPE].epAddr, &length, buffer);
-    if (result == 0 && length != 0) {
-      probing = false;
-      // The probe consumed one report; the base driver reads the next one.
-      return 0;
-    }
-  }
-
-  if ((long)(millis() - probeDeadline) >= 0) {
-    probing = false;
-    SendM30Start();
-  }
-  return 0;
 }

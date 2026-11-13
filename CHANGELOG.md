@@ -3,6 +3,7 @@
 ### Added
 - Added 8BitDo NEOGEO 2.4 GHz receiver support in XInput mode.
 - Added 8BitDo M30 Mega Drive 2.4 GHz receiver support in XInput mode.
+- Confirmed 8BitDo M30 and NEOGEO support through both their original USB receivers and wired USB connections.
 - Added Taito Egret II Mini controller support. [@kitsune](https://github.com/kitsune)
 - Added Victrix Pro FS PS4 controller identification. [@zedahmad](https://github.com/zedahmad)
 - Added HORI Fighting Stick Alpha SPF-013 support in PS4 and PS5 modes.

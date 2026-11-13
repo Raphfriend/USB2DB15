@@ -7,9 +7,9 @@ This is a list of tested controllers. Please reach out to our Discord server if 
 	- Place controller into D-INPUT mode by holding B + START upon powering ON controller
 	- Press SELECT + DPAD UP to enable digital DPAD
 - M30 Mega Drive 2.4 GHz Controller
-	- Via the original 2.4 GHz USB receiver in XInput mode
+	- Via the original 2.4 GHz USB receiver in XInput mode or a wired USB connection
 - NEOGEO Wireless Controller
-	- Via the original 2.4 GHz USB receiver in XInput mode
+	- Via the original 2.4 GHz USB receiver in XInput mode or a wired USB connection
 - SFC30 (Via wired connection)
 - NES & SNES Bluetooth Receivers (Firmware v1.33) 
   - NES & SNES Bluetooth receviers tested compatible with the following controllers:

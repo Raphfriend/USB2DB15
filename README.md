@@ -28,6 +28,8 @@ The USB2DB15 adapter is an open-source device based on an AVR microcontroller. I
 
 We are using a modified USB Host Shield 2.0 library for controller IDs that aren't natively supported.
 
+The 8BitDo M30 Mega Drive and NEOGEO controllers are supported through their original 2.4 GHz USB receivers and through a wired USB connection. The receiver versions use XInput mode; the wired versions use their USB controller mode.
+
 With regard to hardware, there are currently three options:
 
 - A Custom PCB that accommodates and integrates an Arduino Pro Mini, USB Shield Mini and other relevant hardware.

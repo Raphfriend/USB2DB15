@@ -21,7 +21,7 @@
 #define DIR_UP_LEFT 7
 
 // Directional Digital Constants
-#define DIR_MAX = 0xFF
+#define DIR_MAX 0xFF
 #define DIR_MIX = 0x00
 
 // Common Button Ids
