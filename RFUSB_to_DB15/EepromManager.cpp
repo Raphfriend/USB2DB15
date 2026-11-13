@@ -7,17 +7,6 @@
 #include "device_descriptor.h"
 #include "EepromManager.h"
 #include "BuildConfig.h"
-#include "drivers.h"
-
-// Profile blocks created before the loop initialization fix may contain
-// incomplete data. Migrate only the affected Hori Alpha blocks once.
-static const uint8_t HORI_ALPHA_PROFILE_MARKER = 0xA6;
-
-static bool isHoriAlpha(uint16_t vid, uint16_t pid) {
-  return vid == VID_HORI &&
-         (pid == PID_HORI_FIGHTING_STICK_ALPHA_PS4 ||
-          pid == PID_HORI_FIGHTING_STICK_ALPHA_PS5);
-}
 
 EepromManager::EepromManager() {
   if(EEPROM.read(0) != EEPROM_BYTE_0 ||
@@ -101,11 +90,6 @@ void EepromManager::SetCurrentController(uint16_t vid, uint16_t pid) {
       #endif
       found = 1;
       cur_profile_block = i;
-      if (isHoriAlpha(vid, pid) && EEPROM.read(addr + 5) != HORI_ALPHA_PROFILE_MARKER) {
-        EEPROM.update(addr + CURRENT_PROFILE_ADDR, 0);
-        GenerateInitialProfiles();
-        EEPROM.update(addr + 5, HORI_ALPHA_PROFILE_MARKER);
-      }
       break;
     }
     addr += PROFILE_SIZE;
@@ -119,9 +103,6 @@ void EepromManager::SetCurrentController(uint16_t vid, uint16_t pid) {
     EEPROM.update(GetProfileBlockStartAddr() + 4, 0);
     // Generate Default profiles
     GenerateInitialProfiles();
-    if (isHoriAlpha(vid, pid)) {
-      EEPROM.update(GetProfileBlockStartAddr() + 5, HORI_ALPHA_PROFILE_MARKER);
-    }
     // Update Next Profile Block.  Mod block by 10 to loop around
     EEPROM.update(NEXT_PROFILE_BLOCK_ADDR, (cur_profile_block + 1) % 10);
   }
