@@ -15,44 +15,44 @@
  */
 #ifndef RELEASE_MODE
 void debugOutput(uint8_t ddrc, uint8_t ddrd) {
-  Serial.print("Output: ");
+  Serial.print(F("Output: "));
   if (ddrc & DDRC_UP) {
-    Serial.print("UP ");
+    Serial.print(F("UP "));
   }
   if (ddrd & DDRD_DOWN) {
-    Serial.print("DOWN ");
+    Serial.print(F("DOWN "));
   }
   if (ddrc & DDRC_LEFT) {
-    Serial.print("LEFT ");
+    Serial.print(F("LEFT "));
   }
   if (ddrd & DDRD_RIGHT) {
-    Serial.print("RIGHT ");
+    Serial.print(F("RIGHT "));
   }
   if (ddrc & DDRC_START) {
-    Serial.print("START ");
+    Serial.print(F("START "));
   }
   if (ddrd & DDRD_COIN) {
-    Serial.print("SELECT ");
+    Serial.print(F("SELECT "));
   }
   if (ddrc & DDRC_1) {
-    Serial.print("A ");
+    Serial.print(F("A "));
   }
   if (ddrd & DDRD_2) {
-    Serial.print("B ");
+    Serial.print(F("B "));
   }
   if (ddrc & DDRC_3) {
-    Serial.print("C ");
+    Serial.print(F("C "));
   }
   if (ddrd & DDRD_4) {
-    Serial.print("X ");
+    Serial.print(F("X "));
   }
   if (ddrd & DDRD_5) {
-    Serial.print("Y ");
+    Serial.print(F("Y "));
   }
   if (ddrc & DDRC_6) {
-    Serial.print("Z ");
+    Serial.print(F("Z "));
   }
-  Serial.println(" ");
+  Serial.println(F(" "));
 }
 #endif
 
@@ -246,9 +246,10 @@ uint8_t USB2DB15::GetDDRD(Controller &controller) {
  * @param controller The controller pull raw input from
  */
 void USB2DB15::HandleNormalMode(uint8_t ddrc, uint8_t ddrd, Controller &controller) {
+  if (ddrc == prevDDRC && ddrd == prevDDRD) return;
   // Check Special Button Combinations
   // Change Profile  SELECT + DIRECTION
-  if ((ddrd & DDRD_COIN) && (ddrc != prevDDRC || ddrd != prevDDRD)) {
+  if (ddrd & DDRD_COIN) {
     for(uint8_t i = 0; i < 4; i++) {
       if(controller.GetButtonState(profile.bindings[PROFILE_BUTTON_UP + i])) {
         SetProfile(controller, i);
@@ -256,7 +257,6 @@ void USB2DB15::HandleNormalMode(uint8_t ddrc, uint8_t ddrd, Controller &controll
       }
     }
   }
-  if (ddrc == prevDDRC && ddrd == prevDDRD) return;
   // Output
   DDRC = ddrc;
   DDRD = ddrd;
