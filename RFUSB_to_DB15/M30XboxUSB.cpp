@@ -1,7 +1,11 @@
 #include "M30XboxUSB.h"
 
+static void M30NoopInit() {}
+
 M30XboxUSB::M30XboxUSB(USB *usb) : XBOXUSB(usb), probing(false),
-  probeDeadline(0), nextProbe(0) {}
+  probeDeadline(0), nextProbe(0) {
+  attachOnInit(M30NoopInit);
+}
 
 uint8_t M30XboxUSB::Init(uint8_t parent, uint8_t port, bool lowspeed) {
   const uint8_t result = XBOXUSB::Init(parent, port, lowspeed);
@@ -16,7 +20,7 @@ uint8_t M30XboxUSB::Init(uint8_t parent, uint8_t port, bool lowspeed) {
       descriptor[10] == 0x8E && descriptor[11] == 0x02) {
     probing = true;
     nextProbe = millis();
-    probeDeadline = millis() + 750;
+    probeDeadline = millis() + 10;
   }
   return 0;
 }
@@ -31,7 +35,7 @@ uint8_t M30XboxUSB::Poll() {
 
   if ((long)(millis() - nextProbe) >= 0) {
     nextProbe = millis() + 4;
-    uint8_t buffer[32];
+    uint8_t buffer[20];
     uint16_t length = sizeof(buffer);
     const uint8_t result = pUsb->inTransfer(bAddress,
       epInfo[XBOX_INPUT_PIPE].epAddr, &length, buffer);

@@ -20,7 +20,6 @@ void NeoGeoXboxUSB::resetInput() {
   buttonClickState = 0;
   l2Clicked = false;
   r2Clicked = false;
-  for (uint8_t i = 0; i < 4; ++i) hatValue[i] = 0;
 }
 
 uint8_t NeoGeoXboxUSB::fail(uint8_t result) {
@@ -61,10 +60,6 @@ uint8_t NeoGeoXboxUSB::Init(uint8_t parent, uint8_t port, bool lowspeed) {
   result = usb->setEpInfoEntry(address, 1, endpoints);
   if (result) return fail(result);
 
-  USB_DEVICE_DESCRIPTOR secondDescriptor;
-  result = usb->getDevDescr(address, 0, sizeof(secondDescriptor), (uint8_t *)&secondDescriptor);
-  if (result) return fail(result);
-
   uint8_t configuration[49];
   result = usb->getConfDescr(address, 0, 9, 0, configuration);
   if (result) return fail(result);
@@ -79,25 +74,7 @@ uint8_t NeoGeoXboxUSB::Init(uint8_t parent, uint8_t port, bool lowspeed) {
   if (result) return fail(result);
 
   uint8_t stringData[68];
-  result = readString(1, 2, stringData);
-  if (result) return fail(result);
-  result = readString(2, 2, stringData);
-  if (result) return fail(result);
-  result = readString(2, 68, stringData);
-  if (result) return fail(result);
   result = readString(3, 2, stringData);
-  if (result) return fail(result);
-  result = readString(3, 22, stringData);
-  if (result) return fail(result);
-
-  result = usb->getDevDescr(address, 0, sizeof(secondDescriptor), (uint8_t *)&secondDescriptor);
-  if (result) return fail(result);
-  result = usb->getConfDescr(address, 0, 9, 0, configuration);
-  if (result) return fail(result);
-  result = usb->getConfDescr(address, 0, sizeof(configuration), 0, configuration);
-  if (result) return fail(result);
-  result = usb->ctrlReq(address, 0, bmREQ_GET_DESCR, USB_REQUEST_GET_STATUS,
-                        0, 0, 0, 2, 2, status, NULL);
   if (result) return fail(result);
 
   endpoints[1].epAddr = 4;
@@ -111,7 +88,6 @@ uint8_t NeoGeoXboxUSB::Init(uint8_t parent, uint8_t port, bool lowspeed) {
   result = usb->setEpInfoEntry(address, 3, endpoints);
   if (result) return fail(result);
 
-  delay(200);
   result = usb->setConf(address, 0, configuration[5]);
   if (result) return fail(result);
 
@@ -143,8 +119,8 @@ uint8_t NeoGeoXboxUSB::sendStartupPackets() {
 
 uint8_t NeoGeoXboxUSB::Poll() {
   if (!connected || (long)(millis() - nextPoll) < 0) return 0;
-  nextPoll = millis() + 2;
-  uint8_t report[32];
+  nextPoll = millis() + 1;
+  uint8_t report[20];
   uint16_t length = sizeof(report);
   const uint8_t result = usb->inTransfer(address, endpoints[1].epAddr, &length, report);
   if (result == 0 && length) parseReport(report, length);
@@ -155,10 +131,6 @@ void NeoGeoXboxUSB::parseReport(const uint8_t *report, uint16_t length) {
   if (length < 14 || report[0] != 0x00 || report[1] != 0x14) return;
   buttonState = (uint32_t)(report[5] | ((uint16_t)report[4] << 8) |
                  ((uint32_t)report[3] << 16) | ((uint32_t)report[2] << 24));
-  hatValue[LeftHatX] = (int16_t)(((uint16_t)report[7] << 8) | report[6]);
-  hatValue[LeftHatY] = (int16_t)(((uint16_t)report[9] << 8) | report[8]);
-  hatValue[RightHatX] = (int16_t)(((uint16_t)report[11] << 8) | report[10]);
-  hatValue[RightHatY] = (int16_t)(((uint16_t)report[13] << 8) | report[12]);
   if (buttonState != previousButtonState) {
     buttonClickState = (buttonState >> 16) & ((~previousButtonState) >> 16);
     if ((uint8_t)previousButtonState == 0 && (uint8_t)buttonState != 0) r2Clicked = true;
@@ -182,6 +154,3 @@ bool NeoGeoXboxUSB::getButtonClick(ButtonEnum button) {
   return click;
 }
 
-int16_t NeoGeoXboxUSB::getAnalogHat(AnalogHatEnum axis) {
-  return hatValue[axis];
-}

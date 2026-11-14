@@ -19,7 +19,6 @@ public:
 
   uint8_t getButtonPress(ButtonEnum button);
   bool getButtonClick(ButtonEnum button);
-  int16_t getAnalogHat(AnalogHatEnum axis);
 
 private:
   USB *usb;
@@ -30,7 +29,6 @@ private:
   uint32_t buttonState;
   uint32_t previousButtonState;
   uint16_t buttonClickState;
-  int16_t hatValue[4];
   bool l2Clicked;
   bool r2Clicked;
 
