@@ -31,7 +31,9 @@
 #define VID_SEGATOYS            0x0CA3 // Sega Toys
 #define VID_SHANWAN             0x2563 // Shenzhen ShanWan Technology Co., Ltd.
 #define VID_SONY                0x054c // Sony
+#define VID_TAITO               0x0AE4 // Taito
 #define VID_UPCB                0x04D8 // Universal PCB Project
+#define VID_PDP                 0x0E6F // Performance Designed Products, LLC (Victrix)
 
 
 /****************
@@ -39,6 +41,7 @@
  ****************/
 
 #define PID_8BITDO_M30          0x5006 // 8BitDo M30 Bluetooth Wired Controller (D-INPUT MODE)
+#define PID_8BITDO_M30_24G      0x0024 // 2.4 GHz USB receiver with VID_SEGATOYS (0x0CA3)
 #define PID_8BITDO_SFC30        0xAB21 // 8BitDo SFC30 Wired Controller
 #define PID_8BITDO_SNES_BT      0x3101 // 8BitDo Snes BT adapter
 #define PID_BUFFALO_CLASSIC     0x2060 // iBUFFALO SNES CLASSIC USB GAMEPAD
@@ -56,6 +59,8 @@
 #define PID_HORI_CMDR           0x0085 // HORI Fighting Commander
 #define PID_HORI_FS3            0x0010 // HORI Fighting Stick 3
 #define PID_HORI_FSV3           0x0027 // HORI Fighting Stick V3
+#define PID_HORI_FIGHTING_STICK_ALPHA_PS4 0x011C // HORI Fighting Stick Alpha SPF-013, PS4 mode
+#define PID_HORI_FIGHTING_STICK_ALPHA_PS5 0x0184 // HORI Fighting Stick Alpha SPF-013, PS5 mode
 #define PID_HORI_HORIPAD        0x0066 // HORIPAD FPS+(PS4)
 #define PID_HORI_LITE           0x00EE // HORI ワイヤードコントローラライト for PS4-102
 #define PID_HORI_RAP_PREMIUM    0x0026 // HORI Real Arcade リアルアーケードPro.3 Premium VLX
@@ -87,7 +92,9 @@
 #define PID_SONY_PS4_NA         0x05C4 // PS4 Controller NA region
 #define PID_SONY_PS5_NA         0x0CE6 // PS5 Controller NA region
 #define PID_SONY_PSC	        0x0CDA // Playstation Classic Controller
+#define PID_TAITO_EGRET_II      0x0703 // Taito Egret II Mini Controller
 #define PID_UPCB                0x1529 // Universal PCB Project
+#define PID_PDP_PRO_FS_PS4      0x0207 // Victrix Pro FS with Touch Pad for PS4
 
 
 
@@ -163,5 +170,8 @@ void setupSegaAstroCityMini(HIDController *controller);
 void setupPS4(HIDController *controller);
 void setupPS5(HIDController *controller);
 void setupPSC(HIDController *controller);
+
+// Taito
+void setupTaitoEgret2(HIDController *controller);
 
 #endif //USB2DB15_DRIVERS_H

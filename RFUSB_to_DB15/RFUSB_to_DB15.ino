@@ -2,8 +2,8 @@
 //
 //
 //         Author:           Raph_friend
-//         Date:             06.07.2020
-//         Version:          0.14.8
+//         Date:             2026-11-09
+//         Version:          1.0
 //
 //         USB Host Shield 2.0 modded lib:         https://github.com/Raphfriend/USB_Host_Shield_2.0
 //
@@ -29,8 +29,10 @@
 //
 //
 
-// Override USB Polling freqency --This needs to go before includes--
+// Override USB Polling frequency --This needs to go before includes--
 #define POLLING_OVERRIDE 1000
+
+#include "BuildConfig.h"
 
 #include <XBOXONE.h>
 #include <XBOXUSB.h>
@@ -44,9 +46,11 @@
 #include "PS3Controller.h"
 #include "XBoxOneController.h"
 #include "XBoxUSBController.h"
+#include "M30XboxUSB.h"
+#include "NeoGeoUSBController.h"
+#include "NeoGeoXboxUSB.h"
 #include "USB2DB15.h"
 #include "LED.h"
-#include "debug.h"
 
 #ifdef dobogusinclude
 #include <spi4teensy3.h>
@@ -58,30 +62,29 @@
 USB Usb;
 PS3USB PS3(&Usb);
 XBOXONE Xbox(&Usb);
-XBOXUSB Xbox360(&Usb);
+M30XboxUSB Xbox360(&Usb);
+NeoGeoXboxUSB NeoGeo(&Usb);
 
 EepromManager Eeprom;
 HIDController HIDCon(&Usb);
 PS3Controller PS3Con(&PS3);
 XBoxOneController XBoxCon(&Xbox);
 XBoxUSBController XBox360Con(&Xbox360);
-USB2DB15 Usb2db15(PS3Con, XBoxCon, XBox360Con, HIDCon, Eeprom);
+NeoGeoUSBController NeoGeoCon(&NeoGeo);
+USB2DB15 Usb2db15(PS3Con, XBoxCon, XBox360Con, HIDCon, NeoGeoCon, Eeprom);
 
 uint8_t resetLock = 0;
 
 void setup() {
   #ifndef RELEASE_MODE
   Serial.begin(115200);
-
-  while (!Serial);
-
-  byte i, j;
-
+  #endif
   if (Usb.Init() == -1) {
+    #ifndef RELEASE_MODE
     Serial.print(F("\r\nOSC did not start"));
+    #endif
     while (1);
   }
-  #endif
   pinMode(LED_PIN, OUTPUT);
 }
 
@@ -91,9 +94,6 @@ void loop() {
   if (analogRead(ANALOG_BUTTON_PIN) > 800) {
     if(!resetLock) {
       LED::Blink(3, LED::BLINK_RATE_RESET);
-      #ifndef RELEASE_MODE
-      Serial.println("Resetting");
-      #endif
       Usb2db15.FactoryReset();
       resetLock = 1;
     }
@@ -102,12 +102,7 @@ void loop() {
   }
 
   Usb.Task();
-
-  delay(1);
-
   Usb2db15.GenerateOutput();
-
-  delay(1);
 }
 
 //******************************************

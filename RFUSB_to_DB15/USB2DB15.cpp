@@ -4,7 +4,7 @@
 
 #include "USB2DB15.h"
 #include "LED.h"
-#include "debug.h"
+#include "BuildConfig.h"
 
 /**
  * A debug function to print out which buttons are being press.
@@ -15,55 +15,44 @@
  */
 #ifndef RELEASE_MODE
 void debugOutput(uint8_t ddrc, uint8_t ddrd) {
-  Serial.print("Output: ");
+  Serial.print(F("Output: "));
   if (ddrc & DDRC_UP) {
-    Serial.print("UP ");
+    Serial.print(F("UP "));
   }
-
   if (ddrd & DDRD_DOWN) {
-    Serial.print("DOWN ");
+    Serial.print(F("DOWN "));
   }
-
   if (ddrc & DDRC_LEFT) {
-    Serial.print("LEFT ");
+    Serial.print(F("LEFT "));
   }
-
   if (ddrd & DDRD_RIGHT) {
-    Serial.print("RIGHT ");
+    Serial.print(F("RIGHT "));
   }
-
   if (ddrc & DDRC_START) {
-    Serial.print("START ");
+    Serial.print(F("START "));
   }
-
   if (ddrd & DDRD_COIN) {
-    Serial.print("SELECT ");
+    Serial.print(F("SELECT "));
   }
-
   if (ddrc & DDRC_1) {
-    Serial.print("A ");
+    Serial.print(F("A "));
   }
-
   if (ddrd & DDRD_2) {
-    Serial.print("B ");
+    Serial.print(F("B "));
   }
-
   if (ddrc & DDRC_3) {
-    Serial.print("C ");
+    Serial.print(F("C "));
   }
-
   if (ddrd & DDRD_4) {
-    Serial.print("X ");
+    Serial.print(F("X "));
   }
-
   if (ddrd & DDRD_5) {
-    Serial.print("Y ");
+    Serial.print(F("Y "));
   }
-
   if (ddrc & DDRC_6) {
-    Serial.print("Z ");
+    Serial.print(F("Z "));
   }
-  Serial.println(" ");
+  Serial.println(F(" "));
 }
 #endif
 
@@ -78,8 +67,8 @@ void debugOutput(uint8_t ddrc, uint8_t ddrd) {
  * @param xbox The XBox 360 controller to use
  * @param hid  The HID controller to use
  */
-USB2DB15::USB2DB15(PS3Controller &ps3, XBoxOneController &xbox, XBoxUSBController &xbox360, HIDController &hid, EepromManager &eeprom) :
-  ps3(ps3), xbox(xbox), xbox360(xbox360), hid(hid), eeprom(eeprom) { };
+USB2DB15::USB2DB15(PS3Controller &ps3, XBoxOneController &xbox, XBoxUSBController &xbox360, HIDController &hid, NeoGeoUSBController &neogeo, EepromManager &eeprom) :
+  ps3(ps3), xbox(xbox), xbox360(xbox360), hid(hid), neogeo(neogeo), eeprom(eeprom) { };
  
 /**
  * Outputs the keys pressed on the controller to the DB15 connector
@@ -94,10 +83,18 @@ USB2DB15::USB2DB15(PS3Controller &ps3, XBoxOneController &xbox, XBoxUSBControlle
 void USB2DB15::GenerateOutput() {
   uint8_t ddrc = 0;
   uint8_t ddrd = 0;
-  uint8_t button = 0;
   Controller *controller = GetActiveController();
 
-  if(!controller) return; // If there isn't a controller we are done here
+  if (!controller) {
+    // Release every DB15 output immediately when the active controller is removed.
+    if (prevDDRC || prevDDRD) {
+      DDRC = 0;
+      DDRD = 0;
+      prevDDRC = 0;
+      prevDDRD = 0;
+    }
+    return;
+  }
 
   // Setup Profile
   if(controller->GetVid() != cur_vid || controller->GetPid() != cur_pid) {
@@ -116,7 +113,7 @@ void USB2DB15::GenerateOutput() {
       select_press_time = millis();
     } else if ((millis() - select_press_time) >= SELECT_HOLD_DURATION && input_mode != PROFILE_BIND_MODE) {
       #ifndef RELEASE_MODE
-      Serial.println("Bind Mode");
+      Serial.println(F("Bind Mode"));
       #endif
       input_mode = PROFILE_BIND_MODE; 
       cur_key = PROFILE_BUTTON_1;
@@ -143,6 +140,8 @@ void USB2DB15::FactoryReset() {
 Controller* USB2DB15::GetActiveController() {
   if (ps3.Connected()) { // PS3
     return &ps3;
+  } else if (neogeo.Connected()) { // NeoGeo Xbox USB
+    return &neogeo;
   } else if (xbox.Connected()) { // XboxOne
     return &xbox;
   } else if (xbox360.Connected()) { // Xbox360
@@ -279,9 +278,6 @@ void USB2DB15::HandleNormalMode(uint8_t ddrc, uint8_t ddrd, Controller &controll
 void USB2DB15::HandleProfileBindMode(uint8_t ddrc, uint8_t ddrd, Controller &controller) {
   // End Mode if SELECT/COIN is released
   if(!(ddrd & DDRD_COIN)) {
-    #ifndef RELEASE_MODE
-    Serial.println("Normal Mode");
-    #endif
     if (cur_key > PROFILE_BUTTON_1) {
       for(;cur_key < NUM_BUTTON_BINDINGS; cur_key++) {
         profile.bindings[cur_key] = BUTTON_NULL;
@@ -318,7 +314,7 @@ void USB2DB15::SetProfile(Controller &controller, uint8_t profile_num) {
   if(profile_num > MAX_PROFILES) return;
 
   #ifndef RELEASE_MODE
-  Serial.print("Using Profile: ");
+  Serial.print(F("Using Profile: "));
   Serial.println(profile_num);
   #endif
   eeprom.SaveCurrentProfile(profile_num);

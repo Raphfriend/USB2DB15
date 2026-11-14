@@ -32,6 +32,8 @@
 #define MASK_BUTTON_8   0x0004
 #define MASK_BUTTON_9   0x0002
 #define MASK_BUTTON_10  0x0001
+#define MASK_DIRECTIONS (MASK_UP | MASK_UP_RIGHT | MASK_RIGHT | MASK_DOWN_RIGHT | \
+                         MASK_DOWN | MASK_DOWN_LEFT | MASK_LEFT | MASK_UP_LEFT)
 
 /**
  * Stores information on how to tell if a button is pressed
@@ -48,12 +50,29 @@ struct Button {
 class HIDController : public HIDUniversal, public Controller {
   Button buttons[MAX_HID_BUTTONS];
   uint32_t buttonState, lastButtonState, clickState;
+  bool analogEnabled;
+  uint8_t analogX, analogY;
+  uint8_t analogLowX, analogHighX, analogLowY, analogHighY;
+  uint8_t inputReportLength;
+  int16_t inputReportId;
+  bool horiDirect;
 
 public:
-  HIDController(USB *usb) : HIDUniversal(usb), Controller() {};
+  HIDController(USB *usb) : HIDUniversal(usb), Controller(),
+    buttonState(0), lastButtonState(0), clickState(0), analogEnabled(false),
+    analogX(0), analogY(0), analogLowX(0), analogHighX(0),
+    analogLowY(0), analogHighY(0), inputReportLength(0), inputReportId(-1), horiDirect(false) {
+    ResetController();
+  }
 
   void ConfigButton(uint8_t button_id, uint8_t index, uint8_t mask); // Uses mask as target value
   void ConfigButton(uint8_t button_id, uint8_t index, uint8_t mask, uint8_t value);
+  // Configures unsigned 8-bit analog axes. Offsets include the report ID byte.
+  // ID=-1 accepts any report ID; length=0 accepts any report length.
+  bool ConfigAnalogStick(uint8_t x, uint8_t y, uint8_t lowX, uint8_t highX,
+                         uint8_t lowY, uint8_t highY, uint8_t reportLength = 0,
+                         int16_t reportId = -1);
+  bool ConfigReport(uint8_t length, int16_t id = -1);
 
   bool Connected();
   bool GetButtonClick(uint8_t button);
@@ -61,6 +80,7 @@ public:
 
   uint16_t GetVid();
   uint16_t GetPid();
+  uint8_t Poll() override;
 protected:
   uint8_t OnInitSuccessful();
   void ParseHIDData(USBHID *hid, bool is_rpt_id, uint8_t len, uint8_t *buf);

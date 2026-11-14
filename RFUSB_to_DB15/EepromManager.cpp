@@ -6,7 +6,7 @@
 
 #include "device_descriptor.h"
 #include "EepromManager.h"
-#include "debug.h"
+#include "BuildConfig.h"
 
 EepromManager::EepromManager() {
   if(EEPROM.read(0) != EEPROM_BYTE_0 ||
@@ -64,7 +64,7 @@ void EepromManager::LoadProfile(uint8_t num, Profile &profile) {
   int start_addr = GetProfileStartAddr() + (num * PROFILE_SIZE);
   if (num >= MAX_PROFILES) return;
 
-  for(uint8_t i;i < NUM_BUTTON_BINDINGS; i++) {
+  for(uint8_t i = 0; i < NUM_BUTTON_BINDINGS; i++) {
     profile.bindings[i] = EEPROM.read(start_addr + i);
   }
 }
@@ -73,7 +73,7 @@ void EepromManager::SaveProfile(uint8_t num, Profile &profile) {
   int start_addr = GetProfileStartAddr() + (num * PROFILE_SIZE);
   if (num >= MAX_PROFILES) return;
 
-  for(uint8_t i;i < NUM_BUTTON_BINDINGS; i++) {
+  for(uint8_t i = 0; i < NUM_BUTTON_BINDINGS; i++) {
     EEPROM.update(start_addr + i, profile.bindings[i]);
   }
 }
@@ -96,10 +96,6 @@ void EepromManager::SetCurrentController(uint16_t vid, uint16_t pid) {
   }
   if(!found) {
     cur_profile_block = EEPROM.read(NEXT_PROFILE_BLOCK_ADDR);
-    #ifndef RELEASE_MODE
-    Serial.print("Could Not find Controller. Generating Profile Block:");
-    Serial.println(cur_profile_block);
-    #endif
     // Write the vid and pid to EEPROM
     Write16Bit(GetProfileBlockStartAddr(), vid);
     Write16Bit(GetProfileBlockStartAddr() + 2, pid);

@@ -35,6 +35,7 @@ bool XBoxUSBController::GetButtonClick(uint8_t button) {
   if(!GetButtonState(button)) {
     return false;
   }
+  
   switch(button) {
     case BUTTON_UP:
       return xbox360->getButtonClick(UP) || xbox360->getAnalogHat(LeftHatY) <= 32767 && xbox360->getAnalogHat(LeftHatY) >= 16384;   
@@ -130,11 +131,9 @@ bool XBoxUSBController::GetButtonState(uint8_t button) {
  * @return true if an XBoxUSB controller is connected to the system
  */
 bool XBoxUSBController::Connected() {
-  if (xbox360->Xbox360Connected) {
-    xbox360->setRumbleOff();
-    return true;
-  }
-  return false;
+  // Do not call setRumbleOff() here. The M30 receiver can stop reporting input
+  // when it receives this request repeatedly from the main polling loop.
+  return xbox360->Xbox360Connected;
 }
 
 /**
