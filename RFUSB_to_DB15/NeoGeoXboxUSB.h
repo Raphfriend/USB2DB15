@@ -4,6 +4,9 @@
 #include <Usb.h>
 #include <xboxEnums.h>
 
+static const uint16_t NEOGEO_8BITDO_VID = 0x2DC8;
+static const uint16_t NEOGEO_8BITDO_XINPUT_PID = 0x3106;
+
 class NeoGeoXboxUSB : public USBDeviceConfig {
 public:
   explicit NeoGeoXboxUSB(USB *usb);
@@ -14,7 +17,7 @@ public:
   uint8_t GetAddress() { return address; }
   bool isReady() { return connected; }
   bool VIDPIDOK(uint16_t vid, uint16_t pid) {
-    return vid == 0x2DC8 && pid == 0x3106;
+    return vid == NEOGEO_8BITDO_VID && pid == NEOGEO_8BITDO_XINPUT_PID;
   }
 
   uint8_t getButtonPress(ButtonEnum button);

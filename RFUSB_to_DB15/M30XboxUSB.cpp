@@ -1,5 +1,7 @@
 #include "M30XboxUSB.h"
 
+static const uint16_t M30_24G_VID = 0x045E;
+static const uint16_t M30_24G_PID = 0x028E;
 static void M30NoopInit() {}
 
 M30XboxUSB::M30XboxUSB(USB *usb) : XBOXUSB(usb), probing(false),
@@ -14,10 +16,12 @@ uint8_t M30XboxUSB::Init(uint8_t parent, uint8_t port, bool lowspeed) {
 
   // The M30 shares the wired Xbox 360 VID/PID. Probe input first so a
   // controller that already reports data stays on the original path.
-  uint8_t descriptor[18];
-  if (pUsb->getDevDescr(bAddress, 0, sizeof(descriptor), descriptor) == 0 &&
-      descriptor[8] == 0x5E && descriptor[9] == 0x04 &&
-      descriptor[10] == 0x8E && descriptor[11] == 0x02) {
+  USB_DEVICE_DESCRIPTOR descriptor;
+  if (pUsb->getDevDescr(bAddress, 0, sizeof(descriptor),
+                        reinterpret_cast<uint8_t *>(&descriptor)) == 0) {
+    const uint16_t vid = descriptor.idVendor;
+    const uint16_t pid = descriptor.idProduct;
+    if (vid != M30_24G_VID || pid != M30_24G_PID) return 0;
     probing = true;
     nextProbe = millis();
     probeDeadline = millis() + 10;
