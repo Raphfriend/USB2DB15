@@ -9,6 +9,7 @@
 #include "Controller.h"
 #include "device_descriptor.h"
 #include "EepromManager.h"
+#include "NeoGeoUSBController.h"
 #include "Profile.h"
 #include "PS3Controller.h"
 #include "XBoxOneController.h"
@@ -51,6 +52,7 @@ class USB2DB15 {
     XBoxOneController &xbox;
     XBoxUSBController &xbox360;
     HIDController &hid;
+    NeoGeoUSBController &neogeo;
     EepromManager &eeprom;
     Profile profile;
     uint8_t input_mode = NORMAL_MODE;
@@ -67,7 +69,7 @@ class USB2DB15 {
     unsigned long select_press_time = 0;
 
   public:
-    USB2DB15(PS3Controller &ps3, XBoxOneController &xbox, XBoxUSBController &xbox360, HIDController &hid, EepromManager &eeprom);
+    USB2DB15(PS3Controller &ps3, XBoxOneController &xbox, XBoxUSBController &xbox360, HIDController &hid, NeoGeoUSBController &neogeo, EepromManager &eeprom);
     void GenerateOutput();
     void FactoryReset();
 

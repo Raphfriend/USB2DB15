@@ -4,7 +4,7 @@
 
 #include "drivers.h"
 #include "HIDController.h"
-#include "debug.h"
+#include "BuildConfig.h"
 
 /**
  * Returns if there is a controller connected and ready
@@ -12,7 +12,70 @@
  * @return If there is a controller connected and ready
  */
 bool HIDController::Connected() {
-  isReady();
+  if (horiDirect) return bAddress != 0;
+  return isReady();
+}
+
+bool HIDController::ConfigReport(uint8_t length, int16_t id) {
+  if (length > 64 || id < -1 || id > 255) return false;
+  inputReportLength = length;
+  inputReportId = id;
+  return true;
+}
+
+bool HIDController::ConfigAnalogStick(uint8_t x, uint8_t y, uint8_t lowX,
+                                      uint8_t highX, uint8_t lowY, uint8_t highY,
+                                      uint8_t reportLength, int16_t reportId) {
+  analogEnabled = false;
+  if (x >= 64 || y >= 64 || x == y || lowX >= highX || lowY >= highY ||
+      (reportLength && (x >= reportLength || y >= reportLength))) {
+    return false;
+  }
+  if (!ConfigReport(reportLength, reportId)) return false;
+
+  analogX = x;
+  analogY = y;
+  analogLowX = lowX;
+  analogHighX = highX;
+  analogLowY = lowY;
+  analogHighY = highY;
+  analogEnabled = true;
+  return true;
+}
+
+enum CardinalDirection {
+  DIRECTION_UP = 0x01,
+  DIRECTION_RIGHT = 0x02,
+  DIRECTION_DOWN = 0x04,
+  DIRECTION_LEFT = 0x08
+};
+
+static uint8_t getDirections(uint32_t state) {
+  uint8_t directions = 0;
+  if (state & (MASK_UP | MASK_UP_RIGHT | MASK_UP_LEFT)) directions |= DIRECTION_UP;
+  if (state & (MASK_RIGHT | MASK_UP_RIGHT | MASK_DOWN_RIGHT)) directions |= DIRECTION_RIGHT;
+  if (state & (MASK_DOWN | MASK_DOWN_RIGHT | MASK_DOWN_LEFT)) directions |= DIRECTION_DOWN;
+  if (state & (MASK_LEFT | MASK_UP_LEFT | MASK_DOWN_LEFT)) directions |= DIRECTION_LEFT;
+  return directions;
+}
+
+static uint32_t getDirectionState(uint8_t directions) {
+  uint32_t state = 0;
+  if (directions & DIRECTION_UP) state |= MASK_UP;
+  if (directions & DIRECTION_RIGHT) state |= MASK_RIGHT;
+  if (directions & DIRECTION_DOWN) state |= MASK_DOWN;
+  if (directions & DIRECTION_LEFT) state |= MASK_LEFT;
+  return state;
+}
+
+static uint8_t applyHitBoxSocd(uint8_t directions) {
+  if ((directions & DIRECTION_LEFT) && (directions & DIRECTION_RIGHT)) {
+    directions &= ~(DIRECTION_LEFT | DIRECTION_RIGHT);
+  }
+  if ((directions & DIRECTION_UP) && (directions & DIRECTION_DOWN)) {
+    directions &= ~DIRECTION_DOWN;
+  }
+  return directions;
 }
 
 /**
@@ -97,7 +160,8 @@ uint16_t HIDController::GetPid() {
  * @param index The index in the usb packet buffer that the button is located at
  * @param mask The bit mask to target the bits that make up the button
  */
-void HIDController::ConfigButton(uint8_t button_id, uint8_t index, uint8_t mask) {
+// Keep this setup helper shared by controller layouts. It only runs at device initialization.
+void __attribute__((noinline)) HIDController::ConfigButton(uint8_t button_id, uint8_t index, uint8_t mask) {
   ConfigButton(button_id, index, mask, mask);
 }
 
@@ -111,9 +175,9 @@ void HIDController::ConfigButton(uint8_t button_id, uint8_t index, uint8_t mask)
  * @param mask The bit mask to target the bits that make up the button
  * @param value The value the byte should equal after the bit mask is applied
  */
-void HIDController::ConfigButton(uint8_t button_id, uint8_t index, uint8_t mask, uint8_t value) {
+void __attribute__((noinline)) HIDController::ConfigButton(uint8_t button_id, uint8_t index, uint8_t mask, uint8_t value) {
   if (button_id >= MAX_HID_BUTTONS) return;
-  #ifndef REDUCED_SERIAL_OUTPUT
+  #if defined(USB2DB15_VERBOSE_CONFIG)
   Serial.print("Button ID: ");
   Serial.print(button_id, DEC);
   Serial.print(" Index: ");
@@ -140,12 +204,48 @@ void HIDController::ConfigButton(uint8_t button_id, uint8_t index, uint8_t mask,
  * @return error number, zero for no error
  */
 uint8_t HIDController::OnInitSuccessful() {
-  #ifndef RELEASE_MODE
+  #if defined(USB2DB15_VERBOSE_CONFIG)
   Serial.println("Detected HID device. ");
   #endif
   ResetController();
+  horiDirect = (VID == VID_HORI &&
+                (PID == PID_HORI_FIGHTING_STICK_ALPHA_PS4 ||
+                 PID == PID_HORI_FIGHTING_STICK_ALPHA_PS5));
+  if (horiDirect) {
+    epInfo[1].epAddr = 4;
+    epInfo[1].maxPktSize = 64;
+    epInfo[1].bmSndToggle = 0;
+    epInfo[1].bmRcvToggle = 0;
+    epInfo[1].bmNakPower = USB_NAK_NOWAIT;
+    pUsb->setEpInfoEntry(bAddress, 2, epInfo);
+
+    // The SPF-013 starts reporting on EP84 after its interface 3 report
+    // descriptor has been requested. The standalone Hori test performs this
+    // request before polling, so mirror that sequence here.
+    uint8_t descriptor[64];
+    pUsb->ctrlReq(bAddress, 0, 0x81, 0x06, 0x00, 0x22,
+                  3, 229, sizeof(descriptor), descriptor, nullptr);
+  }
   setupController(VID, PID, this);
   return 0;
+}
+
+uint8_t HIDController::Poll() {
+  if (!horiDirect) return HIDUniversal::Poll();
+  if (!bAddress) return 0;
+
+  static uint32_t nextRead = 0;
+  uint32_t now = millis();
+  if ((int32_t)(now - nextRead) < 0) return 0;
+  nextRead = now + 6;
+
+  uint8_t report[64];
+  uint16_t length = sizeof(report);
+  uint8_t result = pUsb->inTransfer(bAddress, 4, &length, report);
+  if (result == 0 && length >= 12) {
+    ParseHIDData(nullptr, false, (uint8_t)length, report);
+  }
+  return result;
 }
 
 /**
@@ -167,6 +267,10 @@ uint8_t HIDController::OnInitSuccessful() {
  * @param buf The buffer
  */
 void HIDController::ParseHIDData(USBHID *hid, bool is_rpt_id, uint8_t len, uint8_t *buf) {
+  // Ignore reports that do not match the configured HID input report.
+  // Keep the last decoded controller state unchanged.
+  if (inputReportLength != 0 && len != inputReportLength) return;
+  if (inputReportId >= 0 && (len == 0 || buf[0] != inputReportId)) return;
   uint8_t value = 0;
   buttonState = 0;
 
@@ -180,6 +284,20 @@ void HIDController::ParseHIDData(USBHID *hid, bool is_rpt_id, uint8_t len, uint8
     if(value == buttons[i].value) {
       buttonState |= 1;  // Set the final bit
     }
+  }
+
+  if (analogEnabled && analogX < len && analogY < len) {
+    uint8_t directions = getDirections(buttonState);
+    const uint8_t x = buf[analogX];
+    const uint8_t y = buf[analogY];
+
+    if (x < analogLowX) directions |= DIRECTION_LEFT;
+    if (x > analogHighX) directions |= DIRECTION_RIGHT;
+    if (y < analogLowY) directions |= DIRECTION_UP;
+    if (y > analogHighY) directions |= DIRECTION_DOWN;
+
+    buttonState &= ~MASK_DIRECTIONS;
+    buttonState |= getDirectionState(applyHitBoxSocd(directions));
   }
 
   // Update Click State and LastButtonState
@@ -196,7 +314,15 @@ void HIDController::ParseHIDData(USBHID *hid, bool is_rpt_id, uint8_t len, uint8
  * are unset and should not be used.
  */
 void HIDController::ResetController() {
+  analogEnabled = false;
+  analogX = analogY = 0;
+  analogLowX = analogHighX = analogLowY = analogHighY = 0;
+  inputReportLength = 0;
+  inputReportId = -1;
+  buttonState = lastButtonState = clickState = 0;
   for(uint8_t i = 0; i < MAX_HID_BUTTONS; i++) {
+    buttons[i].index = 0;
     buttons[i].mask = 0;
+    buttons[i].value = 0;
   }
 }
